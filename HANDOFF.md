@@ -51,6 +51,14 @@ setup fails after candidate creation. Bootstrap updates machine-dependent
 `source-provenance.json` paths and regenerates `transcript-hook.patch`; inspect the
 diff before committing subsequent work. New pins are ignored by Git.
 
+Publication validation: bootstrap succeeded in a separate checkout on the original
+Windows machine using the matching runtime cache, npm offline cache and verified
+fd executable. The newly built candidate reported `1.0.0+reason-ui.3`; its four-file
+strict TypeScript check passed with zero diagnostics. Receipts:
+`artifacts/checkpoint/device-bootstrap-smoke.json` and `typecheck-bootstrap.json`.
+This verifies relocation/rebuild on Windows, not a clean-device npm download,
+another operating system, or the full original-machine acceptance suite.
+
 ## Acceptance and external evidence
 
 The full historical suite is coupled to the original clean/fork snapshots, single

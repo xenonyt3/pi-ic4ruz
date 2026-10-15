@@ -1,0 +1,9 @@
+{
+  "createdAt": "2026-10-15T04:19:14.490Z",
+  "platform": "win32",
+  "node": "v24.12.0",
+  "runtime": "1.0.0+reason-ui.3",
+  "fdInstalled": true,
+  "offlineLauncherVersion": true,
+  "fullAcceptance": "not run; original-machine baseline and proprietary reference oracle are not distributed"
+}
