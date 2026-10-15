@@ -1,0 +1,283 @@
+✔ assistant absent/undefined hook remains byte-identical to stock across stop reasons and mixed blocks (93.1218ms)
+✔ assistant text matches Reason oracle for Markdown, indentation, tabs, whitespace and deltas at 80/120 (1498.3707ms)
+✔ assistant malformed/throwing hooks fall back; cached hook arrays remain unchanged (1.1021ms)
+✔ assistant hook preserves transformers, streaming flag, thinking visibility, tool boundaries and errors (1.036ms)
+✔ assistant streaming updates and resize preserve final content and stock empty-message suppression (1.3033ms)
+✔ assistant control sequences are stripped while NO_COLOR and source text are preserved (0.3166ms)
+✔ assistant renderer and Markdown transformers agree on user-configured output padding (0.9597ms)
+✔ O07 actual nested calls overlap at a barrier and allSettled preserves rejection (2239.2498ms)
+✔ O07 sequential override prevents overlap for actual nested tool calls (150.4511ms)
+✔ O07 independent calls overlap and allSettled retains partial rejection (1.5562ms)
+✔ O07 dependent calls are kept sequential (0.2455ms)
+✔ O07 upstream queue serializes same file while distinct files overlap (4.5089ms)
+✔ O07 atomic lease blocks second process and requires exact nonce to release (150.7467ms)
+✔ upstream MCP re-registration reconnects curated Brain namespace and refreshes active tools (69.8447ms)
+✔ Brain config binds one curated vault and denies child access (2.1759ms)
+✔ Brain recall is explicit on unavailable and never called for child (0.5829ms)
+✔ telemetry records hashes and unknown usage without secrets (2.2634ms)
+✔ telemetry hooks remain observational and bounded (1.6186ms)
+✔ real system sections and toolsAdded alter final prompt/schema hashes (2.8994ms)
+✔ upstream MCP extension loads only curated Brain tools from fake transport (65.864ms)
+✖ real SDK worker brokers two model turns around read tool, preserving model, effort, assignment and real reply (158.9494ms)
+✖ cancelling a blocked provider request aborts parent broker and settles worker (148.6641ms)
+✔ O02 facade preserves upstream schema, loadout, grammar and renderers; helpers off (1.3474ms)
+✔ O02 real AgentSession executes isolated QuickJS await/return/exit and success-only store (360.9174ms)
+✔ O02 options ceiling/parser, CPU timeout, unsettled promise and host abort (190.9512ms)
+✔ O02 output cap spills full content and heap failure is bounded (194.7774ms)
+✔ O02 dangling and aborted nested tools receive cancellation (187.6574ms)
+✔ upstream threshold is strictly above contextWindow minus reserve (0.8488ms)
+✔ upstream rejects unusable summary response (0.3405ms)
+✔ AgentSession compaction persists fake summary and keeps original branch history (26.0558ms)
+✔ failed AgentSession compaction does not append a false checkpoint (9.9282ms)
+✔ cancelled AgentSession compaction keeps history and reports aborted (9.3583ms)
+✔ second AgentSession compaction sends previous summary to fake summarizer (8.3559ms)
+✔ AgentSession compaction keeps retained tool call and result paired (27.5363ms)
+✔ low-window model override changes effective settings and triggers runtime threshold compaction (38.2236ms)
+✔ explicit context overflow receives one compact-and-retry with deterministic fake streams (13.6216ms)
+✔ persistent overflow stops after one recovery cycle without appending another summary (10.6385ms)
+✔ context policy adds a stable section without rewriting messages (1.2838ms)
+✔ runtime pointers restore latest branch-local entries, including deletion (1.3174ms)
+✔ real AgentSession receives guidelines in its final system prompt (31.7847ms)
+✖ real offline worker creates isolated Pi SDK session and exits without inference (170.9583ms)
+✖ cancel settles a real delayed worker and confirms process exit (151.9515ms)
+✔ IPC parent disconnect stops a delayed worker without ghost completion (11590.9135ms)
+✖ default worker holds one writer lease and writes only through owned tool (149.9909ms)
+✖ code explorer host rejects outside paths and forbidden writes, including nested tools (153.0828ms)
+✔ O12 failed durable claim does not consume delivery token (7.8595ms)
+✔ O13 throwing cancellation retains handle and permits cleanup retry (5.8198ms)
+✔ O13 shutdown waits for uncommitted startup and prevents future starts (29.7235ms)
+✔ O13 receipt write failure keeps slot and cancels a started process handle (2.5683ms)
+✔ O12 cancelling wait leaves its child running (4.4992ms)
+✔ profile and model are explicit; recursive tools never enter child ceiling (3.0314ms)
+✔ atomic starting reservations cap concurrent spawn at three without queue (28.0788ms)
+✔ partial prefix, timeout, busy follow-up, same session generation and durable claim (19.685ms)
+✔ cleanup unconfirmed retains capacity; cancel is idempotent (9.5967ms)
+✔ follow-up respects global capacity and stale owner records are untouched (11.9298ms)
+✔ duplicate keys and unconfirmed startup failure never run a suffix (2.6855ms)
+✔ O03 exactly five initial declarations, deferred catalog/schema lookup and unknown (195.5711ms)
+✔ O03 normalized collisions rejected (0.6139ms)
+✔ O03 registry changes are reflected in callable discovery (340.0257ms)
+✔ T5 reservations bound parent/child/summary/retry together, missing usage stops (1.4343ms)
+✔ T5 overshoot, duration and unverified prices fail closed (0.2817ms)
+✔ O05 upstream read pages UTF-8, spaces, Unicode, BOM and CRLF (15.1771ms)
+✔ O05 upstream edit uses original snapshot and preserves BOM/CRLF (13.0567ms)
+✔ O05 upstream write creates parents, then replaces file; directory target errors (4.9972ms)
+✔ O05 upstream read returns image block for PNG and reports binary files (5.1825ms)
+✔ O05 line/byte boundaries, non-unique edit and junction escape (14.4189ms)
+✔ O05 native upstream find/grep/ls work offline with isolated executable cache (118.4991ms)
+✔ integrated harness declares five tools, enforces leases and preserves direct/nested shell contracts (3641.4951ms)
+✔ O01 env strips inherited profile, preload, provider credentials and proxy (2.3833ms)
+✔ O01 reject override families, short aliases, assignments, unknown flags and messages (22.4591ms)
+✔ O01 only existing own sessions, including canonical junction enforcement (5.8496ms)
+✔ O01 project config and protected working roots rejected before CLI (19493.841ms)
+✔ O01 upstream public SDK identity is runtime-local and pinned (22378.1212ms)
+✔ O01 changed runtime bytes fail closed in a disposable installation fixture (15.8618ms)
+✔ O01 launcher version/help execute without inference (44795.3205ms)
+✔ O01 stock RPC, explicit extension, no project discovery and zero network attempts (22213.6522ms)
+✔ O01 real SDK resource loader aliases public runtime import and excludes project context/resources (178.3746ms)
+✔ O01 real own-session resume/continue and foreign RPC switch cancellation (71598.9493ms)
+✔ T0 input gate handles a synthetic prompt before any inference request (23909.6914ms)
+✔ O01 immutable baseline/fork/launchers (3806.3106ms)
+✔ live budget denies wrong endpoint/model/cap before sending; raw usage includes cached input (29.5527ms)
+✔ live budget consumes failed/unknown attempt and cannot be reset by restart (23.6024ms)
+✔ live concurrent parent/child permits share physical attempt cap (34.5779ms)
+✔ file-worker-incompatible launch flags fail before acceptance, credentials or model requests (122.1558ms)
+✔ live pilot driver uses real SDK with injected provider, runs verifier, and charges three calls (11616.5669ms)
+✔ pilot rejects an early-exit candidate even when the model reports completion (8052.3828ms)
+✔ condition C discovers deferred delegation and completes a brokered child before editing (11586.2434ms)
+✔ live opt-in, incomplete config, model, credential, endpoint and fresh allowance fail before request (5.499ms)
+✔ actual SDK streams deltas, executes tools, compacts, resumes and retains one allowance (3370.1736ms)
+✔ real brokered child and parent share ledger; child tools and cleanup remain active (2918.9866ms)
+✔ wrong response model, provider errors, missing usage and cancel stop conservatively without secret logging (221.0707ms)
+✔ shared ledger denies concurrent launch, cap changes, missing accounting and expired resume (57.415ms)
+✔ every physical fetch including retry counts; pending crash charges reservation after explicit lock recovery (31.2715ms)
+✔ offline guard rejects fetch, Node sockets, HTTP and DNS before transport (157.7015ms)
+✔ guard receipts retain both process lifetimes when Windows reuses a PID (442.8504ms)
+✔ verifier requires all assertions and binds receipt to the exact source (182.9876ms)
+✔ early process exit, imports, forged markers and unfinished execution cannot pass (12732.1233ms)
+✔ all children and parent writer state must be clean before a condition can pass (0.3149ms)
+✔ stale acceptance and missing live test coverage block the real transport gate (7.3764ms)
+✔ official converter parses streamed JSON function arguments through injected fetch (20.7838ms)
+✔ malformed function arguments become a provider result rather than a silent model switch (2.9439ms)
+✔ 429 is surfaced without retry or network escape (2.4102ms)
+✔ context overflow response is surfaced without switching provider (1.3493ms)
+✔ cached token usage is kept separate from total tokens (1.7697ms)
+✔ missing SSE usage has upstream synthetic zero, which telemetry must mark unknown (1.5349ms)
+✔ aborted request remains on selected provider and does not retry (1.0349ms)
+✔ disconnected SSE surfaces error without a second request (2.0572ms)
+✔ grammar tool transport is conditional on explicit compat capability (3.7789ms)
+✔ O14 slice: compact tool headers match the extracted 0.2.269 source oracle (20.5894ms)
+✔ O14 slice: failure tail stays visible, expansion restores full output, execution identity is unchanged (2.1559ms)
+✔ O14 slice: upstream editor preserves multiline, Unicode, bracketed paste, cancel and exit across resize (7.1778ms)
+✔ O14 slice: footer represents actual unknown usage, failed children and narrow paths without terminal injection (0.8594ms)
+✔ O14 slice: UI hooks restore stock presentation after a component failure and ignore RPC installation (3.48ms)
+✔ O14 slice: long failure and status text retain their ending at 80 and 120 columns (2.0111ms)
+✔ O14 slice: theme retains the host constructor across SDK realms (1.8422ms)
+✔ O14 slice: real SDK tool policy and execution still work with presentation enabled (64.7276ms)
+✔ O14 surface: measured dark/light colors match the extracted source; missing colors keep borders (37.4102ms)
+✔ O14 surface: editor text/cursor and fallback borders match source across 80/120 resize (69.3391ms)
+✔ O14 lifecycle: late color replies cannot mutate a shut down UI; unsupported query keeps fallback (5.6561ms)
+✔ O14 lifecycle: actual SDK tool/error/aborted events drive UI state without provider inference (19.0495ms)
+✔ O14 lifecycle: overlapping tools, streamed writing and post-compaction unknown state stay honest (2.3336ms)
+✔ O14 surface: real upstream TUI parses terminal color replies through its public query API (2.1006ms)
+✔ startup/working: exact source shimmer including light, NO_COLOR, Unicode and sweep/pause boundaries (122.5489ms)
+✔ startup/working: source braille sampler and responsive startup layout with explicit Pi asset substitution (115.1452ms)
+✔ startup/working: startup settles at 2400ms, never restarts on resize, and disposes early on interaction (2.791ms)
+✔ startup/working: redraw only when visible frame changes and release timers on idle/dispose/failure (0.9955ms)
+✔ startup/working: idle -> thinking -> writing -> overlapping tools -> complete/error/cancel, actual identities (8.8228ms)
+✔ startup/working: reset, repeated session start, fallback, shutdown and late timer callbacks clean up (2.0663ms)
+✔ startup/working: upstream retry and compaction indicators remain visible above custom editor (2.6747ms)
+✔ startup/working: actual SDK streams, tool execution, error and abort release timers and restore stock (3739.1259ms)
+✔ O08 upstream store resume/branch isolation, copy/delete and quotas (1288.5914ms)
+✔ thinking hidden/expanded rows match Reason source and preserve signed content (578.8188ms)
+✔ thinking labels are per-run, use last bold heading, and update as content streams (0.6396ms)
+✔ thinking absent, undefined, invalid and throwing hooks retain exact stock output (3.4757ms)
+✔ text and thinking rows retain source separation without changing tool boundaries or fallback (60.2586ms)
+✔ thinking expanded transform receives correct width and streaming state; collapsed stays untransformed (0.9239ms)
+✔ thinking clicks and global toggles keep upstream MouseRegion and visibility behavior (0.5987ms)
+✔ thinking narrow resize, cached arrays, controls and NO_COLOR preserve content safely (1.0294ms)
+✔ O04 real AgentSession direct/nested policy/schema/throw and result transformations (493.4644ms)
+✔ O04 registry allowlist removes forbidden deferred tools from child callable context (109.5095ms)
+✔ O04 canonical workspace policy blocks direct/nested outside paths (233.5253ms)
+✔ user hook absent or undefined preserves exact upstream rendering (26.802ms)
+✔ patched user renderer matches Reason literal framing and measured surfaces at 80/120 (306.5038ms)
+✔ invalid or throwing renderers fall back without losing messages or mutating cached output (1.3817ms)
+✔ presentation sanitizes terminal control sequences without rewriting the source string (1.5812ms)
+✔ runtime selector rejects arbitrary roots and candidate pin rejects modified execution bytes (46.4044ms)
+✔ Windows resume hint stays on the pinned prototype launcher with PowerShell-safe arguments (2.5797ms)
+✔ real candidate interactive host installs, restores, resets and safely disables the user hook (3876.6907ms)
+✔ I22 actual host matches Reason showEntry composition across themes, expansion and resize (291.2567ms)
+✔ I22 absent/undefined layout preserves stock children and OSC zones, including partial-message errors (381.2631ms)
+✔ I22 streamed interleaved calls/results match replay, preserve tool identity and resume without transcript edits (197.7601ms)
+✔ I22 mouse translation preserves reasoning toggle after an attached tool run and text (152.4546ms)
+✔ I22 abort/error tool rows stay errors despite stale live status and remain expandable (140.9817ms)
+✔ I22 failed layout, reset and reload keep original components, and user text/tool results are never lost (162.0392ms)
+✔ I22 content rows attach across assistant messages but do not hide orphan or duplicate tool components (0.9058ms)
+✔ I22 NO_COLOR, image payloads and edit diffs keep upstream tool components and rendering (134.0218ms)
+✔ O06 upstream shell definitions keep bash direct and PowerShell deferred (3.3695ms)
+✔ O06 Bash and PowerShell preserve stdout, stderr, cwd, and exit 7 (1603.5246ms)
+✔ O06 upstream bash keeps direct output cap separate from structured output (347.5317ms)
+✔ O06 timeout is seconds and abort stops an owned shell (4586.9135ms)
+✔ O06 timeout confirms ordinary child-tree descendant exit (3184.371ms)
+✔ O07 preheld writer lease is borrowed and retained across shell call (67.6533ms)
+✔ O07 dynamic lease is borrowed and cleanup_unconfirmed retains the writer (2139.0289ms)
+✔ O06 shell cwd junction outside workspace is rejected before spawn (2.5752ms)
+✔ O06 exited owned parent never sends stale PID to taskkill (104.7558ms)
+ℹ tests 165
+ℹ suites 0
+ℹ pass 159
+ℹ fail 6
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 392855.6697
+
+✖ failing tests:
+
+test at ..\tests\brokered-child.test.mjs:30:1
+✖ real SDK worker brokers two model turns around read tool, preserving model, effort, assignment and real reply (158.9494ms)
+  AssertionError [ERR_ASSERTION]: [{"id":"6d35919c-ab03-485d-8a6c-227305e46fa3","owner":{"session":"broker-parent","branch":"main"},"taskKey":"1792051236719:0","title":"Read fact.txt exactly","assignment":"Read fact.txt exactly","profile":"code_explorer","modelSlot":"primary","model":{"provider":"9router","model":"cx/gpt-6-astra","thinkingLevel":"low"},"capabilityHash":"15ddcf12ccf75c31a34a6889640563b842264792deaa212222f04e3726029285","tools":["read"],"generation":1,"status":"failed","createdAt":"2026-10-15T08:00:36.719Z","cleanupConfirmed":false,"claimed":false,"updatedAt":"2026-10-15T08:00:36.873Z","error":"CHILD_EXITED file:///D:/pi-reason-prototype/src/offline-guard.mjs:57\r\n  if(!isWithin(canonicalPath(path.join(root,'artifacts/verification')),dir))throw new Error('INVALID_GUARD_RECEIPT_DIR');\r\n                                                                                  ^\r\n\r\nError: INVALID_GUARD_RECEIPT_DIR\r\n    at file:///D:/pi-reason-prototype/src/offline-guard.mjs:57:83\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)\r\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\r\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:660:26)\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:96:9)\r\n\r\nNode.js v24.12.0\r\n","completedAt":"2026-10-15T08:00:36.873Z"}]
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file:///D:/pi-reason-prototype/publish/pi-ic4ruz/tests/brokered-child.test.mjs:55:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ..\tests\brokered-child.test.mjs:63:1
+✖ cancelling a blocked provider request aborts parent broker and settles worker (148.6641ms)
+  AssertionError [ERR_ASSERTION]: [{"id":"4d2b013d-520c-4a04-96ff-5b5b75237aa0","owner":{"session":"broker-parent","branch":"main"},"taskKey":"1792051236876:0","title":"Wait for cancellation","assignment":"Wait for cancellation","profile":"code_explorer","modelSlot":"primary","model":{"provider":"9router","model":"cx/gpt-6-astra","thinkingLevel":"low"},"capabilityHash":"15ddcf12ccf75c31a34a6889640563b842264792deaa212222f04e3726029285","tools":["read"],"generation":1,"status":"failed","createdAt":"2026-10-15T08:00:36.876Z","cleanupConfirmed":false,"claimed":false,"updatedAt":"2026-10-15T08:00:37.023Z","error":"CHILD_EXITED file:///D:/pi-reason-prototype/src/offline-guard.mjs:57\r\n  if(!isWithin(canonicalPath(path.join(root,'artifacts/verification')),dir))throw new Error('INVALID_GUARD_RECEIPT_DIR');\r\n                                                                                  ^\r\n\r\nError: INVALID_GUARD_RECEIPT_DIR\r\n    at file:///D:/pi-reason-prototype/src/offline-guard.mjs:57:83\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)\r\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\r\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:660:26)\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:96:9)\r\n\r\nNode.js v24.12.0\r\n","completedAt":"2026-10-15T08:00:37.023Z"}]
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file:///D:/pi-reason-prototype/publish/pi-ic4ruz/tests/brokered-child.test.mjs:74:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ..\tests\delegation-process.test.mjs:17:1
+✖ real offline worker creates isolated Pi SDK session and exits without inference (170.9583ms)
+  AssertionError [ERR_ASSERTION]: [{"id":"c8a96f02-63e9-40f6-9d98-d72a76c32141","owner":{"session":"parent-process","branch":"main"},"taskKey":"1792051262380:0","title":"Read the fixture and report it","assignment":"Read the fixture and report it","profile":"code_explorer","modelSlot":"primary","model":{"provider":"9router","model":"cx/gpt-6-sol"},"capabilityHash":"ab5b5046311b1a82270e0b25411dbfb6f9ce6f096096f8d5ae764bfce6a2b311","tools":["read","grep","find","ls"],"generation":1,"status":"failed","createdAt":"2026-10-15T08:01:02.380Z","cleanupConfirmed":false,"claimed":false,"updatedAt":"2026-10-15T08:01:02.547Z","error":"CHILD_EXITED file:///D:/pi-reason-prototype/src/offline-guard.mjs:57\r\n  if(!isWithin(canonicalPath(path.join(root,'artifacts/verification')),dir))throw new Error('INVALID_GUARD_RECEIPT_DIR');\r\n                                                                                  ^\r\n\r\nError: INVALID_GUARD_RECEIPT_DIR\r\n    at file:///D:/pi-reason-prototype/src/offline-guard.mjs:57:83\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)\r\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\r\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:660:26)\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:96:9)\r\n\r\nNode.js v24.12.0\r\n","completedAt":"2026-10-15T08:01:02.547Z"}]
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file:///D:/pi-reason-prototype/publish/pi-ic4ruz/tests/delegation-process.test.mjs:29:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ..\tests\delegation-process.test.mjs:43:1
+✖ cancel settles a real delayed worker and confirms process exit (151.9515ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file:///D:/pi-reason-prototype/publish/pi-ic4ruz/tests/delegation-process.test.mjs:54:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ..\tests\delegation-process.test.mjs:88:1
+✖ default worker holds one writer lease and writes only through owned tool (149.9909ms)
+  AssertionError [ERR_ASSERTION]: [{"id":"f5e7b8ce-51c2-4d1c-9563-74acc083c401","owner":{"session":"parent-writer","branch":"main"},"taskKey":"1792051274294:0","title":"Write the fixture","assignment":"Write the fixture","profile":"default","modelSlot":"primary","model":{"provider":"9router","model":"cx/gpt-6-sol"},"capabilityHash":"5718841d60fe24b12f9e32ffb0a3480393d7dd9fe321ab98301cd8b4860767a6","tools":["read","grep","find","ls","edit","write","bash","powershell","codemode"],"generation":1,"status":"failed","createdAt":"2026-10-15T08:01:14.294Z","cleanupConfirmed":false,"claimed":false,"updatedAt":"2026-10-15T08:01:14.441Z","error":"CHILD_EXITED file:///D:/pi-reason-prototype/src/offline-guard.mjs:57\r\n  if(!isWithin(canonicalPath(path.join(root,'artifacts/verification')),dir))throw new Error('INVALID_GUARD_RECEIPT_DIR');\r\n                                                                                  ^\r\n\r\nError: INVALID_GUARD_RECEIPT_DIR\r\n    at file:///D:/pi-reason-prototype/src/offline-guard.mjs:57:83\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)\r\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\r\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:660:26)\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:96:9)\r\n\r\nNode.js v24.12.0\r\n","completedAt":"2026-10-15T08:01:14.441Z"}]
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file:///D:/pi-reason-prototype/publish/pi-ic4ruz/tests/delegation-process.test.mjs:103:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ..\tests\delegation-process.test.mjs:115:1
+✖ code explorer host rejects outside paths and forbidden writes, including nested tools (153.0828ms)
+  AssertionError [ERR_ASSERTION]: outside_read: [{"id":"23c51b82-2f38-4363-a390-56c79fad16b2","owner":{"session":"parent-outside_read","branch":"main"},"taskKey":"1792051274444:0","title":"Check outside_read","assignment":"Check outside_read","profile":"code_explorer","modelSlot":"primary","model":{"provider":"9router","model":"cx/gpt-6-sol"},"capabilityHash":"f77f8c80f7b0882b19c8710623604532897b7572917692573dc051a9602694d2","tools":["read","grep","find","ls","codemode"],"generation":1,"status":"failed","createdAt":"2026-10-15T08:01:14.444Z","cleanupConfirmed":false,"claimed":false,"updatedAt":"2026-10-15T08:01:14.594Z","error":"CHILD_EXITED file:///D:/pi-reason-prototype/src/offline-guard.mjs:57\r\n  if(!isWithin(canonicalPath(path.join(root,'artifacts/verification')),dir))throw new Error('INVALID_GUARD_RECEIPT_DIR');\r\n                                                                                  ^\r\n\r\nError: INVALID_GUARD_RECEIPT_DIR\r\n    at file:///D:/pi-reason-prototype/src/offline-guard.mjs:57:83\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)\r\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\r\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:660:26)\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:96:9)\r\n\r\nNode.js v24.12.0\r\n","completedAt":"2026-10-15T08:01:14.594Z"}]
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file:///D:/pi-reason-prototype/publish/pi-ic4ruz/tests/delegation-process.test.mjs:129:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

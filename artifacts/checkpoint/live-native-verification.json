@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "kind": "Windows ConPTY actual live launcher against loopback synthetic SSE",
+  "paidInferenceRequests": 0,
+  "requests": 3,
+  "checks": [
+    "explicit live launch",
+    "native incremental streaming",
+    "write tool",
+    "resize",
+    "clean exit",
+    "resume with accounting",
+    "Escape cancellation",
+    "Ctrl+C clear",
+    "Ctrl+D exit",
+    "secret absent from transcript",
+    "private resume hint",
+    "ledger lock released"
+  ]
+}

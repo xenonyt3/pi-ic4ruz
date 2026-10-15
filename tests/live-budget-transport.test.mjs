@@ -1,7 +1,8 @@
+import {pilotBudget} from './helpers/live-fixture.mjs';
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import path from 'node:path';
 import {LiveBudgetTransport} from '../src/live-budget-transport.mjs';import{root}from'../src/paths.mjs';
 const base=path.join(root,'tests/.tmp');fs.mkdirSync(base,{recursive:true});
-const budget=JSON.parse(fs.readFileSync(path.join(root,'config/evaluation-astra.json'),'utf8'));
+const budget=pilotBudget;
 const endpoint='http://127.0.0.1:20128/v1/chat/completions';
 const payload={model:budget.model,stream:true,stream_options:{include_usage:true},max_completion_tokens:1000,reasoning_effort:'low',messages:[]};
 async function request(gate,body=payload){const call=gate.createCall();try{const r=await call.fetch(endpoint,{method:'POST',body:JSON.stringify(body)});await r.text();return call;}finally{call.finish();}}

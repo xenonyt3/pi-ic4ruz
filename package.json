@@ -10,7 +10,8 @@
     "test:context": "node scripts/verify-offline.mjs --suite context",
     "test:delegation": "node scripts/verify-offline.mjs --suite delegation",
     "audit": "node scripts/audit-baseline.mjs --check",
-    "start": "node launch.mjs"
+    "start": "node launch.mjs",
+    "start:live": "node launch-live.mjs"
   },
   "engines": { "node": ">=24" }
 }

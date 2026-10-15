@@ -8,6 +8,8 @@ developer's profile or an independently verified portable release.
 Excluded deliberately:
 
 - Auth files, production provider configurations, tokens and environment secrets.
+- The entire `agent/live-private/` tree: live configuration, resume wrappers,
+  allowance ledgers/locks, model stores, telemetry, parent/child sessions and receipts.
 - Agent sessions, telemetry, writer leases, models cache and private Brain vault.
 - Installed dependencies, generated candidate runtime and machine-specific pins.
 - Raw live campaign sessions and private baseline file inventories.
@@ -28,6 +30,8 @@ to unrelated third-party materials by making this repository public.
 Historical paths, session identifiers in synthetic receipts, model labels and
 usage totals in project documents are evidence, not production credentials.
 The bundled `agent/models.json` uses `127.0.0.1:9` and an explicit fixture credential.
+`config/live.example.json` is disabled with zero allowance. Test provider files
+contain synthetic credentials only and never grant paid inference authorization.
 
 Original implementation provenance is recorded in
 `artifacts/checkpoint/public-source-snapshot.json`. New-machine bootstrap results

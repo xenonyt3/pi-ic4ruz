@@ -88,7 +88,7 @@ export function registerHarness(pi, options = {}) {
     return children.every(child=>child.cleanup_confirmed===true)&&policy.pendingWriterCalls().length===0;
   }
   pi.on('session_before_switch',async event=>{
-    if(event.targetSessionFile&&!isWithin(canonicalPath(resolvePrototypePaths().sessions),canonicalPath(event.targetSessionFile)))return{cancel:true};
+    if(event.targetSessionFile&&!isWithin(canonicalPath(options.sessionRoot??resolvePrototypePaths().sessions),canonicalPath(event.targetSessionFile)))return{cancel:true};
     if(!await drain())return{cancel:true};
   });
   pi.on('session_before_fork',async()=>({cancel:!await drain()}));

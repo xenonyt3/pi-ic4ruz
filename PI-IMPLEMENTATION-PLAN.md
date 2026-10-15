@@ -2,6 +2,12 @@
 
 Tanggal audit: 14 Oktober 2026. Penulisan plan: sesi 14-15 Oktober 2026 WIB. Status: **DISETUJUI; IMPLEMENTASI BERTAHAP DIMULAI 15 OKTOBER 2026 WIB**.
 
+I23 continuation: interactive live use is explicitly authorized for implementation,
+offline/fake-provider verification and publication, with the offline default kept.
+Reuse the existing live transport and model broker; persist one allowance across
+parent/child/retry/summary/resume. 9router selected; no paid smoke or old campaign
+reuse authorized. Usage and rollback: `docs/LIVE.md`; results: latest backlog.
+
 Dokumen kerja aktif berada di `D:/pi-ic4ruz`; sumber audit tetap di `D:/reason-investigation-20261014`. UI mengikuti **CLI/terminal Reason**. Pengguna telah menyetujui pilihan desain dan memerintahkan implementasi bertahap dari T0. Persetujuan ini menggantikan pembahasan bersyarat pada sesi planning. Pilot Astra/9router kemudian diotorisasi dengan batas 12 request / 120000 input token / 12000 output token / 15 menit; Brain production ditunda.
 
 Status implementasi aktual, hasil tes dan unknown dilacak di [RECONSTRUCTION-BACKLOG.md](RECONSTRUCTION-BACKLOG.md). Bagian evidence dan catatan sesi planning di bawah tetap merupakan snapshot historis; kalimat "belum dibuat/dijalankan sesi ini" di bagian tersebut merujuk sesi planning, bukan status terbaru. Prototype kini berada di `D:/pi-reason-prototype`.

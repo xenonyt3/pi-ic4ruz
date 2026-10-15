@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { createChildSupervisor } from '../src/child-supervisor.ts';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const prototype = 'D:/pi-reason-prototype';
+const prototype = path.resolve(here, '..');
 const fixtureConfig = {
   schemaVersion: 1,
   profiles: { code_explorer: { systemPrompt: 'Read the assigned file and report the finding.', tools: ['read'] } },

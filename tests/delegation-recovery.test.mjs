@@ -21,6 +21,15 @@ test('O13 throwing cancellation retains handle and permits cleanup retry',async(
   assert.equal((await s.cancel(id)).cleanup_confirmed,false);assert.equal(s.activeCount(),1);
   assert.equal((await s.cancel(id)).cleanup_confirmed,true);assert.equal(s.activeCount(),0);
 });
+test('O13 simultaneous cancel and shutdown await one confirmed cleanup',async()=>{
+  let release,cancels=0;const cleanup=new Promise(resolve=>{release=resolve;});
+  const s=fixture({start:async record=>({sessionPath:record.id,done:new Promise(()=>{}),cancel:async()=>{cancels++;await cleanup;return true;}})});
+  const id=(await s.spawnTasks([task])).subagent_session_ids[0];
+  const first=s.cancel(id),second=s.cancel(id),shutdown=s.shutdown();
+  assert.equal(cancels,1);assert.equal(s.activeCount(),1);release();
+  assert.equal((await first).cleanup_confirmed,true);assert.equal((await second).cleanup_confirmed,true);
+  assert.equal((await shutdown)[0].cleanup_confirmed,true);assert.equal(s.activeCount(),0);
+});
 test('O13 shutdown waits for uncommitted startup and prevents future starts',async()=>{
   let release;const gate=new Promise(resolve=>{release=resolve;});let cancelled=0;
   const s=fixture({start:async record=>{await gate;return{sessionPath:record.id,done:new Promise(()=>{}),cancel:async()=>{cancelled++;return true;}};}});

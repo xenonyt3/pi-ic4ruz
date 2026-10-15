@@ -1,5 +1,21 @@
 # Continue on another device
 
+I23 adds an explicitly opted-in interactive live launcher. Start with
+[docs/LIVE.md](docs/LIVE.md): `launch-live.mjs --live --config PATH`, local
+credential environment variable, pinned provider/model and a new persistent
+allowance. `launch.mjs` remains offline and `liveInference:false` stays unchanged.
+The user selected 9router / `cx/gpt-6-astra`, but no new paid smoke authorization was
+given. Do not reuse any historical campaign allowance. Current implementation
+and verification are recorded in the I23 backlog and
+`artifacts/checkpoint/live-interactive-verification.json`.
+
+Current-checkout I23 verification: **171/171 full offline acceptance PASS**, including
+51 UI tests and 11 live fixtures; baseline/vault/source/both runtimes unchanged and
+zero unexpected network attempts. The original private baseline snapshot and
+source oracle were available locally, copied into ignored locations and verified;
+they were not recreated or published. This does not establish acceptance on a
+different device without those prerequisites, nor full O14/live Reason parity.
+
 Checkpoint: Pi `1.0.0+reason-ui.4`, adding content-order transcript/tool grouping
 to the prior startup/shimmer and user/assistant/reasoning hooks. Five patched-file
 TypeScript checks and 96 composition comparisons pass on the original workstation.
@@ -19,8 +35,9 @@ result. O14/full UI parity remains incomplete.
 The repository root is the prototype root. It contains a copy of the two planning
 documents that originally lived separately in `D:/Pi-Ic4ruz`. Historical absolute
 paths in reports remain evidence pointers to the original machine, not portable
-links. The existing application source and tests are preserved byte-for-byte;
-packaging adds this handoff, bootstrap and redistribution notices.
+links. Initial publication preserved application source and tests byte-for-byte;
+I23 subsequently adds the explicit live path and corrects relocated test imports.
+Private baseline/reference prerequisites remain intentionally unpublished.
 
 ## Windows setup
 
@@ -101,3 +118,9 @@ the sole vault contract remains `D:/.vault-brain/vault`, with no second memory s
 > and remaining prerequisites; never mark omitted reference/baseline tests passed.
 > Track implemented, tested, runtime-verified and unknown separately. Full UI parity
 > is not complete. Ask only about material scope changes.
+
+For I23 continuation, preserve the shared `LiveBudgetTransport`, brokered child
+workers and private allowance ledgers. Tests use a synthetic provider fixture;
+they do not read production credentials. The actual Windows live launcher has
+also been exercised against loopback synthetic SSE (stream/tool/resume/cancel),
+with zero paid requests; see `artifacts/checkpoint/live-native-verification.json`.

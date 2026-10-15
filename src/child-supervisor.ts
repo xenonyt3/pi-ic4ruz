@@ -105,8 +105,10 @@ export function createProcessChildTransport(options: any) {
           text: finished?.text ?? info.stderr, error: finished?.error, exitCode: info.code,
           cleanupConfirmed: finished?.cleanupConfirmed === true })),
         async send(prompt: string, generation: number) { const result = await request('prompt', { prompt, generation }); if (!result.ok) throw new Error(result.error || 'CHILD_PROMPT_FAILED'); return result; },
-        async cancel() { let response; try { response = await request('cancel', {}, 10000); } catch {} if (child.exitCode === null) child.kill(); const info = await Promise.race([exit, delay(10000).then(() => null)]); return !!info && response?.cleanupConfirmed === true; },
-        async close() { let response; try { response = await request('close', {}, 10000); } catch {} if (child.exitCode === null) child.kill(); return !!(await Promise.race([exit, delay(10000).then(() => null)])) && response?.cleanupConfirmed === true; }
+        // A broker abort can finish cleanup before the cancel IPC arrives. Require
+        // both an observed exit and an affirmative cleanup receipt in either order.
+        async cancel() { let response; try { response = await request('cancel', {}, 10000); } catch {} if (child.exitCode === null) child.kill(); const info = await Promise.race([exit, delay(10000).then(() => null)]); return !!info && (response?.cleanupConfirmed === true || finished?.cleanupConfirmed === true); },
+        async close() { let response; try { response = await request('close', {}, 10000); } catch {} if (child.exitCode === null) child.kill(); return !!(await Promise.race([exit, delay(10000).then(() => null)])) && (response?.cleanupConfirmed === true || finished?.cleanupConfirmed === true); }
       };
   }
   return { start: (record: any, assignment: string, spec: any) => launch(record, assignment, spec),
@@ -121,6 +123,7 @@ export function createChildSupervisor(options: any) {
   const records = new Map<string, any>();
   const handles = new Map<string, any>();
   const pending = new Set<string>();
+  const cancelling = new Map<string, Promise<any>>();
   let shuttingDown = false;
   const owner = { session: options.ownerSession, branch: options.ownerBranch };
   if (!owner.session || !owner.branch) throw new Error('OWNER_REQUIRED');
@@ -266,7 +269,13 @@ export function createChildSupervisor(options: any) {
       pending.delete(id);
     }
   }
-  async function cancel(id: string) {
+  function cancel(id: string) {
+    if (cancelling.has(id)) return cancelling.get(id)!;
+    const result = cancelOnce(id).finally(() => cancelling.delete(id));
+    cancelling.set(id, result);
+    return result;
+  }
+  async function cancelOnce(id: string) {
     const record = owned(id), handle = handles.get(id);
     if (terminal.has(record.status) && record.cleanupConfirmed === true) return { id, status: record.status, cleanup_confirmed: true };
     record.status = 'cancelled';

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "mode": "interactive-live",
+  "provider": "9router",
+  "api": "openai-completions",
+  "baseUrl": "http://localhost:20128/v1",
+  "models": ["REPLACE_WITH_EXACT_MODEL_ID"],
+  "model": "REPLACE_WITH_EXACT_MODEL_ID",
+  "responseModels": ["REPLACE_WITH_EXACT_RESPONSE_MODEL_ID"],
+  "thinkingLevel": "low",
+  "contextWindow": 32768,
+  "credentialEnv": "PI_LIVE_API_KEY",
+  "budget": {
+    "allowanceId": "REPLACE_WITH_NEW_ALLOWANCE_ID",
+    "authorized": false,
+    "maxRequests": 0,
+    "maxInputTokens": 0,
+    "maxOutputTokens": 0,
+    "perRequestMaxOutputTokens": 0,
+    "maxDurationMs": 0
+  }
+}

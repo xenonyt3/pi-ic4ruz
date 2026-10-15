@@ -5,8 +5,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { createFixtureSession, assistantMessage, messageStream, runTool } from './helpers/session.mjs';
 
-const source = 'D:/pi-reason-prototype/runtime/node_modules/@earendil-works/pi-coding-agent/dist/core/compaction/compaction.js';
-const compaction = await import(pathToFileURL(source).href);
+const compaction = await import(new URL('../runtime/node_modules/@earendil-works/pi-coding-agent/dist/core/compaction/compaction.js',import.meta.url).href);
 
 test('upstream threshold is strictly above contextWindow minus reserve', () => {
   const settings = { enabled: true, reserveTokens: 16384, keepRecentTokens: 20000 };

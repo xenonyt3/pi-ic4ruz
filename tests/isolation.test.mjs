@@ -83,7 +83,8 @@ test('O01 changed runtime bytes fail closed in a disposable installation fixture
 
 test('O01 launcher version/help execute without inference', async () => {
   for (const flag of ['--version', '--help']) {
-    const result = await run([path.join(root, 'launch.mjs'), flag]);
+    // Relocated Windows trees can take >30s to hash; retain all identity checks.
+    const result = await run([path.join(root, 'launch.mjs'), flag], {timeout:90000});
     assert.equal(result.code, 0, result.stderr);
     assert.match(result.stdout, flag === '--version' ? /1\.0\.0/ : /Usage|coding assistant/i);
   }

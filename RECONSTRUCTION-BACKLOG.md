@@ -4,7 +4,36 @@ Tanggal audit: 14 Oktober 2026. **Plan disetujui; implementasi bertahap dimulai 
 
 Dokumen kerja aktif berada di `D:/pi-ic4ruz`; evidence audit tetap di `D:/reason-investigation-20261014`. UI: **ikuti CLI/terminal Reason** (D13). Persetujuan desain sudah eksplisit; tidak memerlukan persetujuan ulang untuk detail rutin. Pengguna telah mengotorisasi pilot live Astra/9router dengan budget terbatas; hasilnya dilacak pada bagian terbaru berikut.
 
-## Status terbaru: I22 content-order transcript dan tool adjacency - 15 Oktober 2026 WIB
+## Status terbaru: I23 explicit interactive live - 15 Oktober 2026 WIB
+
+- Implemented: `launch-live.mjs --live --config PATH`, reusing `LiveBudgetTransport`
+  and the existing child broker. Offline launcher/default unchanged; user selected
+  9router / `cx/gpt-6-astra`; no new paid allowance authorized. Production Brain disabled.
+- Persistent ledger lock, reserve-before-send, parent/child/retry/summary accounting,
+  session binding, conservative unknown-usage stop, no restart allowance reset;
+  credentials local to broker memory, private files ignored by Git.
+- Tested: **171/171 full acceptance PASS** in the current checkout, including 51 UI
+  tests and 11 focused live tests, zero failed/cancelled/skipped. Original baseline
+  5599 files + fd source, vault, source and both pinned runtimes unchanged;
+  unexpected network attempts zero and receipts complete. Report:
+  `artifacts/verification/runs/2026-10-15T08-27-06.809Z/report.json`.
+  Scoped strict candidate TypeScript: five files / zero diagnostics. This uses the
+  verified original private baseline/reference copies, not a newly frozen baseline.
+- Verification history retained: first relocated run 159/165 (six worker failures
+  from old absolute prototype paths); second 169/170 (30-second launcher test
+  timeout while hashing the pinned runtime). Paths now resolve the current checkout;
+  only that launcher's test wait was extended to 90 seconds, retaining every hash,
+  identity, result and network assertion. A separate shutdown regression also proved
+  and fixed the SDK user-shell dispose race before final acceptance.
+- Runtime-verified: actual Windows ConPTY live launcher against loopback synthetic
+  SSE: streaming, write tool, resize, exit, resume accounting, Escape cancel,
+  Ctrl+C/Ctrl+D, private resume hint and ledger-lock cleanup. Zero paid requests.
+- Unknown: real 9router credential/model compatibility, pricing, paid smoke,
+  full O14 and live Reason parity. Historical pilot allowance is not new permission.
+- Usage/rollback: `docs/LIVE.md`, `docs/ROLLBACK.md`. Publication exclusions unchanged
+  and extended to the entire `agent/live-private/` tree.
+
+## Milestone sebelumnya: I22 content-order transcript dan tool adjacency - 15 Oktober 2026 WIB
 
 - Implemented: kandidat `1.0.0+reason-ui.4`, optional setTranscriptLayout('content') setelah 12 actual-host gap fixtures membuktikan text/tool order dan separator berbeda dari FeA.showEntry/B0A. Projection memakai komponen tool asli; model/session payload, signatures, execution dan registry tetap utuh. Error result mengalahkan stale running status. Undefined/reset/failure kembali ke layout Pi.
 - Tested: **8/8 focused PASS**, **96 visible-row composition comparisons** pada dark/light, reasoning collapsed/expanded, lebar 8/32/80/120; trailing surface padding diabaikan secara eksplisit. User/assistant/reasoning fixtures tetap 16/80/96 PASS. Scoped strict TypeScript **5 file / 0 diagnostics**. Actual SDK streaming, replay/resume, mouse, expansion, image/diff payloads dan fallback/reset/reload lulus.
@@ -232,6 +261,7 @@ I16 diperluas dengan source oracle dan marketing reference; I17 adapter awal imp
 | I20 | Implemented / active | `THINKING-VERIFICATION.md`, optional ThinkingRenderer, candidate 1.0.0+reason-ui.3 | I19 + gap summary/indent/spacing terbukti; pengguna menyetujui lanjut | 4-file strict typecheck, 7 thinking tests, 96 source fixtures dan native Ctrl+T expand/collapse/exit PASS; full O14 tetap parsial |
 | I21 | Implemented / tested / runtime-verified, bounded slice | `P/src/ui-startup.mjs`, `P/src/reason-ui.mjs`, `P/docs/STARTUP-WORKING-VERIFICATION.md` | I20 + source startup/working verified; task explicitly approved | Existing upstream hooks; actual identity/Pi asset substitution; 8 focused tests, 284 source comparisons, actual SDK/native lifecycle/resize/Escape/cleanup; full acceptance 151/151 PASS, O14 remains partial |
 | I22 | Implemented / focused-tested / native-verified | `P/upstream-patches/transcript-hook/LAYOUT-VERIFICATION.md`, reason-ui.4 | Approved continuation; 12 actual host gaps vs FeA.showEntry/B0A | Original-component projection, 8 tests / 96 comparisons / strict5-file TS; native CtrlO/CtrlT/resize/resume/exit; full acceptance 159/159 PASS, O14 partial |
+| I23 | Implemented / offline-tested / native synthetic verified | `launch-live.mjs`, `src/live-interactive.mjs`, shared `src/live-budget-transport.mjs`, `docs/LIVE.md` | User authorized interactive live implementation with offline default and new-budget gate | 171/171 full acceptance, 11 live tests, native loopback stream/tool/resume/cancel; persistent shared ledger, pinned model, child cleanup, one writer; paid compatibility and O14 unknown |
 
 ## Evidence follow-up yang tidak boleh disamarkan sebagai implementation task
 

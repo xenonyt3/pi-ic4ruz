@@ -13,7 +13,7 @@ const suites = {
   context:['context-store','store-runtime','compaction','context-recovery','brain-telemetry','brain-reconnect','provider-transport'],
   delegation:['delegation','delegation-process','delegation-recovery'],
   provider:['provider-transport'],
-  live:['live-budget-transport','live-evaluation','brokered-child','pilot-verifier'],
+  live:['live-budget-transport','live-evaluation','brokered-child','pilot-verifier','live-interactive'],
   ui:['reason-ui','transcript-hook','assistant-hook','thinking-hook','startup-working','transcript-layout'],
 };
 suites.all=[...new Set(Object.values(suites).flat())];
@@ -31,7 +31,7 @@ function sourceSnapshot(files){
   for(const file of ['tools/typecheck/package.json','tools/typecheck/package-lock.json','tools/typecheck/node_modules/typescript/lib/typescript.js'])add(path.join(root,file));
   const oracle=path.join(root,'artifacts/ui-reference/20261015/source-oracle.json');
   if(fs.existsSync(oracle))add(oracle);
-  for(const file of [...files,...['launch.mjs','agent/settings.json','agent/models.json','runtime/package.json','runtime/package-lock.json','runtime/exports.mjs','tests/fixtures/manifest.json'].map(file=>path.join(root,file))])add(file);
+  for(const file of [...files,...['launch.mjs','launch-live.mjs','agent/settings.json','agent/models.json','runtime/package.json','runtime/package-lock.json','runtime/exports.mjs','tests/fixtures/manifest.json','tests/fixtures/live-provider.json'].map(file=>path.join(root,file))])add(file);
   return hashes;
 }
 function vaultSnapshot(){

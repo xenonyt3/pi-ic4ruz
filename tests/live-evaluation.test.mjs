@@ -1,3 +1,4 @@
+import {pilotBudget,providerSource} from './helpers/live-fixture.mjs';
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import path from 'node:path';import{randomUUID}from'node:crypto';
 import{root}from'../src/paths.mjs';import{runLiveEvaluation}from'../src/live-evaluation.mjs';
 import {spawnSync} from 'node:child_process';
@@ -10,7 +11,7 @@ test('file-worker-incompatible launch flags fail before acceptance, credentials 
   assert.match(result.stderr,/LIVE_FILE_ENTRYPOINT_REQUIRED/);
 });
 test('live pilot driver uses real SDK with injected provider, runs verifier, and charges three calls', {timeout:60000},async()=>{
-  const budget={...JSON.parse(fs.readFileSync(path.join(root,'config/evaluation-astra.json'),'utf8')),campaign:'test-live-'+randomUUID()};let calls=0;
+  const budget={...pilotBudget,campaign:'test-live-'+randomUUID()};let calls=0;
   const fixed="export function normalizeLabel(value) {\n  if (typeof value !== 'string') throw new TypeError('string required');\n  return value.trim().replace(/\\s+/gu, ' ').toLowerCase();\n}\n";
   const fetchImpl=async(url,init={})=>{
     assert.match(String(url),/\/chat\/completions$/);
@@ -20,22 +21,22 @@ test('live pilot driver uses real SDK with injected provider, runs verifier, and
     else{delta={content:'Fixed normalization.'};finish='stop';}
     return new Response(`data: ${JSON.stringify({id:'fixture-'+calls,model:budget.model,choices:[{index:0,delta,finish_reason:finish}],usage:{prompt_tokens:20,completion_tokens:10,total_tokens:30}})}\n\ndata: [DONE]\n\n`,{headers:{'content-type':'text/event-stream'}});
   };
-  const result=await runLiveEvaluation({budget,fetchImpl,conditions:['A'],onProgress:()=>{}});
+  const result=await runLiveEvaluation({budget,fetchImpl,providerSource,conditions:['A'],onProgress:()=>{}});
   assert.equal(calls,3,JSON.stringify(result.report));assert.equal(result.report.passed,true,JSON.stringify(result.report));assert.equal(result.report.usage.requests,3);assert.equal(result.report.usage.inputTokens,60);assert.equal(result.report.usage.outputTokens,30);assert.equal(result.report.brain,'disabled_by_user');
 });
 test('pilot rejects an early-exit candidate even when the model reports completion', {timeout:60000},async()=>{
-  const budget={...JSON.parse(fs.readFileSync(path.join(root,'config/evaluation-astra.json'),'utf8')),campaign:'test-live-early-exit-'+randomUUID()};let calls=0;
+  const budget={...pilotBudget,campaign:'test-live-early-exit-'+randomUUID()};let calls=0;
   const fetchImpl=async()=>{
     calls++;
     const delta=calls===1?{tool_calls:[{index:0,id:'write-exit',type:'function',function:{name:'write',arguments:JSON.stringify({path:'src/normalize.mjs',content:'export function normalizeLabel(){process.exit(0)}'})}}]}:{content:'Done'};
     return new Response(`data: ${JSON.stringify({choices:[{index:0,delta,finish_reason:calls===1?'tool_calls':'stop'}],usage:{prompt_tokens:20,completion_tokens:10}})}\n\ndata: [DONE]\n\n`,{headers:{'content-type':'text/event-stream'}});
   };
-  const {report}=await runLiveEvaluation({budget,fetchImpl,conditions:['A'],onProgress:()=>{}});
+  const {report}=await runLiveEvaluation({budget,fetchImpl,providerSource,conditions:['A'],onProgress:()=>{}});
   assert.equal(calls,2);assert.equal(report.passed,false);assert.equal(report.conditions[0].correct,false);assert.equal(report.conditions[0].cleanupConfirmed,true);assert.equal(report.conditions[0].verifierReceipt.passed,0);
 });
 
 test('condition C discovers deferred delegation and completes a brokered child before editing', {timeout:60000},async()=>{
-  const budget={...JSON.parse(fs.readFileSync(path.join(root,'config/evaluation-astra.json'),'utf8')),campaign:'test-live-delegation-'+randomUUID()};let calls=0;
+  const budget={...pilotBudget,campaign:'test-live-delegation-'+randomUUID()};let calls=0;
   const fixed="export function normalizeLabel(value) { if (typeof value !== 'string') throw new TypeError('string required'); return value.trim().replace(/\\s+/gu, ' ').toLowerCase(); }";
   const fetchImpl=async(_url,init)=>{
     calls++;const body=JSON.parse(init.body);
@@ -54,7 +55,7 @@ test('condition C discovers deferred delegation and completes a brokered child b
     const delta=name?{tool_calls:[{index:0,id:'delegation-'+calls,type:'function',function:{name,arguments:JSON.stringify(args)}}]}:{content};
     return new Response(`data: ${JSON.stringify({choices:[{index:0,delta,finish_reason:name?'tool_calls':'stop'}],usage:{prompt_tokens:20,completion_tokens:10}})}\n\ndata: [DONE]\n\n`,{headers:{'content-type':'text/event-stream'}});
   };
-  const {report,directory}=await runLiveEvaluation({budget,fetchImpl,conditions:['C'],onProgress:()=>{}});
+  const {report,directory}=await runLiveEvaluation({budget,fetchImpl,providerSource,conditions:['C'],onProgress:()=>{}});
   assert.equal(report.passed,true,JSON.stringify(report));assert.equal(calls,6);
   assert.equal(report.conditions[0].childCount,1);assert.equal(report.conditions[0].childStatuses[0].status,'completed');
   assert.equal(report.conditions[0].cleanupConfirmed,true);assert.equal(report.conditions[0].delegationExercised,true);

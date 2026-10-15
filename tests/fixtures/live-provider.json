@@ -1,0 +1,1 @@
+{"providers":{"9router":{"api":"openai-completions","baseUrl":"http://localhost:20128/v1","apiKey":"synthetic-test-credential"}}}

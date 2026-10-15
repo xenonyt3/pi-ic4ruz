@@ -27,6 +27,9 @@ visual authority is Reason CLI, with Pi's real state and capabilities.
   phase, estimated context (explicit unknown), child/cleanup state and statuses.
   Context percentage is not a provider account quota.
 - Footer key hints come from Pi keybindings. Do not advertise Reason-only keys.
+- Explicit interactive live mode adds an extension status with LIVE, pinned
+  provider/model, cumulative allowance usage and honest stop reasons. Price remains
+  unknown. Offline stays the default; this status does not imply O14/live parity.
 - Use the host Theme constructor and host editor keybindings across CLI/SDK
   module boundaries. Pin the custom editor's padding when the host copies defaults.
 - Query terminal colors using the public TUI API. With a measured background,

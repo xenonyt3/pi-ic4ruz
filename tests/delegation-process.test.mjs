@@ -10,7 +10,7 @@ import { createChildSupervisor } from '../src/child-supervisor.ts';
 import { loadChildProfiles } from '../src/child-profiles.ts';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const prototype = 'D:/pi-reason-prototype';
+const prototype = path.resolve(here, '..');
 const config = loadChildProfiles(path.join(here, '../config/child-profiles.json'));
 const stagedSrc = path.join(here, '../src');
 

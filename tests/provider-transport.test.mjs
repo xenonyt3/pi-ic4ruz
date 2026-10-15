@@ -2,8 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { pathToFileURL } from 'node:url';
 
-const source = 'D:/pi-reason-prototype/runtime/node_modules/@earendil-works/pi-coding-agent/node_modules/@earendil-works/pi-ai/dist/api/openai-completions.js';
-const { stream } = await import(pathToFileURL(source).href);
+const { stream } = await import(new URL('../runtime/node_modules/@earendil-works/pi-coding-agent/node_modules/@earendil-works/pi-ai/dist/api/openai-completions.js',import.meta.url).href);
 
 const model = {
   id: 'fixture-model', provider: 'fixture', api: 'openai-completions',

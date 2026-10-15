@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "checkpoint": "fa5f3dc",
+  "candidate": "1.0.0+reason-ui.4",
+  "implemented": [
+    "explicit interactive-live entrypoint; offline default retained",
+    "shared persistent LiveBudgetTransport for parent, child, retry and summary",
+    "pinned model and local credential; child broker reused",
+    "parent, child and interactive shell cleanup; shared writer lease"
+  ],
+  "tested": {
+    "command": "node scripts/verify-offline.mjs --suite all",
+    "report": "artifacts/verification/runs/2026-10-15T08-27-06.809Z/report.json",
+    "counts": {
+      "tests": 171,
+      "pass": 171,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    "uiTests": 51,
+    "interactiveLiveTests": 11,
+    "unexpectedNetworkAttempts": 0,
+    "baseline": {
+      "passed": true,
+      "checkedFiles": 5599,
+      "toolSourcesChecked": 1,
+      "changed": []
+    },
+    "vaultUnchanged": true,
+    "sourceUnchanged": true,
+    "runtimeUnchanged": true,
+    "networkReceiptsComplete": true,
+    "scopedCandidateTypecheck": {
+      "command": "node scripts/typecheck-candidate.mjs",
+      "files": 5,
+      "diagnostics": 0
+    }
+  },
+  "prerequisites": {
+    "baseline": "existing original snapshot copied unchanged, not refrozen",
+    "reference": "existing 0.2.269 oracle; source/binary provenance matches public hashes",
+    "privateEvidencePublished": false
+  },
+  "runtimeVerified": {
+    "receipt": "artifacts/checkpoint/live-native-verification.json",
+    "scope": "actual Windows ConPTY launcher with loopback synthetic provider; not paid 9router"
+  },
+  "configuration": {
+    "selectedProvider": "9router",
+    "selectedModel": "cx/gpt-6-astra",
+    "newPaidAllowanceAuthorized": false,
+    "credentialStoredInConfig": false
+  },
+  "paidInferenceRequests": 0,
+  "unknown": [
+    "real 9router credential/model compatibility",
+    "provider pricing and billing enforcement",
+    "full O14 and live Reason parity",
+    "cross-device acceptance without original prerequisites"
+  ],
+  "retainedFailures": [
+    {
+      "report": "artifacts/verification/runs/2026-10-15T08-00-17.068Z/report.json",
+      "counts": "159/165",
+      "reason": "six worker fixtures used old absolute prototype paths"
+    },
+    {
+      "report": "artifacts/verification/runs/2026-10-15T08-14-36.601Z/report.json",
+      "counts": "169/170",
+      "reason": "30-second launcher test timeout during pinned-tree hashing; extended only test wait to 90 seconds"
+    }
+  ]
+}

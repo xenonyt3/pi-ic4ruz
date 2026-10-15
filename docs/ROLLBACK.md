@@ -1,11 +1,19 @@
 # Rollback prototype
 
+For the interactive-live entrypoint, interrupt active work, then exit Pi and
+confirm child cleanup and writer lease release. Return to `node launch.mjs` for
+offline mode; do not flip `config/harness.json.liveInference`. Keep the ignored
+`agent/live-private/` configuration, sessions and accounting intact. Removing a
+ledger does not restore allowance. Stale lock recovery requires inspecting its
+owner and child processes; see [LIVE.md](LIVE.md). No global launcher/profile is
+installed or modified by live mode. Production Brain remains disabled.
+
 Tutup proses prototype. Gunakan launcher `pi` untuk fork atau `pi-clean` untuk
 baseline. Prototype tidak memasang alias global atau mengubah PATH.
 Tidak perlu restore backup ke atas profil aktif. Simpan session dan receipts.
 Jangan hapus direktori otomatis; review diff task secara terpisah.
 
-Live inference ditutup oleh launcher, extension dan network guard.
+Live inference ditutup oleh launcher offline, extension dan network guard.
 `--offline` upstream sendiri hanya menutup startup discovery, bukan semua
 inference. Guard Node ini untuk verifikasi terpercaya, bukan OS sandbox untuk
 arbitrary shell. Untuk delegation, tunggu shutdown sampai semua child

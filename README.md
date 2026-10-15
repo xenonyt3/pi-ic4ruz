@@ -1,6 +1,11 @@
 # Pi Reason prototype
 
-**Continuing on another device:** start with [HANDOFF.md](HANDOFF.md) for Windows bootstrap and current limits. Public exclusions are described in [PUBLICATION.md](PUBLICATION.md). The acceptance result is original-workstation evidence; private baselines and proprietary Reason source are not distributed.
+**Continuing on another device:** start with [HANDOFF.md](HANDOFF.md) for Windows bootstrap and current limits. Public exclusions are described in [PUBLICATION.md](PUBLICATION.md). The historical 159/159 result is original-workstation evidence; current I23 verification is recorded separately. Private baselines and proprietary Reason source are not distributed.
+
+**Interactive live mode:** [docs/LIVE.md](docs/LIVE.md) describes the separate
+`launch-live.mjs --live --config PATH` entrypoint for your provider, with persistent
+shared accounting. The standard launcher stays offline. The example config grants
+no usage; a new explicit model/allowance and local credential are required.
 
 
 
@@ -27,8 +32,8 @@ fork/baseline ditolak. Tidak ada alias global atau perubahan PATH.
 Profil dan session berada di `agent/`. `agent/models.json` memuat **fixture**,
 bukan credential/endpoint produksi. Nilai cost nol dari SDK adalah default
 fixture, bukan tarif terverifikasi. Jangan membuka live gate hanya dengan
-mengganti config: jalur live wajib memakai runner evaluasi, acceptance terbaru,
-dan budget eksplisit. `--offline` Pi sendiri bukan network sandbox; guard Node tambahan
+mengganti config: gunakan entrypoint live eksplisit dengan allowance baru, atau
+runner evaluasi dengan campaign terpisah. `--offline` Pi sendiri bukan network sandbox; guard Node tambahan
 memblokir API network umum pada fixture terpercaya, tidak membatasi arbitrary
 process/shell sebagai OS sandbox.
 

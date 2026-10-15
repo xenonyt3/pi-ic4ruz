@@ -1,5 +1,11 @@
 # T5 - evaluasi tetap terpisah dari acceptance offline
 
+Interactive daily use now has a separate explicit entrypoint; see [LIVE.md](LIVE.md).
+It shares the existing live transport and child broker with the evaluator, with
+persistent resumable allowances. The campaign path retains its one-shot Astra
+scope and refuses reuse. All campaign authorizations documented below are historical;
+they are not permission to run the interactive launcher or repeat a campaign.
+
 Perintah `node scripts/evaluate-tasks.mjs` default dry-run. Artefak berada di
 `artifacts/evaluations/dry-run.json`. Tidak ada request model pada dry-run.
 Pengguna mengotorisasi pilot headless live dengan `cx/gpt-6-astra` melalui
