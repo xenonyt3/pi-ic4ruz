@@ -1,0 +1,653 @@
+{
+  "runtime": "1.0.0+reason-ui.3",
+  "kind": "deterministic-assistant-text-replay-not-live-Reason-capture",
+  "reference": "Reason CLI 0.2.269 B0A unattached assistant rows; Pi Markdown helpers",
+  "passed": true,
+  "cases": [
+    {
+      "appearance": "dark",
+      "width": 80,
+      "streaming": false,
+      "name": "plain",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "streaming": false,
+      "name": "markdown",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "streaming": false,
+      "name": "quote",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "streaming": false,
+      "name": "code",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "streaming": false,
+      "name": "indented",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "streaming": false,
+      "name": "tabs",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "streaming": false,
+      "name": "whitespace",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "streaming": false,
+      "name": "unicode",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "streaming": false,
+      "name": "long",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "streaming": false,
+      "name": "partial",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "streaming": true,
+      "name": "plain",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "streaming": true,
+      "name": "markdown",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "streaming": true,
+      "name": "quote",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "streaming": true,
+      "name": "code",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "streaming": true,
+      "name": "indented",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "streaming": true,
+      "name": "tabs",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "streaming": true,
+      "name": "whitespace",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "streaming": true,
+      "name": "unicode",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "streaming": true,
+      "name": "long",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "streaming": true,
+      "name": "partial",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "streaming": false,
+      "name": "plain",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "streaming": false,
+      "name": "markdown",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "streaming": false,
+      "name": "quote",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "streaming": false,
+      "name": "code",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "streaming": false,
+      "name": "indented",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "streaming": false,
+      "name": "tabs",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "streaming": false,
+      "name": "whitespace",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "streaming": false,
+      "name": "unicode",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "streaming": false,
+      "name": "long",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "streaming": false,
+      "name": "partial",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "streaming": true,
+      "name": "plain",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "streaming": true,
+      "name": "markdown",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "streaming": true,
+      "name": "quote",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "streaming": true,
+      "name": "code",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "streaming": true,
+      "name": "indented",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "streaming": true,
+      "name": "tabs",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "streaming": true,
+      "name": "whitespace",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "streaming": true,
+      "name": "unicode",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "streaming": true,
+      "name": "long",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "streaming": true,
+      "name": "partial",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "streaming": false,
+      "name": "plain",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "streaming": false,
+      "name": "markdown",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "streaming": false,
+      "name": "quote",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "streaming": false,
+      "name": "code",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "streaming": false,
+      "name": "indented",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "streaming": false,
+      "name": "tabs",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "streaming": false,
+      "name": "whitespace",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "streaming": false,
+      "name": "unicode",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "streaming": false,
+      "name": "long",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "streaming": false,
+      "name": "partial",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "streaming": true,
+      "name": "plain",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "streaming": true,
+      "name": "markdown",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "streaming": true,
+      "name": "quote",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "streaming": true,
+      "name": "code",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "streaming": true,
+      "name": "indented",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "streaming": true,
+      "name": "tabs",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "streaming": true,
+      "name": "whitespace",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "streaming": true,
+      "name": "unicode",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "streaming": true,
+      "name": "long",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "streaming": true,
+      "name": "partial",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "streaming": false,
+      "name": "plain",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "streaming": false,
+      "name": "markdown",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "streaming": false,
+      "name": "quote",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "streaming": false,
+      "name": "code",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "streaming": false,
+      "name": "indented",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "streaming": false,
+      "name": "tabs",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "streaming": false,
+      "name": "whitespace",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "streaming": false,
+      "name": "unicode",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "streaming": false,
+      "name": "long",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "streaming": false,
+      "name": "partial",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "streaming": true,
+      "name": "plain",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "streaming": true,
+      "name": "markdown",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "streaming": true,
+      "name": "quote",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "streaming": true,
+      "name": "code",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "streaming": true,
+      "name": "indented",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "streaming": true,
+      "name": "tabs",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "streaming": true,
+      "name": "whitespace",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "streaming": true,
+      "name": "unicode",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "streaming": true,
+      "name": "long",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "streaming": true,
+      "name": "partial",
+      "matched": true,
+      "transcriptUnchanged": true
+    }
+  ],
+  "limits": [
+    "Empty and whitespace-only messages remain suppressed by upstream Pi.",
+    "Reason reasoning/tool/message composition and live streaming timing are not asserted.",
+    "Default outputPad=1 matches Reason; custom Pi padding is preserved."
+  ]
+}

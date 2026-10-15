@@ -1,0 +1,10 @@
+{
+  "fd": {
+    "version": "10.5.0",
+    "source": "D:/pi-clean/agent/bin/fd.exe",
+    "destination": "agent/bin/fd.exe",
+    "sha256": "d67d27a8e375ed7e9bca2b506a9dd5082bc24547aeba908b863f6f8b8ab0c3b9",
+    "copied": true,
+    "sourceModified": false
+  }
+}

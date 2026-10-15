@@ -1,0 +1,16 @@
+{
+  "capturedAt": "2026-10-15T02:13:58.816Z",
+  "runtime": "1.0.0+reason-ui.1",
+  "terminal": "Windows ConPTY 120x40",
+  "fixture": "native-transcript-session.json",
+  "exitCode": 0,
+  "checks": {
+    "literalUserText": true,
+    "unicode": true,
+    "candidateVersion": true,
+    "prototypeResumeHint": true,
+    "globalPiHintAbsent": true
+  },
+  "inferenceRequests": 0,
+  "output": "\u001b[<u\u001b[>4;0m\u001b[?2026h\u001b[?2026l\u001b[?2026h\u001b[?1006l\u001b[?1003l\u001b[?1002l\u001b[?1000l\u001b[?2026l\u001b[?2004l\u001b[?2026h\u001b[35;4H\u001b[?25h\u001b[?1049l\u001b[?2026l\u001b[?25l\u001b[?2026h\u001b[H\u001b[K\r\n\u001b[K\u001b[38;5;245m\r\n Pi prototype 1.0.0+reason-ui.1 · cx/gpt-6-sol\u001b[K\r\n D:\\pi-reason-prototype\\workspace\u001b[K\u001b[m\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\u001b[38;5;75m\r\n[Context]\u001b[K\u001b[38;5;245m\r\n  D:\\pi-reason-prototype\\agent\\shared-brain.md\u001b[K\u001b[m\r\n\u001b[K\u001b[38;5;75m\r\n[Extensions]\u001b[K\u001b[38;5;245m\r\n  harness.ts\u001b[K\u001b[m\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\u001b[14;1H\u001b[?25h\u001b]133;A\u0007 \u001b[38;5;75m› \u001b[mKeep **literal** punctuation and `code`.\r\n   Preserve Unicode: CAFÉ.\u001b]133;B\u0007\u001b]133;C\u0007\r\n\u001b]133;A\u0007\r\n\u001b]133;B\u0007\u001b]133;C\u0007\u001b[?2026l\u001b[?2004l\u001b[?25l Offline display fixture. No model request was made.\u001b[K\u001b[38;5;245m\u001b[19;1H────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\u001b[m\r\n \u001b[38;5;75m›\u001b[K\u001b[38;5;245m\r\n────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\u001b[m\r\n \u001b[38;5;75m9router/cx/gpt-6-sol \u001b[m· offline · 0% context\r\n D:\\pi-reason-prototype\\workspace\r\n Brain: unavailable (offline)\r\n /resume sessions · / commands · ctrl+o tool output · escape cancel\u001b[27;1HTo resume this session: & 'C:\\Program Files\\nodejs\\node.exe' 'D:\\pi-reason-prototype\\launch.mjs' --session 'D:\\pi-reason-prototype\\agent\\sessions\\2026-10-15T01-56-31-069Z_01a13d46-78dc-71fd-83be-046bb53dca69.jsonl'\r\n\u001b[?25h\u001b]0;C:\\Program Files\\PowerShell\\7\\pwsh.exe\u0007\u001b[?9001l\u001b[?1004l"
+}

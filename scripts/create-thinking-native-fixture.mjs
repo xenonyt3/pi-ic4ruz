@@ -1,0 +1,12 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {sdk} from '../src/upstream.mjs';
+import {root,resolvePrototypePaths} from '../src/paths.mjs';
+import {assistantMessage} from '../tests/helpers/session.mjs';
+const manager=sdk.SessionManager.create(path.join(root,'workspace'),resolvePrototypePaths().sessions);
+manager.appendModelChange('9router','cx/gpt-6-sol');
+manager.appendMessage({role:'user',content:'Inspect this offline reasoning fixture.',timestamp:Date.now()});
+manager.appendMessage(assistantMessage([{type:'thinking',thinking:'First inspect the contract.\n\n**Preserve Unicode**\nExpanded detail: CAF\u00c9 stays intact.',thinkingSignature:'offline-fixture-signature'},{type:'text',text:'No model request was made.'}],{provider:'9router',model:'cx/gpt-6-sol'}));
+const file=path.join(root,'artifacts/ui-replay/native-thinking-session.json');
+fs.writeFileSync(file,JSON.stringify({sessionFile:manager.getSessionFile(),fixture:true,modelRequests:0},null,2));
+console.log(JSON.stringify({file,sessionFile:manager.getSessionFile()}));

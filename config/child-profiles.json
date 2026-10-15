@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "profiles": {
+    "code_explorer": {
+      "systemPrompt": "Explore the assigned code and report concise findings with file evidence. Do not mutate files, run shell commands, delegate, or access memory tools.",
+      "tools": ["read", "grep", "find", "ls", "codemode"]
+    },
+    "default": {
+      "systemPrompt": "Complete the exact assignment within the granted workspace and report the result. Do not delegate or access memory tools.",
+      "tools": ["read", "grep", "find", "ls", "edit", "write", "bash", "powershell", "codemode"]
+    }
+  },
+  "modelSlots": {
+    "primary": { "provider": "9router", "model": "cx/gpt-6-sol" },
+    "thinking": { "provider": "9router", "model": "cx/gpt-6-sol" },
+    "coding": { "provider": "9router", "model": "cx/gpt-6-sol" },
+    "subagent": { "provider": "9router", "model": "cx/gpt-6-sol" }
+  }
+}

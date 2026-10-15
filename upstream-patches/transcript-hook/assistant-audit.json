@@ -1,0 +1,363 @@
+{
+  "kind": "assistant-hook-disabled-baseline-comparison-not-live-Reason-capture",
+  "reference": "Reason CLI 0.2.269 B0A, unattached assistant row",
+  "hook": "disabled; deliberately exercises stock rendering",
+  "terminalEnvironment": {
+    "NO_COLOR": null,
+    "FORCE_COLOR": "1"
+  },
+  "cases": [
+    {
+      "name": "plain",
+      "width": 80,
+      "exact": true,
+      "layout": true,
+      "actual": [
+        "",
+        " Inspect the input contract.                                                    "
+      ],
+      "expected": [
+        "",
+        " Inspect the input contract.                                                    "
+      ]
+    },
+    {
+      "name": "markdown",
+      "width": 80,
+      "exact": true,
+      "layout": true,
+      "actual": [
+        "",
+        " \u001b[38;5;75m\u001b[1m\u001b[4mResult\u001b[24m\u001b[22m\u001b[39m                                                                         ",
+        "                                                                                ",
+        " \u001b[1mBold\u001b[22m and \u001b[38;5;179minline code\u001b[39m.                                                          ",
+        "                                                                                ",
+        " \u001b[38;5;75m- \u001b[39mfirst                                                                        ",
+        " \u001b[38;5;75m- \u001b[39msecond                                                                       "
+      ],
+      "expected": [
+        "",
+        " \u001b[38;5;75m\u001b[1m\u001b[4mResult\u001b[24m\u001b[22m\u001b[39m                                                                         ",
+        "                                                                                ",
+        " \u001b[1mBold\u001b[22m and \u001b[38;5;179minline code\u001b[39m.                                                          ",
+        "                                                                                ",
+        " \u001b[38;5;75m- \u001b[39mfirst                                                                        ",
+        " \u001b[38;5;75m- \u001b[39msecond                                                                       "
+      ]
+    },
+    {
+      "name": "quote",
+      "width": 80,
+      "exact": false,
+      "layout": true,
+      "actual": [
+        "",
+        " \u001b[38;5;245m│ \u001b[39m\u001b[38;5;250m\u001b[3mPreserve the contract.\u001b[23m\u001b[39m                                                       "
+      ],
+      "expected": [
+        "",
+        " \u001b[38;5;245m│ \u001b[39m\u001b[3m\u001b[3mPreserve the contract.\u001b[23m\u001b[23m                                                       "
+      ]
+    },
+    {
+      "name": "code",
+      "width": 80,
+      "exact": false,
+      "layout": true,
+      "actual": [
+        "",
+        " \u001b[38;5;245m```js\u001b[39m                                                                          ",
+        "   \u001b[38;5;250mconst\u001b[39m value = \u001b[38;5;250m42\u001b[39m;                                                            ",
+        " \u001b[38;5;245m```\u001b[39m                                                                            "
+      ],
+      "expected": [
+        "",
+        " \u001b[38;5;245m```js\u001b[39m                                                                          ",
+        "   const value = 42;                                                            ",
+        " \u001b[38;5;245m```\u001b[39m                                                                            "
+      ]
+    },
+    {
+      "name": "indented",
+      "width": 80,
+      "exact": false,
+      "layout": false,
+      "actual": [
+        "",
+        " const value = 42;                                                              ",
+        "     return value;                                                              "
+      ],
+      "expected": [
+        "",
+        " \u001b[38;5;245m```\u001b[39m                                                                            ",
+        "   const value = 42;                                                            ",
+        "   return value;                                                                ",
+        " \u001b[38;5;245m```\u001b[39m                                                                            "
+      ]
+    },
+    {
+      "name": "whitespace",
+      "width": 80,
+      "exact": false,
+      "layout": false,
+      "actual": [
+        "",
+        " trailing spaces                                                                "
+      ],
+      "expected": [
+        "",
+        "                                                                                ",
+        "  trailing spaces                                                               ",
+        "                                                                                "
+      ]
+    },
+    {
+      "name": "unicode",
+      "width": 80,
+      "exact": true,
+      "layout": true,
+      "actual": [
+        "",
+        " CAFÉ and 日本語                                                                "
+      ],
+      "expected": [
+        "",
+        " CAFÉ and 日本語                                                                "
+      ]
+    },
+    {
+      "name": "long",
+      "width": 80,
+      "exact": true,
+      "layout": true,
+      "actual": [
+        "",
+        " path/value path/value path/value path/value path/value path/value path/value   ",
+        " path/value path/value path/value path/value path/value path/value path/value   ",
+        " path/value path/value path/value path/value path/value path/value path/value   ",
+        " path/value path/value path/value path/value path/value path/value path/value   ",
+        " path/value path/value path/value path/value path/value path/value path/value   ",
+        " path/value path/value path/value path/value path/value path/value path/value   ",
+        " path/value path/value path/value path/value path/value path/value path/value   ",
+        " path/value path/value path/value path/value path/value path/value path/value   ",
+        " path/value path/value path/value path/value path/value path/value path/value   ",
+        " path/value path/value path/value path/value path/value path/value path/value   "
+      ],
+      "expected": [
+        "",
+        " path/value path/value path/value path/value path/value path/value path/value   ",
+        " path/value path/value path/value path/value path/value path/value path/value   ",
+        " path/value path/value path/value path/value path/value path/value path/value   ",
+        " path/value path/value path/value path/value path/value path/value path/value   ",
+        " path/value path/value path/value path/value path/value path/value path/value   ",
+        " path/value path/value path/value path/value path/value path/value path/value   ",
+        " path/value path/value path/value path/value path/value path/value path/value   ",
+        " path/value path/value path/value path/value path/value path/value path/value   ",
+        " path/value path/value path/value path/value path/value path/value path/value   ",
+        " path/value path/value path/value path/value path/value path/value path/value   "
+      ]
+    },
+    {
+      "name": "stream",
+      "width": 80,
+      "exact": true,
+      "layout": true,
+      "actual": [
+        "",
+        " \u001b[38;5;75m\u001b[1mChecking\u001b[22m\u001b[39m                                                                       ",
+        "                                                                                ",
+        " The value is **part                                                            "
+      ],
+      "expected": [
+        "",
+        " \u001b[38;5;75m\u001b[1mChecking\u001b[22m\u001b[39m                                                                       ",
+        "                                                                                ",
+        " The value is **part                                                            "
+      ]
+    },
+    {
+      "name": "empty",
+      "width": 80,
+      "exact": false,
+      "layout": false,
+      "actual": [],
+      "expected": [
+        ""
+      ]
+    },
+    {
+      "name": "plain",
+      "width": 120,
+      "exact": true,
+      "layout": true,
+      "actual": [
+        "",
+        " Inspect the input contract.                                                                                            "
+      ],
+      "expected": [
+        "",
+        " Inspect the input contract.                                                                                            "
+      ]
+    },
+    {
+      "name": "markdown",
+      "width": 120,
+      "exact": true,
+      "layout": true,
+      "actual": [
+        "",
+        " \u001b[38;5;75m\u001b[1m\u001b[4mResult\u001b[24m\u001b[22m\u001b[39m                                                                                                                 ",
+        "                                                                                                                        ",
+        " \u001b[1mBold\u001b[22m and \u001b[38;5;179minline code\u001b[39m.                                                                                                  ",
+        "                                                                                                                        ",
+        " \u001b[38;5;75m- \u001b[39mfirst                                                                                                                ",
+        " \u001b[38;5;75m- \u001b[39msecond                                                                                                               "
+      ],
+      "expected": [
+        "",
+        " \u001b[38;5;75m\u001b[1m\u001b[4mResult\u001b[24m\u001b[22m\u001b[39m                                                                                                                 ",
+        "                                                                                                                        ",
+        " \u001b[1mBold\u001b[22m and \u001b[38;5;179minline code\u001b[39m.                                                                                                  ",
+        "                                                                                                                        ",
+        " \u001b[38;5;75m- \u001b[39mfirst                                                                                                                ",
+        " \u001b[38;5;75m- \u001b[39msecond                                                                                                               "
+      ]
+    },
+    {
+      "name": "quote",
+      "width": 120,
+      "exact": false,
+      "layout": true,
+      "actual": [
+        "",
+        " \u001b[38;5;245m│ \u001b[39m\u001b[38;5;250m\u001b[3mPreserve the contract.\u001b[23m\u001b[39m                                                                                               "
+      ],
+      "expected": [
+        "",
+        " \u001b[38;5;245m│ \u001b[39m\u001b[3m\u001b[3mPreserve the contract.\u001b[23m\u001b[23m                                                                                               "
+      ]
+    },
+    {
+      "name": "code",
+      "width": 120,
+      "exact": false,
+      "layout": true,
+      "actual": [
+        "",
+        " \u001b[38;5;245m```js\u001b[39m                                                                                                                  ",
+        "   \u001b[38;5;250mconst\u001b[39m value = \u001b[38;5;250m42\u001b[39m;                                                                                                    ",
+        " \u001b[38;5;245m```\u001b[39m                                                                                                                    "
+      ],
+      "expected": [
+        "",
+        " \u001b[38;5;245m```js\u001b[39m                                                                                                                  ",
+        "   const value = 42;                                                                                                    ",
+        " \u001b[38;5;245m```\u001b[39m                                                                                                                    "
+      ]
+    },
+    {
+      "name": "indented",
+      "width": 120,
+      "exact": false,
+      "layout": false,
+      "actual": [
+        "",
+        " const value = 42;                                                                                                      ",
+        "     return value;                                                                                                      "
+      ],
+      "expected": [
+        "",
+        " \u001b[38;5;245m```\u001b[39m                                                                                                                    ",
+        "   const value = 42;                                                                                                    ",
+        "   return value;                                                                                                        ",
+        " \u001b[38;5;245m```\u001b[39m                                                                                                                    "
+      ]
+    },
+    {
+      "name": "whitespace",
+      "width": 120,
+      "exact": false,
+      "layout": false,
+      "actual": [
+        "",
+        " trailing spaces                                                                                                        "
+      ],
+      "expected": [
+        "",
+        "                                                                                                                        ",
+        "  trailing spaces                                                                                                       ",
+        "                                                                                                                        "
+      ]
+    },
+    {
+      "name": "unicode",
+      "width": 120,
+      "exact": true,
+      "layout": true,
+      "actual": [
+        "",
+        " CAFÉ and 日本語                                                                                                        "
+      ],
+      "expected": [
+        "",
+        " CAFÉ and 日本語                                                                                                        "
+      ]
+    },
+    {
+      "name": "long",
+      "width": 120,
+      "exact": true,
+      "layout": true,
+      "actual": [
+        "",
+        " path/value path/value path/value path/value path/value path/value path/value path/value path/value path/value          ",
+        " path/value path/value path/value path/value path/value path/value path/value path/value path/value path/value          ",
+        " path/value path/value path/value path/value path/value path/value path/value path/value path/value path/value          ",
+        " path/value path/value path/value path/value path/value path/value path/value path/value path/value path/value          ",
+        " path/value path/value path/value path/value path/value path/value path/value path/value path/value path/value          ",
+        " path/value path/value path/value path/value path/value path/value path/value path/value path/value path/value          ",
+        " path/value path/value path/value path/value path/value path/value path/value path/value path/value path/value          "
+      ],
+      "expected": [
+        "",
+        " path/value path/value path/value path/value path/value path/value path/value path/value path/value path/value          ",
+        " path/value path/value path/value path/value path/value path/value path/value path/value path/value path/value          ",
+        " path/value path/value path/value path/value path/value path/value path/value path/value path/value path/value          ",
+        " path/value path/value path/value path/value path/value path/value path/value path/value path/value path/value          ",
+        " path/value path/value path/value path/value path/value path/value path/value path/value path/value path/value          ",
+        " path/value path/value path/value path/value path/value path/value path/value path/value path/value path/value          ",
+        " path/value path/value path/value path/value path/value path/value path/value path/value path/value path/value          "
+      ]
+    },
+    {
+      "name": "stream",
+      "width": 120,
+      "exact": true,
+      "layout": true,
+      "actual": [
+        "",
+        " \u001b[38;5;75m\u001b[1mChecking\u001b[22m\u001b[39m                                                                                                               ",
+        "                                                                                                                        ",
+        " The value is **part                                                                                                    "
+      ],
+      "expected": [
+        "",
+        " \u001b[38;5;75m\u001b[1mChecking\u001b[22m\u001b[39m                                                                                                               ",
+        "                                                                                                                        ",
+        " The value is **part                                                                                                    "
+      ]
+    },
+    {
+      "name": "empty",
+      "width": 120,
+      "exact": false,
+      "layout": false,
+      "actual": [],
+      "expected": [
+        ""
+      ]
+    }
+  ],
+  "matched": 10,
+  "layoutMatched": 14
+}

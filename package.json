@@ -1,0 +1,16 @@
+{
+  "name": "pi-reason-prototype",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node scripts/verify-offline.mjs --suite all",
+    "test:core": "node scripts/verify-offline.mjs --suite core",
+    "test:windows": "node scripts/verify-offline.mjs --suite windows",
+    "test:context": "node scripts/verify-offline.mjs --suite context",
+    "test:delegation": "node scripts/verify-offline.mjs --suite delegation",
+    "audit": "node scripts/audit-baseline.mjs --check",
+    "start": "node launch.mjs"
+  },
+  "engines": { "node": ">=24" }
+}

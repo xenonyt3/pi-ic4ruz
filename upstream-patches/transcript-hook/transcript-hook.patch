@@ -1,0 +1,356 @@
+diff --git a/packages/coding-agent/src/core/extensions/types.ts b/packages/coding-agent/src/core/extensions/types.ts
+index 3e0ea47..f460fc6 100644
+--- a/packages/coding-agent/src/core/extensions/types.ts
++++ b/packages/coding-agent/src/core/extensions/types.ts
+@@ -146,6 +146,16 @@ export type EditorFactory = (tui: TUI, theme: EditorTheme, keybindings: Keybindi
+  * UI context for extensions to request interactive UI.
+  * Each mode (interactive, RPC, print) provides its own implementation.
+  */
++export type UserMessageRenderer = (text: string, width: number, theme: Theme) => readonly string[] | undefined;
++export type AssistantTextRenderer = (text: string, width: number, theme: Theme, isStreaming: boolean, outputPad: number) => readonly string[] | undefined;
++export interface ThinkingRenderContext {
++	expanded: boolean;
++	isStreaming: boolean;
++	outputPad: number;
++	transform: (markdown: string, availableWidth: number) => string;
++}
++export type ThinkingRenderer = (text: string, width: number, theme: Theme, context: ThinkingRenderContext) => readonly string[] | undefined;
++
+ export interface ExtensionUIContext {
+ 	/** Show a selector and return the user's choice. */
+ 	select(title: string, options: string[], opts?: ExtensionUIDialogOptions): Promise<string | undefined>;
+@@ -206,6 +216,12 @@ export interface ExtensionUIContext {
+ 
+ 	/** Set a custom header component (shown at startup, above chat), or undefined to restore the built-in header. */
+ 	setHeader(factory: ((tui: TUI, theme: Theme) => Component & { dispose?(): void }) | undefined): void;
++	/** Prototype presentation hook; undefined restores stock user-message rendering. */
++	setUserMessageRenderer?(renderer: UserMessageRenderer | undefined): void;
++	/** Render assistant text blocks only; reasoning, tools, errors and terminal zones remain upstream. */
++	setAssistantTextRenderer?(renderer: AssistantTextRenderer | undefined): void;
++	/** Presentation only; the host retains visibility, mouse handling and the original reasoning content. */
++	setThinkingRenderer?(renderer: ThinkingRenderer | undefined): void;
+ 
+ 	/** Set the terminal window/tab title. */
+ 	setTitle(title: string): void;
+diff --git a/packages/coding-agent/src/modes/interactive/components/assistant-message.ts b/packages/coding-agent/src/modes/interactive/components/assistant-message.ts
+index c02e371..f82ebc8 100644
+--- a/packages/coding-agent/src/modes/interactive/components/assistant-message.ts
++++ b/packages/coding-agent/src/modes/interactive/components/assistant-message.ts
+@@ -1,6 +1,6 @@
+ import type { AssistantMessage } from "@earendil-works/pi-ai";
+-import { Container, Markdown, type MarkdownTheme, MouseRegion, Spacer, Text } from "@earendil-works/pi-tui";
+-import type { MarkdownTransformer } from "../../../core/extensions/types.ts";
++import { Container, Markdown, type MarkdownTheme, MouseRegion, Spacer, Text, visibleWidth } from "@earendil-works/pi-tui";
++import type { AssistantTextRenderer, MarkdownTransformer, ThinkingRenderer } from "../../../core/extensions/types.ts";
+ import { getMarkdownTheme, theme } from "../theme/theme.ts";
+ import { createMarkdownTransform } from "./markdown-transform.ts";
+ 
+@@ -18,6 +18,10 @@ export class AssistantMessageComponent extends Container {
+ 	private hiddenThinkingLabel: string;
+ 	private outputPad: number;
+ 	private markdownTransformers: readonly MarkdownTransformer[];
++	private getTextRenderer?: () => AssistantTextRenderer | undefined;
++	private onTextRendererError?: (error: unknown) => void;
++	private getThinkingRenderer?: () => ThinkingRenderer | undefined;
++	private onThinkingRendererError?: (error: unknown) => void;
+ 	private lastMessage?: AssistantMessage;
+ 	private hasToolCalls = false;
+ 	private isStreaming = false;
+@@ -30,6 +34,10 @@ export class AssistantMessageComponent extends Container {
+ 		hiddenThinkingLabel = "Thinking...",
+ 		outputPad = 1,
+ 		markdownTransformers: readonly MarkdownTransformer[] = [],
++		getTextRenderer?: () => AssistantTextRenderer | undefined,
++		onTextRendererError?: (error: unknown) => void,
++		getThinkingRenderer?: () => ThinkingRenderer | undefined,
++		onThinkingRendererError?: (error: unknown) => void,
+ 	) {
+ 		super();
+ 
+@@ -38,6 +46,10 @@ export class AssistantMessageComponent extends Container {
+ 		this.hiddenThinkingLabel = hiddenThinkingLabel;
+ 		this.outputPad = outputPad;
+ 		this.markdownTransformers = markdownTransformers;
++		this.getTextRenderer = getTextRenderer;
++		this.onTextRendererError = onTextRendererError;
++		this.getThinkingRenderer = getThinkingRenderer;
++		this.onThinkingRendererError = onThinkingRendererError;
+ 
+ 		// Container for text/thinking content
+ 		this.contentContainer = new Container();
+@@ -108,14 +120,35 @@ export class AssistantMessageComponent extends Container {
+ 		for (let i = 0; i < message.content.length; i++) {
+ 			const content = message.content[i];
+ 			if (content.type === "text" && content.text.trim()) {
+-				// Assistant text messages with no background - trim the text
+-				// Set paddingY=0 to avoid extra spacing before tool executions
+-				this.contentContainer.addChild(
+-					new Markdown(content.text.trim(), this.outputPad, 0, this.markdownTheme, undefined, {
+-						transform: createMarkdownTransform("assistant", this.isStreaming, this.markdownTransformers),
+-					}),
+-				);
++				const transform = createMarkdownTransform("assistant", this.isStreaming, this.markdownTransformers);
++				const fallback = new Markdown(content.text.trim(), this.outputPad, 0, this.markdownTheme, undefined, { transform });
++				// Only text presentation is replaceable; the surrounding message lifecycle stays upstream.
++				this.contentContainer.addChild({
++					invalidate: () => fallback.invalidate(),
++					render: (width: number) => {
++						try {
++							const renderer = this.getTextRenderer?.();
++							if (renderer) {
++								const text = transform(content.text, Math.max(1, width - 2 * this.outputPad));
++								const custom = renderer(text, width, theme, this.isStreaming, this.outputPad);
++								if (custom !== undefined) {
++									if (!Array.isArray(custom) || custom.length === 0 || custom.length > 10000 ||
++										custom.some(line => typeof line !== "string" || /[\r\n]/.test(line) || visibleWidth(line) > width)) {
++										throw new Error("INVALID_ASSISTANT_TEXT_RENDERER_OUTPUT");
++									}
++									return [...custom];
++								}
++							}
++						} catch (error) {
++							try { this.onTextRendererError?.(error); } catch { /* Preserve stock output. */ }
++						}
++						return fallback.render(width);
++					},
++				});
+ 			} else if (content.type === "thinking") {
++				const followsText = message.content.slice(0, i).reverse().find(block =>
++					(block.type === "text" && block.text.trim()) || (block.type === "thinking" && block.thinking.trim()) || block.type === "toolCall",
++				)?.type === "text";
+ 				const thinkingBlocks: string[] = [];
+ 				for (; i < message.content.length; i++) {
+ 					const thinkingContent = message.content[i];
+@@ -160,8 +193,29 @@ export class AssistantMessageComponent extends Container {
+ 								),
+ 							},
+ 						);
++				const presentedThinking = {
++					invalidate: () => thinkingComponent.invalidate(),
++					render: (width: number) => {
++						try {
++							const custom = this.getThinkingRenderer?.()?.(thinkingBlocks.join("\n\n"), width, theme, {
++								expanded: !hidden, isStreaming: this.isStreaming, outputPad: this.outputPad,
++								transform: createMarkdownTransform("assistant-thinking", this.isStreaming, this.markdownTransformers),
++							});
++							if (custom !== undefined) {
++								if (!Array.isArray(custom) || custom.length === 0 || custom.length > 10000 ||
++									custom.some(line => typeof line !== "string" || /[\r\n]/.test(line) || visibleWidth(line) > width)) {
++									throw new Error("INVALID_THINKING_RENDERER_OUTPUT");
++								}
++								return [...(followsText ? [""] : []), ...custom];
++							}
++						} catch (error) {
++							try { this.onThinkingRendererError?.(error); } catch { /* Preserve stock reasoning. */ }
++						}
++						return thinkingComponent.render(width);
++					},
++				};
+ 				this.contentContainer.addChild(
+-					new MouseRegion(thinkingComponent, (event) => {
++					new MouseRegion(presentedThinking, (event) => {
+ 						if (event.type !== "click" || event.button !== "left") return undefined;
+ 						this.thinkingVisibilityOverrides.set(runIndex, !hidden);
+ 						if (this.lastMessage) this.updateContent(this.lastMessage);
+diff --git a/packages/coding-agent/src/modes/interactive/components/user-message.ts b/packages/coding-agent/src/modes/interactive/components/user-message.ts
+index c187eff..457835d 100644
+--- a/packages/coding-agent/src/modes/interactive/components/user-message.ts
++++ b/packages/coding-agent/src/modes/interactive/components/user-message.ts
+@@ -1,5 +1,5 @@
+-import { Container, Markdown, type MarkdownTheme } from "@earendil-works/pi-tui";
+-import type { MarkdownTransformer } from "../../../core/extensions/types.ts";
++import { Container, Markdown, type MarkdownTheme, visibleWidth } from "@earendil-works/pi-tui";
++import type { MarkdownTransformer, UserMessageRenderer } from "../../../core/extensions/types.ts";
+ import { getMarkdownTheme, theme } from "../theme/theme.ts";
+ import { createMarkdownTransform } from "./markdown-transform.ts";
+ 
+@@ -15,18 +15,24 @@ export class UserMessageComponent extends Container {
+ 	private markdownTheme: MarkdownTheme;
+ 	private outputPad: number;
+ 	private markdownTransformers: readonly MarkdownTransformer[];
++	private getRenderer?: () => UserMessageRenderer | undefined;
++	private onRendererError?: (error: unknown) => void;
+ 
+ 	constructor(
+ 		text: string,
+ 		markdownTheme: MarkdownTheme = getMarkdownTheme(),
+ 		outputPad = 1,
+ 		markdownTransformers: readonly MarkdownTransformer[] = [],
++		getRenderer?: () => UserMessageRenderer | undefined,
++		onRendererError?: (error: unknown) => void,
+ 	) {
+ 		super();
+ 		this.text = text;
+ 		this.markdownTheme = markdownTheme;
+ 		this.outputPad = outputPad;
+ 		this.markdownTransformers = markdownTransformers;
++		this.getRenderer = getRenderer;
++		this.onRendererError = onRendererError;
+ 		this.rebuild();
+ 	}
+ 
+@@ -59,6 +65,24 @@ export class UserMessageComponent extends Container {
+ 	}
+ 
+ 	override render(width: number): string[] {
++		try {
++			const custom = this.getRenderer?.()?.(this.text, width, theme);
++			if (custom !== undefined) {
++				if (!Array.isArray(custom) || custom.length > 10000 ||
++					(custom.length === 0 && this.text.length > 0) ||
++					custom.some(line => typeof line !== "string" || /[\r\n]/.test(line) || visibleWidth(line) > width)) {
++					throw new Error("INVALID_USER_MESSAGE_RENDERER_OUTPUT");
++				}
++				const lines = [...custom];
++				if (lines.length) {
++					lines[0] = OSC133_ZONE_START + lines[0];
++					lines[lines.length - 1] += OSC133_ZONE_END + OSC133_ZONE_FINAL;
++				}
++				return lines;
++			}
++		} catch (error) {
++			try { this.onRendererError?.(error); } catch { /* Stock rendering must remain available. */ }
++		}
+ 		const lines = super.render(width);
+ 		if (lines.length === 0) {
+ 			return lines;
+diff --git a/packages/coding-agent/src/modes/interactive/interactive-mode.ts b/packages/coding-agent/src/modes/interactive/interactive-mode.ts
+index 158f59e..60c5ff5 100644
+--- a/packages/coding-agent/src/modes/interactive/interactive-mode.ts
++++ b/packages/coding-agent/src/modes/interactive/interactive-mode.ts
+@@ -92,6 +92,7 @@ import type {
+ 	WorkingIndicatorOptions,
+ } from "../../core/extensions/index.ts";
+ import { FooterDataProvider, type ReadonlyFooterDataProvider } from "../../core/footer-data-provider.ts";
++import type { AssistantTextRenderer, ThinkingRenderer, UserMessageRenderer } from "../../core/extensions/types.ts";
+ import { configureHttpDispatcher, formatHttpIdleTimeoutMs } from "../../core/http-dispatcher.ts";
+ import { type AppKeybinding, KeybindingsManager } from "../../core/keybindings.ts";
+ import type { McpHttpServerConfig } from "../../core/mcp-servers.ts";
+@@ -338,6 +339,11 @@ export function formatResumeCommand(sessionManager: SessionManager): string | un
+ 
+ 	const sessionFile = sessionManager.getSessionFile();
+ 	if (!sessionFile || !fs.existsSync(sessionFile)) return undefined;
++	const prototypeLauncher = process.env.PI_PROTOTYPE_LAUNCHER;
++	if (process.platform === "win32" && prototypeLauncher && path.isAbsolute(prototypeLauncher) && fs.existsSync(prototypeLauncher)) {
++		const quotePowerShell = (value: string) => `'${value.replace(/'/g, "''")}'`;
++		return `& ${quotePowerShell(process.execPath)} ${quotePowerShell(prototypeLauncher)} --session ${quotePowerShell(sessionFile)}`;
++	}
+ 
+ 	const args = [APP_NAME];
+ 	if (!sessionManager.usesDefaultSessionDir()) {
+@@ -510,6 +516,9 @@ export class InteractiveMode {
+ 	// Thinking block visibility state
+ 	private hideThinkingBlock = false;
+ 	private outputPad = 1;
++	private userMessageRenderer: UserMessageRenderer | undefined;
++	private assistantTextRenderer: AssistantTextRenderer | undefined;
++	private thinkingRenderer: ThinkingRenderer | undefined;
+ 	private readonly mermaidMarkdownTransformer: MarkdownTransformer = createMermaidMarkdownTransformer({
+ 		getMode: () => this.settingsManager.getMermaidRenderingMode(),
+ 		theme,
+@@ -2187,6 +2196,30 @@ export class InteractiveMode {
+ 		return [this.mermaidMarkdownTransformer, ...this.session.extensionRunner.getMarkdownTransformers()];
+ 	}
+ 
++	private onUserMessageRendererError = (_error: unknown): void => {
++		if (!this.userMessageRenderer) return;
++		this.userMessageRenderer = undefined;
++		queueMicrotask(() => {
++			if (this.isInitialized) this.showWarning("User-message renderer failed; restored stock Pi rendering.");
++		});
++	};
++
++	private onAssistantTextRendererError = (_error: unknown): void => {
++		if (!this.assistantTextRenderer) return;
++		this.assistantTextRenderer = undefined;
++		queueMicrotask(() => {
++			if (this.isInitialized) this.showWarning("Assistant-text renderer failed; restored stock Pi rendering.");
++		});
++	};
++
++	private onThinkingRendererError = (_error: unknown): void => {
++		if (!this.thinkingRenderer) return;
++		this.thinkingRenderer = undefined;
++		queueMicrotask(() => {
++			if (this.isInitialized) this.showWarning("Thinking renderer failed; restored stock Pi rendering.");
++		});
++	};
++
+ 	/**
+ 	 * Set up keyboard shortcuts registered by extensions.
+ 	 */
+@@ -2402,6 +2435,9 @@ export class InteractiveMode {
+ 	}
+ 
+ 	private resetExtensionUI(): void {
++		this.userMessageRenderer = undefined;
++		this.assistantTextRenderer = undefined;
++		this.thinkingRenderer = undefined;
+ 		if (this.extensionSelector) {
+ 			this.hideExtensionSelector();
+ 		}
+@@ -2602,6 +2638,24 @@ export class InteractiveMode {
+ 			setWidget: (key, content, options) => this.setExtensionWidget(key, content, options),
+ 			setFooter: (factory) => this.setExtensionFooter(factory),
+ 			setHeader: (factory) => this.setExtensionHeader(factory),
++			setUserMessageRenderer: (renderer) => {
++				if (renderer !== undefined && typeof renderer !== "function") throw new Error("INVALID_USER_MESSAGE_RENDERER");
++				this.userMessageRenderer = renderer;
++				this.ui.invalidate();
++				this.ui.requestRender();
++			},
++			setAssistantTextRenderer: (renderer) => {
++				if (renderer !== undefined && typeof renderer !== "function") throw new Error("INVALID_ASSISTANT_TEXT_RENDERER");
++				this.assistantTextRenderer = renderer;
++				this.ui.invalidate();
++				this.ui.requestRender();
++			},
++			setThinkingRenderer: (renderer) => {
++				if (renderer !== undefined && typeof renderer !== "function") throw new Error("INVALID_THINKING_RENDERER");
++				this.thinkingRenderer = renderer;
++				this.ui.invalidate();
++				this.ui.requestRender();
++			},
+ 			setTitle: (title) => this.ui.terminal.setTitle(title),
+ 			custom: (factory, options) => this.showExtensionCustom(factory, options),
+ 			pasteToEditor: (text) => this.editor.handleInput(`\x1b[200~${text}\x1b[201~`),
+@@ -3453,6 +3507,10 @@ export class InteractiveMode {
+ 						this.hiddenThinkingLabel,
+ 						this.outputPad,
+ 						this.getMarkdownTransformers(),
++						() => this.assistantTextRenderer,
++						this.onAssistantTextRendererError,
++						() => this.thinkingRenderer,
++						this.onThinkingRendererError,
+ 					);
+ 					this.streamingMessage = event.message;
+ 					this.chatContainer.addChild(this.streamingComponent);
+@@ -3871,6 +3929,8 @@ export class InteractiveMode {
+ 								this.getMarkdownThemeWithSettings(),
+ 								this.outputPad,
+ 								this.getMarkdownTransformers(),
++								() => this.userMessageRenderer,
++								this.onUserMessageRendererError,
+ 							);
+ 							this.chatContainer.addChild(userComponent);
+ 						}
+@@ -3880,6 +3940,8 @@ export class InteractiveMode {
+ 							this.getMarkdownThemeWithSettings(),
+ 							this.outputPad,
+ 							this.getMarkdownTransformers(),
++							() => this.userMessageRenderer,
++							this.onUserMessageRendererError,
+ 						);
+ 						this.chatContainer.addChild(userComponent);
+ 					}
+@@ -3897,6 +3959,10 @@ export class InteractiveMode {
+ 					this.hiddenThinkingLabel,
+ 					this.outputPad,
+ 					this.getMarkdownTransformers(),
++					() => this.assistantTextRenderer,
++					this.onAssistantTextRendererError,
++					() => this.thinkingRenderer,
++					this.onThinkingRendererError,
+ 				);
+ 				this.chatContainer.addChild(assistantComponent);
+ 				break;

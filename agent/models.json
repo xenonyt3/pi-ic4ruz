@@ -1,0 +1,18 @@
+{
+  "providers": {
+    "9router": {
+      "baseUrl": "http://127.0.0.1:9/v1",
+      "api": "openai-completions",
+      "apiKey": "offline-fixture-not-a-credential",
+      "models": [{
+        "id": "cx/gpt-6-sol",
+        "name": "Configured model (offline; live compatibility unknown)",
+        "reasoning": true,
+        "compat": { "supportsOpenAIGrammarTools": false },
+        "input": ["text"],
+        "contextWindow": 272000,
+        "maxTokens": 128000
+      }]
+    }
+  }
+}

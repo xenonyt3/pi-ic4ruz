@@ -1,0 +1,211 @@
+{
+  "runtime": "1.0.0+reason-ui.3",
+  "kind": "thinking-hook-disabled-gap-reproduction",
+  "reference": "Reason CLI 0.2.269 B0A/deI source oracle; host showEntry always gives reasoning an unattached row",
+  "cases": [
+    {
+      "width": 80,
+      "expanded": false,
+      "text": "Check the contract.",
+      "expected": [
+        "",
+        "   Thinking: Check the contract."
+      ],
+      "actual": [
+        "",
+        " Thinking                                                                       "
+      ],
+      "matched": false
+    },
+    {
+      "width": 80,
+      "expanded": false,
+      "text": "First thought.\n\n**Latest decision**\nMore detail.",
+      "expected": [
+        "",
+        "   Thinking: Latest decision"
+      ],
+      "actual": [
+        "",
+        " Thinking                                                                       "
+      ],
+      "matched": false
+    },
+    {
+      "width": 80,
+      "expanded": false,
+      "text": "## Inspect Unicode\n\nCAFÉ and 日本語",
+      "expected": [
+        "",
+        "   Thinking: Inspect Unicode"
+      ],
+      "actual": [
+        "",
+        " Thinking                                                                       "
+      ],
+      "matched": false
+    },
+    {
+      "width": 80,
+      "expanded": true,
+      "text": "Check the contract.",
+      "expected": [
+        "",
+        "   Check the contract.                                                          "
+      ],
+      "actual": [
+        "",
+        " Check the contract.                                                            "
+      ],
+      "matched": false
+    },
+    {
+      "width": 80,
+      "expanded": true,
+      "text": "First thought.\n\n**Latest decision**\nMore detail.",
+      "expected": [
+        "",
+        "   First thought.                                                               ",
+        "                                                                                ",
+        "   Latest decision                                                              ",
+        "   More detail.                                                                 "
+      ],
+      "actual": [
+        "",
+        " First thought.                                                                 ",
+        "                                                                                ",
+        " Latest decision                                                                ",
+        " More detail.                                                                   "
+      ],
+      "matched": false
+    },
+    {
+      "width": 80,
+      "expanded": true,
+      "text": "## Inspect Unicode\n\nCAFÉ and 日本語",
+      "expected": [
+        "",
+        "   Inspect Unicode                                                              ",
+        "                                                                                ",
+        "   CAFÉ and 日本語                                                              "
+      ],
+      "actual": [
+        "",
+        " Inspect Unicode                                                                ",
+        "                                                                                ",
+        " CAFÉ and 日本語                                                                "
+      ],
+      "matched": false
+    },
+    {
+      "width": 120,
+      "expanded": false,
+      "text": "Check the contract.",
+      "expected": [
+        "",
+        "   Thinking: Check the contract."
+      ],
+      "actual": [
+        "",
+        " Thinking                                                                                                               "
+      ],
+      "matched": false
+    },
+    {
+      "width": 120,
+      "expanded": false,
+      "text": "First thought.\n\n**Latest decision**\nMore detail.",
+      "expected": [
+        "",
+        "   Thinking: Latest decision"
+      ],
+      "actual": [
+        "",
+        " Thinking                                                                                                               "
+      ],
+      "matched": false
+    },
+    {
+      "width": 120,
+      "expanded": false,
+      "text": "## Inspect Unicode\n\nCAFÉ and 日本語",
+      "expected": [
+        "",
+        "   Thinking: Inspect Unicode"
+      ],
+      "actual": [
+        "",
+        " Thinking                                                                                                               "
+      ],
+      "matched": false
+    },
+    {
+      "width": 120,
+      "expanded": true,
+      "text": "Check the contract.",
+      "expected": [
+        "",
+        "   Check the contract.                                                                                                  "
+      ],
+      "actual": [
+        "",
+        " Check the contract.                                                                                                    "
+      ],
+      "matched": false
+    },
+    {
+      "width": 120,
+      "expanded": true,
+      "text": "First thought.\n\n**Latest decision**\nMore detail.",
+      "expected": [
+        "",
+        "   First thought.                                                                                                       ",
+        "                                                                                                                        ",
+        "   Latest decision                                                                                                      ",
+        "   More detail.                                                                                                         "
+      ],
+      "actual": [
+        "",
+        " First thought.                                                                                                         ",
+        "                                                                                                                        ",
+        " Latest decision                                                                                                        ",
+        " More detail.                                                                                                           "
+      ],
+      "matched": false
+    },
+    {
+      "width": 120,
+      "expanded": true,
+      "text": "## Inspect Unicode\n\nCAFÉ and 日本語",
+      "expected": [
+        "",
+        "   Inspect Unicode                                                                                                      ",
+        "                                                                                                                        ",
+        "   CAFÉ and 日本語                                                                                                      "
+      ],
+      "actual": [
+        "",
+        " Inspect Unicode                                                                                                        ",
+        "                                                                                                                        ",
+        " CAFÉ and 日本語                                                                                                        "
+      ],
+      "matched": false
+    }
+  ],
+  "matched": 0,
+  "textThenThinking": {
+    "kind": "candidate-before-spacing-fix",
+    "actual": [
+      "",
+      " First answer.                                                                  ",
+      "   Thinking: Check next step."
+    ],
+    "expected": [
+      "",
+      " First answer.                                                                  ",
+      "",
+      "   Thinking: Check next step."
+    ],
+    "matched": false
+  }
+}

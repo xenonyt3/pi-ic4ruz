@@ -1,0 +1,23 @@
+{
+  "compiler": "TypeScript 5.9.3",
+  "scope": "All patched TypeScript implementation files against the selected candidate declarations; external declaration checks skipped; not a whole upstream monorepo typecheck",
+  "passed": true,
+  "sourceHashes": {
+    "upstream-patches\\transcript-hook\\source\\core\\extensions\\types.ts": "a5e1f96eed34ddd2b0906f543a25b880a0884380a807899012c02328293057c4",
+    "upstream-patches\\transcript-hook\\source\\modes\\interactive\\components\\assistant-message.ts": "402afa78532a98c2e2806eabed11ab7c3435488fa5cca86518641587c0f1f324",
+    "upstream-patches\\transcript-hook\\source\\modes\\interactive\\components\\user-message.ts": "31b59df03cc0cbbb421b6083be4d1a55473e5f5c3a29004e5fc39dfe2d050458",
+    "upstream-patches\\transcript-hook\\source\\modes\\interactive\\interactive-mode.ts": "f1da0d597241faf19bdd93b90617c68ffcb8cb4955de1871d66b1e8e908f38d7"
+  },
+  "compilerHash": "3ae902c92cc44dace175c0e69e13a4b0899f6983c6121d76b9ab8dd5795e7675",
+  "lockHash": "383ebcbdd9f7410c2a2c7eb93cc17c653c37c10560d0e07ccfac5ba59db2813f",
+  "diagnostics": [],
+  "candidateIdentityHash": "9a33c254afe3b98fac9370fb748292c88c3fb69867715d4889fc1a5c1e1f1639",
+  "options": {
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "module": "NodeNext",
+    "target": "ES2022",
+    "allowImportingTsExtensions": true
+  }
+}

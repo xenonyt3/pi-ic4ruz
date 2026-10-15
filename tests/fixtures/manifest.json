@@ -1,0 +1,346 @@
+{
+  "schemaVersion": 1,
+  "stage": "T1-T5-offline",
+  "fixtures": [
+    {
+      "id": "O01-env-args",
+      "classification": "design",
+      "evidence": [
+        "P01",
+        "P02",
+        "D01",
+        "D02"
+      ],
+      "syntheticInput": "inherited PI/env credentials, override flags, own/foreign/junction session paths",
+      "expected": "isolated env and paths; invalid launch rejected before CLI",
+      "allowedDeviations": []
+    },
+    {
+      "id": "O01-loader",
+      "classification": "source",
+      "evidence": [
+        "P02",
+        "P04"
+      ],
+      "source": "runtime/node_modules/@earendil-works/pi-coding-agent/dist/core/extensions/loader.js",
+      "hashManifest": "config/runtime-identity.json",
+      "syntheticInput": "explicit TS extension with real runtime import plus foreign package/context sentinels",
+      "expected": "runtime factory identity equal; project resources/context absent",
+      "allowedDeviations": []
+    },
+    {
+      "id": "O01-rpc",
+      "classification": "source",
+      "evidence": [
+        "P01",
+        "P02"
+      ],
+      "source": "runtime/node_modules/@earendil-works/pi-coding-agent/dist/modes/rpc/rpc-mode.js",
+      "hashManifest": "config/runtime-identity.json",
+      "syntheticInput": [
+        "get_state",
+        "get_commands",
+        "get_available_models"
+      ],
+      "expected": "success; explicit model; own session path; zero intercepted network attempts",
+      "allowedDeviations": [
+        "xhigh configured but high selected by upstream; live effort compatibility unknown"
+      ]
+    },
+    {
+      "id": "O01-resume",
+      "classification": "design",
+      "evidence": [
+        "D02",
+        "P07"
+      ],
+      "syntheticInput": "upstream SessionManager JSONL with synthetic user/assistant pair",
+      "expected": "own session resumes; continue stays own; foreign RPC switch cancelled",
+      "allowedDeviations": []
+    },
+    {
+      "id": "T0-input-gate",
+      "classification": "design",
+      "evidence": [
+        "D12",
+        "budget-gate"
+      ],
+      "syntheticInput": "RPC prompt to input hook, no inference",
+      "expected": "handled disposition; no agent_start; zero intercepted network attempts",
+      "allowedDeviations": []
+    },
+    {
+      "id": "T0-network-guard",
+      "classification": "design",
+      "evidence": [
+        "offline-plan-section-8"
+      ],
+      "syntheticInput": "fetch/socket/http/dns attempted only inside guarded child",
+      "expected": "all rejected before transport",
+      "allowedDeviations": [
+        "not OS sandbox; arbitrary processes not covered"
+      ]
+    },
+    {
+      "id": "O02",
+      "testFile": "codemode.test.mjs",
+      "classification": "source+design",
+      "evidence": [
+        "R02",
+        "P03",
+        "D05",
+        "D07"
+      ],
+      "syntheticInput": "Deterministic fixture defined in test; no copied trajectory commands",
+      "expected": "Isolated QuickJS, await/return/exit, success-only store, abort/dangling calls, bounded CPU/heap/output, invalid options rejected",
+      "allowedDeviations": [
+        "Offline synthetic stream is not live provider verification; no Reason exact-equivalence claim"
+      ],
+      "sha256": "736d837f62764bfc552b67ce09109813c1059534f2fe8ec101d458340f21c841"
+    },
+    {
+      "id": "O03",
+      "testFile": "discovery-policy.test.mjs",
+      "classification": "source",
+      "evidence": [
+        "R03",
+        "R04",
+        "P03"
+      ],
+      "syntheticInput": "Deterministic fixture defined in test; no copied trajectory commands",
+      "expected": "Exactly five declarations, deferred lookup, unknown undefined, normalized collision denied, registry refresh",
+      "allowedDeviations": [
+        "Offline synthetic stream is not live provider verification; no Reason exact-equivalence claim"
+      ],
+      "sha256": "2424f85c7491b4ffc19fcb803951c9845f978c3a98eac802704a136951616991"
+    },
+    {
+      "id": "O04",
+      "testFile": "tool-pipeline.test.mjs",
+      "classification": "source+design",
+      "evidence": [
+        "P04",
+        "D06"
+      ],
+      "syntheticInput": "Deterministic fixture defined in test; no copied trajectory commands",
+      "expected": "Real AgentSession direct/nested validation and hooks match; forbidden child capabilities unreachable",
+      "allowedDeviations": [
+        "Offline synthetic stream is not live provider verification; no Reason exact-equivalence claim"
+      ],
+      "sha256": "5d752190877e836243fe3874b5f0a8b9f2b7d93b114affeae6e8353d70b26326"
+    },
+    {
+      "id": "O05",
+      "testFile": "file-tools.test.mjs",
+      "classification": "source",
+      "evidence": [
+        "P06",
+        "R03"
+      ],
+      "syntheticInput": "Deterministic fixture defined in test; no copied trajectory commands",
+      "expected": "UTF-8/CRLF/BOM, image/binary, original-snapshot non-overlap edits, write parents and errors",
+      "allowedDeviations": [
+        "Offline synthetic stream is not live provider verification; no Reason exact-equivalence claim"
+      ],
+      "sha256": "41e2f41fa1bd2ebe626b73ea87cbd401edd1bf851b6a51db989842c0dbb14da5"
+    },
+    {
+      "id": "O06",
+      "testFile": "windows-tools.test.mjs",
+      "classification": "source+design",
+      "evidence": [
+        "P06",
+        "D08"
+      ],
+      "syntheticInput": "Deterministic fixture defined in test; no copied trajectory commands",
+      "expected": "Git Bash and PowerShell stdout/stderr/nonzero, seconds timeout, owned process tree cleanup, direct/structured output limits",
+      "allowedDeviations": [
+        "Offline synthetic stream is not live provider verification; no Reason exact-equivalence claim"
+      ],
+      "sha256": "dbd41e93dfc1f57b2720eaf7bb01ba453db2e8997cd5e0e084e23d397478ae76"
+    },
+    {
+      "id": "O07",
+      "testFile": "batching-runtime.test.mjs",
+      "classification": "source+design",
+      "evidence": [
+        "P05",
+        "D08"
+      ],
+      "syntheticInput": "Deterministic fixture defined in test; no copied trajectory commands",
+      "expected": "Two real nested tool starts precede release, allSettled failure isolated, sequential mode excludes overlap; batching.test verifies mutation queue and crossprocess leases",
+      "allowedDeviations": [
+        "Offline synthetic stream is not live provider verification; no Reason exact-equivalence claim"
+      ],
+      "sha256": "03598dec2a9fe891eae6f1ee224eec0bc0be2213cfda11b21956036d4616d055"
+    },
+    {
+      "id": "O08",
+      "testFile": "store-runtime.test.mjs",
+      "classification": "source",
+      "evidence": [
+        "P03",
+        "P07"
+      ],
+      "syntheticInput": "Deterministic fixture defined in test; no copied trajectory commands",
+      "expected": "Branch-local and resumed store, copy/delete and per-value/total quota; failed writes do not commit",
+      "allowedDeviations": [
+        "Offline synthetic stream is not live provider verification; no Reason exact-equivalence claim"
+      ],
+      "sha256": "155a4d5f308aadc855c68a7511971c821aba86e75c7c2c7f589815bcb744c49b"
+    },
+    {
+      "id": "O09",
+      "testFile": "compaction.test.mjs",
+      "classification": "source",
+      "evidence": [
+        "P07"
+      ],
+      "syntheticInput": "Deterministic fixture defined in test; no copied trajectory commands",
+      "expected": "Threshold, real summary persistence/failure/cancel/history/tool pairs; context-recovery verifies low-window override and one overflow recovery",
+      "allowedDeviations": [
+        "Offline synthetic stream is not live provider verification; no Reason exact-equivalence claim"
+      ],
+      "sha256": "23024c896b12d99c958446a6b76387c1cd3d136c0638c874f5fe1188e496a221"
+    },
+    {
+      "id": "O10",
+      "testFile": "provider-transport.test.mjs",
+      "classification": "source",
+      "evidence": [
+        "P11",
+        "P08"
+      ],
+      "syntheticInput": "Deterministic fixture defined in test; no copied trajectory commands",
+      "expected": "Injected official OpenAI transport SSE, JSON/grammar capability, malformed/error/abort/disconnect/overflow/usage provenance; no provider request",
+      "allowedDeviations": [
+        "Offline synthetic stream is not live provider verification; no Reason exact-equivalence claim"
+      ],
+      "sha256": "89ab645627503894c8bdcf973321f6e9954532a833057220461b6731bafd35cd"
+    },
+    {
+      "id": "O11",
+      "testFile": "brain-telemetry.test.mjs",
+      "classification": "source+design",
+      "evidence": [
+        "P09",
+        "P08",
+        "D11"
+      ],
+      "syntheticInput": "Deterministic fixture defined in test; no copied trajectory commands",
+      "expected": "Curated fake Brain one-vault binding, unavailable recall and child exclusion, redacted hashes/unknown usage/bounded events; brain-reconnect verifies namespace refresh",
+      "allowedDeviations": [
+        "Offline synthetic stream is not live provider verification; no Reason exact-equivalence claim"
+      ],
+      "sha256": "4c0b684ea9f703ddd009e20b0ef60c3e1be0491117b13586131ff099e049209e"
+    },
+    {
+      "id": "O12",
+      "testFile": "delegation.test.mjs",
+      "classification": "design",
+      "evidence": [
+        "R04",
+        "R05",
+        "D08",
+        "D09"
+      ],
+      "syntheticInput": "Deterministic fixture defined in test; no copied trajectory commands",
+      "expected": "Three active slots with atomic startup prefix, no fourth queue, exact assignment, followup same ID, claim persistence and owner/model/profile checks",
+      "allowedDeviations": [
+        "Offline synthetic stream is not live provider verification; no Reason exact-equivalence claim"
+      ],
+      "sha256": "fcb6ab928fc8cda3ad1b0b5ed1fcf60423d1ea350e54df80e80731bb996ef7b1"
+    },
+    {
+      "id": "O13",
+      "testFile": "delegation-process.test.mjs",
+      "classification": "design",
+      "evidence": [
+        "P06",
+        "P10",
+        "D08"
+      ],
+      "syntheticInput": "Deterministic fixture defined in test; no copied trajectory commands",
+      "expected": "Real Windows SDK workers with synthetic streams, cancel/disconnect/default writer lease/read-only policy; recovery tests retain slots on uncertain cleanup",
+      "allowedDeviations": [
+        "Offline synthetic stream is not live provider verification; no Reason exact-equivalence claim"
+      ],
+      "sha256": "eea6a545bb518eb9f31039a150eb73bf03b998128c27b24dfb213851e5a983d0"
+    },
+    {
+      "id": "T5",
+      "testFile": "evaluation-budget.test.mjs",
+      "classification": "design",
+      "evidence": [
+        "plan-section-9"
+      ],
+      "syntheticInput": "Deterministic fixture defined in test; no copied trajectory commands",
+      "expected": "Reservations include parent/child/summary/retry, no unknown cost authority, missing usage/overshoot/deadline stop; live driver remains closed",
+      "allowedDeviations": [
+        "Offline synthetic stream is not live provider verification; no Reason exact-equivalence claim"
+      ],
+      "sha256": "7f2189c81086e08e3c0e6b52dabf0e91fa0daa86bc9aec63160168daa6998e8d"
+    },
+    {
+      "id": "T5-live-budget",
+      "testFile": "live-budget-transport.test.mjs",
+      "classification": "design",
+      "evidence": [
+        "plan-section-9",
+        "user-approved-Astra-pilot-budget"
+      ],
+      "syntheticInput": "Deterministic local fixtures; injected transport only",
+      "expected": "Deny endpoint/model/token-cap mismatch before send; shared physical attempts; missing usage stops; no budget reset",
+      "allowedDeviations": [
+        "Pilot evaluates one task once in each A/B/C condition; no statistical uplift claim"
+      ],
+      "sha256": "cd13f29db700a0d672040dc5b2430924b29210f62eab4e69f609da95c4d1b15b"
+    },
+    {
+      "id": "T5-live-driver",
+      "testFile": "live-evaluation.test.mjs",
+      "classification": "design",
+      "evidence": [
+        "plan-section-9",
+        "user-approved-Astra-pilot-budget"
+      ],
+      "syntheticInput": "Deterministic local fixtures; injected transport only",
+      "expected": "Real SDK plus fake provider completes valid fix and rejects process.exit candidate; no live requests",
+      "allowedDeviations": [
+        "Pilot evaluates one task once in each A/B/C condition; no statistical uplift claim"
+      ],
+      "sha256": "abd5e573908139073ae83c7d261e073609f0b4fed45086ba6822d7003cf5a9a6"
+    },
+    {
+      "id": "T5-broker",
+      "testFile": "brokered-child.test.mjs",
+      "classification": "design",
+      "evidence": [
+        "plan-section-9",
+        "user-approved-Astra-pilot-budget"
+      ],
+      "syntheticInput": "Deterministic local fixtures; injected transport only",
+      "expected": "Real worker proxies model turns through parent broker, preserves model/effort and propagates cancellation",
+      "allowedDeviations": [
+        "Pilot evaluates one task once in each A/B/C condition; no statistical uplift claim"
+      ],
+      "sha256": "29bf2f821713d235e33da54c009541c321afa1635c4d43e994d72fd02ba6975f"
+    },
+    {
+      "id": "T5-verifier",
+      "testFile": "pilot-verifier.test.mjs",
+      "classification": "design",
+      "evidence": [
+        "plan-section-9",
+        "user-approved-Astra-pilot-budget"
+      ],
+      "syntheticInput": "Deterministic local fixtures; injected transport only",
+      "expected": "Twelve independent assertions, source-bound verifier receipt, all cleanup confirmed, stale acceptance rejected",
+      "allowedDeviations": [
+        "Pilot evaluates one task once in each A/B/C condition; no statistical uplift claim"
+      ],
+      "sha256": "ea8e2b474fee01bbb6fe17f96fc37716d73716ea6022d247ddfbbebdea0b4e8f"
+    }
+  ],
+  "runtimeIdentityHash": "e494e3327ba5851511d1f6a487d3f21f1573bdfda72f618bf40dfb1ec62cae7d"
+}

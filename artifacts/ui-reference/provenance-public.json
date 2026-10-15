@@ -1,0 +1,81 @@
+{
+  "kind": "reference-provenance-only-no-proprietary-source",
+  "version": "0.2.269",
+  "sourceHash": "0fa1c2f350662b3ef97c8ea173dae8a6804b9b72efabf9c64c28fe495392a348",
+  "binaryHash": "87d20c2d10c8ebaa308949b5f65a12dd5fe28a0827fca25a6794a472f185bed7",
+  "constants": {
+    "MeI": 6,
+    "FeI": 64,
+    "keI": 16,
+    "ReI": 7,
+    "tsA": 16,
+    "ZeI": 44,
+    "esA": 1400,
+    "LeI": 500,
+    "cAQ": 80,
+    "_AQ": 0.08,
+    "vAQ": 2400
+  },
+  "snippets": {
+    "o7": {
+      "sha256": "90e38056ed73e70e255afef65ac25199aa4c538e41dc8d6faa0fe84c4f7059f7",
+      "line": 249624
+    },
+    "Q0A": {
+      "sha256": "b97ff2dcb47e619179accd01876fd8e949a831be00256def22774571a77533db",
+      "line": 250303
+    },
+    "deI": {
+      "sha256": "090c672ea674ef926ad8ab977f7836dcfaa32649d638ed509eedeed26b975fe3",
+      "line": 250329
+    },
+    "ueI": {
+      "sha256": "dc6d6cf83997277bc19f794554f81d34f80d11ca86112f3285ece89182f71ee5",
+      "line": 250312
+    },
+    "I0A": {
+      "sha256": "d936fcc03e1b2ecd58a8fd22dc29c139a88dee367fcc24ffcedc9c5b95ff0933",
+      "line": 250326
+    },
+    "ND": {
+      "sha256": "3ebefd0d8dfd05d73e23ffdf1d742855d30f5d20343ada8144bb37c8f771003f",
+      "line": 246017
+    },
+    "B0A": {
+      "sha256": "2b24ead7e1fde41d9ba0ffd9de69c5ea106662d806cf9918370c9e57f919ccf4",
+      "line": 250358
+    },
+    "p7": {
+      "sha256": "71110785656a7e046bc5412f2095f30c79184c84d439981f4870cf3532d03e08",
+      "line": 249518
+    },
+    "A0A": {
+      "sha256": "d2bc8f6b4b34c728b31298646bcf7e1f0acd22151fc793bc3593e4310afec735",
+      "line": 250230
+    },
+    "uGA": {
+      "sha256": "c09f0896f17959b994bed2ecb346d57169a8cfaef1478b937ece58650a66a4e4",
+      "line": 249530
+    },
+    "Mh": {
+      "sha256": "7600d1aae94da506e1ef19961fe3c541e4cd8aeadb9a97d6344bdd3146e9e31c",
+      "line": 249459
+    },
+    "lGA": {
+      "sha256": "204455eade3c7c803702d3a4de3a52e804144ebbac148c1744976b6c603a7665",
+      "line": 249491
+    },
+    "iGA": {
+      "sha256": "bcb39b664fd3d2b4c944e936e3dac4dabb5185d3b8009f972477f9465b59d872",
+      "line": 249485
+    },
+    "asA": {
+      "sha256": "d575da5b72178358bdd11ed3e73f87984c55e93df0ded053f62f524c1c13545a",
+      "line": 249332
+    },
+    "YeI": {
+      "sha256": "4a2846233bf4b632a0403cde8be31ca9dac440d355bba3aad3fe56e5b047e4a5",
+      "line": 249325
+    }
+  }
+}

@@ -1,0 +1,34 @@
+# Public snapshot boundaries
+
+This repository is a development handoff of an isolated Windows prototype.
+It includes implementation, tests, patch source, lockfiles, planning/design/status
+documents and selected synthetic verification artifacts. It is not a dump of the
+developer's profile or an independently verified portable release.
+
+Excluded deliberately:
+
+- Auth files, production provider configurations, tokens and environment secrets.
+- Agent sessions, telemetry, writer leases, models cache and private Brain vault.
+- Installed dependencies, generated candidate runtime and machine-specific pins.
+- Raw live campaign sessions and private baseline file inventories.
+- Reason CLI binaries, extracted proprietary source oracle and marketing captures.
+
+The locally inspected Reason CLI license notice identifies that software as
+proprietary. The repository does not redistribute its binary/extracted source.
+Public provenance hashes and a description of the observed behavior are provided.
+The prototype has its own Pi branding and no Reason server dependency.
+
+Upstream Pi source files under `upstream-patches/transcript-hook/source-original`
+and modified copies under `source` derive from `@earendil-works/pi-coding-agent`
+1.0.0 (MIT). Its copyright and permission notice are preserved in
+[LICENSE.upstream](upstream-patches/transcript-hook/LICENSE.upstream). Dependency
+packages retain their own licenses when installed. No blanket license is assigned
+to unrelated third-party materials by making this repository public.
+
+Historical paths, session identifiers in synthetic receipts, model labels and
+usage totals in project documents are evidence, not production credentials.
+The bundled `agent/models.json` uses `127.0.0.1:9` and an explicit fixture credential.
+
+Original implementation provenance is recorded in
+`artifacts/checkpoint/public-source-snapshot.json`. New-machine bootstrap results
+are stored separately in ignored `.device-bootstrap/receipt.json`.

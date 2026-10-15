@@ -1,0 +1,32 @@
+{
+  "upstream": "@earendil-works/pi-coding-agent@1.0.0",
+  "stock": "D:\\pi-reason-prototype\\publish\\pi-ic4ruz\\runtime\\node_modules\\@earendil-works\\pi-coding-agent",
+  "provenance": [
+    {
+      "sourceMap": "D:\\pi-reason-prototype\\publish\\pi-ic4ruz\\runtime\\node_modules\\@earendil-works\\pi-coding-agent\\dist\\core\\extensions\\types.js.map",
+      "sourceMapHash": "1fd0e01b03e6956e69dc6674cac9bb6c00888a8cf2a07a0451fbd035753f9203",
+      "source": "../../../src/core/extensions/types.ts",
+      "contentHash": "c22e4ddd89f021e8b9eac716cfebdf456c5951f8345b4de98d1d30e5ce619f66"
+    },
+    {
+      "sourceMap": "D:\\pi-reason-prototype\\publish\\pi-ic4ruz\\runtime\\node_modules\\@earendil-works\\pi-coding-agent\\dist\\modes\\interactive\\components\\user-message.js.map",
+      "sourceMapHash": "164c8d30830787fb509b6823b6d574b0232dfb5867c3f3a9caf54bdd431d7f2d",
+      "source": "../../../../src/modes/interactive/components/user-message.ts",
+      "contentHash": "22ffba3a5c014bc5cb7284ad03c39bc77b1788df34ed98f5856d87cfd856ce3b"
+    },
+    {
+      "sourceMap": "D:\\pi-reason-prototype\\publish\\pi-ic4ruz\\runtime\\node_modules\\@earendil-works\\pi-coding-agent\\dist\\modes\\interactive\\interactive-mode.js.map",
+      "sourceMapHash": "0f5c6087e741979a719b3082c3fd8f8b800b5fe71705d0af1d8aeb79c9bff89e",
+      "source": "../../../src/modes/interactive/interactive-mode.ts",
+      "contentHash": "2d598d2ced8b3188edc21aa23d791c2c38ccac1f8683144cd1b734d201da8729"
+    },
+    {
+      "sourceMap": "D:\\pi-reason-prototype\\publish\\pi-ic4ruz\\runtime\\node_modules\\@earendil-works\\pi-coding-agent\\dist\\modes\\interactive\\components\\assistant-message.js.map",
+      "sourceMapHash": "c382fb334e6075c0f13c5f9d32595584dbd2eb990b21efa45345f533ebae8ea1",
+      "source": "../../../../src/modes/interactive/components/assistant-message.ts",
+      "contentHash": "f8a20228291816aec253d3f115fec5ba765807275bc14077780225117e5912cb"
+    }
+  ],
+  "dependencyLockHash": "65282b05fb856d2d1fa619b3971ec2c30c8ecf08127408a19a675db15a8b63a3",
+  "strategy": "Separate package tree and byte-copied pinned dependencies; no symlinks, no installed runtime edits, no inference."
+}

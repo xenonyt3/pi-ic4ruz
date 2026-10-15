@@ -1,0 +1,172 @@
+{
+  "runtime": "1.0.0+reason-ui.3",
+  "reference": "Reason CLI 0.2.269 source oracle, attached user-row framing",
+  "kind": "deterministic-component-replay-not-live-Reason-capture",
+  "passed": true,
+  "cases": [
+    {
+      "width": 80,
+      "measured": false,
+      "text": "Inspect src/normalize.mjs.",
+      "matched": true,
+      "plain": [
+        " › Inspect src/normalize.mjs."
+      ]
+    },
+    {
+      "width": 80,
+      "measured": false,
+      "text": "Preserve **literal** and `code`.",
+      "matched": true,
+      "plain": [
+        " › Preserve **literal** and `code`."
+      ]
+    },
+    {
+      "width": 80,
+      "measured": false,
+      "text": "first\nCAFÉ",
+      "matched": true,
+      "plain": [
+        " › first",
+        "   CAFÉ"
+      ]
+    },
+    {
+      "width": 80,
+      "measured": false,
+      "text": "long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path",
+      "matched": true,
+      "plain": [
+        " › long/path long/path long/path long/path long/path long/path long/path",
+        "   long/path long/path long/path long/path long/path long/path long/path",
+        "   long/path long/path long/path long/path long/path long/path long/path",
+        "   long/path long/path long/path long/path long/path long/path long/path",
+        "   long/path long/path long/path long/path long/path long/path long/path",
+        "   long/path long/path long/path long/path long/path"
+      ]
+    },
+    {
+      "width": 80,
+      "measured": true,
+      "text": "Inspect src/normalize.mjs.",
+      "matched": true,
+      "plain": [
+        " › Inspect src/normalize.mjs.                                                   "
+      ]
+    },
+    {
+      "width": 80,
+      "measured": true,
+      "text": "Preserve **literal** and `code`.",
+      "matched": true,
+      "plain": [
+        " › Preserve **literal** and `code`.                                             "
+      ]
+    },
+    {
+      "width": 80,
+      "measured": true,
+      "text": "first\nCAFÉ",
+      "matched": true,
+      "plain": [
+        " › first                                                                        ",
+        "   CAFÉ                                                                         "
+      ]
+    },
+    {
+      "width": 80,
+      "measured": true,
+      "text": "long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path",
+      "matched": true,
+      "plain": [
+        " › long/path long/path long/path long/path long/path long/path long/path        ",
+        "   long/path long/path long/path long/path long/path long/path long/path        ",
+        "   long/path long/path long/path long/path long/path long/path long/path        ",
+        "   long/path long/path long/path long/path long/path long/path long/path        ",
+        "   long/path long/path long/path long/path long/path long/path long/path        ",
+        "   long/path long/path long/path long/path long/path                            "
+      ]
+    },
+    {
+      "width": 120,
+      "measured": false,
+      "text": "Inspect src/normalize.mjs.",
+      "matched": true,
+      "plain": [
+        " › Inspect src/normalize.mjs."
+      ]
+    },
+    {
+      "width": 120,
+      "measured": false,
+      "text": "Preserve **literal** and `code`.",
+      "matched": true,
+      "plain": [
+        " › Preserve **literal** and `code`."
+      ]
+    },
+    {
+      "width": 120,
+      "measured": false,
+      "text": "first\nCAFÉ",
+      "matched": true,
+      "plain": [
+        " › first",
+        "   CAFÉ"
+      ]
+    },
+    {
+      "width": 120,
+      "measured": false,
+      "text": "long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path",
+      "matched": true,
+      "plain": [
+        " › long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path",
+        "   long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path",
+        "   long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path",
+        "   long/path long/path long/path long/path long/path long/path long/path"
+      ]
+    },
+    {
+      "width": 120,
+      "measured": true,
+      "text": "Inspect src/normalize.mjs.",
+      "matched": true,
+      "plain": [
+        " › Inspect src/normalize.mjs.                                                                                           "
+      ]
+    },
+    {
+      "width": 120,
+      "measured": true,
+      "text": "Preserve **literal** and `code`.",
+      "matched": true,
+      "plain": [
+        " › Preserve **literal** and `code`.                                                                                     "
+      ]
+    },
+    {
+      "width": 120,
+      "measured": true,
+      "text": "first\nCAFÉ",
+      "matched": true,
+      "plain": [
+        " › first                                                                                                                ",
+        "   CAFÉ                                                                                                                 "
+      ]
+    },
+    {
+      "width": 120,
+      "measured": true,
+      "text": "long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path",
+      "matched": true,
+      "plain": [
+        " › long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path        ",
+        "   long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path        ",
+        "   long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path long/path        ",
+        "   long/path long/path long/path long/path long/path long/path long/path                                                "
+      ]
+    }
+  ]
+}

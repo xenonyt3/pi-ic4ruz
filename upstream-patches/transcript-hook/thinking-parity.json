@@ -1,0 +1,876 @@
+{
+  "runtime": "1.0.0+reason-ui.3",
+  "kind": "deterministic-reasoning-replay-not-live-Reason-capture",
+  "reference": "Reason CLI 0.2.269 B0A/deI; same Pi Markdown helpers",
+  "passed": true,
+  "cases": [
+    {
+      "appearance": "dark",
+      "width": 80,
+      "expanded": false,
+      "streaming": false,
+      "name": "plain",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "expanded": false,
+      "streaming": false,
+      "name": "heading",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "expanded": false,
+      "streaming": false,
+      "name": "latest",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "expanded": false,
+      "streaming": false,
+      "name": "markdown",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "expanded": false,
+      "streaming": false,
+      "name": "unicode",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "expanded": false,
+      "streaming": false,
+      "name": "long",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "expanded": false,
+      "streaming": true,
+      "name": "plain",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "expanded": false,
+      "streaming": true,
+      "name": "heading",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "expanded": false,
+      "streaming": true,
+      "name": "latest",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "expanded": false,
+      "streaming": true,
+      "name": "markdown",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "expanded": false,
+      "streaming": true,
+      "name": "unicode",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "expanded": false,
+      "streaming": true,
+      "name": "long",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "expanded": true,
+      "streaming": false,
+      "name": "plain",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "expanded": true,
+      "streaming": false,
+      "name": "heading",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "expanded": true,
+      "streaming": false,
+      "name": "latest",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "expanded": true,
+      "streaming": false,
+      "name": "markdown",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "expanded": true,
+      "streaming": false,
+      "name": "unicode",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "expanded": true,
+      "streaming": false,
+      "name": "long",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "expanded": true,
+      "streaming": true,
+      "name": "plain",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "expanded": true,
+      "streaming": true,
+      "name": "heading",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "expanded": true,
+      "streaming": true,
+      "name": "latest",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "expanded": true,
+      "streaming": true,
+      "name": "markdown",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "expanded": true,
+      "streaming": true,
+      "name": "unicode",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 80,
+      "expanded": true,
+      "streaming": true,
+      "name": "long",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "expanded": false,
+      "streaming": false,
+      "name": "plain",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "expanded": false,
+      "streaming": false,
+      "name": "heading",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "expanded": false,
+      "streaming": false,
+      "name": "latest",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "expanded": false,
+      "streaming": false,
+      "name": "markdown",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "expanded": false,
+      "streaming": false,
+      "name": "unicode",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "expanded": false,
+      "streaming": false,
+      "name": "long",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "expanded": false,
+      "streaming": true,
+      "name": "plain",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "expanded": false,
+      "streaming": true,
+      "name": "heading",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "expanded": false,
+      "streaming": true,
+      "name": "latest",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "expanded": false,
+      "streaming": true,
+      "name": "markdown",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "expanded": false,
+      "streaming": true,
+      "name": "unicode",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "expanded": false,
+      "streaming": true,
+      "name": "long",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "expanded": true,
+      "streaming": false,
+      "name": "plain",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "expanded": true,
+      "streaming": false,
+      "name": "heading",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "expanded": true,
+      "streaming": false,
+      "name": "latest",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "expanded": true,
+      "streaming": false,
+      "name": "markdown",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "expanded": true,
+      "streaming": false,
+      "name": "unicode",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "expanded": true,
+      "streaming": false,
+      "name": "long",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "expanded": true,
+      "streaming": true,
+      "name": "plain",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "expanded": true,
+      "streaming": true,
+      "name": "heading",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "expanded": true,
+      "streaming": true,
+      "name": "latest",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "expanded": true,
+      "streaming": true,
+      "name": "markdown",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "expanded": true,
+      "streaming": true,
+      "name": "unicode",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "dark",
+      "width": 120,
+      "expanded": true,
+      "streaming": true,
+      "name": "long",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "expanded": false,
+      "streaming": false,
+      "name": "plain",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "expanded": false,
+      "streaming": false,
+      "name": "heading",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "expanded": false,
+      "streaming": false,
+      "name": "latest",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "expanded": false,
+      "streaming": false,
+      "name": "markdown",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "expanded": false,
+      "streaming": false,
+      "name": "unicode",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "expanded": false,
+      "streaming": false,
+      "name": "long",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "expanded": false,
+      "streaming": true,
+      "name": "plain",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "expanded": false,
+      "streaming": true,
+      "name": "heading",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "expanded": false,
+      "streaming": true,
+      "name": "latest",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "expanded": false,
+      "streaming": true,
+      "name": "markdown",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "expanded": false,
+      "streaming": true,
+      "name": "unicode",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "expanded": false,
+      "streaming": true,
+      "name": "long",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "expanded": true,
+      "streaming": false,
+      "name": "plain",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "expanded": true,
+      "streaming": false,
+      "name": "heading",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "expanded": true,
+      "streaming": false,
+      "name": "latest",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "expanded": true,
+      "streaming": false,
+      "name": "markdown",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "expanded": true,
+      "streaming": false,
+      "name": "unicode",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "expanded": true,
+      "streaming": false,
+      "name": "long",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "expanded": true,
+      "streaming": true,
+      "name": "plain",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "expanded": true,
+      "streaming": true,
+      "name": "heading",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "expanded": true,
+      "streaming": true,
+      "name": "latest",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "expanded": true,
+      "streaming": true,
+      "name": "markdown",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "expanded": true,
+      "streaming": true,
+      "name": "unicode",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 80,
+      "expanded": true,
+      "streaming": true,
+      "name": "long",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "expanded": false,
+      "streaming": false,
+      "name": "plain",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "expanded": false,
+      "streaming": false,
+      "name": "heading",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "expanded": false,
+      "streaming": false,
+      "name": "latest",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "expanded": false,
+      "streaming": false,
+      "name": "markdown",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "expanded": false,
+      "streaming": false,
+      "name": "unicode",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "expanded": false,
+      "streaming": false,
+      "name": "long",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "expanded": false,
+      "streaming": true,
+      "name": "plain",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "expanded": false,
+      "streaming": true,
+      "name": "heading",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "expanded": false,
+      "streaming": true,
+      "name": "latest",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "expanded": false,
+      "streaming": true,
+      "name": "markdown",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "expanded": false,
+      "streaming": true,
+      "name": "unicode",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "expanded": false,
+      "streaming": true,
+      "name": "long",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "expanded": true,
+      "streaming": false,
+      "name": "plain",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "expanded": true,
+      "streaming": false,
+      "name": "heading",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "expanded": true,
+      "streaming": false,
+      "name": "latest",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "expanded": true,
+      "streaming": false,
+      "name": "markdown",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "expanded": true,
+      "streaming": false,
+      "name": "unicode",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "expanded": true,
+      "streaming": false,
+      "name": "long",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "expanded": true,
+      "streaming": true,
+      "name": "plain",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "expanded": true,
+      "streaming": true,
+      "name": "heading",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "expanded": true,
+      "streaming": true,
+      "name": "latest",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "expanded": true,
+      "streaming": true,
+      "name": "markdown",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "expanded": true,
+      "streaming": true,
+      "name": "unicode",
+      "matched": true,
+      "transcriptUnchanged": true
+    },
+    {
+      "appearance": "light",
+      "width": 120,
+      "expanded": true,
+      "streaming": true,
+      "name": "long",
+      "matched": true,
+      "transcriptUnchanged": true
+    }
+  ],
+  "limits": [
+    "Contiguous Pi thinking blocks are grouped; Reason entry keys are not reconstructed.",
+    "Tool ordering, physical streaming timing and full transcript parity remain unasserted."
+  ]
+}

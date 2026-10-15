@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "runtimeVersion": "1.0.0",
+  "provider": "9router",
+  "model": "cx/gpt-6-sol",
+  "liveInference": false,
+  "maxActiveChildren": 3,
+  "brainVault": "D:/.vault-brain/vault",
+  "codemode": { "defaultDeadlineMs": 300000, "maxDeadlineMs": 900000, "models": false },
+  "features": { "codemode": true, "delegation": true, "brain": true, "context": true, "telemetry": true },
+  "ui": { "reasonTerminal": true }
+}

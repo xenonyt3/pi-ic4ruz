@@ -1,0 +1,81 @@
+{
+  "kind": "capability-gap-reproduction-not-a-runtime-patch",
+  "runtime": "Pi 1.0.0",
+  "reference": "Reason CLI 0.2.269 source oracle",
+  "network": "none",
+  "sources": [
+    {
+      "file": "D:\\pi-reason-prototype\\runtime\\node_modules\\@earendil-works\\pi-coding-agent\\dist\\core\\extensions\\types.d.ts",
+      "sha256": "6c78c89ad1ffb421e81ff0ad11ceff1a635b21fd818a32aa3e87009392298d9f"
+    },
+    {
+      "file": "D:\\pi-reason-prototype\\runtime\\node_modules\\@earendil-works\\pi-coding-agent\\dist\\modes\\interactive\\components\\user-message.js",
+      "sha256": "a333be7aee4aa9e767644c5f3783f55352a78816316abd3301b7b98e985e53ab"
+    },
+    {
+      "file": "D:\\pi-reason-prototype\\runtime\\node_modules\\@earendil-works\\pi-coding-agent\\dist\\modes\\interactive\\interactive-mode.js",
+      "sha256": "f9629b20031fa11ed10835b6f80f97d39e67397e9fa339cfc938e9cb0dcb4f2d"
+    }
+  ],
+  "cases": [
+    {
+      "width": 80,
+      "text": "Inspect src/normalize.mjs before editing.",
+      "expected": [
+        " › Inspect src/normalize.mjs before editing."
+      ],
+      "actual": [
+        "                                                                                ",
+        " Inspect src/normalize.mjs before editing.                                      ",
+        "                                                                                "
+      ],
+      "same": false
+    },
+    {
+      "width": 80,
+      "text": "Preserve **literal** punctuation and `code` in the prompt.",
+      "expected": [
+        " › Preserve **literal** punctuation and `code` in the prompt."
+      ],
+      "actual": [
+        "                                                                                ",
+        " Preserve literal punctuation and code in the prompt.                           ",
+        "                                                                                "
+      ],
+      "same": false
+    },
+    {
+      "width": 120,
+      "text": "Inspect src/normalize.mjs before editing.",
+      "expected": [
+        " › Inspect src/normalize.mjs before editing."
+      ],
+      "actual": [
+        "                                                                                                                        ",
+        " Inspect src/normalize.mjs before editing.                                                                              ",
+        "                                                                                                                        "
+      ],
+      "same": false
+    },
+    {
+      "width": 120,
+      "text": "Preserve **literal** punctuation and `code` in the prompt.",
+      "expected": [
+        " › Preserve **literal** punctuation and `code` in the prompt."
+      ],
+      "actual": [
+        "                                                                                                                        ",
+        " Preserve literal punctuation and code in the prompt.                                                                   ",
+        "                                                                                                                        "
+      ],
+      "same": false
+    }
+  ],
+  "requirementMet": false,
+  "publicApi": {
+    "markdownTransformer": true,
+    "customMessageRenderer": true,
+    "userMessageRenderer": false
+  },
+  "interpretation": "The public user component renders Markdown with its own padding and OSC133 zones. The current extension API has no user-message component replacement; a Markdown string transformer cannot control the surrounding container/layout. This is an API capability gap, not a claim that upstream behavior is a bug."
+}
