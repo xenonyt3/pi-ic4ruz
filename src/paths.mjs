@@ -28,7 +28,7 @@ export function resolvePrototypePaths(base = root, selectionOverride) {
   const pkg = selection==='stock'?stockPkg:path.join(base,'upstream-patches/transcript-hook/build/package');
   const agent = path.join(base, 'agent');
   return { root: base, runtime, pkg, stockPkg, selection,
-    runtimeLabel:selection==='stock'?'1.0.0':'1.0.0+reason-ui.3',
+    runtimeLabel:selection==='stock'?'1.0.0':'1.0.0+reason-ui.4',
     runtimeExports:selection==='stock'?path.join(runtime,'exports.mjs'):path.join(pkg,'prototype-exports.mjs'),
     cli: path.join(pkg, selection==='stock'?'dist/bundle/cli.js':'dist/cli.js'),
     sdk: path.join(pkg, 'dist/index.js'), agent, sessions: path.join(agent, 'sessions'),

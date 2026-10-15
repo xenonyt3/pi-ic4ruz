@@ -148,7 +148,7 @@ export function wrapToolPresentation(definition,{states=new Map(),failed=()=>fal
   return {...definition,renderShell:'self',
     renderCall(args,theme,context) {
       if(failed()||definition.name==='edit')return fallback('renderCall',args,theme,context);
-      return safe(width=>[renderToolHeader({name:definition.name,args,status:states.get(context.toolCallId)??(context.isError?'failed':context.state?.reasonResultSeen?'done':'running')},theme,width)],()=>fallback('renderCall',args,theme,context));
+      return safe(width=>[renderToolHeader({name:definition.name,args,status:context.isError?'failed':states.get(context.toolCallId)??(context.state?.reasonResultSeen?'done':'running')},theme,width)],()=>fallback('renderCall',args,theme,context));
     },
     renderResult(result,options,theme,context) {
       if(context.state)context.state.reasonResultSeen=!options.isPartial;
@@ -177,7 +177,7 @@ export function registerReasonUI(pi,{cwd,getChildren=()=>[],offline=true,clock=s
     stopColorWatch();
     if(!context||context.mode!=='tui')return;
     try{context.ui.setWidget?.('prototype-working',undefined);context.ui.setWorkingVisible?.(true);}catch{}
-    for(const method of ['setUserMessageRenderer','setAssistantTextRenderer','setThinkingRenderer','setHeader','setFooter','setEditorComponent','setWorkingIndicator','setWorkingMessage','setHiddenThinkingLabel'])try{context.ui[method]?.(undefined);}catch{}
+    for(const method of ['setTranscriptLayout','setUserMessageRenderer','setAssistantTextRenderer','setThinkingRenderer','setHeader','setFooter','setEditorComponent','setWorkingIndicator','setWorkingMessage','setHiddenThinkingLabel'])try{context.ui[method]?.(undefined);}catch{}
     try{if(baseTheme)context.ui.setTheme(baseTheme);}catch{}
   };
   const fail=error=>{
@@ -226,6 +226,7 @@ export function registerReasonUI(pi,{cwd,getChildren=()=>[],offline=true,clock=s
         return {render:width=>header.render(width),invalidate:()=>header.invalidate(),dispose:()=>{header.dispose();life.active=false;unsubscribeColors();}};
       });
       ctx.ui.setUserMessageRenderer?.((text,width,currentTheme)=>renderUserMessage(text,width,currentTheme,surface));
+      ctx.ui.setTranscriptLayout?.('content');
       ctx.ui.setAssistantTextRenderer?.((text,width,currentTheme,_streaming,padding)=>renderAssistantText(text,width,currentTheme,{padding}));
       ctx.ui.setThinkingRenderer?.((text,width,currentTheme,options)=>renderThinking(text,width,currentTheme,options));
       ctx.ui.setEditorComponent((t,editorTheme,keys)=>{keyHints={expand:keys.getKeys('app.tools.expand').join('/'),cancel:keys.getKeys('app.interrupt').join('/')};return new ReasonEditor(t,editorTheme,keys,{onFailure:fail,markerColor:text=>theme.fg('accent',text),getSurface:()=>surface});});

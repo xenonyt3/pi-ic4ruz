@@ -99,7 +99,7 @@ function adapterFixture(){
 test('startup/working: idle -> thinking -> writing -> overlapping tools -> complete/error/cancel, actual identities',()=>{
   const f=adapterFixture(),{emit,components,clock}=f;
   emit('session_start');assert.equal(clock.timers.size,1);assert.deepEqual(components.working.render(80),[]);
-  assert.match(plain(components.header.render(120)),/Pi 1.0.0\+reason-ui.3.*own-provider\/actual-model/);
+  assert.match(plain(components.header.render(120)),/Pi 1.0.0\+reason-ui.4.*own-provider\/actual-model/);
   assert.match(plain(components.header.render(120)),/D:\/actual/);
   f.ctx.model={id:'next-model',provider:'next-provider'};emit('model_select');
   assert.match(plain(components.header.render(120)),/next-provider\/next-model/);

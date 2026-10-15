@@ -38,7 +38,7 @@ visual authority is Reason CLI, with Pi's real state and capabilities.
 - Drive Thinking/Writing/running-tool labels from actual events. Finishing one
   tool does not hide another active tool. Preserve cancelled/error at turn end;
   reset on a new session. Compaction with unknown usage stays explicit.
-- The approved isolated runtime `1.0.0+reason-ui.3` retains the optional user-message
+- The approved isolated runtime `1.0.0+reason-ui.4` retains the optional user-message
   renderer hook. Literal text, marker, wrapping and measured surface match the
   Reason source row; OSC133 zones stay in Pi's component wrapper. Persisted/model
   text is untouched. Invalid/throwing renderers use stock output and warn once.
@@ -67,10 +67,19 @@ visual authority is Reason CLI, with Pi's real state and capabilities.
   and its timer. Suppress identical-frame redraws; never start timers during render.
   Retry/compaction indicators remain Pi-owned and visible above the custom editor.
   Reset, reload, shutdown and renderer failure dispose both animations.
+- Optional `setTranscriptLayout('content')` projects original Pi components into
+  content order. Every visible user/text/reasoning/tool entry begins with one blank
+  row, except a tool directly following another tool. Empty blocks do not separate
+  a tool run. Tools remain the same objects in Pi's flat lifecycle container;
+  rendered slots refer to them without recreating, duplicating or changing messages.
+  Projection preserves MouseRegion offsets, OSC133 zones, expansion, images/diffs
+  and Pi error notices. Invalid/failed layout restores stock layout; reset/unload
+  clears the opt-in. Tool error state takes precedence over stale running state.
 
 ## Deliberate remaining differences
 
-Whole transcript layout and Reason-specific session menus remain upstream Pi.
+Content ordering and tool adjacency now follow source; Reason-specific menus,
+nested codemode composition and whole-session notice/scroll composition remain Pi.
 Splash layout/motion and shimmer are source-tested, with explicit Pi art/identity
 substitution. No exact parity claim for full composition or live Reason states without
 capture. The editor surface is now source-tested; physical terminal autodetection

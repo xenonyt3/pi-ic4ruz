@@ -1,0 +1,13 @@
+{
+  "createdAt": "2026-10-15T07:38:35.654Z",
+  "runtime": "1.0.0+reason-ui.4",
+  "method": "Rebuild existing isolated candidate in relocated Windows checkout using cached pinned dependencies",
+  "build": true,
+  "versionSmoke": true,
+  "strictTypecheck": {
+    "files": 5,
+    "diagnostics": 0
+  },
+  "fullAcceptance": "Original workstation only; see final report. No full relocated suite claim.",
+  "modelRequests": 0
+}

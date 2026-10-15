@@ -1,0 +1,11 @@
+{
+  "report": "artifacts/verification/runs/2026-10-15T07-19-38.166Z/report.json",
+  "fixture": "atomic starting reservations cap concurrent spawn at three without queue",
+  "status": "failed",
+  "cleanupConfirmed": true,
+  "errorCode": "EPERM",
+  "operation": "rename",
+  "purpose": "atomic child fixture receipt replacement",
+  "lockHolder": "unknown",
+  "followup": "Focused delegation 6/6 and full rerun 159/159 passed without delegation source changes"
+}

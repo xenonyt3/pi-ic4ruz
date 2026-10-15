@@ -14,7 +14,7 @@ const suites = {
   delegation:['delegation','delegation-process','delegation-recovery'],
   provider:['provider-transport'],
   live:['live-budget-transport','live-evaluation','brokered-child','pilot-verifier'],
-  ui:['reason-ui','transcript-hook','assistant-hook','thinking-hook','startup-working'],
+  ui:['reason-ui','transcript-hook','assistant-hook','thinking-hook','startup-working','transcript-layout'],
 };
 suites.all=[...new Set(Object.values(suites).flat())];
 function verifyRuntimes(){

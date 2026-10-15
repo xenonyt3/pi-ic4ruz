@@ -1,19 +1,11 @@
 # Pi Reason prototype
 
-**Continuing on another device:** start with [HANDOFF.md](HANDOFF.md) for Windows
-bootstrap, the current checkpoint and known portability limits. This public
-snapshot includes source/docs/tests and selected evidence; see
-[PUBLICATION.md](PUBLICATION.md) for the files deliberately kept local.
+**Continuing on another device:** start with [HANDOFF.md](HANDOFF.md) for Windows bootstrap and current limits. Public exclusions are described in [PUBLICATION.md](PUBLICATION.md). The acceptance result is original-workstation evidence; private baselines and proprietary Reason source are not distributed.
 
-```powershell
-node scripts/bootstrap-device.mjs
-```
 
-The 151/151 result below belongs to the original workstation. A fresh clone does
-not include its private baseline or proprietary Reason reference oracle.
 
 Prototype terisolasi berdasarkan `D:/pi-ic4ruz/PI-IMPLEMENTATION-PLAN.md`.
-Runtime kandidat **1.0.0+reason-ui.3**, berbasis Pi resmi 1.0.0, provider slot **9router/cx/gpt-6-sol**.
+Runtime kandidat **1.0.0+reason-ui.4**, berbasis Pi resmi 1.0.0, provider slot **9router/cx/gpt-6-sol**.
 T1-T4 terintegrasi dengan paket acceptance offline T5. Default launcher memakai
 endpoint fixture dan tetap offline. Pilot headless terpisah sudah dijalankan
 dengan izin pengguna memakai 9router/cx/gpt-6-astra; hasil parsial ada di bawah.
@@ -42,7 +34,14 @@ process/shell sebagai OS sandbox.
 
 ## Verifikasi dan batas
 
-- T0/O01 awal lulus 13 tes. Full suite terbaru **151/151 PASS**, termasuk 43 tes
+I22 menambahkan layout content-order dan tool adjacency lewat optional hook pada
+kandidat terisolasi. Urutan tampilan mengikuti message content; komponen tool asli,
+signed reasoning dan isi session tetap dipertahankan. Delapan focused tests,
+96 perbandingan layout, scoped strict TS lima file, dan native Windows Ctrl+O /
+Ctrl+T / resize / resume / exit lulus. Detail dan batas bukti:
+`upstream-patches/transcript-hook/LAYOUT-VERIFICATION.md`.
+
+- T0/O01 awal lulus 13 tes. Full suite terbaru **159/159 PASS**, termasuk 51 tes
   UI. `artifacts/verification/all-latest.json`; O14 penuh belum lulus.
 - `config/runtime-identity.json`: hash seluruh installed runtime tree dari
   instalasi upstream dan direct helper dependencies pinned. Install scripts
@@ -81,7 +80,7 @@ tanpa Node `--input-type`. Lihat `docs/EVALUATION.md` untuk bukti dan batas hasi
 TU1 awal menyediakan theme/header/footer/editor/tool presentation via upstream
 hooks. Editor surface kini mengikuti warna terminal yang tersedia, dengan border
 fallback; lifecycle state mengikuti event SDK. Lihat `artifacts/ui-replay/index.html`
-untuk 48 frame 80x24/120x40 offline replay (surface dark/light adalah fixture);
+untuk 54 frame 80x24/120x40 offline replay (surface dark/light adalah fixture);
 Windows PTY 80x24/120x40 telah diuji tanpa inference. O14 penuh tetap pending. Untuk rollback tampilan,
 ubah `ui.reasonTerminal=false` di `config/harness.json`, lalu restart.
 Hook user-message terisolasi sudah disetujui dan aktif: teks literal, marker,
@@ -91,7 +90,7 @@ lulus. Ini belum membuktikan whole-transcript/menu parity.
 `config/runtime-selection.json` memilih `transcript-hook-v1`; `stock` memulihkan
 runtime asli setelah restart. Hook teks assistant kini mempertahankan indentasi/tab
 dan styling quote/code fence; 80/80 fixture nonempty cocok dengan source Reason.
-Build memakai esbuild; strict TypeScript checking 4 file patch lulus terhadap
+Build memakai esbuild; strict TypeScript checking 5 file patch lulus terhadap
 deklarasi kandidat, bukan seluruh monorepo upstream. Native resume/code/Unicode/
 paste/clear/exit lulus. Reasoning kini collapsed dengan ringkasan per blok;
 Ctrl+T/klik membuka Markdown dim/italic berindentasi tiga kolom. Replay reasoning
@@ -100,7 +99,7 @@ persisten: set `hideThinkingBlock:false` untuk default expanded pada rollback.
 Splash/startup dan working/shimmer kini memakai hooks upstream tanpa patch baru:
 Pi art/identitas aktual, startup 2400 ms, shimmer 1400+500 ms, lifecycle cleanup.
 Native resize sampai 32x16, Escape cancel, Unicode, clear dan exit lulus.
-Bukti terbaru: `docs/STARTUP-WORKING-VERIFICATION.md`; detail reasoning tetap pada
+Bukti terbaru: `upstream-patches/transcript-hook/LAYOUT-VERIFICATION.md`; detail reasoning tetap pada
 `upstream-patches/transcript-hook/THINKING-VERIFICATION.md`.
 Source, profil dan launcher `pi` / `pi-clean` tetap terpisah.
 

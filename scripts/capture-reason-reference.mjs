@@ -20,7 +20,7 @@ for(const name of ['o7','Q0A','deI','ueI','I0A','ND','B0A','p7','A0A','uGA','Mh'
 }
 const out=path.join(root,'artifacts/ui-reference/20261015/source-oracle.json');
 const hostSnippets={};
-for(const [name,end] of [['spinToRest','offeredSuggestion'],['startWorking','refreshStatus']]){
+for(const [name,end] of [['spinToRest','offeredSuggestion'],['startWorking','refreshStatus'],['showEntry','trackQuestion']]){
   const start=source.indexOf(`  ${name}(`),stop=source.indexOf(`\n  ${end}(`,start);
   if(start<0||stop<0)throw Error(`REFERENCE_HOST_METHOD_MISSING: ${name}`);
   const code=source.slice(start,stop);hostSnippets[name]={code,sha256:hash(code),line:source.slice(0,start).split('\n').length};

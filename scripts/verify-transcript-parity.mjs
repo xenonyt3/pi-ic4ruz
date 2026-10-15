@@ -6,7 +6,7 @@ import {tui} from '../src/ui-runtime.mjs';
 import {sourceOracle,baseTheme} from '../tests/helpers/ui.mjs';
 import {renderUserMessage,createReasonTheme,editorSurface} from '../src/reason-ui.mjs';
 
-if(runtimeLabel!=='1.0.0+reason-ui.3')throw Error('PATCHED_RUNTIME_REQUIRED');
+if(runtimeLabel!=='1.0.0+reason-ui.4')throw Error('PATCHED_RUNTIME_REQUIRED');
 sdk.initTheme('dark');
 const cases=[];
 for(const width of [80,120])for(const measured of [false,true])for(const text of ['Inspect src/normalize.mjs.','Preserve **literal** and `code`.','first\nCAF\u00c9',Array(40).fill('long/path').join(' ')]){

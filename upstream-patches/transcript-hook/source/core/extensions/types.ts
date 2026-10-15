@@ -157,6 +157,8 @@ export interface ThinkingRenderContext {
 export type ThinkingRenderer = (text: string, width: number, theme: Theme, context: ThinkingRenderContext) => readonly string[] | undefined;
 
 export interface ExtensionUIContext {
+	/** Opt in to content-ordered transcript rows; undefined retains the stock layout. */
+	setTranscriptLayout?(layout: "content" | undefined): void;
 	/** Show a selector and return the user's choice. */
 	select(title: string, options: string[], opts?: ExtensionUIDialogOptions): Promise<string | undefined>;
 

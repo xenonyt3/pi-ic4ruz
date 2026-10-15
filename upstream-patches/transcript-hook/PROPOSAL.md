@@ -1,5 +1,10 @@
 # Proposed isolated user-message renderer hook
 
+Latest: I22 adds an isolated optional content-order layout in reason-ui.4 after
+12 actual-host gap fixtures. See `LAYOUT-VERIFICATION.md`. Five scoped TypeScript
+files, 96 composition comparisons and native Ctrl+O/Ctrl+T/resize checks pass.
+The v1-v3 paragraphs below remain historical records.
+
 Current continuation: candidate `1.0.0+reason-ui.3` includes the approved user hook
 and bounded assistant-text/thinking hooks after concrete indentation/style gaps were
 reproduced. See `THINKING-VERIFICATION.md` and `ASSISTANT-VERIFICATION.md` for scoped strict typecheck, comparison,

@@ -1,5 +1,5 @@
 import type { AssistantMessage } from "@earendil-works/pi-ai";
-import { Container, Markdown, type MarkdownTheme, MouseRegion, Spacer, Text, visibleWidth } from "@earendil-works/pi-tui";
+import { type Component, Container, Markdown, type MarkdownTheme, MouseRegion, Spacer, Text, visibleWidth } from "@earendil-works/pi-tui";
 import type { AssistantTextRenderer, MarkdownTransformer, ThinkingRenderer } from "../../../core/extensions/types.ts";
 import { getMarkdownTheme, theme } from "../theme/theme.ts";
 import { createMarkdownTransform } from "./markdown-transform.ts";
@@ -7,6 +7,10 @@ import { createMarkdownTransform } from "./markdown-transform.ts";
 const OSC133_ZONE_START = "\x1b]133;A\x07";
 const OSC133_ZONE_END = "\x1b]133;B\x07";
 const OSC133_ZONE_FINAL = "\x1b]133;C\x07";
+
+export type TranscriptPart =
+	| { kind: "assistant" | "reasoning" | "notice"; component: Component; trimLeading?: boolean }
+	| { kind: "tool"; toolCallId: string };
 
 /**
  * Component that renders a complete assistant message
@@ -26,6 +30,9 @@ export class AssistantMessageComponent extends Container {
 	private hasToolCalls = false;
 	private isStreaming = false;
 	private thinkingVisibilityOverrides = new Map<number, boolean>();
+	private transcriptParts: TranscriptPart[] = [];
+
+	getTranscriptParts(): readonly TranscriptPart[] { return this.transcriptParts; }
 
 	constructor(
 		message?: AssistantMessage,
@@ -90,7 +97,10 @@ export class AssistantMessageComponent extends Container {
 	}
 
 	override render(width: number): string[] {
-		const lines = super.render(width);
+		return this.applyTranscriptZones(super.render(width));
+	}
+
+	applyTranscriptZones(lines: string[]): string[] {
 		if (this.hasToolCalls || lines.length === 0) {
 			return lines;
 		}
@@ -106,6 +116,7 @@ export class AssistantMessageComponent extends Container {
 
 		// Clear content container
 		this.contentContainer.clear();
+		this.transcriptParts = [];
 
 		const hasVisibleContent = message.content.some(
 			(c) => (c.type === "text" && c.text.trim()) || (c.type === "thinking" && c.thinking.trim()),
@@ -123,7 +134,7 @@ export class AssistantMessageComponent extends Container {
 				const transform = createMarkdownTransform("assistant", this.isStreaming, this.markdownTransformers);
 				const fallback = new Markdown(content.text.trim(), this.outputPad, 0, this.markdownTheme, undefined, { transform });
 				// Only text presentation is replaceable; the surrounding message lifecycle stays upstream.
-				this.contentContainer.addChild({
+				const textComponent: Component = {
 					invalidate: () => fallback.invalidate(),
 					render: (width: number) => {
 						try {
@@ -144,7 +155,9 @@ export class AssistantMessageComponent extends Container {
 						}
 						return fallback.render(width);
 					},
-				});
+				};
+				this.contentContainer.addChild(textComponent);
+				this.transcriptParts.push({ kind: "assistant", component: textComponent });
 			} else if (content.type === "thinking") {
 				const followsText = message.content.slice(0, i).reverse().find(block =>
 					(block.type === "text" && block.text.trim()) || (block.type === "thinking" && block.thinking.trim()) || block.type === "toolCall",
@@ -214,19 +227,22 @@ export class AssistantMessageComponent extends Container {
 						return thinkingComponent.render(width);
 					},
 				};
-				this.contentContainer.addChild(
-					new MouseRegion(presentedThinking, (event) => {
+				const thinkingRegion = new MouseRegion(presentedThinking, (event) => {
 						if (event.type !== "click" || event.button !== "left") return undefined;
 						this.thinkingVisibilityOverrides.set(runIndex, !hidden);
 						if (this.lastMessage) this.updateContent(this.lastMessage);
 						return { handled: true };
-					}),
-				);
+					});
+				this.contentContainer.addChild(thinkingRegion);
+				this.transcriptParts.push({ kind: "reasoning", component: thinkingRegion, trimLeading: followsText });
 				if (hasVisibleContentAfter) {
 					this.contentContainer.addChild(new Spacer(1));
 				}
+			} else if (content.type === "toolCall") {
+				this.transcriptParts.push({ kind: "tool", toolCallId: content.id });
 			}
 		}
+		const contentChildCount = this.contentContainer.children.length;
 
 		// Check if incomplete/failed - show after partial content.
 		// For aborted/error tool calls, tool execution components show the error.
@@ -251,6 +267,9 @@ export class AssistantMessageComponent extends Container {
 				this.contentContainer.addChild(new Spacer(1));
 				this.contentContainer.addChild(new Text(theme.fg("error", `Error: ${errorMsg}`), this.outputPad, 0));
 			}
+		}
+		for (const component of this.contentContainer.children.slice(contentChildCount)) {
+			if (!(component instanceof Spacer)) this.transcriptParts.push({ kind: "notice", component });
 		}
 	}
 }

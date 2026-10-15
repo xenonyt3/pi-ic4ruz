@@ -65,7 +65,7 @@ test('runtime selector rejects arbitrary roots and candidate pin rejects modifie
   assert.throws(()=>resolvePrototypePaths(base),/RUNTIME_SELECTION_REJECTED/);
   fs.writeFileSync(path.join(config,'runtime-selection.json'),JSON.stringify({runtime:'transcript-hook-v1'}));
   const paths=resolvePrototypePaths(base);
-  assert.equal(paths.runtimeLabel,'1.0.0+reason-ui.3');
+  assert.equal(paths.runtimeLabel,'1.0.0+reason-ui.4');
   assert.equal(resolvePrototypePaths(base,'stock').runtimeLabel,'1.0.0');
   const required=[paths.cli,paths.sdk,paths.runtimeExports,path.join(paths.pkg,'package.json'),path.join(paths.pkg,'dist/modes/interactive/components/user-message.js'),path.join(paths.pkg,'dist/modes/interactive/components/assistant-message.js'),path.join(paths.pkg,'dist/modes/interactive/interactive-mode.js')];
   const files={};

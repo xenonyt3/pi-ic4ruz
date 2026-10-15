@@ -1,0 +1,270 @@
+{
+  "runtime": "1.0.0+reason-ui.3",
+  "kind": "actual-Pi-InteractiveMode-vs-Reason-source-layout-gap",
+  "cases": [
+    {
+      "name": "consecutive tools",
+      "width": 80,
+      "matched": false,
+      "actual": [
+        " › Inspect **literal** CAFÉ.",
+        "",
+        " ● read alpha.txt",
+        "",
+        " ● read beta.txt"
+      ],
+      "expected": [
+        "",
+        " › Inspect **literal** CAFÉ.",
+        "",
+        " ● read alpha.txt",
+        " ● read beta.txt"
+      ]
+    },
+    {
+      "name": "consecutive tools",
+      "width": 120,
+      "matched": false,
+      "actual": [
+        " › Inspect **literal** CAFÉ.",
+        "",
+        " ● read alpha.txt",
+        "",
+        " ● read beta.txt"
+      ],
+      "expected": [
+        "",
+        " › Inspect **literal** CAFÉ.",
+        "",
+        " ● read alpha.txt",
+        " ● read beta.txt"
+      ]
+    },
+    {
+      "name": "text tool text",
+      "width": 80,
+      "matched": false,
+      "actual": [
+        " › Inspect **literal** CAFÉ.",
+        "",
+        " Before tool.                                                                   ",
+        " After tool.                                                                    ",
+        "",
+        " ● read alpha.txt"
+      ],
+      "expected": [
+        "",
+        " › Inspect **literal** CAFÉ.",
+        "",
+        " Before tool.                                                                   ",
+        "",
+        " ● read alpha.txt",
+        "",
+        " After tool.                                                                    "
+      ]
+    },
+    {
+      "name": "text tool text",
+      "width": 120,
+      "matched": false,
+      "actual": [
+        " › Inspect **literal** CAFÉ.",
+        "",
+        " Before tool.                                                                                                           ",
+        " After tool.                                                                                                            ",
+        "",
+        " ● read alpha.txt"
+      ],
+      "expected": [
+        "",
+        " › Inspect **literal** CAFÉ.",
+        "",
+        " Before tool.                                                                                                           ",
+        "",
+        " ● read alpha.txt",
+        "",
+        " After tool.                                                                                                            "
+      ]
+    },
+    {
+      "name": "thinking tool text",
+      "width": 80,
+      "matched": false,
+      "actual": [
+        " › Inspect **literal** CAFÉ.",
+        "",
+        "   Thinking: Inspect CAFÉ",
+        "",
+        " After tool.                                                                    ",
+        "",
+        " ● read alpha.txt"
+      ],
+      "expected": [
+        "",
+        " › Inspect **literal** CAFÉ.",
+        "",
+        "   Thinking: Inspect CAFÉ",
+        "",
+        " ● read alpha.txt",
+        "",
+        " After tool.                                                                    "
+      ]
+    },
+    {
+      "name": "thinking tool text",
+      "width": 120,
+      "matched": false,
+      "actual": [
+        " › Inspect **literal** CAFÉ.",
+        "",
+        "   Thinking: Inspect CAFÉ",
+        "",
+        " After tool.                                                                                                            ",
+        "",
+        " ● read alpha.txt"
+      ],
+      "expected": [
+        "",
+        " › Inspect **literal** CAFÉ.",
+        "",
+        "   Thinking: Inspect CAFÉ",
+        "",
+        " ● read alpha.txt",
+        "",
+        " After tool.                                                                                                            "
+      ]
+    },
+    {
+      "name": "text text thinking",
+      "width": 80,
+      "matched": false,
+      "actual": [
+        " › Inspect **literal** CAFÉ.",
+        "",
+        " First block.                                                                   ",
+        " Second block.                                                                  ",
+        "",
+        "   Thinking: Next step"
+      ],
+      "expected": [
+        "",
+        " › Inspect **literal** CAFÉ.",
+        "",
+        " First block.                                                                   ",
+        "",
+        " Second block.                                                                  ",
+        "",
+        "   Thinking: Next step"
+      ]
+    },
+    {
+      "name": "text text thinking",
+      "width": 120,
+      "matched": false,
+      "actual": [
+        " › Inspect **literal** CAFÉ.",
+        "",
+        " First block.                                                                                                           ",
+        " Second block.                                                                                                          ",
+        "",
+        "   Thinking: Next step"
+      ],
+      "expected": [
+        "",
+        " › Inspect **literal** CAFÉ.",
+        "",
+        " First block.                                                                                                           ",
+        "",
+        " Second block.                                                                                                          ",
+        "",
+        "   Thinking: Next step"
+      ]
+    },
+    {
+      "name": "interleaved tools",
+      "width": 80,
+      "matched": false,
+      "actual": [
+        " › Inspect **literal** CAFÉ.",
+        "",
+        " Between tools.                                                                 ",
+        "",
+        " ● read alpha.txt",
+        "",
+        " ● read beta.txt"
+      ],
+      "expected": [
+        "",
+        " › Inspect **literal** CAFÉ.",
+        "",
+        " ● read alpha.txt",
+        "",
+        " Between tools.                                                                 ",
+        "",
+        " ● read beta.txt"
+      ]
+    },
+    {
+      "name": "interleaved tools",
+      "width": 120,
+      "matched": false,
+      "actual": [
+        " › Inspect **literal** CAFÉ.",
+        "",
+        " Between tools.                                                                                                         ",
+        "",
+        " ● read alpha.txt",
+        "",
+        " ● read beta.txt"
+      ],
+      "expected": [
+        "",
+        " › Inspect **literal** CAFÉ.",
+        "",
+        " ● read alpha.txt",
+        "",
+        " Between tools.                                                                                                         ",
+        "",
+        " ● read beta.txt"
+      ]
+    },
+    {
+      "name": "empty blocks",
+      "width": 80,
+      "matched": false,
+      "actual": [
+        " › Inspect **literal** CAFÉ.",
+        "",
+        " ● read alpha.txt",
+        "",
+        " ● read beta.txt"
+      ],
+      "expected": [
+        "",
+        " › Inspect **literal** CAFÉ.",
+        "",
+        " ● read alpha.txt",
+        " ● read beta.txt"
+      ]
+    },
+    {
+      "name": "empty blocks",
+      "width": 120,
+      "matched": false,
+      "actual": [
+        " › Inspect **literal** CAFÉ.",
+        "",
+        " ● read alpha.txt",
+        "",
+        " ● read beta.txt"
+      ],
+      "expected": [
+        "",
+        " › Inspect **literal** CAFÉ.",
+        "",
+        " ● read alpha.txt",
+        " ● read beta.txt"
+      ]
+    }
+  ]
+}

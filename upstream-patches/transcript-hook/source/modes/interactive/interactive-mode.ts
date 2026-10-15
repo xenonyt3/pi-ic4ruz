@@ -177,6 +177,7 @@ import {
 import { ThemedText } from "./components/themed-text.ts";
 import { ThinkingSelectorComponent } from "./components/thinking-selector.ts";
 import { ToolExecutionComponent } from "./components/tool-execution.ts";
+import { TranscriptContainer } from "./components/transcript-container.ts";
 import { TreeSelectorComponent } from "./components/tree-selector.ts";
 import { TrustSelectorComponent } from "./components/trust-selector.ts";
 import { UserMessageComponent } from "./components/user-message.ts";
@@ -456,7 +457,8 @@ export class InteractiveMode {
 	private ui: TUI;
 	private mainScreenRenderState: TuiMainScreenRenderState | undefined;
 	private loadedResourcesContainer: Container;
-	private chatContainer: Container;
+	private chatContainer: TranscriptContainer;
+	private transcriptLayout?: "content";
 	private documentContainer: Container;
 	private transcriptScrollView: TuiLayouts.ScrollView | undefined;
 	private fullscreenLayoutRoot: Component | undefined;
@@ -630,7 +632,10 @@ export class InteractiveMode {
 		this.ui.setClearOnShrink(this.settingsManager.getClearOnShrink());
 		this.headerContainer = new Container();
 		this.loadedResourcesContainer = new Container();
-		this.chatContainer = new Container();
+		this.chatContainer = new TranscriptContainer(() => this.transcriptLayout === "content", () => {
+			this.transcriptLayout = undefined;
+			queueMicrotask(() => this.showWarning("Transcript layout failed; restored stock Pi layout."));
+		});
 		this.documentContainer = new Container();
 		this.documentContainer.addChild(this.headerContainer);
 		this.documentContainer.addChild(this.loadedResourcesContainer);
@@ -2435,6 +2440,7 @@ export class InteractiveMode {
 	}
 
 	private resetExtensionUI(): void {
+		this.transcriptLayout = undefined;
 		this.userMessageRenderer = undefined;
 		this.assistantTextRenderer = undefined;
 		this.thinkingRenderer = undefined;
@@ -2638,6 +2644,12 @@ export class InteractiveMode {
 			setWidget: (key, content, options) => this.setExtensionWidget(key, content, options),
 			setFooter: (factory) => this.setExtensionFooter(factory),
 			setHeader: (factory) => this.setExtensionHeader(factory),
+			setTranscriptLayout: (layout) => {
+				if (layout !== undefined && layout !== "content") throw new Error("INVALID_TRANSCRIPT_LAYOUT");
+				this.transcriptLayout = layout;
+				this.ui.invalidate();
+				this.ui.requestRender();
+			},
 			setUserMessageRenderer: (renderer) => {
 				if (renderer !== undefined && typeof renderer !== "function") throw new Error("INVALID_USER_MESSAGE_RENDERER");
 				this.userMessageRenderer = renderer;
@@ -3540,7 +3552,7 @@ export class InteractiveMode {
 									this.sessionManager.getCwd(),
 								);
 								component.setExpanded(this.toolOutputExpanded);
-								this.chatContainer.addChild(component);
+								this.chatContainer.addToolComponent(component, content.id);
 								this.pendingTools.set(content.id, component);
 							} else {
 								const component = this.pendingTools.get(content.id);
@@ -3618,7 +3630,7 @@ export class InteractiveMode {
 						this.sessionManager.getCwd(),
 					);
 					component.setExpanded(this.toolOutputExpanded);
-					this.chatContainer.addChild(component);
+					this.chatContainer.addToolComponent(component, event.toolCallId);
 					this.pendingTools.set(event.toolCallId, component);
 				}
 				component.markExecutionStarted();
@@ -4028,7 +4040,7 @@ export class InteractiveMode {
 							this.sessionManager.getCwd(),
 						);
 						component.setExpanded(this.toolOutputExpanded);
-						this.chatContainer.addChild(component);
+						this.chatContainer.addToolComponent(component, content.id);
 
 						if (message.stopReason === "aborted" || message.stopReason === "error") {
 							let errorMessage: string;

@@ -1,5 +1,5 @@
 {
-  "runtime": "1.0.0+reason-ui.3",
+  "runtime": "1.0.0+reason-ui.4",
   "reference": "Reason CLI 0.2.269 source oracle, attached user-row framing",
   "kind": "deterministic-component-replay-not-live-Reason-capture",
   "passed": true,

@@ -1,0 +1,40 @@
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+const {createHash}=require('node:crypto');
+const root=path.resolve(__dirname,'..'),pty=require(process.argv[2]),node=process.argv[3];
+const fixture=JSON.parse(fs.readFileSync(path.join(root,'artifacts/ui-replay/native-layout-session.json')));
+const strip=value=>value.replace(/\x1b\][^\x07]*(?:\x07|\x1b\\)/g,'').replace(/\x1b\[[0-?]*[ -/]*[@-~]/g,'');
+const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+const hash=file=>createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+const records=()=>fs.readFileSync(fixture.sessionFile,'utf8').trim().split(/\r?\n/).map(line=>JSON.parse(line));
+const before=records(),settings=hash(path.join(root,'agent/settings.json'));
+(async()=>{
+  const env={...process.env};delete env.ELECTRON_RUN_AS_NODE;delete env.NO_COLOR;delete env.NODE_OPTIONS;
+  env.TERM='xterm-256color';
+  const terminal=pty.spawn(node,[path.join(root,'launch.mjs'),'--session',fixture.sessionFile,'--tui-mode','fullscreen'],{name:'xterm-256color',cols:120,rows:40,cwd:path.join(root,'workspace'),env,useConpty:true});
+  const chunks=[],checks={};terminal.onData(data=>chunks.push(data));let exit;
+  const closed=new Promise(resolve=>terminal.onExit(event=>{exit=event;resolve(event);}));
+  const deadline=Date.now()+90000,timeout=setTimeout(()=>terminal.kill(),92000);
+  const wait=async condition=>{while(!condition()){if(exit)throw Error(`EARLY_EXIT ${exit.exitCode}`);if(Date.now()>deadline)throw Error('NATIVE_LAYOUT_TIMEOUT');await sleep(50);}};
+  try{
+    await wait(()=>strip(chunks.join('')).includes('Finished offline.'));
+    const first=strip(chunks.join(''));
+    const tokens=['Before alpha.','read alpha.txt','read beta.txt','Between groups.','read missing.txt','After tools.','Finished offline.'];
+    const positions=tokens.map(token=>first.indexOf(token));assert.ok(positions.every((pos,index)=>pos>=0&&(index===0||pos>positions[index-1])));checks.contentOrder=true;
+    assert.ok(first.includes('Thinking: Preserve order'));assert.ok(first.includes('Synthetic missing-file error.'));checks.errorVisible=true;
+    let from=chunks.length;terminal.write('\x0f');
+    await wait(()=>strip(chunks.slice(from).join('')).includes('Alpha result: CAF\u00c9.')&&strip(chunks.slice(from).join('')).includes('Beta result: preserved.'));checks.ctrlOExpanded=true;
+    from=chunks.length;terminal.write('\x0f');await wait(()=>strip(chunks.slice(from).join('')).includes('Tool output: collapsed'));checks.ctrlOCollapsed=true;
+    from=chunks.length;terminal.write('\x14');await wait(()=>strip(chunks.slice(from).join('')).includes('Expanded CAF\u00c9 reasoning.'));checks.ctrlTExpanded=true;
+    from=chunks.length;terminal.write('\x14');await wait(()=>strip(chunks.slice(from).join('')).includes('Thinking: Preserve order'));checks.ctrlTCollapsed=true;
+    for(const [columns,rows] of [[80,24],[32,16],[120,40]]){terminal.resize(columns,rows);await sleep(250);}checks.resize='120x40 -> 80x24 -> 32x16 -> 120x40';
+    terminal.write('\x1b[200~CAF\u00c9 paste\nsecond line\x1b[201~');await sleep(250);terminal.write('\x03');await sleep(200);terminal.write('\x04');
+    const ended=await closed;assert.equal(ended.exitCode,0);checks.exitCode=0;
+    const after=records();assert.deepEqual(after.slice(0,before.length),before);
+    assert.deepEqual(after.filter(entry=>entry.type==='message'),before.filter(entry=>entry.type==='message'));
+    const added=after.slice(before.length);assert.ok(added.every(entry=>['thinking_level_change','custom'].includes(entry.type)));
+    assert.equal(hash(path.join(root,'agent/settings.json')),settings);checks.messagesAndSettingsUnchanged=true;
+    checks.appendedUpstreamMetadata=added.map(entry=>({type:entry.type,customType:entry.customType}));
+    fs.writeFileSync(path.join(root,'artifacts/ui-replay/windows-pty-transcript-layout.json'),JSON.stringify({runtime:fixture.runtime,kind:'actual-Windows-ConPTY-synthetic-resume-not-live-Reason',modelRequests:0,passed:true,checks,chunks},null,2));
+    console.log(JSON.stringify({passed:true,checks}));
+  }finally{clearTimeout(timeout);if(!exit)terminal.kill();}
+})().then(()=>process.exit(0),error=>{console.error(error);process.exit(1);});

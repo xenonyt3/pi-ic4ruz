@@ -1,5 +1,18 @@
 # TU0 - Referensi CLI Reason
 
+## I22 continuation: content-order layout
+
+FeA.showEntry at source line 252117 is extracted with a hash in the local oracle
+and replayed directly with B0A. A tool attaches only if the previous visible entry
+is also a tool; other entries get one structural blank. Binary/source hashes still
+match the original audit. The extracted proprietary source remains local.
+
+Actual Pi InteractiveMode reproduced 12 gaps before patching. Candidate reason-ui.4
+adds an optional layout projection while retaining original components and payloads.
+There are 96 mixed-block comparisons of visible order/spacing, ignoring trailing
+surface padding. Actual SDK stream/resume/mouse/expansion and native Windows checks
+pass. Details: `../upstream-patches/transcript-hook/LAYOUT-VERIFICATION.md`.
+
 Inventaris diperiksa 2026-10-15 WIB, tanpa membuka session Reason atau inference.
 Target kontrak agent 1.3 / C2 v7 berbeda dari versi CLI presentation.
 

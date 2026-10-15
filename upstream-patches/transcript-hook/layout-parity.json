@@ -1,0 +1,680 @@
+{
+  "runtime": "1.0.0+reason-ui.4",
+  "kind": "actual-SDK-host-vs-source-FeA-showEntry-B0A",
+  "comparison": "terminal-visible rows ignoring trailing surface padding; individual palette/renderers verified separately",
+  "passed": true,
+  "cases": [
+    {
+      "name": "consecutive tools",
+      "appearance": "dark",
+      "expanded": false,
+      "width": 8,
+      "matched": true
+    },
+    {
+      "name": "text tool text",
+      "appearance": "dark",
+      "expanded": false,
+      "width": 8,
+      "matched": true
+    },
+    {
+      "name": "thinking tool text",
+      "appearance": "dark",
+      "expanded": false,
+      "width": 8,
+      "matched": true
+    },
+    {
+      "name": "text text thinking",
+      "appearance": "dark",
+      "expanded": false,
+      "width": 8,
+      "matched": true
+    },
+    {
+      "name": "interleaved tools",
+      "appearance": "dark",
+      "expanded": false,
+      "width": 8,
+      "matched": true
+    },
+    {
+      "name": "empty blocks",
+      "appearance": "dark",
+      "expanded": false,
+      "width": 8,
+      "matched": true
+    },
+    {
+      "name": "consecutive tools",
+      "appearance": "dark",
+      "expanded": false,
+      "width": 32,
+      "matched": true
+    },
+    {
+      "name": "text tool text",
+      "appearance": "dark",
+      "expanded": false,
+      "width": 32,
+      "matched": true
+    },
+    {
+      "name": "thinking tool text",
+      "appearance": "dark",
+      "expanded": false,
+      "width": 32,
+      "matched": true
+    },
+    {
+      "name": "text text thinking",
+      "appearance": "dark",
+      "expanded": false,
+      "width": 32,
+      "matched": true
+    },
+    {
+      "name": "interleaved tools",
+      "appearance": "dark",
+      "expanded": false,
+      "width": 32,
+      "matched": true
+    },
+    {
+      "name": "empty blocks",
+      "appearance": "dark",
+      "expanded": false,
+      "width": 32,
+      "matched": true
+    },
+    {
+      "name": "consecutive tools",
+      "appearance": "dark",
+      "expanded": false,
+      "width": 80,
+      "matched": true
+    },
+    {
+      "name": "text tool text",
+      "appearance": "dark",
+      "expanded": false,
+      "width": 80,
+      "matched": true
+    },
+    {
+      "name": "thinking tool text",
+      "appearance": "dark",
+      "expanded": false,
+      "width": 80,
+      "matched": true
+    },
+    {
+      "name": "text text thinking",
+      "appearance": "dark",
+      "expanded": false,
+      "width": 80,
+      "matched": true
+    },
+    {
+      "name": "interleaved tools",
+      "appearance": "dark",
+      "expanded": false,
+      "width": 80,
+      "matched": true
+    },
+    {
+      "name": "empty blocks",
+      "appearance": "dark",
+      "expanded": false,
+      "width": 80,
+      "matched": true
+    },
+    {
+      "name": "consecutive tools",
+      "appearance": "dark",
+      "expanded": false,
+      "width": 120,
+      "matched": true
+    },
+    {
+      "name": "text tool text",
+      "appearance": "dark",
+      "expanded": false,
+      "width": 120,
+      "matched": true
+    },
+    {
+      "name": "thinking tool text",
+      "appearance": "dark",
+      "expanded": false,
+      "width": 120,
+      "matched": true
+    },
+    {
+      "name": "text text thinking",
+      "appearance": "dark",
+      "expanded": false,
+      "width": 120,
+      "matched": true
+    },
+    {
+      "name": "interleaved tools",
+      "appearance": "dark",
+      "expanded": false,
+      "width": 120,
+      "matched": true
+    },
+    {
+      "name": "empty blocks",
+      "appearance": "dark",
+      "expanded": false,
+      "width": 120,
+      "matched": true
+    },
+    {
+      "name": "consecutive tools",
+      "appearance": "dark",
+      "expanded": true,
+      "width": 8,
+      "matched": true
+    },
+    {
+      "name": "text tool text",
+      "appearance": "dark",
+      "expanded": true,
+      "width": 8,
+      "matched": true
+    },
+    {
+      "name": "thinking tool text",
+      "appearance": "dark",
+      "expanded": true,
+      "width": 8,
+      "matched": true
+    },
+    {
+      "name": "text text thinking",
+      "appearance": "dark",
+      "expanded": true,
+      "width": 8,
+      "matched": true
+    },
+    {
+      "name": "interleaved tools",
+      "appearance": "dark",
+      "expanded": true,
+      "width": 8,
+      "matched": true
+    },
+    {
+      "name": "empty blocks",
+      "appearance": "dark",
+      "expanded": true,
+      "width": 8,
+      "matched": true
+    },
+    {
+      "name": "consecutive tools",
+      "appearance": "dark",
+      "expanded": true,
+      "width": 32,
+      "matched": true
+    },
+    {
+      "name": "text tool text",
+      "appearance": "dark",
+      "expanded": true,
+      "width": 32,
+      "matched": true
+    },
+    {
+      "name": "thinking tool text",
+      "appearance": "dark",
+      "expanded": true,
+      "width": 32,
+      "matched": true
+    },
+    {
+      "name": "text text thinking",
+      "appearance": "dark",
+      "expanded": true,
+      "width": 32,
+      "matched": true
+    },
+    {
+      "name": "interleaved tools",
+      "appearance": "dark",
+      "expanded": true,
+      "width": 32,
+      "matched": true
+    },
+    {
+      "name": "empty blocks",
+      "appearance": "dark",
+      "expanded": true,
+      "width": 32,
+      "matched": true
+    },
+    {
+      "name": "consecutive tools",
+      "appearance": "dark",
+      "expanded": true,
+      "width": 80,
+      "matched": true
+    },
+    {
+      "name": "text tool text",
+      "appearance": "dark",
+      "expanded": true,
+      "width": 80,
+      "matched": true
+    },
+    {
+      "name": "thinking tool text",
+      "appearance": "dark",
+      "expanded": true,
+      "width": 80,
+      "matched": true
+    },
+    {
+      "name": "text text thinking",
+      "appearance": "dark",
+      "expanded": true,
+      "width": 80,
+      "matched": true
+    },
+    {
+      "name": "interleaved tools",
+      "appearance": "dark",
+      "expanded": true,
+      "width": 80,
+      "matched": true
+    },
+    {
+      "name": "empty blocks",
+      "appearance": "dark",
+      "expanded": true,
+      "width": 80,
+      "matched": true
+    },
+    {
+      "name": "consecutive tools",
+      "appearance": "dark",
+      "expanded": true,
+      "width": 120,
+      "matched": true
+    },
+    {
+      "name": "text tool text",
+      "appearance": "dark",
+      "expanded": true,
+      "width": 120,
+      "matched": true
+    },
+    {
+      "name": "thinking tool text",
+      "appearance": "dark",
+      "expanded": true,
+      "width": 120,
+      "matched": true
+    },
+    {
+      "name": "text text thinking",
+      "appearance": "dark",
+      "expanded": true,
+      "width": 120,
+      "matched": true
+    },
+    {
+      "name": "interleaved tools",
+      "appearance": "dark",
+      "expanded": true,
+      "width": 120,
+      "matched": true
+    },
+    {
+      "name": "empty blocks",
+      "appearance": "dark",
+      "expanded": true,
+      "width": 120,
+      "matched": true
+    },
+    {
+      "name": "consecutive tools",
+      "appearance": "light",
+      "expanded": false,
+      "width": 8,
+      "matched": true
+    },
+    {
+      "name": "text tool text",
+      "appearance": "light",
+      "expanded": false,
+      "width": 8,
+      "matched": true
+    },
+    {
+      "name": "thinking tool text",
+      "appearance": "light",
+      "expanded": false,
+      "width": 8,
+      "matched": true
+    },
+    {
+      "name": "text text thinking",
+      "appearance": "light",
+      "expanded": false,
+      "width": 8,
+      "matched": true
+    },
+    {
+      "name": "interleaved tools",
+      "appearance": "light",
+      "expanded": false,
+      "width": 8,
+      "matched": true
+    },
+    {
+      "name": "empty blocks",
+      "appearance": "light",
+      "expanded": false,
+      "width": 8,
+      "matched": true
+    },
+    {
+      "name": "consecutive tools",
+      "appearance": "light",
+      "expanded": false,
+      "width": 32,
+      "matched": true
+    },
+    {
+      "name": "text tool text",
+      "appearance": "light",
+      "expanded": false,
+      "width": 32,
+      "matched": true
+    },
+    {
+      "name": "thinking tool text",
+      "appearance": "light",
+      "expanded": false,
+      "width": 32,
+      "matched": true
+    },
+    {
+      "name": "text text thinking",
+      "appearance": "light",
+      "expanded": false,
+      "width": 32,
+      "matched": true
+    },
+    {
+      "name": "interleaved tools",
+      "appearance": "light",
+      "expanded": false,
+      "width": 32,
+      "matched": true
+    },
+    {
+      "name": "empty blocks",
+      "appearance": "light",
+      "expanded": false,
+      "width": 32,
+      "matched": true
+    },
+    {
+      "name": "consecutive tools",
+      "appearance": "light",
+      "expanded": false,
+      "width": 80,
+      "matched": true
+    },
+    {
+      "name": "text tool text",
+      "appearance": "light",
+      "expanded": false,
+      "width": 80,
+      "matched": true
+    },
+    {
+      "name": "thinking tool text",
+      "appearance": "light",
+      "expanded": false,
+      "width": 80,
+      "matched": true
+    },
+    {
+      "name": "text text thinking",
+      "appearance": "light",
+      "expanded": false,
+      "width": 80,
+      "matched": true
+    },
+    {
+      "name": "interleaved tools",
+      "appearance": "light",
+      "expanded": false,
+      "width": 80,
+      "matched": true
+    },
+    {
+      "name": "empty blocks",
+      "appearance": "light",
+      "expanded": false,
+      "width": 80,
+      "matched": true
+    },
+    {
+      "name": "consecutive tools",
+      "appearance": "light",
+      "expanded": false,
+      "width": 120,
+      "matched": true
+    },
+    {
+      "name": "text tool text",
+      "appearance": "light",
+      "expanded": false,
+      "width": 120,
+      "matched": true
+    },
+    {
+      "name": "thinking tool text",
+      "appearance": "light",
+      "expanded": false,
+      "width": 120,
+      "matched": true
+    },
+    {
+      "name": "text text thinking",
+      "appearance": "light",
+      "expanded": false,
+      "width": 120,
+      "matched": true
+    },
+    {
+      "name": "interleaved tools",
+      "appearance": "light",
+      "expanded": false,
+      "width": 120,
+      "matched": true
+    },
+    {
+      "name": "empty blocks",
+      "appearance": "light",
+      "expanded": false,
+      "width": 120,
+      "matched": true
+    },
+    {
+      "name": "consecutive tools",
+      "appearance": "light",
+      "expanded": true,
+      "width": 8,
+      "matched": true
+    },
+    {
+      "name": "text tool text",
+      "appearance": "light",
+      "expanded": true,
+      "width": 8,
+      "matched": true
+    },
+    {
+      "name": "thinking tool text",
+      "appearance": "light",
+      "expanded": true,
+      "width": 8,
+      "matched": true
+    },
+    {
+      "name": "text text thinking",
+      "appearance": "light",
+      "expanded": true,
+      "width": 8,
+      "matched": true
+    },
+    {
+      "name": "interleaved tools",
+      "appearance": "light",
+      "expanded": true,
+      "width": 8,
+      "matched": true
+    },
+    {
+      "name": "empty blocks",
+      "appearance": "light",
+      "expanded": true,
+      "width": 8,
+      "matched": true
+    },
+    {
+      "name": "consecutive tools",
+      "appearance": "light",
+      "expanded": true,
+      "width": 32,
+      "matched": true
+    },
+    {
+      "name": "text tool text",
+      "appearance": "light",
+      "expanded": true,
+      "width": 32,
+      "matched": true
+    },
+    {
+      "name": "thinking tool text",
+      "appearance": "light",
+      "expanded": true,
+      "width": 32,
+      "matched": true
+    },
+    {
+      "name": "text text thinking",
+      "appearance": "light",
+      "expanded": true,
+      "width": 32,
+      "matched": true
+    },
+    {
+      "name": "interleaved tools",
+      "appearance": "light",
+      "expanded": true,
+      "width": 32,
+      "matched": true
+    },
+    {
+      "name": "empty blocks",
+      "appearance": "light",
+      "expanded": true,
+      "width": 32,
+      "matched": true
+    },
+    {
+      "name": "consecutive tools",
+      "appearance": "light",
+      "expanded": true,
+      "width": 80,
+      "matched": true
+    },
+    {
+      "name": "text tool text",
+      "appearance": "light",
+      "expanded": true,
+      "width": 80,
+      "matched": true
+    },
+    {
+      "name": "thinking tool text",
+      "appearance": "light",
+      "expanded": true,
+      "width": 80,
+      "matched": true
+    },
+    {
+      "name": "text text thinking",
+      "appearance": "light",
+      "expanded": true,
+      "width": 80,
+      "matched": true
+    },
+    {
+      "name": "interleaved tools",
+      "appearance": "light",
+      "expanded": true,
+      "width": 80,
+      "matched": true
+    },
+    {
+      "name": "empty blocks",
+      "appearance": "light",
+      "expanded": true,
+      "width": 80,
+      "matched": true
+    },
+    {
+      "name": "consecutive tools",
+      "appearance": "light",
+      "expanded": true,
+      "width": 120,
+      "matched": true
+    },
+    {
+      "name": "text tool text",
+      "appearance": "light",
+      "expanded": true,
+      "width": 120,
+      "matched": true
+    },
+    {
+      "name": "thinking tool text",
+      "appearance": "light",
+      "expanded": true,
+      "width": 120,
+      "matched": true
+    },
+    {
+      "name": "text text thinking",
+      "appearance": "light",
+      "expanded": true,
+      "width": 120,
+      "matched": true
+    },
+    {
+      "name": "interleaved tools",
+      "appearance": "light",
+      "expanded": true,
+      "width": 120,
+      "matched": true
+    },
+    {
+      "name": "empty blocks",
+      "appearance": "light",
+      "expanded": true,
+      "width": 120,
+      "matched": true
+    }
+  ]
+}

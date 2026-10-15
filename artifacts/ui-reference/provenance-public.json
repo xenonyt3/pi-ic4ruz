@@ -77,5 +77,19 @@
       "sha256": "4a2846233bf4b632a0403cde8be31ca9dac440d355bba3aad3fe56e5b047e4a5",
       "line": 249325
     }
+  },
+  "hostMethods": {
+    "spinToRest": {
+      "sha256": "62d2bc758436470a82c0874902d4e79ff25cff5e36d85cc8b10f61b4e61bc3dc",
+      "line": 251973
+    },
+    "startWorking": {
+      "sha256": "190f71723eeda09898d9a2d254b8f9c315dbaa2a435aa9c9bb57d11a0f56c553",
+      "line": 252398
+    },
+    "showEntry": {
+      "sha256": "c7a0572e30a4fe8049c3dab8b13926ce92cafe62abed7394fb676bc6799e0dfb",
+      "line": 252117
+    }
   }
 }

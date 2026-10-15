@@ -15,7 +15,7 @@ cleanup_unconfirmed; periksa proses milik harness sebelum explicit recovery.
 Config `ui.reasonTerminal=false`, lalu restart, mematikan adapter dan hook renderer
 agar memakai tampilan stock pada runtime terpilih. Untuk rollback runtime penuh,
 ubah `config/runtime-selection.json` menjadi `{"runtime":"stock"}` lalu restart.
-Runtime asli pada `runtime/` dipertahankan; kandidat `1.0.0+reason-ui.3` dibangun
+Runtime asli pada `runtime/` dipertahankan; kandidat `1.0.0+reason-ui.4` dibangun
 di `upstream-patches/transcript-hook/build/package`, terpisah dari node_modules
 yang terpasang. Session dan receipts tetap tersedia. Adapter Brain telah diuji dengan fake MCP;
 transport production tetap tidak aktif di launcher offline. Vault tetap
@@ -32,6 +32,11 @@ Untuk menonaktifkan capability, ubah `features.codemode`, `features.delegation`,
 Menonaktifkan extension tidak membatalkan perubahan file task yang sudah terjadi.
 Session JSONL dan receipts dipertahankan. Tidak perlu restore file upstream;
 selector menentukan runtime. Renderer error menggunakan stock fallback dengan warning.
+
+I22 adds optional setTranscriptLayout('content'). Clearing it restores Pi ordering
+without replacing the original tool components; extension reset also clears it.
+For all stock presentation, disable ui.reasonTerminal and restart. The prior v3
+source/build/pin snapshot remains under upstream-patches/transcript-hook/history/reason-ui.3.
 
 Startup/working memakai API yang sudah ada di `reason-ui.3`, tanpa build kandidat
 baru. Shutdown/reset/fallback membuang widget dan timer startup/shimmer; fallback

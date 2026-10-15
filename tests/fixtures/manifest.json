@@ -340,6 +340,23 @@
         "Pilot evaluates one task once in each A/B/C condition; no statistical uplift claim"
       ],
       "sha256": "ea8e2b474fee01bbb6fe17f96fc37716d73716ea6022d247ddfbbebdea0b4e8f"
+    },
+    {
+      "id": "O14-transcript-layout",
+      "testFile": "transcript-layout.test.mjs",
+      "classification": "source-and-runtime",
+      "evidence": [
+        "Reason CLI 0.2.269 FeA.showEntry/B0A",
+        "upstream-patches/transcript-hook/layout-gap.json",
+        "I22 approved continuation"
+      ],
+      "syntheticInput": "Interleaved text/reasoning/tool calls, overlapping results, error/abort, partial and resumed streams, click/expand and resize",
+      "expected": "Visible content order matches source; only adjacent tools attach; no message/tool payload mutation; stock fallback and cleanup preserved",
+      "allowedDeviations": [
+        "Trailing surface padding ignored in composition comparison; individual renderers covered separately",
+        "Pi nested tools, notices, image/diff content, cancellation semantics and thinking-run coalescing retained"
+      ],
+      "sha256": "34cb90bd7a8536affb98c66f142fc6d10ca58ffc8aa6a19173df62c9242cb835"
     }
   ],
   "runtimeIdentityHash": "e494e3327ba5851511d1f6a487d3f21f1573bdfda72f618bf40dfb1ec62cae7d"

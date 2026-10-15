@@ -1,5 +1,28 @@
 # Status implementasi T1-T5
 
+## I22: content-order transcript, reason-ui.4
+
+Implemented: optional setTranscriptLayout('content'), original-component projection,
+tool adjacency and per-visible-entry spacing. Stored messages, tool payloads,
+expansion and MouseRegions are preserved. Errors override stale running status.
+
+Tested: 8 focused tests; 96 visible-row composition comparisons; 16 user / 80
+assistant / 96 reasoning fixtures still PASS. Strict TypeScript: five files,
+zero diagnostics. Full acceptance **159/159 PASS**, including 51 UI tests, zero
+failed/cancelled/skipped; source/runtime/baseline/fork/vault unchanged and zero
+unexpected network attempts. Final report:
+`artifacts/verification/runs/2026-10-15T07-28-50.699Z/report.json`.
+The first 158/159 run remains documented with its Windows EPERM receipt failure;
+no delegation logic was changed. The 151-test section below is I21 history.
+
+Runtime-verified: actual SDK streaming/resume/mouse and native Windows content
+order/error, Ctrl+O/Ctrl+T, resize 120/80/32 columns and exit 0. Message records
+and final settings unchanged. Gallery 54 frames; three new layout PNGs reviewed.
+
+Unknown: nested codemode/notices/scroll composition, menus, native color detection
+and live Reason parity. O14 remains partial. No paid inference or production Brain.
+Evidence: `upstream-patches/transcript-hook/LAYOUT-VERIFICATION.md`.
+
 ## Startup / working continuation: reason-ui.3, tanpa patch baru
 
 Implemented: header responsif dengan Pi art dan identitas runtime/model/workspace

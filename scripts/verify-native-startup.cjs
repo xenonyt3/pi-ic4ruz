@@ -2,6 +2,7 @@
 // node-pty is read from its asar; neither VS Code nor Pi profiles are changed.
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const root=path.resolve(__dirname,'..');
+const runtimeLabel=JSON.parse(fs.readFileSync(path.join(root,'config/runtime-candidate.json'))).version;
 const {pathToFileURL}=require('node:url');
 const pty=require(process.argv[2]);
 const node=process.argv[3];
@@ -35,14 +36,14 @@ async function run(args,exercise){
   assert.ok(host.frames.some(frame=>frame.columns===80));assert.equal(host.timersAfterTurns,0);assert.ok(sdk.checks.unicode);
   const launcher=await run([path.join(root,'launch.mjs'),'--no-session','--tui-mode','fullscreen'],async({terminal,chunks,wait})=>{
     const text=()=>strip(chunks.join(''));
-    await wait(()=>text().includes('Pi 1.0.0+reason-ui.3')&&text().includes('9router/cx/gpt-6-sol'));
+    await wait(()=>text().includes(`Pi ${runtimeLabel}`)&&text().includes('9router/cx/gpt-6-sol'));
     await sleep(2700);terminal.resize(80,24);await sleep(300);terminal.resize(32,16);await sleep(300);terminal.resize(120,40);await sleep(300);
     terminal.write('\x1b[200~Native CAF\u00c9\nsecond line\x1b[201~');
     await wait(()=>text().includes('Native CAF\u00c9')&&text().includes('second line'));
     terminal.write('\x03');await sleep(200);terminal.write('\x04');
     return {actualIdentity:true,resize:'120x40 -> 80x24 -> 32x16 -> 120x40',unicodePaste:true,clearAndExit:true};
   });
-  const receipt={kind:'actual-Windows-ConPTY-synthetic-SDK-and-production-launcher-not-live-Reason',runtime:'1.0.0+reason-ui.3',modelRequests:0,passed:true,sdk,host,launcher};
+  const receipt={kind:'actual-Windows-ConPTY-synthetic-SDK-and-production-launcher-not-live-Reason',runtime:runtimeLabel,modelRequests:0,passed:true,sdk,host,launcher};
   fs.writeFileSync(path.join(out,'windows-pty-startup-working.json'),JSON.stringify(receipt,null,2));
   console.log(JSON.stringify({passed:true,sdk:sdk.checks,launcher:launcher.checks,timersAfterTurns:host.timersAfterTurns}));
 })().then(()=>process.exit(0),error=>{console.error(error);process.exit(1);});

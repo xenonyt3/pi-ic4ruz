@@ -7,13 +7,15 @@ import {createReasonTheme,editorSurface,ReasonEditor,renderUserMessage,renderAss
 import {baseTheme,host,renderContext} from '../tests/helpers/ui.mjs';
 import {assistantMessage} from '../tests/helpers/session.mjs';
 import {ReasonStartup,renderWorking} from '../src/ui-startup.mjs';
+import {createLayoutHost,layoutCases} from '../tests/helpers/transcript-layout-host.mjs';
 
 sdk.initTheme('dark');
 const keys=new tui.KeybindingsManager({...tui.TUI_KEYBINDINGS,'app.interrupt':{defaultKeys:'escape'},'app.exit':{defaultKeys:'ctrl+d'},'app.tools.expand':{defaultKeys:'ctrl+o'}});
 tui.setKeybindings(keys);
 const directory=path.join(root,'artifacts/ui-replay');fs.mkdirSync(directory,{recursive:true});
-const scenes=['idle','startup-turn','startup-light','working-thinking','working-light','multiline','streaming','tool-running','tool-error','diff','child-completed','cancel','compaction-unknown','status-warning','surface-dark','surface-light','assistant-markdown','assistant-code','assistant-cancel','assistant-thinking','thinking-expanded','thinking-expanded-light','thinking-after-text','thinking-collapsed-light'];
+const scenes=['idle','startup-turn','startup-light','working-thinking','working-light','multiline','streaming','tool-running','tool-error','diff','child-completed','cancel','compaction-unknown','status-warning','surface-dark','surface-light','assistant-markdown','assistant-code','assistant-cancel','assistant-thinking','thinking-expanded','thinking-expanded-light','thinking-after-text','thinking-collapsed-light','layout-interleaved','layout-tools-light','layout-expanded'];
 const frames=[];
+const layoutHost=await createLayoutHost();
 for(const [columns,rows]of [[80,24],[120,40]])for(const scene of scenes){
   const light=scene.endsWith('-light');
   const theme=createReasonTheme(baseTheme(light?'light':'dark'));
@@ -58,6 +60,11 @@ for(const [columns,rows]of [[80,24],[120,40]])for(const scene of scenes){
     if(scene==='streaming')assistant.updateContent(message,true);
     body.push(...assistant.render(columns).map(line=>line.replace(/\x1b\]133;[ABC]\x07/g,'')));
   }
+  if(scene.startsWith('layout-')){
+    layoutHost.ui.setTheme(theme);layoutHost.mode.hideThinkingBlock=scene!=='layout-expanded';layoutHost.mode.toolOutputExpanded=scene==='layout-expanded';
+    const content=scene==='layout-interleaved'?layoutCases[4][1]:[{type:'thinking',thinking:'**Keep the result order**\nPreserve CAF\u00c9.'},...layoutCases[0][1],{type:'text',text:'Both results remain in their original call slots.'}];
+    body=layoutHost.render(content,columns).lines;
+  }
   const phase=scene==='streaming'?'writing':scene==='tool-running'?'running read':scene.startsWith('working-')?'thinking':scene==='cancel'?'cancelled':'idle';
   const statuses=scene==='status-warning'?['Brain: unavailable. Local fixture could not reconnect to the configured vault; prior context is unavailable. Retry after reconnecting.']:['Brain: off'];
   const footer=renderFooter({provider:'fixture',model:'offline-model',phase,contextPercent:scene==='compaction-unknown'?null:12,children:scene==='child-completed'?[{status:'completed',cleanupConfirmed:true}]:[],statuses,cwd:'D:\\pi-reason-prototype\\workspace'},theme,columns);
@@ -73,6 +80,7 @@ for(const [columns,rows]of [[80,24],[120,40]])for(const scene of scenes){
   if(lines.length!==rows||lines.some(line=>tui.visibleWidth(line)>columns))throw Error('FRAME_OVERFLOW');
   frames.push({id:`${scene}-${columns}`,scene,columns,rows,background:light?'#f5f5f5':'#101010',foreground:light?'#141414':'#dedede',colorsSource:surface?'synthetic-terminal-color-reply':'unavailable-border-fallback',lines});
 }
+await layoutHost.dispose();
 fs.writeFileSync(path.join(directory,'frames.json'),JSON.stringify({kind:'offline-prototype-renderer-fixtures-not-Reason-capture',font:'Consolas',frames},null,2));
 const escape=text=>text.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 const palette=n=>n<16?['#000','#a00','#0a0','#aa0','#00a','#a0a','#0aa','#aaa','#555','#f55','#5f5','#ff5','#55f','#f5f','#5ff','#fff'][n]:n>=232?`rgb(${[8+(n-232)*10,8+(n-232)*10,8+(n-232)*10].join(',')})`:`rgb(${[Math.floor((n-16)/36),Math.floor((n-16)%36/6),(n-16)%6].map(v=>v?55+v*40:0).join(',')})`;
@@ -94,7 +102,7 @@ function html(line,defaultColor){
 const cards=frames.map(frame=>`<section id="${frame.id}"><h2>${frame.scene} / ${frame.columns}x${frame.rows}</h2><pre style="width:${frame.columns}ch;background:${frame.background}">${frame.lines.map(line=>html(line,frame.foreground)).join('\n')}</pre></section>`).join('\n');
 fs.writeFileSync(path.join(directory,'index.html'),`<!doctype html><html><meta charset="utf-8"><title>Offline terminal fixtures</title><style>body{margin:24px;background:#e8e5df;color:#242424;font-family:Georgia,serif}h1{font-size:24px}h2{font-size:16px;margin:0 0 10px}section{width:max-content;margin:24px 0}pre{font:14px/18px Consolas,monospace;background:#101010;color:#dedede;padding:12px;margin:0;overflow:hidden}pre span{display:inline-block;height:18px;line-height:18px;vertical-align:top}p{max-width:72ch}</style><h1>Pi terminal adapter: offline replay</h1><p>Deterministic fixtures using production renderer functions. These are not screenshots of a live Reason session. Fixture font: Consolas. No model requests.</p>${cards}</html>`);
 console.log(JSON.stringify({directory,frames:frames.length,network:'none'}));
-const reviewIds=['idle-80','startup-turn-120','working-light-80','tool-running-120'];
+const reviewIds=['idle-80','startup-turn-120','working-light-80','tool-running-120','layout-interleaved-80','layout-tools-light-120','layout-expanded-80'];
 for(const id of reviewIds){
   const document=fs.readFileSync(path.join(directory,'index.html'),'utf8');
   const section=document.match(new RegExp(`<section id="${id}">[\\s\\S]*?</section>`))[0];

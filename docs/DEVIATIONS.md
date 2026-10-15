@@ -1,5 +1,16 @@
 # Penyimpangan dan batas bukti
 
+## I22 content-order continuation
+
+Candidate reason-ui.4 now preserves top-level text/reasoning/tool order and attaches
+adjacent tools using the original Pi components. Comparison is of visible rows,
+excluding trailing surface padding; it is not whole-terminal byte parity. Expanded
+tool bodies/diffs/images, nested codemode, notices, scroll and cancellation remain
+Pi-specific. An initial native journal-hash assertion was corrected to distinguish
+unchanged message records from legitimate resume metadata. See
+`../upstream-patches/transcript-hook/LAYOUT-VERIFICATION.md` for evidence and the
+retained first full run's unrelated EPERM fixture failure.
+
 ## Current startup / working slice
 
 Reason CLI 0.2.269 splash geometry, braille raster and animation timing are reused
