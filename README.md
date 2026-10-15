@@ -6,6 +6,10 @@
 `launch-live.mjs --live --config PATH` entrypoint for your provider, with persistent
 shared accounting. The standard launcher stays offline. The example config grants
 no usage; a new explicit model/allowance and local credential are required.
+One separately authorized native live smoke with 9router/Astra now passes: parent
+and child tools, exact file result, accounting, cleanup and resume; see
+[the sanitized receipt](artifacts/checkpoint/interactive-live-smoke.json). Prices,
+broad daily-workload reliability and full Reason parity remain unverified.
 
 
 

@@ -1,0 +1,100 @@
+{
+  "allowanceId": "astra-interactive-2026-10-15T08-41-54-909Z",
+  "model": "cx/gpt-6-astra",
+  "provider": "9router",
+  "transport": "actual interactive launcher; native Windows ConPTY; live 9router",
+  "checks": {
+    "durationMs": 25019,
+    "accounted": true,
+    "noBudgetStop": true,
+    "fileCorrect": true,
+    "parentRequests": 3,
+    "childRequests": 2,
+    "exitCode": 0,
+    "credentialAbsentFromTerminal": true,
+    "oneChild": true,
+    "childCompleted": true,
+    "childRead": true,
+    "lockReleased": true,
+    "writerLeaseReleased": true,
+    "resumeWithoutNewInference": true,
+    "resumeExitCode": 0,
+    "nativeTerminalUpdatedDuringRun": true,
+    "credentialAbsentFromPrivateArtifacts": true
+  },
+  "error": null,
+  "usage": {
+    "requests": 5,
+    "inputTokens": 18430,
+    "outputTokens": 250,
+    "cost": null
+  },
+  "stopReason": null,
+  "requests": [
+    {
+      "kind": "parent_or_summary",
+      "status": "accounted",
+      "inputTokens": 3969,
+      "outputTokens": 43,
+      "httpStatus": 200,
+      "responseModel": "gpt-6-astra"
+    },
+    {
+      "kind": "parent_or_summary",
+      "status": "accounted",
+      "inputTokens": 4197,
+      "outputTokens": 142,
+      "httpStatus": 200,
+      "responseModel": "gpt-6-astra"
+    },
+    {
+      "kind": "child",
+      "status": "accounted",
+      "inputTokens": 2917,
+      "outputTokens": 27,
+      "httpStatus": 200,
+      "responseModel": "gpt-6-astra"
+    },
+    {
+      "kind": "child",
+      "status": "accounted",
+      "inputTokens": 2982,
+      "outputTokens": 31,
+      "httpStatus": 200,
+      "responseModel": "gpt-6-astra"
+    },
+    {
+      "kind": "parent_or_summary",
+      "status": "accounted",
+      "inputTokens": 4365,
+      "outputTokens": 7,
+      "httpStatus": 200,
+      "responseModel": "gpt-6-astra"
+    }
+  ],
+  "baseline": {
+    "passed": true,
+    "checkedFiles": 5599,
+    "toolSourcesChecked": 1,
+    "changed": []
+  },
+  "completedAt": "2026-10-15T08:44:34.004Z",
+  "passed": true,
+  "sourceCommit": "79067fa28c01269aba59cdc9933751a845d11507",
+  "authorization": {
+    "maxRequests": 6,
+    "maxInputTokens": 120000,
+    "maxOutputTokens": 6000,
+    "perRequestMaxOutputTokens": 1000,
+    "maxDurationMs": 300000,
+    "approvedByUser": true,
+    "scope": "one smoke; no automatic campaign rerun"
+  },
+  "unknown": [
+    "provider monetary pricing",
+    "token-level timing of live UI deltas not separately measured",
+    "full O14/live Reason parity",
+    "broad daily-workload reliability"
+  ],
+  "rawSessionsAndTerminalPublished": false
+}

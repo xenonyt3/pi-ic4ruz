@@ -6,6 +6,26 @@ persistent resumable allowances. The campaign path retains its one-shot Astra
 scope and refuses reuse. All campaign authorizations documented below are historical;
 they are not permission to run the interactive launcher or repeat a campaign.
 
+## I23 interactive smoke, separate authorization
+
+After the explicit launcher and 171/171 offline acceptance were complete, the user
+authorized 6 total requests / 120000 input / 6000 output / 1000 output per request /
+5 minutes for 9router `cx/gpt-6-astra`. The actual Windows ConPTY live launcher
+passed one disposable marker task: one read-only child read the marker, the parent
+wrote the exact result, then exited and resumed without another inference request.
+The shared ledger accounted all **5 requests (3 parent + 2 child), 18430 input and
+250 output tokens**. Response model `gpt-6-astra` matched the explicit alias allowlist.
+No fallback, error, budget stop, unconfirmed cleanup or credential leak was observed.
+Baseline/fork audit remained unchanged. Prices and broad workload reliability remain
+unknown; no savings or full UI parity claim follows from this smoke.
+
+Public receipt: `artifacts/checkpoint/interactive-live-smoke.json`. Raw terminal,
+sessions and allowance state remain under ignored `agent/live-private/`. This new
+smoke did not repeat any historical evaluation campaign; no further paid run is
+authorized by its remaining capacity.
+
+## Historical campaign workflow
+
 Perintah `node scripts/evaluate-tasks.mjs` default dry-run. Artefak berada di
 `artifacts/evaluations/dry-run.json`. Tidak ada request model pada dry-run.
 Pengguna mengotorisasi pilot headless live dengan `cx/gpt-6-astra` melalui

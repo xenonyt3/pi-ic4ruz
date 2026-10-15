@@ -4,10 +4,17 @@ I23 adds an explicitly opted-in interactive live launcher. Start with
 [docs/LIVE.md](docs/LIVE.md): `launch-live.mjs --live --config PATH`, local
 credential environment variable, pinned provider/model and a new persistent
 allowance. `launch.mjs` remains offline and `liveInference:false` stays unchanged.
-The user selected 9router / `cx/gpt-6-astra`, but no new paid smoke authorization was
-given. Do not reuse any historical campaign allowance. Current implementation
+The user selected 9router / `cx/gpt-6-astra` and subsequently authorized one new
+interactive smoke: 6 requests, 120000 input tokens, 6000 output tokens, 1000 output
+per request, 5 minutes. It **passed**, consuming 5 requests (3 parent + 2 child),
+18430 input tokens and 250 output tokens. Native launcher, delegated read, parent
+write, cleanup and resume without another request were verified. Pricing remains
+unknown. This is not permission for another smoke or daily unlimited usage.
+Do not reuse historical campaign allowances. Current implementation
 and verification are recorded in the I23 backlog and
 `artifacts/checkpoint/live-interactive-verification.json`.
+The subsequent paid smoke receipt is `artifacts/checkpoint/interactive-live-smoke.json`;
+raw sessions, terminal capture, configuration and credentials remain unpublished.
 
 Current-checkout I23 verification: **171/171 full offline acceptance PASS**, including
 51 UI tests and 11 live fixtures; baseline/vault/source/both runtimes unchanged and

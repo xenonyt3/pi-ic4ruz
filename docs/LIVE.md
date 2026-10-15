@@ -136,8 +136,12 @@ children, shared accounting, summaries, retries, errors, cancellation, restart,
 expiration, exclusive locking and cleanup. Baseline/reference-dependent acceptance
 must use the real prerequisite evidence, as described in HANDOFF.md. See the
 current I23 backlog and `artifacts/checkpoint/live-interactive-verification.json`
-for actual results. O14/full Reason parity and paid daily-provider compatibility
-remain separate, unverified claims.
+for offline results. A subsequently authorized live 9router/Astra smoke passed
+through the native Windows launcher: 5 requests (3 parent, 2 child), 18430 input
+tokens, 250 output tokens, exact child-read/parent-write result, clean exit and
+resume without another request. See `artifacts/checkpoint/interactive-live-smoke.json`.
+No retry/campaign rerun was needed. Prices, broad daily-workload reliability and
+O14/full Reason parity remain unknown. This smoke does not grant another allowance.
 
 The native synthetic smoke runner is `node scripts/verify-native-live.cjs PATH_TO_NODE_PTY`.
 It requires a locally installed Windows-compatible node-pty module, starts its own

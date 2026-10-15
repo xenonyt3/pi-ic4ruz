@@ -4,11 +4,33 @@ Tanggal audit: 14 Oktober 2026. **Plan disetujui; implementasi bertahap dimulai 
 
 Dokumen kerja aktif berada di `D:/pi-ic4ruz`; evidence audit tetap di `D:/reason-investigation-20261014`. UI: **ikuti CLI/terminal Reason** (D13). Persetujuan desain sudah eksplisit; tidak memerlukan persetujuan ulang untuk detail rutin. Pengguna telah mengotorisasi pilot live Astra/9router dengan budget terbatas; hasilnya dilacak pada bagian terbaru berikut.
 
-## Status terbaru: I23 explicit interactive live - 15 Oktober 2026 WIB
+## Status terbaru: I23 bounded interactive live smoke PASS - 15 Oktober 2026 WIB
+
+- Authorization baru eksplisit: 6 request / 120000 input / 6000 output / 1000
+  output per request / 300 detik, 9router `cx/gpt-6-astra`. Satu smoke baru melalui
+  launcher live di native Windows ConPTY; bukan rerun campaign lama.
+- Runtime-verified **PASS** pada source `79067fa`: parent discovery dan delegation,
+  satu code_explorer membaca marker, parent menulis hasil exact, semua child/lease
+  bersih, exit 0 dan resume session tanpa inference tambahan. UI menerima update
+  selama run; timing per-token pada live UI tidak diukur terpisah.
+- Pemakaian **5/6 request (3 parent + 2 child), 18430 input, 250 output**;
+  task selesai sekitar 25 detik, di luar startup/resume. Seluruh raw usage accounted,
+  HTTP 200, response alias `gpt-6-astra` termasuk allowlist eksplisit, tanpa fallback,
+  error atau budget stop. Harga uang tetap unknown.
+- Acceptance 171/171 masih cocok dengan hash source sebelum smoke; baseline
+  5599 file + fd source unchanged sesudahnya. Pemindaian 15 artefak privat tidak
+  menemukan credential. Receipt publik: `artifacts/checkpoint/interactive-live-smoke.json`;
+  raw session/terminal/config/ledger tetap ignored. Tidak ada proses launcher/child
+  atau writer lease tertinggal. Tidak ada inference tambahan setelah smoke.
+- Unknown: pricing, reliability lintas workload harian, full O14/live Reason parity.
+  Smoke terbatas ini bukan benchmark atau izin allowance berikutnya.
+
+## Milestone sebelumnya: I23 explicit interactive live implementation
 
 - Implemented: `launch-live.mjs --live --config PATH`, reusing `LiveBudgetTransport`
   and the existing child broker. Offline launcher/default unchanged; user selected
-  9router / `cx/gpt-6-astra`; no new paid allowance authorized. Production Brain disabled.
+  9router / `cx/gpt-6-astra`; paid authorization was pending at this implementation
+  checkpoint and was later granted only for the bounded smoke above. Production Brain disabled.
 - Persistent ledger lock, reserve-before-send, parent/child/retry/summary accounting,
   session binding, conservative unknown-usage stop, no restart allowance reset;
   credentials local to broker memory, private files ignored by Git.
