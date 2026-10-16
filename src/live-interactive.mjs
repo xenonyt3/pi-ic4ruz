@@ -6,6 +6,7 @@ import { root, canonicalPath, isWithin, resolvePrototypePaths } from './paths.mj
 import {createWebServices} from './web-services.mjs';
 
 export async function createLiveRuntime({config,budget,key,workspace,endpoint,options={},fetchImpl=globalThis.fetch,directory}) {
+  if(budget.accountingOnly&&(options.headlessEvaluation||options.evaluationCondition||options.singleAgentEvaluation))throw new Error('LIVE_ACCOUNTING_NOT_FOR_EVALUATION');
   const condition=options.evaluationCondition??'prototype';
   if(!['prototype','stock-core'].includes(condition))throw new Error('LIVE_EVALUATION_CONDITION_INVALID');
   const {sdk,ai}=condition==='stock-core'
@@ -19,7 +20,7 @@ export async function createLiveRuntime({config,budget,key,workspace,endpoint,op
   if(!fs.existsSync(ledger)&&fs.existsSync(sessions)&&fs.readdirSync(sessions).length)throw new Error('LIVE_LEDGER_MISSING: restore accounting before resume');
   fs.mkdirSync(sessions,{recursive:true});fs.mkdirSync(agentDir,{recursive:true});
   let context,host,harness;
-  const status=()=>`LIVE ${config.provider}/${config.model} | ${gate.state.requests.length}/${budget.maxRequests} requests | ${gate.state.inputTokens}/${budget.maxInputTokens} input | ${gate.state.outputTokens}/${budget.maxOutputTokens} output | ${gate.state.stopReason??gate.state.status} | cost unknown; Brain disabled`;
+  const status=()=>`LIVE ${config.provider}/${config.model} | ${budget.accountingOnly?'provider limits; no local usage budget | ':''}${gate.state.requests.length}${budget.accountingOnly?'':`/${budget.maxRequests}`} requests | ${gate.state.inputTokens}${budget.accountingOnly?'':`/${budget.maxInputTokens}`} input | ${gate.state.outputTokens}${budget.accountingOnly?'':`/${budget.maxOutputTokens}`} output | ${gate.state.stopReason??gate.state.status} | cost unknown; Brain disabled`;
   const gate=new LiveBudgetTransport({budget,endpoint,ledgerPath:ledger,interactive:true,fetchImpl:async(url,init)=>{
     const headers=new Headers(init.headers);headers.set('Authorization',`Bearer ${key}`);
     try{return await fetchImpl(url,{...init,headers});}catch{throw new Error('LIVE_TRANSPORT_FAILED');}
@@ -120,7 +121,7 @@ export async function createLiveRuntime({config,budget,key,workspace,endpoint,op
             if(sessionHarness.policy.pendingWriterCalls().length||sessionHarness.getSupervisor()?.list().some(child=>!child.cleanupConfirmed))gate.stop('cleanup_unconfirmed');
             context=undefined;
           });
-          pi.registerCommand('live-status',{description:'Show shared persistent allowance and model',handler:async(_args,ctx)=>ctx.ui.notify(status(),'info')});
+          pi.registerCommand('live-status',{description:'Show persistent usage, active limits and model',handler:async(_args,ctx)=>ctx.ui.notify(status(),'info')});
         }]}});
       if(services.resourceLoader.getExtensions().errors.length)throw new Error('LIVE_EXTENSION_LOAD_FAILED');
       const created=await sdk.createAgentSessionFromServices({services,sessionManager,sessionStartEvent,model,thinkingLevel:config.thinkingLevel});

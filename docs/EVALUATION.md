@@ -1,5 +1,11 @@
 # T5 - evaluasi tetap terpisah dari acceptance offline
 
+I29 daily provider-accounting mode removes manual usage budgets only for
+interactive daily coding. Evaluation validators reject accounting-only mode;
+campaign budgets and authorization remain unchanged. Its synthetic/native tests
+exercise resume, parent/child/summary accounting and stop/cleanup without using
+a paid campaign. See [LIVE.md](LIVE.md).
+
 I28 adds fake web/provider and actual SDK fixtures to offline acceptance. The
 separate `scripts/verify-web-tools.mjs` runs a native isolated Chromium against
 a loopback fixture; `--public` also checks public search/extraction with no model

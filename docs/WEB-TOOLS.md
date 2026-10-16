@@ -32,7 +32,7 @@ Apache-2.0 license. Installed dependencies retain their own notices.
 
 ## Usage
 
-Live allowance requirements are unchanged; see [LIVE.md](LIVE.md). `/web-status`
+Daily provider-accounting or bounded live mode is selected in [LIVE.md](LIVE.md). `/web-status`
 reports the public search provider and browser mode. These tools are deferred;
 the five initial model tools are unchanged. Inside codemode:
 
@@ -115,8 +115,9 @@ and subsequent verification checks both tree exit and registry release.
 
 These web operations do not call a model. Their output enters the parent
 transcript; later turns and compaction consume the same persistent allowance.
-There is no second inference transport/budget. The pending daily allowance is
-still unauthorized; installing tools does not activate it.
+There is no second inference transport/budget. I29 subsequently enables daily
+provider-accounting at the user's request, without a local usage allowance.
+The historical benchmark allowances remain closed.
 
 ## Verification and rollback
 

@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { root, canonicalPath, isWithin, protectedRoots } from './paths.mjs';
-import { validateBudget } from './evaluation-budget.mjs';
+import { validateBudget, validateInteractiveAccounting } from './evaluation-budget.mjs';
 
 const label = value => typeof value === 'string' && /^[a-zA-Z0-9][a-zA-Z0-9._/+-]{0,159}$/.test(value);
 export function validateLiveConfig(config, {env=process.env,cwd=process.cwd()}={}) {
@@ -17,16 +17,21 @@ export function validateLiveConfig(config, {env=process.env,cwd=process.cwd()}={
   if(!/^[A-Z][A-Z0-9_]*$/.test(config.credentialEnv??''))throw new Error('LIVE_CREDENTIAL_ENV_REQUIRED');
   const key=env[config.credentialEnv];
   if(typeof key!=='string'||!key.trim()||/[\r\n]/.test(key)||key==='offline-fixture-not-a-credential')throw new Error('LIVE_CREDENTIAL_UNAVAILABLE');
-  const b=config.budget;
-  if(!b||!/^[-a-zA-Z0-9_]{1,80}$/.test(b.allowanceId??'')||b.authorized!==true)throw new Error('LIVE_NEW_ALLOWANCE_REQUIRED');
+  const accountingOnly=config.accounting!==undefined;
+  if(accountingOnly&&config.budget!==undefined)throw new Error('LIVE_ACCOUNTING_BUDGET_CONFLICT');
+  const a=config.accounting;
+  if(accountingOnly&&(!a||a.mode!=='provider'||!/^[-a-zA-Z0-9_]{1,80}$/.test(a.id??'')||
+    Object.keys(a).some(key=>!['mode','id','perRequestMaxOutputTokens'].includes(key))))throw new Error('LIVE_ACCOUNTING_CONFIG_INVALID');
+  const b=accountingOnly?{allowanceId:a.id,accountingOnly:true,maxRequests:null,maxInputTokens:null,maxOutputTokens:null,maxDurationMs:null,perRequestMaxOutputTokens:a.perRequestMaxOutputTokens??4000}:config.budget;
+  if(!accountingOnly&&(!b||!/^[-a-zA-Z0-9_]{1,80}$/.test(b.allowanceId??'')||b.authorized!==true))throw new Error('LIVE_NEW_ALLOWANCE_REQUIRED');
   if(!Number.isSafeInteger(b.perRequestMaxOutputTokens)||b.perRequestMaxOutputTokens<1||b.perRequestMaxOutputTokens>=config.contextWindow)throw new Error('LIVE_OUTPUT_CAP_REQUIRED');
   if(b.maxCost!==undefined)throw new Error('LIVE_COST_CAP_UNSUPPORTED: use explicit token caps');
   const budgetKeys=new Set(['allowanceId','authorized','maxRequests','maxInputTokens','maxOutputTokens','maxDurationMs','perRequestMaxOutputTokens']);
-  if(Object.keys(b).some(k=>!budgetKeys.has(k)))throw new Error('LIVE_BUDGET_UNKNOWN_FIELD');
+  if(!accountingOnly&&Object.keys(b).some(k=>!budgetKeys.has(k)))throw new Error('LIVE_BUDGET_UNKNOWN_FIELD');
   if(b.maxDurationMs>2147483647)throw new Error('LIVE_DURATION_TOO_LONG');
   const workspace=canonicalPath(cwd),control=canonicalPath(path.join(root,'agent'));
   if(isWithin(workspace,control)||isWithin(control,workspace)||protectedRoots.some(p=>isWithin(canonicalPath(p),workspace)))throw new Error('LIVE_WORKSPACE_ISOLATION_REQUIRED: use workspace/ or a separate task directory');
-  const budget=validateBudget({...b,maxAttempts:1,provider:config.provider,model:config.model,thinkingLevel:config.thinkingLevel,
+  const budget=(accountingOnly?validateInteractiveAccounting:validateBudget)({...b,maxAttempts:1,provider:config.provider,model:config.model,thinkingLevel:config.thinkingLevel,
     responseModels:config.responseModels,brainEnabled:false,workspace,contextWindow:config.contextWindow});
   return {config,budget,key,workspace,endpoint:url.href.replace(/\/$/,'')+'/chat/completions'};
 }
@@ -36,7 +41,7 @@ export function loadLiveConfig(file,options) {
   if(!isWithin(directory,canonicalPath(file)))throw new Error('LIVE_CONFIG_LOCATION: store config under agent/live-private/');
   let config;try{config=JSON.parse(fs.readFileSync(file,'utf8'));}catch{throw new Error('LIVE_CONFIG_INVALID: expected local JSON');}
   // Credentials are read only from the named environment variable, never config text.
-  const allowed=new Set(['schemaVersion','mode','provider','api','baseUrl','models','model','responseModels','thinkingLevel','contextWindow','credentialEnv','budget']);
+  const allowed=new Set(['schemaVersion','mode','provider','api','baseUrl','models','model','responseModels','thinkingLevel','contextWindow','credentialEnv','budget','accounting']);
   if(Object.keys(config).some(k=>!allowed.has(k)))throw new Error('LIVE_CONFIG_UNKNOWN_FIELD');
   return validateLiveConfig(config,options);
 }

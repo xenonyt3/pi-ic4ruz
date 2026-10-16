@@ -1,10 +1,21 @@
 export function validateBudget(config) {
   if (!config || typeof config !== 'object') throw new Error('BUDGET_REQUIRED');
+  if (config.accountingOnly !== undefined) throw new Error('INVALID_EVALUATION_ACCOUNTING_MODE');
   for (const key of ['maxRequests','maxInputTokens','maxOutputTokens','maxDurationMs','maxAttempts']) {
     if (!Number.isSafeInteger(config[key]) || config[key] <= 0) throw new Error(`INVALID_BUDGET_${key}`);
   }
   if (config.maxCost !== undefined && (!Number.isFinite(config.maxCost) || config.maxCost <= 0)) throw new Error('INVALID_COST_BUDGET');
   if (config.maxCost !== undefined && (!config.priceVerified || !Number.isFinite(config.inputPricePerMillion) || config.inputPricePerMillion<0 || !Number.isFinite(config.outputPricePerMillion) || config.outputPricePerMillion<0)) throw new Error('VERIFIED_PRICING_REQUIRED');
+  return Object.freeze({...config});
+}
+
+// Only the explicit interactive path accepts uncapped accounting. Campaigns
+// continue to use validateBudget and cannot inherit this mode accidentally.
+export function validateInteractiveAccounting(config) {
+  if(config?.accountingOnly!==true||config.maxAttempts!==1||config.maxCost!==undefined||
+    ['maxRequests','maxInputTokens','maxOutputTokens','maxDurationMs'].some(key=>config[key]!==null))throw new Error('LIVE_ACCOUNTING_MODE_INVALID');
+  if(!/^[-a-zA-Z0-9_]{1,80}$/.test(config.allowanceId??'')||
+    !Number.isSafeInteger(config.perRequestMaxOutputTokens)||config.perRequestMaxOutputTokens<1)throw new Error('LIVE_ACCOUNTING_CONFIG_INVALID');
   return Object.freeze({...config});
 }
 

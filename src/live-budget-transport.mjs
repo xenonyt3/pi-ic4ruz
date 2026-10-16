@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
-import { validateBudget } from './evaluation-budget.mjs';
+import { validateBudget, validateInteractiveAccounting } from './evaluation-budget.mjs';
 
 const hash=value=>createHash('sha256').update(typeof value==='string'?value:JSON.stringify(value)).digest('hex');
 const validCount=value=>Number.isSafeInteger(value)&&value>=0;
@@ -9,7 +9,7 @@ export class LiveBudgetTransport {
   constructor({budget,endpoint,ledgerPath,fetchImpl=globalThis.fetch,clock=Date.now,interactive=false,onChange=()=>{},api='openai-completions'}) {
     if(!['openai-completions','openai-responses'].includes(api))throw new Error('LIVE_API_UNSUPPORTED');
     this.api=api;
-    this.budget=validateBudget(budget);this.endpoint=new URL(endpoint).href;this.file=ledgerPath;this.fetchImpl=fetchImpl;this.clock=clock;
+    this.budget=interactive&&budget?.accountingOnly===true?validateInteractiveAccounting(budget):validateBudget(budget);this.endpoint=new URL(endpoint).href;this.file=ledgerPath;this.fetchImpl=fetchImpl;this.clock=clock;
     this.interactive=interactive;this.onChange=onChange;
     if(!interactive){
       if(budget.provider!=='9router'||budget.model!=='cx/gpt-6-astra'||budget.brainEnabled!==false)throw new Error('LIVE_SCOPE_MISMATCH');
@@ -35,7 +35,7 @@ export class LiveBudgetTransport {
   }
   persist(){const tmp=this.file+'.tmp';const fd=fs.openSync(tmp,'w',0o600);try{fs.writeFileSync(fd,JSON.stringify(this.state,null,2));fs.fsyncSync(fd);}finally{fs.closeSync(fd);}fs.renameSync(tmp,this.file);this.onChange(this.state);}
   armTimer(){
-    if(this.timer||this.state.startedAt===null||!this.allowsModelTurns())return;
+    if(this.budget.accountingOnly||this.timer||this.state.startedAt===null||!this.allowsModelTurns())return;
     const remaining=this.remainingMs();
     if(!remaining){this.stop('duration');return;}
     this.timer=setTimeout(()=>this.stop('duration'),Math.min(remaining,2147483647));this.timer.unref();
@@ -44,13 +44,13 @@ export class LiveBudgetTransport {
   assertOpen(){if(!this.allowsModelTurns()||this.abortController.signal.aborted)throw new Error(`LIVE_BUDGET_STOP: ${this.state.stopReason??this.state.status}`);}
   beginAttempt(condition){this.assertOpen();if(this.state.attempts.length>=this.budget.maxAttempts)throw new Error('ATTEMPT_LIMIT');this.state.attempts.push({condition,at:new Date(this.clock()).toISOString()});this.persist();}
   stop(reason){this.state.status='stopped';this.state.stopReason??=reason;this.persist();this.abortController.abort(new Error(`LIVE_BUDGET_STOP: ${reason}`));}
-  remainingMs(){return this.state.startedAt===null?this.budget.maxDurationMs:Math.max(0,this.budget.maxDurationMs-(this.clock()-this.state.startedAt));}
+  remainingMs(){return this.budget.accountingOnly?Infinity:this.state.startedAt===null?this.budget.maxDurationMs:Math.max(0,this.budget.maxDurationMs-(this.clock()-this.state.startedAt));}
   reserve(payload,kind,condition){
     this.assertOpen();if(this.remainingMs()===0){this.stop('duration');throw new Error('LIVE_BUDGET_DURATION');}
     const pending=this.state.requests.filter(r=>r.status==='pending');
     const input=Buffer.byteLength(JSON.stringify(payload),'utf8')+8192;
     const output=this.budget.perRequestMaxOutputTokens;
-    if(this.state.requests.length>=this.budget.maxRequests||this.state.inputTokens+pending.reduce((n,r)=>n+r.reservedInput,0)+input>this.budget.maxInputTokens||this.state.outputTokens+pending.reduce((n,r)=>n+r.reservedOutput,0)+output>this.budget.maxOutputTokens){this.stop('capacity');throw new Error('LIVE_BUDGET_EXHAUSTED');}
+    if(!this.budget.accountingOnly&&(this.state.requests.length>=this.budget.maxRequests||this.state.inputTokens+pending.reduce((n,r)=>n+r.reservedInput,0)+input>this.budget.maxInputTokens||this.state.outputTokens+pending.reduce((n,r)=>n+r.reservedOutput,0)+output>this.budget.maxOutputTokens)){this.stop('capacity');throw new Error('LIVE_BUDGET_EXHAUSTED');}
     if(this.state.startedAt===null){this.state.startedAt=this.clock();this.armTimer();}
     const record={id:this.state.requests.length+1,kind,condition,status:'pending',startedAt:this.clock(),reservedInput:input,reservedOutput:output,payloadHash:hash(payload),promptHash:hash(payload.messages??{instructions:payload.instructions,input:payload.input}),schemaHash:hash(payload.tools??payload.input?.filter(item=>item.type==='additional_tools')??[]),reasoning:payload.reasoning_effort??payload.reasoning?.effort??null};
     this.state.status='running';this.state.requests.push(record);this.persist();return record;
@@ -64,7 +64,8 @@ export class LiveBudgetTransport {
       record.status='accounted';record.inputTokens=usage.prompt_tokens;record.outputTokens=usage.completion_tokens;
       record.cacheReadTokens=usage.prompt_tokens_details?.cached_tokens??null;
       this.state.inputTokens+=usage.prompt_tokens;this.state.outputTokens+=usage.completion_tokens;
-      if(usage.prompt_tokens>record.reservedInput||usage.completion_tokens>record.reservedOutput||this.state.inputTokens>this.budget.maxInputTokens||this.state.outputTokens>this.budget.maxOutputTokens){this.state.status='stopped';this.state.stopReason??='reported_usage_overshoot';}
+      if(usage.completion_tokens>record.reservedOutput||(!this.budget.accountingOnly&&(usage.prompt_tokens>record.reservedInput||this.state.inputTokens>this.budget.maxInputTokens||this.state.outputTokens>this.budget.maxOutputTokens))){this.state.status='stopped';this.state.stopReason??='reported_usage_overshoot';}
+      if(!validCount(this.state.inputTokens)||!validCount(this.state.outputTokens)){this.state.status='stopped';this.state.stopReason??='accounting_counter_overflow';}
       if(this.interactive&&!record.responseModel){this.state.status='stopped';this.state.stopReason??='response_model_missing';}
     }
     record.durationMs=this.clock()-record.startedAt;delete record.rawUsage;this.persist();

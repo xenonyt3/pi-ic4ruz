@@ -1,5 +1,22 @@
 # Bahan backlog rekonstruksi perilaku Reason di Pi Windows
 
+## I29 - Daily live tanpa menetapkan budget lokal (17 Oktober 2026 WIB)
+
+- User explicitly superseded daily budget gate: no manual request/token/duration
+  allowance for daily coding. Explicit provider-accounting config reuses the
+  existing persistent transport; old campaign ledgers remain unchanged.
+- Implemented: no cumulative local usage caps or idle/restart expiry; stable
+  accounting namespace; truthful provider-limits status. Per-response generation
+  bound/request timeout, endpoint/model pins, cleanup and writer lease retained.
+- Offline default and bounded campaign validation unchanged. Accounting-only
+  configuration is rejected by evaluation budget validators and headless campaigns.
+- Focused fixture results, native launcher verification and full acceptance are
+  recorded separately in `artifacts/checkpoint/daily-live-verification.json`.
+- Local daily configuration enabled; no new campaign, paid smoke or real prompt
+  is run as part of this setup. Brain remains off; web tools remain installed.
+- Usage/rollback: `docs/LIVE.md`, `docs/ROLLBACK.md`. Historical daily allowance
+  requirements in I23-I28 are superseded for daily use only.
+
 ## I28 - Tool web oh-my-pi, Brain off (17 Oktober 2026 WIB)
 
 - Implemented: `web_search`, `web_extract`, `browser`, deferred/codemode discovery,
@@ -447,3 +464,5 @@ baru, dan satu campaign live. Sisa allowance v1/v2 tidak dipakai untuk langkah i
 - Disetujui D10/D11: compaction Pi dan Brain parent-only sebagai desain eksplisit.
 - Budget pilot awal dipakai 11/12 request, 42441 input/600 output. Budget tambahan C pertama dipakai 8/8 request, 31522 input/498 output; budget C-03 berikutnya dipakai 7/8 request, 28339 input/540 output. Semua campaign tersimpan; tidak ada reset allowance. Budget inference berikutnya serta corpus penuh belum ditentukan.
 - Target UI sudah ditentukan: CLI/terminal Reason. Setelah arsitektur disetujui, review tambahan difokuskan pada hasil UI konkret, perubahan scope material, serta budget evaluasi; tidak perlu persetujuan per file/function.
+
+I29 verification: 215/215 full offline acceptance, 23/23 focused tests, native synthetic launcher passed; baseline/source/runtime/vault unchanged and zero unexpected network attempts. Receipt: `artifacts/checkpoint/daily-live-verification.json`.

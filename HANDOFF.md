@@ -1,5 +1,15 @@
 # Continue on another device
 
+I29 supersedes the earlier daily-allowance requirement: the user explicitly
+requested no local usage budget for daily coding. `accounting.mode:provider`
+uses the same persistent LiveBudgetTransport without cumulative request/token
+limits or session duration. Provider/model pins, generation limit, request timeout,
+accounting integrity, cancel/cleanup and offline default remain. Bounded campaigns
+retain their limits and require separate authorization. Local daily config and
+`agent/live-private/start-daily.mjs` are prepared for 9router / Astra low; no real
+inference is needed to activate configuration. See [docs/LIVE.md](docs/LIVE.md).
+Earlier disabled-daily-budget statements below describe prior checkpoints.
+
 I28 adds parent-owned `web_search`, `web_extract` and `browser`, adapted from
 hash-pinned oh-my-pi 18.10.1 components. Brain is disabled in the prototype
 configuration. Read [docs/WEB-TOOLS.md](docs/WEB-TOOLS.md) for local dependency
@@ -212,3 +222,5 @@ workers and private allowance ledgers. Tests use a synthetic provider fixture;
 they do not read production credentials. The actual Windows live launcher has
 also been exercised against loopback synthetic SSE (stream/tool/resume/cancel),
 with zero paid requests; see `artifacts/checkpoint/live-native-verification.json`.
+
+I29 verification is complete: **215/215 full offline acceptance PASS**, 23/23 focused daily fixtures, and native synthetic ConPTY checks passed. Baseline 5599 files plus fd source, source, both runtimes and vault were unchanged; unexpected tracked network attempts were zero. Receipt: `artifacts/checkpoint/daily-live-verification.json`. No paid inference ran.

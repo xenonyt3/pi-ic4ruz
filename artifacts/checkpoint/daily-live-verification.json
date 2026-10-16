@@ -1,0 +1,62 @@
+{
+  "milestone": "I29 daily provider-accounting live mode",
+  "date": "2026-10-17 Asia/Jakarta",
+  "baseCommit": "40c3ae2",
+  "implemented": [
+    "explicit accounting.mode=provider daily configuration",
+    "persistent shared accounting without cumulative local caps or idle deadline",
+    "per-response output cap/request timeout/model pin retained",
+    "parent child retry summary resume cancel cleanup and writer lease retained",
+    "bounded campaigns reject accounting-only mode; offline launcher remains default"
+  ],
+  "tested": {
+    "fullOffline": "artifacts/verification/runs/2026-10-16T21-42-08.851Z/report.json",
+    "fullOfflineCounts": {
+      "tests": 215,
+      "pass": 215,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    "focusedDailyCounts": {
+      "tests": 23,
+      "pass": 23,
+      "fail": 0
+    },
+    "native": "artifacts/checkpoint/daily-native-verification.json",
+    "baselineFiles": 5599,
+    "unexpectedNetworkAttempts": 0,
+    "vaultUnchanged": true,
+    "sourceUnchanged": true,
+    "runtimeUnchanged": true
+  },
+  "runtimeVerified": {
+    "provider": "synthetic loopback only",
+    "requests": 3,
+    "checks": [
+      "streaming",
+      "write tool",
+      "resize",
+      "resume",
+      "Escape",
+      "Ctrl+C",
+      "Ctrl+D",
+      "ledger lock cleanup"
+    ],
+    "paidInferenceRequests": 0
+  },
+  "localConfig": {
+    "provider": "9router",
+    "model": "cx/gpt-6-astra",
+    "thinkingLevel": "low",
+    "accountingId": "astra-daily",
+    "brain": false,
+    "defaultLauncherOffline": true,
+    "credentialPublished": false
+  },
+  "unknown": [
+    "actual 9router daily quota, account billing and provider rate limits",
+    "full Reason parity and long-term daily reliability",
+    "model vision through screenshot files"
+  ]
+}

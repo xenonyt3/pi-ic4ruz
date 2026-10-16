@@ -1,5 +1,11 @@
 # Rollback prototype
 
+I29 daily provider-accounting mode: exit the explicit live launcher after cleanup
+and return to `launch.mjs` for offline use. Preserve its accounting ID, ledger and
+sessions. To choose bounded use, create a separately approved bounded config/ID;
+do not edit the policy of an existing ledger or reuse spent campaign allowances.
+The private daily wrapper is checkout-local; no global launcher changes exist.
+
 I28 web tools: exit after browser/child cleanup, set `features.web:false` in
 `config/harness.json`, then restart. `config/web-tools.json.enabled:false` instead
 retains discovery but denies execution. Return to `launch.mjs` for offline mode.

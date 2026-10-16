@@ -1,5 +1,57 @@
 # Explicit interactive live mode
 
+## Daily use without a local usage budget
+
+As requested on 17 October 2026, daily use can follow provider limits without
+setting a request/token/time allowance. Use `config/live-daily.example.json`
+as the local template under ignored `agent/live-private/`. It replaces the
+`budget` object with `"accounting":{"mode":"provider","id":"astra-daily"}`.
+Never specify both. This is explicit daily opt-in, not the default offline mode.
+The existing bounded `config/live.example.json` and evaluation campaigns retain
+their budget/authorization requirements; old ledgers are not converted or reset.
+
+The accounting ID is a stable storage namespace, not a quota. Requests from the
+parent, children, retries and summaries still pass through `LiveBudgetTransport`
+and the same persistent, locked ledger. There is no local maximum request count,
+cumulative input/output token cap or elapsed-time deadline, including idle time
+and downtime. The status displays `provider limits; no local usage budget` with
+cumulative usage. Upstream quota/rate limits and pricing still apply; the UI does
+not invent remaining provider quota or treat SDK cost zero as actual billing.
+
+One response still has a generation limit (default 4000 output tokens, optionally
+`accounting.perRequestMaxOutputTokens`) and a 120-second request timeout. These
+bound individual generation/network operations, not daily usage. Context window,
+max three children, writer lease, model/credential validation, response-model
+allowlist, cancellation and cleanup remain unchanged. Reported output above its
+generation bound, malformed/missing usage, unconfirmed cleanup or wrong response
+model still stop the accounting stream rather than silently losing records.
+Errors are not automatically retried. Do not delete a stopped ledger to reset it.
+
+Typical portable launch after setting the credential environment variable:
+
+```powershell
+cd workspace
+node ../launch-live.mjs --live --config ../agent/live-private/daily-config.json --check
+node ../launch-live.mjs --live --config ../agent/live-private/daily-config.json
+# Later, with the same accounting ID and workspace:
+node ../launch-live.mjs --live --config ../agent/live-private/daily-config.json --continue
+```
+
+On this workstation the ignored `agent/live-private/start-daily.mjs` wrapper reads
+the existing local 9router credential in memory, selects the checkout's `workspace/`
+and runs these commands without copying credentials or changing global profiles:
+
+```powershell
+node agent/live-private/start-daily.mjs
+node agent/live-private/start-daily.mjs --continue
+```
+
+The user-approved daily configuration is 9router / `cx/gpt-6-astra`, low effort,
+with web tools enabled and Brain disabled. Configuration and the wrapper stay
+untracked. This authorization does not authorize new evaluation campaigns.
+
+The sections below describe shared mechanics and the optional bounded mode.
+
 Optional parent-owned web tools are installed from selected oh-my-pi components:
 see [WEB-TOOLS.md](WEB-TOOLS.md). They use the same live launcher, are deferred
 through codemode and do not call a search model. Brain remains disabled. Public
@@ -39,7 +91,8 @@ sole vault contract stays `D:/.vault-brain/vault`.
 
 Bootstrap the pinned runtime as described in HANDOFF.md first. Store the live
 configuration under the ignored `agent/live-private/` directory. Copy
-`config/live.example.json` there and fill it locally. The example is deliberately
+`config/live-daily.example.json` there for provider-limited daily use, or
+`config/live.example.json` for bounded use. The bounded example is deliberately
 unusable: `authorized:false` and zero limits are not an allowance.
 
 Required configuration:
@@ -50,11 +103,11 @@ Required configuration:
 - `models`: an explicit local allowlist; `model`: an exact member of that list.
   `responseModels`: exact accepted response IDs, including any documented gateway
   alias. Unknown response IDs stop the allowance. No automatic model fallback.
-- `thinkingLevel`, `contextWindow`, and a positive per-request output limit.
-  Model and effort are pinned for this allowance, including children and summaries.
+- `thinkingLevel`, `contextWindow`, and a positive per-request generation limit
+  (daily default 4000). Model and effort are pinned, including children/summaries.
 - `credentialEnv`: the name of an environment variable containing the credential.
   Set it locally before launching; do not paste the value into a prompt or config.
-- `budget`: a **new** `allowanceId`, `authorized:true`, and positive
+- For bounded mode only, `budget`: a **new** `allowanceId`, `authorized:true`, and positive
   `maxRequests`, `maxInputTokens`, `maxOutputTokens`, `maxDurationMs`, and
   `perRequestMaxOutputTokens`. Historical pilot budgets do not grant new usage.
 
@@ -116,7 +169,7 @@ an untrusted gateway honors output caps or reports billing correctly. Money caps
 are rejected until pricing enforcement exists. Automatic retries and cache warming
 are disabled; any physical retry through the transport still consumes a request.
 
-Elapsed allowance time starts at the first request and includes idle time and
+In bounded mode, elapsed allowance time starts at the first request and includes idle time and
 downtime. Closing and reopening does not reset its deadline. Closing an unused
 `--check` does not start that clock. A stopped allowance stays stopped; obtain new
 authorization before creating another allowance. Never delete or edit accounting
@@ -154,3 +207,5 @@ It requires a locally installed Windows-compatible node-pty module, starts its o
 loopback SSE server and supplies only a synthetic credential. It does not contact
 9router or consume an actual provider allowance. It is separate from full offline
 acceptance because that suite prohibits even incidental network connections.
+
+I29 verification passed: 215/215 full offline acceptance, 23/23 focused daily tests, and native synthetic ConPTY verification. No paid inference ran. See `artifacts/checkpoint/daily-live-verification.json`.

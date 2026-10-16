@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "mode": "interactive-live",
+  "provider": "9router",
+  "api": "openai-completions",
+  "baseUrl": "http://localhost:20128/v1",
+  "models": ["cx/gpt-6-astra"],
+  "model": "cx/gpt-6-astra",
+  "responseModels": ["cx/gpt-6-astra", "gpt-6-astra"],
+  "thinkingLevel": "low",
+  "contextWindow": 32768,
+  "credentialEnv": "PI_LIVE_API_KEY",
+  "accounting": {"mode": "provider", "id": "astra-daily"}
+}

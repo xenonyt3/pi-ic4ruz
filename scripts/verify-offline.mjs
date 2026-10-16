@@ -13,7 +13,7 @@ const suites = {
   context:['context-store','store-runtime','compaction','context-recovery','brain-telemetry','brain-reconnect','provider-transport'],
   delegation:['delegation','delegation-process','delegation-recovery'],
   provider:['provider-transport'],
-  live:['live-budget-transport','live-evaluation','brokered-child','pilot-verifier','live-interactive'],
+  live:['live-budget-transport','live-evaluation','brokered-child','pilot-verifier','live-interactive','live-daily'],
   ui:['reason-ui','transcript-hook','assistant-hook','thinking-hook','startup-working','transcript-layout'],
   behavior:['behavior-verifier','behavior-evaluation','codex-evaluation'],
   web:['web-tools'],
