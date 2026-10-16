@@ -3,6 +3,7 @@ import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import { LiveBudgetTransport } from './live-budget-transport.mjs';
 import { root, canonicalPath, isWithin, resolvePrototypePaths } from './paths.mjs';
+import {createWebServices} from './web-services.mjs';
 
 export async function createLiveRuntime({config,budget,key,workspace,endpoint,options={},fetchImpl=globalThis.fetch,directory}) {
   const condition=options.evaluationCondition??'prototype';
@@ -92,11 +93,15 @@ export async function createLiveRuntime({config,budget,key,workspace,endpoint,op
       if(condition==='stock-core')for(const name of ['codemode','delegation','context'])harnessConfig.features[name]=false;
       if(options.singleAgentEvaluation)harnessConfig.features.delegation=false;
       if(options.headlessEvaluation||condition==='stock-core')harnessConfig.ui.reasonTerminal=false;
+      if(options.headlessEvaluation||condition==='stock-core')harnessConfig.features.web=false;
+      const webServices=harnessConfig.features.web===true
+        ? (options.webServices??createWebServices({fetchImpl,lookup:fetchImpl.lookup,workspace,directory:path.join(directory,'web',sessionManager.getSessionId()),blockedOrigins:[config.baseUrl],secrets:[key]}))
+        : undefined;
       const settingsManager=sdk.SettingsManager.inMemory({packages:[],defaultTools:condition==='stock-core'?['read','bash','edit','write']:['read','bash','edit','write','codemode'],hideThinkingBlock:true,cacheWarming:'off',retry:{enabled:false,maxRetries:0,provider:{maxRetries:0}},
         compaction:{enabled:true,reserveTokens:Math.min(16384,Math.floor(config.contextWindow/4)),keepRecentTokens:Math.min(20000,Math.floor(config.contextWindow/4))},enableAnalytics:false,enableInstallTelemetry:false});
       const services=await sdk.createAgentSessionServices({cwd:workspace,agentDir,settingsManager,modelRuntime:runtime,resourceLoaderOptions:{
         noExtensions:true,noSkills:true,noPromptTemplates:true,noThemes:true,noContextFiles:true,systemPromptOverride:()=>'',appendSystemPromptOverride:()=>[],extensionFactories:[pi=>{
-          harness=registerHarness(pi,{cwd:workspace,config:harnessConfig,liveEvaluation:gate,childProfiles:profiles,childTransport,leaseRoot,
+          harness=registerHarness(pi,{cwd:workspace,config:harnessConfig,liveEvaluation:gate,childProfiles:profiles,childTransport,leaseRoot,webServices,
             sessionRoot:sessions,registryDir:path.join(directory,'receipts',sessionManager.getSessionId()),telemetryDir:path.join(directory,'telemetry')});
           const sessionHarness=harness;
           const shell=createOwnedShellOperations({workspace,owner:`parent-${process.pid}`,leaseRoot,shell:'bash',getExistingLease:sessionHarness.policy.getExistingLease});
@@ -140,10 +145,13 @@ export async function createLiveRuntime({config,budget,key,workspace,endpoint,op
       created.session.abort=()=>aborting??=(async()=>{
         created.session.abortBash();
         await abort();
+        let webCleanupFailed=false;
+        try{await ownedHarness.web?.abort();}catch{webCleanupFailed=true;gate.stop('cleanup_unconfirmed');}
         // SDK dispose aborts user-shell jobs but does not await their process cleanup.
         await Promise.allSettled([...userShellCalls]);
         const children=ownedHarness.getSupervisor()?.list()??[];
         await Promise.all(children.filter(c=>!c.cleanupConfirmed).map(c=>ownedHarness.getSupervisor().cancel(c.id)));
+        if(webCleanupFailed)throw new Error('LIVE_WEB_CLEANUP_UNCONFIRMED');
       })().finally(()=>{aborting=undefined;});
       return {...created,services,diagnostics:[]};
     };

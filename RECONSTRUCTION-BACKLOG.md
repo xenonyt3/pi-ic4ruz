@@ -1,5 +1,28 @@
 # Bahan backlog rekonstruksi perilaku Reason di Pi Windows
 
+## I28 - Tool web oh-my-pi, Brain off (17 Oktober 2026 WIB)
+
+- Implemented: `web_search`, `web_extract`, `browser`, deferred/codemode discovery,
+  exact local web dependencies and MIT/Apache source provenance from OMP 18.10.1.
+  Browser uses a fresh profile/CDP pipes, existing process cleanup and writer lease.
+- Tested: **210/210 full offline acceptance PASS**, 23/23 focused web/live tests,
+  15 native browser checks. Original 5599-file baseline plus fd source, both
+  runtimes/source/vault unchanged; zero unexpected tracked network attempts.
+  Receipt: `artifacts/checkpoint/omp-web-verification.json`.
+- Runtime-verified: native Windows browser open/snapshot/ref-click/fill/select,
+  console capture, mobile viewport, PNG, rendered extract, tab lifecycle, cancel
+  and shutdown. Public HTTP extraction succeeded. First CDP-pipe cleanup race
+  retained and fixed; no model inference used.
+- Runtime-verified search: OMP's keyless Exa public MCP returned three results
+  through the actual adapter. Exa is now the explicit default. Earlier DDG TLS
+  and Google HTTP 429 failures are retained; no TLS bypass or copied auth.
+- The intermediate Google-config full suite was interrupted when the user
+  requested matching OMP's provider. A fresh full run verifies the final Exa code.
+- Brain disabled; daily live allowance still unauthorized; full Reason parity,
+  model vision, hostile-page confinement and browser-session resume not claimed.
+- Usage/rollback: `docs/WEB-TOOLS.md`. I27 diagnostics and I25 larger behavior
+  evaluation remain open; historical campaign budgets are not reused.
+
 Tanggal audit: 14 Oktober 2026. **Plan disetujui; implementasi bertahap dimulai 15 Oktober 2026 WIB.** Referensi utama [PI-IMPLEMENTATION-PLAN.md](PI-IMPLEMENTATION-PLAN.md), [TRAJECTORY-AUDIT.md](D:/reason-investigation-20261014/TRAJECTORY-AUDIT.md).
 
 Dokumen kerja aktif berada di `D:/pi-ic4ruz`; evidence audit tetap di `D:/reason-investigation-20261014`. UI: **ikuti CLI/terminal Reason** (D13). Persetujuan desain sudah eksplisit; tidak memerlukan persetujuan ulang untuk detail rutin. Pengguna telah mengotorisasi pilot live Astra/9router dengan budget terbatas; hasilnya dilacak pada bagian terbaru berikut.

@@ -8,7 +8,7 @@ import dgram from 'node:dgram';
 import dns from 'node:dns';
 import { syncBuiltinESMExports } from 'node:module';
 
-// Only the budget transport receives this capability. Child workers retain the
+// Only the budget transport and bounded web service receive these capabilities. Child workers retain the
 // stricter offline guard. This is a trusted-process boundary, not an OS sandbox.
 export function installLiveNetworkGuard() {
   const permit=new AsyncLocalStorage(),fetchImpl=globalThis.fetch.bind(globalThis);
@@ -20,6 +20,7 @@ export function installLiveNetworkGuard() {
   for(const object of [dns,dns.promises])for(const key of Object.keys(object))if(/^(lookup|resolve|reverse)/.test(key)&&typeof object[key]==='function')wrap(object,key);
   syncBuiltinESMExports();
   const guardedFetch=(url,init)=>permit.run(true,()=>fetchImpl(url,init));
+  guardedFetch.lookup=(host,options)=>permit.run(true,()=>dns.promises.lookup(host,options));
   // Native Codex needs one inbound loopback broker. This capability cannot bind
   // a public interface or enable outbound traffic for model tool processes.
   guardedFetch.listenLoopback=server=>permit.run(true,()=>server.listen(0,'127.0.0.1'));

@@ -4,7 +4,7 @@ import { canonicalPath, isWithin, protectedRoots } from './paths.mjs';
 
 export const CORE_TOOLS = ['read', 'bash', 'edit', 'write', 'codemode'];
 const fileTools = new Set(['read', 'edit', 'write', 'grep', 'find', 'ls']);
-const writers = new Set(['edit', 'write', 'bash', 'powershell']);
+const writers = new Set(['edit', 'write', 'bash', 'powershell', 'browser']);
 
 export function assertNoIdentifierCollisions(tools) {
   const seen = new Map();

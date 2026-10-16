@@ -1,0 +1,12 @@
+{
+  "name": "pi-omp-web-tools",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "puppeteer-core": "25.3.0",
+    "linkedom": "0.18.13",
+    "@mozilla/readability": "0.6.0",
+    "turndown": "7.2.4",
+    "turndown-plugin-gfm": "1.0.2"
+  }
+}

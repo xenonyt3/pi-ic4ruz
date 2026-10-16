@@ -1,5 +1,12 @@
 # Public snapshot boundaries
 
+I28 publishes selected MIT oh-my-pi 18.10.1 components, source hashes, Node
+adaptations and dependency lockfile. The generated ARIA snapshot bundle includes
+Playwright Apache-2.0 code; both licenses are retained under `vendor/oh-my-pi/`.
+Installed web dependencies are ignored. Actual browser profiles, screenshots,
+public-page captures, private launchers and provider configs remain unpublished
+under ignored live state/evaluation directories. No OMP authentication is copied.
+
 This repository is a development handoff of an isolated Windows prototype.
 It includes implementation, tests, patch source, lockfiles, planning/design/status
 documents and selected synthetic verification artifacts. It is not a dump of the

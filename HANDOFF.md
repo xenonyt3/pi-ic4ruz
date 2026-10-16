@@ -1,5 +1,22 @@
 # Continue on another device
 
+I28 adds parent-owned `web_search`, `web_extract` and `browser`, adapted from
+hash-pinned oh-my-pi 18.10.1 components. Brain is disabled in the prototype
+configuration. Read [docs/WEB-TOOLS.md](docs/WEB-TOOLS.md) for local dependency
+installation, usage, availability and rollback. Default search is OMP's keyless
+Exa public MCP path; an actual tool call returned three results. Google/DDG
+probes were blocked and are retained separately. Native browser and extraction
+checks are separate from offline acceptance. Model transport and
+allowance rules are unchanged; no new inference was authorized or run.
+
+I28 final verification: **210/210 full offline acceptance PASS**, no skips or
+cancellations, original baseline 5599 files plus fd source unchanged, both
+runtimes/source/vault unchanged, zero unexpected tracked network attempts.
+Focused web/live fixtures pass 23/23; native Chromium passes 15 checks; Exa
+public search returns three results and public extraction passes. Receipt:
+`artifacts/checkpoint/omp-web-verification.json`. This does not verify live model
+vision, daily reliability or full Reason parity. Daily allowance stays disabled.
+
 I27 cost audit (no new inference) matched all 73 v2 requests to local router
 history. Pi's client count contains +2000 input padding per request: upstream
 input is **112300**, with **69248 cached**; all 11 missing cache fields are zero.

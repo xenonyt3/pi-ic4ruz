@@ -1,5 +1,12 @@
 # Rollback prototype
 
+I28 web tools: exit after browser/child cleanup, set `features.web:false` in
+`config/harness.json`, then restart. `config/web-tools.json.enabled:false` instead
+retains discovery but denies execution. Return to `launch.mjs` for offline mode.
+Keep private browser cleanup receipts, allowance ledgers and unconfirmed writer
+leases. No OMP/Codex configuration, global launcher or personal browser profile
+was changed. Brain stays disabled. Details: [WEB-TOOLS.md](WEB-TOOLS.md).
+
 I26 Codex comparison is selected only by `--comparison codex`. Stop with Ctrl+C
 and wait for the Windows job/tree cleanup receipt. Preserve the private campaign,
 ledger and any unconfirmed writer lease; never reset an allowance to repeat cells.

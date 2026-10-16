@@ -1,5 +1,11 @@
 # Explicit interactive live mode
 
+Optional parent-owned web tools are installed from selected oh-my-pi components:
+see [WEB-TOOLS.md](WEB-TOOLS.md). They use the same live launcher, are deferred
+through codemode and do not call a search model. Brain remains disabled. Public
+search provider availability is separate from model connectivity and native
+browser verification.
+
 `node launch.mjs` and `npm start` remain offline. `config/harness.json` must
 retain `liveInference:false`; changing it is not the live opt-in mechanism.
 The separate `launch-live.mjs --live --config PATH` uses the same Pi SDK,

@@ -24,6 +24,33 @@ async function open(fixture,fetchImpl,options={}) {
   return live;
 }
 
+test('live web tool results use the existing model ledger and abort/shutdown await web cleanup',async()=>{
+  const f=setup();let live,calls=0,webCalls=0,aborts=0,closes=0;
+  const webServices={run:async(name)=>{webCalls++;assert.equal(name,'web_search');return {text:'synthetic public web result',details:{provider:'fixture'}};},abort:async()=>{aborts++;},close:async()=>{closes++;}};
+  try {
+    live=await open(f,async(url,init)=>{
+      assert.equal(url,f.endpoint);assert.equal(new Headers(init.headers).get('Authorization'),`Bearer ${key}`);
+      calls++;return calls===1?sse({tool:{name:'codemode',args:{code:'text(await tools.web_search({query:"synthetic docs"}));'}}}):sse();
+    },{webServices});
+    await live.host.session.prompt('Synthetic web tool fixture');
+    assert.equal(webCalls,1);assert.equal(calls,2);assert.equal(live.gate.state.requests.length,2);
+    await live.host.session.abort();assert.ok(aborts>0);
+    await live.close();live=undefined;assert.ok(closes>0);
+  }finally{await live?.close();f.dispose();}
+});
+
+test('unconfirmed browser cleanup still drains owned children and stops the allowance',async()=>{
+  const f=setup();let live,cancelled=0;
+  const webServices={run:async()=>({text:'fixture',details:{}}),abort:async()=>{throw new Error('WEB_BROWSER_CLEANUP_UNCONFIRMED');},close:async()=>{}};
+  try {
+    live=await open(f,async()=>sse(),{webServices});
+    const supervisor=live.getHarness().getSupervisor(),list=supervisor.list,cancel=supervisor.cancel;
+    supervisor.list=()=>[{id:'synthetic-child',cleanupConfirmed:false}];supervisor.cancel=async()=>{cancelled++;};
+    try{await assert.rejects(live.host.session.abort(),/LIVE_WEB_CLEANUP_UNCONFIRMED/);assert.equal(cancelled,1);assert.equal(live.gate.state.stopReason,'cleanup_unconfirmed');}
+    finally{supervisor.list=list;supervisor.cancel=cancel;webServices.abort=async()=>{};}
+  }finally{await live?.close();f.dispose();}
+});
+
 test('live opt-in, incomplete config, model, credential, endpoint and fresh allowance fail before request',()=>{
   for(const args of [[],['--live'],['--config','x'],['--live','--config','x','prompt'],['--live','--config','x','--api-key','secret']])assert.throws(()=>parseLiveArgs(args),/LIVE_/);
   assert.equal(parseLiveArgs(['--live','--config','local','--check']).check,true);

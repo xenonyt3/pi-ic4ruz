@@ -7,6 +7,6 @@
   "maxActiveChildren": 3,
   "brainVault": "D:/.vault-brain/vault",
   "codemode": { "defaultDeadlineMs": 300000, "maxDeadlineMs": 900000, "models": false },
-  "features": { "codemode": true, "delegation": true, "brain": true, "context": true, "telemetry": true },
+  "features": { "codemode": true, "delegation": true, "brain": false, "context": true, "telemetry": true, "web": true },
   "ui": { "reasonTerminal": true }
 }

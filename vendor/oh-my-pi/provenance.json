@@ -1,0 +1,84 @@
+{
+  "package": "@oh-my-pi/pi-coding-agent",
+  "version": "18.10.1",
+  "repository": "https://github.com/can1357/oh-my-pi",
+  "npmIntegrity": "sha512-xvHDKLcAsGvDwLQG6PHZEYiELQPKJ4NiSc/yeurja8IZkC7yALjR+2pbEiCT4cSdyIfEmHFDhDUze8hSxYpiZA==",
+  "defaultWebRolePriority": [
+    "web/parallel",
+    "web/hosted",
+    "web/exa",
+    "web/firecrawl",
+    "web/searxng",
+    "web/startpage",
+    "web/duckduckgo",
+    "web/ecosia",
+    "web/google",
+    "web/mojeek",
+    "web/public"
+  ],
+  "sources": [
+    {
+      "path": "LICENSE",
+      "sha256": "16c45f9d667442781f03fa198914cc39abcaa48ec5ed8f644643e554ca2fbf63"
+    },
+    {
+      "path": "src/priority.json",
+      "sha256": "81a760950478f3ee975e957c2acf5c1916e92e5b8adad61bdc0ff3fcffef020b"
+    },
+    {
+      "path": "src/tools/browser/readable.ts",
+      "sha256": "02842eb5e596dad9ce6c7fe0130a451c97ea17d5565c5bbed5270f0bc9d60539"
+    },
+    {
+      "path": "src/utils/turndown.ts",
+      "sha256": "815cd2cfba804403328b5bab2d3e8cba012b3e3bdce72513d2b5db1aa1321f41"
+    },
+    {
+      "path": "src/tools/browser/console-capture.ts",
+      "sha256": "ccce3c32677e95d6a5ff238c8ed9e7b04f78b06e51dbd02e534508f94c31fe0a"
+    },
+    {
+      "path": "src/tools/browser/snapshot-plus.ts",
+      "sha256": "e841b7cc04c5a63063468420e56ef9a810c4b08334830c8a6b2d2ae40c25c99d"
+    },
+    {
+      "path": "src/tools/browser/aria/aria-snapshot.ts",
+      "sha256": "e15e1a7accfda79834f030d6d142a77f0d7868625edd7f58ec39d8a1cce56fdf"
+    },
+    {
+      "path": "src/web/search/providers/duckduckgo.ts",
+      "sha256": "e6098317de42a5821baf36bb1c54e58ea29241f5e36c1bc22369201a0ef0823b"
+    },
+    {
+      "path": "src/web/search/providers/google.ts",
+      "sha256": "5240d3973d021df2344c262f45acf62d9764cd5998936343b6cc8a955e30248f"
+    },
+    {
+      "path": "src/web/search/providers/utils.ts",
+      "sha256": "71073c9fab102f85041ef4cb25fee3395811461f6b9c29049646465296cd1a09"
+    },
+    {
+      "path": "src/web/search/providers/exa.ts",
+      "sha256": "ef339b3886b2d4dc5d01e65e23622b59ac25aa1347295983bcd8489f3e908cf9"
+    },
+    {
+      "path": "src/mcp/json-rpc.ts",
+      "sha256": "91f9cebf2604d4d31c92a7ba71a27e8408125fcf5b1dcda276df1d8abfb1915f"
+    },
+    {
+      "path": "src/web/scrapers/types.ts",
+      "sha256": "9693451f6029beb5bc28479608c2e1dc8469909551c7bdd9bc1ff127c1049c35"
+    },
+    {
+      "path": "src/tools/browser/aria/aria-snapshot.bundle.txt",
+      "sha256": "45f341e60e1e683d3056d2a0b6fbda63cae39b13949787f3eec1394144d49ac1"
+    }
+  ],
+  "changes": [
+    "TypeScript types removed with Node; Node-compatible dependency imports",
+    "DDG/Google parsing and keyless Exa MCP helpers selected; no auth or hosted-model imports",
+    "Strict JSON-RPC decoder selected for bounded terminal-aware MCP response handling",
+    "Readability/Turndown use separately installed upstream libraries",
+    "ARIA bundle retained byte content; fs loader replaces Bun text import"
+  ]
+}

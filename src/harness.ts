@@ -13,6 +13,7 @@ import { loadChildProfiles } from './child-profiles.ts';
 import { createChildSupervisor } from './child-supervisor.ts';
 import { registerDelegation } from './delegation.ts';
 import { registerReasonUI } from './reason-ui.mjs';
+import { registerWebTools, WEB_TOOLS } from './web-tools.ts';
 
 export function registerHarness(pi, options = {}) {
   const cwd = options.cwd ?? process.cwd();
@@ -23,9 +24,10 @@ export function registerHarness(pi, options = {}) {
   const enabled = name => config.features?.[name] !== false;
   const turnsAllowed=options.allowSyntheticTurns===true||options.liveEvaluation?.allowsModelTurns?.()===true;
   const leaseRoot = options.leaseRoot ?? path.join(root,'agent/writer-leases');
-  const grants = [...CORE_TOOLS,'grep','find','ls','powershell','agents_spawn','agents_wait','sessions_send','sessions_cancel',
+  const grants = [...CORE_TOOLS,'grep','find','ls','powershell','agents_spawn','agents_wait','sessions_send','sessions_cancel',...(enabled('web')?WEB_TOOLS:[]),
     ...['brain_context','brain_search','brain_feedback','brain_note','brain_apply_evidence'].map(name=>`mcp__open_second_brain__${name}`)];
   const policy = registerToolPolicy(pi,{workspace:cwd,allowedTools:grants,owner,leaseRoot});
+  const web = enabled('web')?registerWebTools(pi,{services:options.webServices,getExistingLease:policy.getExistingLease}):undefined;
   if(enabled('codemode'))registerCodemode(pi,config.codemode);
   registerDeferredFileTools(pi,cwd);
   registerWindowsTools(pi,{cwd,owner,leaseRoot,getExistingLease:policy.getExistingLease});
@@ -94,10 +96,10 @@ export function registerHarness(pi, options = {}) {
   pi.on('session_before_fork',async()=>({cancel:!await drain()}));
   pi.on('session_before_tree',async()=>({cancel:!await drain()}));
   pi.on('session_tree',(_event,ctx)=>startSupervisor(ctx,true));
-  pi.on('session_shutdown',async()=>{await drain();});
+  pi.on('session_shutdown',async()=>{await drain();await web?.close();});
   if(!turnsAllowed){
     pi.on('input',(_event,ctx)=>{ctx.ui.notify('LIVE_BUDGET_NOT_CONFIGURED: offline verification only','warning');return{action:'handled'};});
     pi.on('session_before_compact',()=>({cancel:true}));
   }
-  return {policy,telemetry,getSupervisor:()=>supervisor,getRecall:()=>recall};
+  return {policy,telemetry,web,getSupervisor:()=>supervisor,getRecall:()=>recall};
 }

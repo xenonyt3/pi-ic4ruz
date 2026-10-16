@@ -16,6 +16,7 @@ const suites = {
   live:['live-budget-transport','live-evaluation','brokered-child','pilot-verifier','live-interactive'],
   ui:['reason-ui','transcript-hook','assistant-hook','thinking-hook','startup-working','transcript-layout'],
   behavior:['behavior-verifier','behavior-evaluation','codex-evaluation'],
+  web:['web-tools'],
 };
 suites.all=[...new Set(Object.values(suites).flat())];
 function verifyRuntimes(){
@@ -29,6 +30,8 @@ function sourceSnapshot(files){
   const add=file=>{hashes[path.relative(root,file)]=sha256(fs.readFileSync(file));};
   const walk=dir=>{for(const entry of fs.readdirSync(dir,{withFileTypes:true})){const file=path.join(dir,entry.name);if(entry.isDirectory())walk(file);else if(entry.isFile())add(file);}};
   for(const dir of ['src','extensions','prompts','config','scripts','tests/helpers','tests/fixtures/behavior'])walk(path.join(root,dir));
+  walk(path.join(root,'vendor/oh-my-pi'));
+  for(const file of ['tools/web/package.json','tools/web/package-lock.json','tools/web/dom.mjs','tools/web/browser.mjs'])add(path.join(root,file));
   for(const file of ['tools/typecheck/package.json','tools/typecheck/package-lock.json','tools/typecheck/node_modules/typescript/lib/typescript.js'])add(path.join(root,file));
   const oracle=path.join(root,'artifacts/ui-reference/20261015/source-oracle.json');
   if(fs.existsSync(oracle))add(oracle);

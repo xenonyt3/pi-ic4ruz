@@ -1,0 +1,108 @@
+{
+  "milestone": "I28 oh-my-pi web tools",
+  "date": "2026-10-17 Asia/Jakarta",
+  "baseCommit": "a3d7601207f84d35833f31a0f9f00925a27af3c2",
+  "upstream": {
+    "package": "@oh-my-pi/pi-coding-agent",
+    "version": "18.10.1",
+    "provenance": "vendor/oh-my-pi/provenance.json",
+    "provenanceSha256": "afb02e240552e2127b0bd0dc111c123adb49852c9bdd07a9c13cbf9b8bf27b29"
+  },
+  "implemented": [
+    "web_search: Exa public MCP default; optional Google/DDG",
+    "web_extract: OMP Readability/Turndown",
+    "browser: isolated Chromium/CDP pipes; OMP ARIA refs/console",
+    "parent-owned deferred tools; writer lease; cancel/shutdown cleanup",
+    "Brain disabled; offline launcher unchanged"
+  ],
+  "offline": {
+    "report": "artifacts/verification/runs/2026-10-16T17-49-15.352Z/report.json",
+    "sha256": "daa9246edfcc66c31125d37383b457d90f73d914fef23b051460fb3e4ccbb577",
+    "passed": true,
+    "counts": {
+      "tests": 210,
+      "pass": 210,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    "baseline": {
+      "passed": true,
+      "checkedFiles": 5599,
+      "toolSourcesChecked": 1,
+      "changed": []
+    },
+    "vaultUnchanged": true,
+    "sourceUnchanged": true,
+    "runtimeUnchanged": true,
+    "unexpectedNetworkAttempts": 0,
+    "networkReceiptCount": 127,
+    "sourceFilesRechecked": 164
+  },
+  "focused": {
+    "tests": 23,
+    "pass": 23,
+    "fail": 0
+  },
+  "native": {
+    "passed": true,
+    "checks": [
+      "global-network-still-denied",
+      "guarded-http-extraction",
+      "native-open-omp-aria-snapshot",
+      "aria-ref-click-and-page-evaluate",
+      "fill-input-events",
+      "select-option",
+      "wait-for-render",
+      "omp-console-capture",
+      "mobile-viewport",
+      "workspace-png-screenshot",
+      "rendered-extraction",
+      "tab-lifecycle",
+      "screenshot-path-denied-and-cleaned",
+      "cancel-confirms-native-tree-exit",
+      "shutdown-confirms-native-tree-exit"
+    ],
+    "cleanupConfirmed": true,
+    "reportSha256": "f8c2b3902894f3f99e144c344e8279f8a102f92490f2d8278d615246ec17614d"
+  },
+  "publicWeb": {
+    "web_search": {
+      "passed": true,
+      "details": {
+        "provider": "exa",
+        "transport": "public-mcp",
+        "count": 3
+      }
+    },
+    "web_extract": {
+      "passed": true,
+      "details": {
+        "url": "https://example.com/",
+        "untrusted": true
+      }
+    }
+  },
+  "retainedHistory": [
+    "Initial native check caught CDP pipe-close ownership race; fixed and verified",
+    "DDG TLS validation failed; Google 429; Ecosia/Mojeek blocked",
+    "Intermediate Google configuration full run deliberately interrupted after user requested matching OMP; final full Exa run passed"
+  ],
+  "inferenceRequests": 0,
+  "searchCredentialSent": false,
+  "dailyAllowanceAuthorized": false,
+  "brainProductionEnabled": false,
+  "publication": {
+    "literalCredentialScanFiles": 294,
+    "literalCredentialHits": 0,
+    "profilesSessionsScreenshotsPublished": false
+  },
+  "limitations": [
+    "No paid/model-driven web smoke; no daily allowance activated",
+    "Public search availability/rate limits can change",
+    "Live model registration remains text-only; screenshot files do not establish vision",
+    "Parent-only web tools; no browser session restore",
+    "Trusted-tool controls are not an OS sandbox or complete hostile-page containment",
+    "Full Reason parity remains unknown"
+  ]
+}

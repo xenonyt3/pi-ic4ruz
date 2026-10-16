@@ -1,5 +1,12 @@
 # T5 - evaluasi tetap terpisah dari acceptance offline
 
+I28 adds fake web/provider and actual SDK fixtures to offline acceptance. The
+separate `scripts/verify-web-tools.mjs` runs a native isolated Chromium against
+a loopback fixture; `--public` also checks public search/extraction with no model
+inference. Reports distinguish native success and external provider failure.
+Existing headless behavior campaigns do not enable the new web tools. Historical
+benchmark results do not measure web capabilities. See [WEB-TOOLS.md](WEB-TOOLS.md).
+
 I26 introduces [Codex versus Pi through 9router](CODEX-PI-BENCHMARK.md), reusing
 the v2 corpus and accounting. Native Codex Responses and Pi Chat Completions are
 explicitly different transports; single-agent settings, prompts and quotas are
