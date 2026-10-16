@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "corpusVersion": "behavior-v1",
+  "tasks": [
+    "invoice",
+    "investigation",
+    "recovery"
+  ]
+}

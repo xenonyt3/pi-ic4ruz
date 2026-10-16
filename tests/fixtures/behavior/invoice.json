@@ -15,7 +15,7 @@
   },
   "referenceChanges": {
     "src/money.mjs": "export function toCents(value) {\n  if (typeof value !== 'string' || !/^\\d+(?:\\.\\d{1,2})?$/.test(value)) throw new TypeError('price');\n  const [whole, fraction = ''] = value.split('.');\n  const cents = Number(whole) * 100 + Number(fraction.padEnd(2, '0'));\n  if (!Number.isSafeInteger(cents) || cents > 999999) throw new TypeError('price');\n  return cents;\n}\n",
-    "src/invoice.mjs": "import { toCents } from './money.mjs';\nexport function invoiceTotal(lines) {\n  if (!Array.isArray(lines)) throw new TypeError('lines');\n  return lines.reduce((sum, line) => {\n    if (!line || typeof line !== 'object' || !Number.isInteger(line.quantity) || line.quantity < 1 || line.quantity > 1000) throw new TypeError('quantity');\n    return sum + toCents(line.price) * line.quantity;\n  }, 0);\n}\n"
+    "src/invoice.mjs": "import { toCents } from './money.mjs';\nexport function invoiceTotal(lines) {\n  if (!Array.isArray(lines)) throw new TypeError('lines');\n  let sum = 0;\n  for (const line of lines) {\n    if (!line || typeof line !== 'object' || !Number.isInteger(line.quantity) || line.quantity < 1 || line.quantity > 1000) throw new TypeError('quantity');\n    sum += toCents(line.price) * line.quantity;\n  }\n  return sum;\n}\n"
   },
   "checks": [
     [
@@ -49,6 +49,10 @@
     [
       "no mutation",
       "(()=>{const lines=Object.freeze([Object.freeze({price:'3.14',quantity:2})]);return M['src/invoice.mjs'].invoiceTotal(lines)===628;})()"
+    ],
+    [
+      "reject sparse invoices",
+      "(()=>{try{M['src/invoice.mjs'].invoiceTotal(Array(1));return false;}catch(e){return e instanceof TypeError;}})()"
     ]
   ],
   "schemaVersion": 1,

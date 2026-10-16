@@ -5,7 +5,7 @@
       "taskId": "invoice",
       "startingTreeFails": true,
       "referencePasses": true,
-      "assertions": 8,
+      "assertions": 9,
       "scopeProtected": true
     },
     {
@@ -25,8 +25,8 @@
   ],
   "plan": {
     "schemaVersion": 1,
-    "protocol": "behavior-v1",
-    "corpusHash": "15fed85a08450c4778ea6f2dfdc926460950401efa4738d6f9e5986e5e515084",
+    "protocol": "behavior-v2",
+    "corpusHash": "f12ae60acb3a92e6a34bb59a79036300670cf9c09c125094e4bb79b9db9166e7",
     "model": {
       "provider": "9router",
       "model": "cx/gpt-6-astra",
@@ -197,19 +197,19 @@
     "interpretation": "small exploratory paired comparison; no statistical superiority or parity percentage",
     "implementationHashes": {
       "scripts/evaluate-behavior.mjs": "e1a465f7b0581e8196b366b86dd339fd284b4a886699f2dff4b89173e8e9811c",
-      "src/behavior-corpus.mjs": "2ce2c65820d98e451af7d0d4474e82b7eb2dcdda24f7df6a3f1ae59424c71929",
+      "src/behavior-corpus.mjs": "69b7721f1a51f10ab1c994dc12fd18ad3f88eb8ed247cbd3d091a4bb860834e4",
       "src/behavior-verifier.mjs": "a546dfb0499cfc70e8bc36e6eb11a9d1e059423c7bf0f36bb593439c6d3c6bd4",
-      "src/behavior-plan.mjs": "a4e144a76c52d1c2ebdd8515e37127d67c91abe520c3e9771f28c6ef8951345c",
+      "src/behavior-plan.mjs": "577adf27a0e8b74aae5ae5830d5a2cc05df53eab702bfacd4bb7dc9e55c493d0",
       "src/behavior-evaluation.mjs": "df7e68607428443257ff371ce237753dc55576cefca4390c9bd62ea1c0e551d7",
       "src/live-interactive.mjs": "07fc9cc3dd618c3cd695a0caff31f7e6f82b3b28418954fe70f48b602de6acbe",
       "src/live-budget-transport.mjs": "fbde0e6fd0224faab4cae3f567e52220ccbcbd71a671313672363662557f8643",
       "src/child-supervisor.ts": "18418f08a6a360181a50d897f7c823583c605197a1bec231657c74999cc1edde",
       "src/harness.ts": "35fcc43f06df22dc1b6e85a8806bb9119d90822634f101033a8e3804cc9dda3f",
-      "prompts/harness.md": "885b8e3df93160c7afdaf0c151a86f559867bbaaabb031c7ef017c882818d8bb",
+      "prompts/harness.md": "89d915f057cff02733d2ca316188eef5f30182f5b51cc9209a305fc28cd007cd",
       "config/harness.json": "ec88c815bd2094cc4f85f5a815086307b2096ae54a7328ac40e7ccdb99fda13d",
       "config/child-profiles.json": "e1e1cf7d165b2be837e939fd68db548634d5b28f6b94e7b8693acd27a171147f"
     },
-    "protocolHash": "cc9103e000f23f6c8c750c9c8843d98c88f27234c24c2a1e72ad2252d5411d35",
+    "protocolHash": "947dd9f901fd60178d0790b15eab0126df5b1729d3265a563b9a5fa7cac4745f",
     "liveAuthorized": false
   },
   "modelRequests": 0,

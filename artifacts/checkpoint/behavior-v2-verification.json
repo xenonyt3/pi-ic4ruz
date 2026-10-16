@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "protocol": "behavior-v2",
+  "protocolHash": "947dd9f901fd60178d0790b15eab0126df5b1729d3265a563b9a5fa7cac4745f",
+  "basis": "Observed v1 trace and post-hoc offline diagnostics; v1 scores preserved",
+  "changes": [
+    "isolated Git fixture baselines",
+    "sparse invoice assertion and corrected reference",
+    "generic nested-command escape/exit-code guidance"
+  ],
+  "preparation": {
+    "command": "node scripts/evaluate-behavior.mjs --prepare",
+    "assertions": 17,
+    "passed": true,
+    "receipt": "artifacts/checkpoint/behavior-preparation.json"
+  },
+  "acceptance": {
+    "command": "node scripts/verify-offline.mjs --suite all",
+    "report": "artifacts/verification/runs/2026-10-16T13-06-58.236Z/report.json",
+    "counts": {
+      "tests": 189,
+      "pass": 189,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    "behaviorTests": 17,
+    "uiTests": 51,
+    "newQuotingRegression": true,
+    "baseline": {
+      "passed": true,
+      "checkedFiles": 5599,
+      "toolSourcesChecked": 1,
+      "changed": []
+    },
+    "sourceUnchanged": true,
+    "runtimeUnchanged": true,
+    "vaultUnchanged": true,
+    "unexpectedNetworkAttempts": 0,
+    "receiptsComplete": true
+  },
+  "retainedFailure": {
+    "report": "artifacts/verification/runs/2026-10-16T12-57-51.287Z/report.json",
+    "counts": "188/189",
+    "reason": "new quoting fixture cwd differed from its guarded workspace; test setup corrected without weakening policy"
+  },
+  "liveV1Receipt": "artifacts/checkpoint/behavior-live-v1.json",
+  "liveV2Run": false,
+  "additionalPaidRequestsAfterV1": 0,
+  "unknown": [
+    "effect of v2 guidance on real model decisions",
+    "Reason parity",
+    "autonomous delegation on larger tasks",
+    "long-context reliability",
+    "monetary pricing"
+  ]
+}

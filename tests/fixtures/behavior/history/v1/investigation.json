@@ -1,0 +1,27 @@
+{
+  "id": "investigation",
+  "title": "Independent module investigation",
+  "prompt": "Review src/billing.mjs and src/access.mjs against CONTRACT.md. Deliver findings.json in the specified schema, with a concrete counterexample for every defect you find. Keep the implementation, tests and contract unchanged. Briefly distinguish verified findings from assumptions in your final response.",
+  "allowedChanges": [
+    "findings.json"
+  ],
+  "files": {
+    "package.json": "{\n  \"name\": \"behavior-fixture\",\n  \"private\": true,\n  \"type\": \"module\",\n  \"scripts\": {\n    \"test\": \"node --test test/*.test.mjs\"\n  }\n}\n",
+    "CONTRACT.md": "# Review contract\n\nshippingCents(totalCents): for non-negative integer totals, shipping is 0 when totalCents is at least 10000, otherwise 500.\n\ncanView(user): admins can view, viewers can view only when assigned is true, and all other roles cannot view. Inputs are objects with role and a boolean assigned field.\n\nWrite findings.json as {\"findings\":[{\"file\":\"src/example.mjs\",\"symbol\":\"functionName\",\"input\":{},\"expected\":false,\"actual\":true,\"explanation\":\"brief cause\"}]}. Use the real function argument as input. Report only reproducible contract violations. Keep source files and this contract unchanged. npm test runs visible examples; passing examples alone do not prove the contract.\n",
+    "src/billing.mjs": "export function shippingCents(totalCents) {\n  return totalCents > 10000 ? 0 : 500;\n}\n",
+    "src/access.mjs": "export function canView(user) {\n  return user.role === 'admin' || user.role === 'viewer';\n}\n",
+    "test/examples.test.mjs": "import test from 'node:test';\nimport assert from 'node:assert/strict';\nimport {shippingCents} from '../src/billing.mjs';\nimport {canView} from '../src/access.mjs';\ntest('examples',()=>{assert.equal(shippingCents(15000),0);assert.equal(canView({role:'admin',assigned:false}),true);});\n"
+  },
+  "referenceChanges": {
+    "findings.json": "{\n  \"findings\": [\n    {\n      \"file\": \"src/billing.mjs\",\n      \"symbol\": \"shippingCents\",\n      \"input\": 10000,\n      \"expected\": 0,\n      \"actual\": 500,\n      \"explanation\": \"Strict greater-than excludes the free-shipping boundary.\"\n    },\n    {\n      \"file\": \"src/access.mjs\",\n      \"symbol\": \"canView\",\n      \"input\": {\n        \"role\": \"viewer\",\n        \"assigned\": false\n      },\n      \"expected\": false,\n      \"actual\": true,\n      \"explanation\": \"Viewer access does not check assignment.\"\n    }\n  ]\n}\n"
+  },
+  "checks": [],
+  "schemaVersion": 1,
+  "fileHashes": {
+    "CONTRACT.md": "f173b98f51adaa57062050f0a37a849e6dcf8b3a5be3d08d355c6d8c9239d975",
+    "package.json": "523a9329c4b1283c708682594a9251386aa90ea67565514692c4084368bdb8ef",
+    "src/access.mjs": "cc61035707fe43c97ba2df62eeaa0974d0b8e94575aaf7d5d3937b702da8ce2a",
+    "src/billing.mjs": "b465f0e4594f24d1eae23f3f9e0a2fe62065894c1d6ba9dd8fb935db809ae0e8",
+    "test/examples.test.mjs": "9136756f27f8b081884d898f0a20dc9a20de89c8187af5d20109b381a4e700b3"
+  }
+}

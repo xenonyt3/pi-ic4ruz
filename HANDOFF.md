@@ -1,12 +1,21 @@
 # Continue on another device
 
-I24 offline preparation adds three synthetic behavior tasks and a goal-only paired
+I24 adds three synthetic behavior tasks and a goal-only paired
 stock-core/prototype protocol. Read [docs/BEHAVIOR-EVALUATION.md](docs/BEHAVIOR-EVALUATION.md).
 Use `node scripts/evaluate-behavior.mjs --dry-run` or `--prepare` without inference.
-The proposed 12-cell live campaign needs a new explicit allowance; the I23 smoke
-authorization does not cover it. Human strategy/recovery/honesty review stays
-unscored until real traces exist; synthetic calibration is not model performance.
-Current I24 acceptance is **186/186 PASS**, including 15 behavior tests and 51 UI
+The separately authorized v1 live campaign completed: **12/12 task passes**, 83
+requests, 368647 input tokens and 15453 output tokens. See
+[docs/BEHAVIOR-RESULTS-V1.md](docs/BEHAVIOR-RESULTS-V1.md) for the Codex trace review,
+method limitations and source checkpoint. It is not independent human review or
+Reason parity. No child was selected and no compaction was triggered.
+V2 applies offline fixes for command escaping, Git fixture isolation and sparse
+invoice coverage. No v2 live run is authorized by the used v1 budget.
+Current v2 acceptance is **189/189 PASS**, with 17 behavior tests, 51 UI tests and
+the nested-command quoting regression. Preparation passes 17 assertions. Source,
+both runtimes, protected baseline and vault remain unchanged during the run;
+unexpected network attempts are zero. Receipt:
+`artifacts/checkpoint/behavior-v2-verification.json`.
+The pre-campaign I24 acceptance was **186/186 PASS**, including 15 behavior tests and 51 UI
 tests, with source/both runtimes/baseline/vault unchanged and zero unexpected network
 attempts. Preparation passes all three negative/reference controls (16 assertions).
 Receipt: `artifacts/checkpoint/behavior-verification.json`. The 171/171 I23 result

@@ -1,6 +1,7 @@
 Use available upstream Pi tools and their actual schemas.
 Batch independent calls with Promise.allSettled when useful; keep dependent calls sequential.
 Filter tool output to what is needed and preserve errors and provenance.
+When building shell or heredoc commands inside JavaScript, preserve intended escapes with String.raw or explicit code points; ordinary template literals interpret sequences such as \n before the shell receives them. Check each nested shell result's exit_code, correct failed checks, and report any failed invocation honestly before claiming verification passed.
 Use only namespaces and tools present in the callable registry; do not invent vendor services.
 Discovery helpers searchTools, describeTool, and describeNamespace are asynchronous: await their results before inspecting or printing them. For example, text(await searchTools('agents_spawn', {limit: 5})). A printed Promise ({}) does not mean a tool is unavailable.
 Respect one writer per canonical workspace and the maximum of three active children.

@@ -3,7 +3,10 @@
 **Autonomous behavior evaluation:** [I24 protocol](docs/BEHAVIOR-EVALUATION.md)
 provides three frozen tasks, trusted verifiers, goal-only prompts and a controlled
 stock-core/prototype comparison. Preparation is offline; live evaluation requires
-a new allowance. It does not claim Reason parity.
+a new allowance. The completed v1 comparison passed 12/12 tasks; prototype used
+fewer requests but more input/output tokens in this sample. See
+[results and follow-up fixes](docs/BEHAVIOR-RESULTS-V1.md). V2 fixes pass 189/189
+offline tests; their live model-behavior effect and Reason parity remain unknown.
 
 **Continuing on another device:** start with [HANDOFF.md](HANDOFF.md) for Windows bootstrap and current limits. Public exclusions are described in [PUBLICATION.md](PUBLICATION.md). The historical 159/159 result is original-workstation evidence; current I23 verification is recorded separately. Private baselines and proprietary Reason source are not distributed.
 

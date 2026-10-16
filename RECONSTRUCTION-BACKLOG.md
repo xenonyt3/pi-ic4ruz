@@ -4,9 +4,44 @@ Tanggal audit: 14 Oktober 2026. **Plan disetujui; implementasi bertahap dimulai 
 
 Dokumen kerja aktif berada di `D:/pi-ic4ruz`; evidence audit tetap di `D:/reason-investigation-20261014`. UI: **ikuti CLI/terminal Reason** (D13). Persetujuan desain sudah eksplisit; tidak memerlukan persetujuan ulang untuk detail rutin. Pengguna telah mengotorisasi pilot live Astra/9router dengan budget terbatas; hasilnya dilacak pada bagian terbaru berikut.
 
-## Urutan berikutnya: I24 evaluasi behaviour mandiri - 16 Oktober 2026 WIB
+## Status terbaru: I24 live v1 selesai; perbaikan v2 offline - 16 Oktober 2026 WIB
 
-Status: **LANGKAH 1-3 SELESAI OFFLINE; LANGKAH 4 MENUNGGU ALLOWANCE BARU**.
+- Langkah 4 selesai sesuai allowance baru: 12 run sekali jalan, **12/12 PASS**
+  pada verifier v1. Pemakaian **83/144 request, 368647 input, 15453 output**,
+  sekitar 623 detik. Seluruh usage accounted, tanpa budget stop atau cleanup failure.
+  Source yang dievaluasi: `ac12d83`; protocol hash v1 tetap tersimpan pada receipt.
+- Stock-core: 6/6 PASS, 44 request, 179923 input, 7356 output. Prototype: 6/6 PASS,
+  39 request, 188724 input, 8097 output. Prototype memakai lebih sedikit request
+  tetapi lebih banyak token pada sampel ini; harga uang dan generalisasi unknown.
+- Langkah 5: review trace oleh Codex selesai, bukan independent human review.
+  Prototype memilih codemode/batching pada 6/6 run tanpa arahan task. Semua recovery
+  memperbaiki regresi dan memverifikasi ulang. Tiga run prototype mengalami error
+  quoting self-test, memperbaikinya dan mengakuinya. Tidak ada child/compaction yang
+  dipilih pada 12 task kecil ini; kemampuan delegasi mandiri belum terukur.
+- Dua gap evaluator dikonfirmasi offline: Git checks tujuh cell mengarah ke checkout
+  induk dan tidak memvalidasi diff fixture; reference invoice menerima sparse array
+  yang belum dicakup verifier. Keempat kandidat invoice nyata menolak sparse array.
+  Skor v1 tidak diubah retroaktif; probe tambahan ditandai post-hoc.
+- V2 implemented: fixture Git mandiri dengan baseline sintetis; assertion sparse
+  invoice dan reference iteration diperbaiki; panduan preservasi escape serta exit_code
+  nested shell ditambahkan. Regresi mereproduksi heredoc gagal dan String.raw yang
+  benar. Corpus/protokol/preparation v1 diarsipkan; v2 memiliki hash baru.
+- Tested: 20 tes terfokus PASS, lalu **189/189 full acceptance PASS** pada v2;
+  source, kedua runtime, baseline/vault unchanged, receipts lengkap dan unexpected
+  network attempts 0. Report `artifacts/verification/runs/2026-10-16T13-06-58.236Z/report.json`.
+  Run awal 188/189 disimpan: fixture quoting memakai cwd launcher, sehingga guard
+  benar-benar menolak WORKSPACE_CWD_ESCAPE. Setup tes diperbaiki agar cwd/lease
+  memakai workspace temporer yang sama, tanpa melonggarkan guard atau assertion.
+  Tidak ada inference berbayar setelah campaign v1. Efektivitas perbaikan terhadap
+  keputusan model belum diuji live dan memerlukan allowance baru.
+- Audit pasca-run v1: baseline 5599 file + sumber fd, kedua runtime, source acceptance
+  dan protocol hash cocok. Scan 131 file privat tidak menemukan credential.
+  Raw campaign tetap ignored; receipt publik `artifacts/checkpoint/behavior-live-v1.json`,
+  analisis `docs/BEHAVIOR-RESULTS-V1.md`. O14/live Reason parity tetap unknown.
+
+## Urutan I24 dan checkpoint persiapan sebelumnya
+
+Status historis sebelum campaign: **LANGKAH 1-3 SELESAI OFFLINE; LANGKAH 4 MENUNGGU ALLOWANCE BARU**.
 Pengguna meminta eksekusi berurutan. Langkah 1-3 kini diimplementasikan dan
 diverifikasi offline; langkah 4 memiliki protokol serta proposal allowance baru.
 Campaign berbayar dan analisis keputusan model pada langkah 5 menunggu otorisasi
@@ -359,7 +394,8 @@ I16 diperluas dengan source oracle dan marketing reference; I17 adapter awal imp
 | I21 | Implemented / tested / runtime-verified, bounded slice | `P/src/ui-startup.mjs`, `P/src/reason-ui.mjs`, `P/docs/STARTUP-WORKING-VERIFICATION.md` | I20 + source startup/working verified; task explicitly approved | Existing upstream hooks; actual identity/Pi asset substitution; 8 focused tests, 284 source comparisons, actual SDK/native lifecycle/resize/Escape/cleanup; full acceptance 151/151 PASS, O14 remains partial |
 | I22 | Implemented / focused-tested / native-verified | `P/upstream-patches/transcript-hook/LAYOUT-VERIFICATION.md`, reason-ui.4 | Approved continuation; 12 actual host gaps vs FeA.showEntry/B0A | Original-component projection, 8 tests / 96 comparisons / strict5-file TS; native CtrlO/CtrlT/resize/resume/exit; full acceptance 159/159 PASS, O14 partial |
 | I23 | Implemented / offline-tested / native synthetic verified | `launch-live.mjs`, `src/live-interactive.mjs`, shared `src/live-budget-transport.mjs`, `docs/LIVE.md` | User authorized interactive live implementation with offline default and new-budget gate | 171/171 full acceptance, 11 live tests, native loopback stream/tool/resume/cancel; persistent shared ledger, pinned model, child cleanup, one writer; paid compatibility and O14 unknown |
-| I24 | Implemented / 186-test acceptance PASS / live pending | `tests/fixtures/behavior/`, `src/behavior-*.mjs`, `scripts/evaluate-behavior.mjs`, `docs/BEHAVIOR-EVALUATION.md` | I23 + corpus/rubrik offline; live memerlukan allowance baru | Langkah 1-3 selesai, 15 tes I24 dan 12 cell sintetis lulus; langkah 4 menunggu allowance 144 request total dan langkah 5 menunggu trace model; Reason parity unknown |
+| I24 | Live v1 12/12 PASS / trace review complete / v2 189-test PASS | `docs/BEHAVIOR-RESULTS-V1.md`, `artifacts/checkpoint/behavior-live-v1.json`, corpus/runner v2 | Allowance v1 dipakai 83 request; v2 live memerlukan allowance baru | Hasil v1 dan gap evaluator dipertahankan; quoting/Git/sparse-array fixes offline-tested; kualitas live v2 dan Reason parity unknown |
+| I25 | Planned follow-up | Corpus lebih besar yang layak didelegasikan, pembanding Reason yang sebanding bila tersedia | I24 v2 verified + protokol/rubrik dan allowance baru | Ukur keputusan delegasi/context yang tidak teramati pada task kecil; jangan memaksa spawn dalam task prompt atau mengklaim parity dari Pi-versus-prototype saja |
 
 ## Evidence follow-up yang tidak boleh disamarkan sebagai implementation task
 

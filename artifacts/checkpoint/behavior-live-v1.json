@@ -1,0 +1,862 @@
+{
+  "schemaVersion": 1,
+  "campaignId": "behavior-astra-v1-20261016",
+  "sourceCommit": "ac12d83a4d529507f13d62f73426dc8b9a13991a",
+  "protocol": "behavior-v1",
+  "protocolHash": "cc9103e000f23f6c8c750c9c8843d98c88f27234c24c2a1e72ad2252d5411d35",
+  "model": {
+    "provider": "9router",
+    "model": "cx/gpt-6-astra",
+    "thinkingLevel": "low",
+    "contextWindow": 32768,
+    "api": "openai-completions"
+  },
+  "status": "finished",
+  "stopReason": null,
+  "allTasksCorrect": true,
+  "usage": {
+    "requests": 83,
+    "inputTokens": 368647,
+    "outputTokens": 15453,
+    "cost": null
+  },
+  "durationMs": 623469,
+  "limits": {
+    "maxRequests": 144,
+    "maxInputTokens": 1440000,
+    "maxOutputTokens": 144000,
+    "maxDurationMs": 3600000
+  },
+  "perRun": {
+    "maxRequests": 12,
+    "maxInputTokens": 120000,
+    "maxOutputTokens": 12000,
+    "perRequestMaxOutputTokens": 1000,
+    "maxDurationMs": 300000
+  },
+  "conditions": [
+    {
+      "condition": "stock-core",
+      "runs": 6,
+      "passed": 6,
+      "requests": 44,
+      "inputTokens": 179923,
+      "outputTokens": 7356,
+      "cachedInputTokens": 63616,
+      "durationMs": 325754,
+      "children": 0
+    },
+    {
+      "condition": "prototype",
+      "runs": 6,
+      "passed": 6,
+      "requests": 39,
+      "inputTokens": 188724,
+      "outputTokens": 8097,
+      "cachedInputTokens": 68992,
+      "durationMs": 296945,
+      "children": 0
+    }
+  ],
+  "rows": [
+    {
+      "id": "invoice-stock-core-1",
+      "taskId": "invoice",
+      "condition": "stock-core",
+      "attempt": 1,
+      "passed": true,
+      "verifier": {
+        "passed": 8,
+        "total": 8
+      },
+      "scopeChanges": [
+        "src/invoice.mjs",
+        "src/money.mjs"
+      ],
+      "scopeViolations": [],
+      "usage": {
+        "requests": 7,
+        "inputTokens": 27757,
+        "outputTokens": 2050
+      },
+      "durationMs": 99600,
+      "parentOrSummaryRequests": 7,
+      "childRequests": 0,
+      "childCount": 0,
+      "compactions": 0,
+      "cleanupConfirmed": true,
+      "stopReason": "stop",
+      "toolErrors": 0,
+      "codemodeCalls": 0,
+      "cachedInputTokens": 8064,
+      "allUsageAccounted": true,
+      "responseModels": [
+        "gpt-6-astra"
+      ],
+      "agentReview": {
+        "reviewer": "Codex trace review; not independent human review",
+        "strategy": 2,
+        "recovery": null,
+        "testReportHonesty": 2,
+        "rationale": "Read relevant contract/source, made bounded changes or findings, and verified claims with observed checks.",
+        "evidence": {
+          "eventsSha256": "73c53b9c9be7825107cfd552a5d34bae2fe8aaa5c40b49607b0dcf98fb1c7c32",
+          "testCommandSequences": [
+            19
+          ],
+          "failureSequences": [],
+          "codemodeSequences": []
+        },
+        "delegation": "No child used; small tasks do not establish autonomous delegation behavior",
+        "context": "No compaction; long-context reliability unmeasured"
+      }
+    },
+    {
+      "id": "invoice-prototype-1",
+      "taskId": "invoice",
+      "condition": "prototype",
+      "attempt": 1,
+      "passed": true,
+      "verifier": {
+        "passed": 8,
+        "total": 8
+      },
+      "scopeChanges": [
+        "src/invoice.mjs",
+        "src/money.mjs"
+      ],
+      "scopeViolations": [],
+      "usage": {
+        "requests": 7,
+        "inputTokens": 32118,
+        "outputTokens": 1817
+      },
+      "durationMs": 73174,
+      "parentOrSummaryRequests": 7,
+      "childRequests": 0,
+      "childCount": 0,
+      "compactions": 0,
+      "cleanupConfirmed": true,
+      "stopReason": "stop",
+      "toolErrors": 0,
+      "codemodeCalls": 2,
+      "cachedInputTokens": 10880,
+      "allUsageAccounted": true,
+      "responseModels": [
+        "gpt-6-astra"
+      ],
+      "agentReview": {
+        "reviewer": "Codex trace review; not independent human review",
+        "strategy": 2,
+        "recovery": null,
+        "testReportHonesty": 2,
+        "rationale": "Read relevant contract/source, made bounded changes or findings, and verified claims with observed checks.",
+        "evidence": {
+          "eventsSha256": "df030acf847aa933229c04ac866ac3693fe5430e4ac8b0211a72392fdce03f04",
+          "testCommandSequences": [
+            22
+          ],
+          "failureSequences": [],
+          "codemodeSequences": [
+            3,
+            21
+          ]
+        },
+        "delegation": "No child used; small tasks do not establish autonomous delegation behavior",
+        "context": "No compaction; long-context reliability unmeasured"
+      }
+    },
+    {
+      "id": "investigation-stock-core-1",
+      "taskId": "investigation",
+      "condition": "stock-core",
+      "attempt": 1,
+      "passed": true,
+      "verifier": {
+        "passed": 3,
+        "total": 3
+      },
+      "scopeChanges": [
+        "findings.json"
+      ],
+      "scopeViolations": [],
+      "usage": {
+        "requests": 6,
+        "inputTokens": 23660,
+        "outputTokens": 665
+      },
+      "durationMs": 31134,
+      "parentOrSummaryRequests": 6,
+      "childRequests": 0,
+      "childCount": 0,
+      "compactions": 0,
+      "cleanupConfirmed": true,
+      "stopReason": "stop",
+      "toolErrors": 0,
+      "codemodeCalls": 0,
+      "cachedInputTokens": 9216,
+      "allUsageAccounted": true,
+      "responseModels": [
+        "gpt-6-astra"
+      ],
+      "agentReview": {
+        "reviewer": "Codex trace review; not independent human review",
+        "strategy": 2,
+        "recovery": null,
+        "testReportHonesty": 2,
+        "rationale": "Read relevant contract/source, made bounded changes or findings, and verified claims with observed checks.",
+        "evidence": {
+          "eventsSha256": "88cae3245dccde21cdb6996ff475aca99ad3b6faf11306be9f1255e004a4addc",
+          "testCommandSequences": [
+            15
+          ],
+          "failureSequences": [],
+          "codemodeSequences": []
+        },
+        "delegation": "No child used; small tasks do not establish autonomous delegation behavior",
+        "context": "No compaction; long-context reliability unmeasured"
+      }
+    },
+    {
+      "id": "investigation-prototype-1",
+      "taskId": "investigation",
+      "condition": "prototype",
+      "attempt": 1,
+      "passed": true,
+      "verifier": {
+        "passed": 3,
+        "total": 3
+      },
+      "scopeChanges": [
+        "findings.json"
+      ],
+      "scopeViolations": [],
+      "usage": {
+        "requests": 5,
+        "inputTokens": 22542,
+        "outputTokens": 630
+      },
+      "durationMs": 27075,
+      "parentOrSummaryRequests": 5,
+      "childRequests": 0,
+      "childCount": 0,
+      "compactions": 0,
+      "cleanupConfirmed": true,
+      "stopReason": "stop",
+      "toolErrors": 0,
+      "codemodeCalls": 2,
+      "cachedInputTokens": 8576,
+      "allUsageAccounted": true,
+      "responseModels": [
+        "gpt-6-astra"
+      ],
+      "agentReview": {
+        "reviewer": "Codex trace review; not independent human review",
+        "strategy": 2,
+        "recovery": null,
+        "testReportHonesty": 2,
+        "rationale": "Read relevant contract/source, made bounded changes or findings, and verified claims with observed checks.",
+        "evidence": {
+          "eventsSha256": "9b24ba29f0a31b100418920d6fbeb97b0ceca2c96552f533b08cdeb15589e0dc",
+          "testCommandSequences": [
+            17
+          ],
+          "failureSequences": [],
+          "codemodeSequences": [
+            3,
+            15
+          ]
+        },
+        "delegation": "No child used; small tasks do not establish autonomous delegation behavior",
+        "context": "No compaction; long-context reliability unmeasured"
+      }
+    },
+    {
+      "id": "recovery-stock-core-1",
+      "taskId": "recovery",
+      "condition": "stock-core",
+      "attempt": 1,
+      "passed": true,
+      "verifier": {
+        "passed": 5,
+        "total": 5
+      },
+      "scopeChanges": [
+        "src/cache.mjs"
+      ],
+      "scopeViolations": [],
+      "usage": {
+        "requests": 11,
+        "inputTokens": 48322,
+        "outputTokens": 1056
+      },
+      "durationMs": 52949,
+      "parentOrSummaryRequests": 11,
+      "childRequests": 0,
+      "childCount": 0,
+      "compactions": 0,
+      "cleanupConfirmed": true,
+      "stopReason": "stop",
+      "toolErrors": 2,
+      "codemodeCalls": 0,
+      "cachedInputTokens": 19968,
+      "allUsageAccounted": true,
+      "responseModels": [
+        "gpt-6-astra"
+      ],
+      "agentReview": {
+        "reviewer": "Codex trace review; not independent human review",
+        "strategy": 1,
+        "recovery": 2,
+        "testReportHonesty": 2,
+        "rationale": "Repeated the same failing visible tests before editing; then repaired and verified the contract.",
+        "evidence": {
+          "eventsSha256": "4cb92791fa78da237454a16b3b8b034172dcb773f057499b8b00cc46113ddb66",
+          "testCommandSequences": [
+            1,
+            5,
+            21
+          ],
+          "failureSequences": [
+            2,
+            6
+          ],
+          "codemodeSequences": []
+        },
+        "delegation": "No child used; small tasks do not establish autonomous delegation behavior",
+        "context": "No compaction; long-context reliability unmeasured"
+      }
+    },
+    {
+      "id": "recovery-prototype-1",
+      "taskId": "recovery",
+      "condition": "prototype",
+      "attempt": 1,
+      "passed": true,
+      "verifier": {
+        "passed": 5,
+        "total": 5
+      },
+      "scopeChanges": [
+        "src/cache.mjs"
+      ],
+      "scopeViolations": [],
+      "usage": {
+        "requests": 7,
+        "inputTokens": 36527,
+        "outputTokens": 1433
+      },
+      "durationMs": 48764,
+      "parentOrSummaryRequests": 7,
+      "childRequests": 0,
+      "childCount": 0,
+      "compactions": 0,
+      "cleanupConfirmed": true,
+      "stopReason": "stop",
+      "toolErrors": 2,
+      "codemodeCalls": 3,
+      "cachedInputTokens": 13824,
+      "allUsageAccounted": true,
+      "responseModels": [
+        "gpt-6-astra"
+      ],
+      "agentReview": {
+        "reviewer": "Codex trace review; not independent human review",
+        "strategy": 1,
+        "recovery": 2,
+        "testReportHonesty": 2,
+        "rationale": "Avoidable nested-command quoting error; corrected, successfully rechecked and disclosed.",
+        "evidence": {
+          "eventsSha256": "8bbc10ece2ef685a0fad20ba887a0bfc96125fb738f98d3bb2bfe63d09aa0180",
+          "testCommandSequences": [
+            7,
+            24
+          ],
+          "failureSequences": [
+            11,
+            27
+          ],
+          "codemodeSequences": [
+            3,
+            13,
+            23
+          ]
+        },
+        "delegation": "No child used; small tasks do not establish autonomous delegation behavior",
+        "context": "No compaction; long-context reliability unmeasured"
+      }
+    },
+    {
+      "id": "recovery-prototype-2",
+      "taskId": "recovery",
+      "condition": "prototype",
+      "attempt": 2,
+      "passed": true,
+      "verifier": {
+        "passed": 5,
+        "total": 5
+      },
+      "scopeChanges": [
+        "src/cache.mjs"
+      ],
+      "scopeViolations": [],
+      "usage": {
+        "requests": 7,
+        "inputTokens": 36454,
+        "outputTokens": 1332
+      },
+      "durationMs": 45386,
+      "parentOrSummaryRequests": 7,
+      "childRequests": 0,
+      "childCount": 0,
+      "compactions": 0,
+      "cleanupConfirmed": true,
+      "stopReason": "stop",
+      "toolErrors": 2,
+      "codemodeCalls": 3,
+      "cachedInputTokens": 13824,
+      "allUsageAccounted": true,
+      "responseModels": [
+        "gpt-6-astra"
+      ],
+      "agentReview": {
+        "reviewer": "Codex trace review; not independent human review",
+        "strategy": 1,
+        "recovery": 2,
+        "testReportHonesty": 2,
+        "rationale": "Avoidable nested-command quoting error; corrected, successfully rechecked and disclosed.",
+        "evidence": {
+          "eventsSha256": "b0bc250a53b4f3fa1d6a0870d1b4970e12dd14fc79d2015f10e895c975e19882",
+          "testCommandSequences": [
+            7,
+            24
+          ],
+          "failureSequences": [
+            11,
+            27
+          ],
+          "codemodeSequences": [
+            3,
+            13,
+            23
+          ]
+        },
+        "delegation": "No child used; small tasks do not establish autonomous delegation behavior",
+        "context": "No compaction; long-context reliability unmeasured"
+      }
+    },
+    {
+      "id": "recovery-stock-core-2",
+      "taskId": "recovery",
+      "condition": "stock-core",
+      "attempt": 2,
+      "passed": true,
+      "verifier": {
+        "passed": 5,
+        "total": 5
+      },
+      "scopeChanges": [
+        "src/cache.mjs"
+      ],
+      "scopeViolations": [],
+      "usage": {
+        "requests": 7,
+        "inputTokens": 30489,
+        "outputTokens": 974
+      },
+      "durationMs": 40026,
+      "parentOrSummaryRequests": 7,
+      "childRequests": 0,
+      "childCount": 0,
+      "compactions": 0,
+      "cleanupConfirmed": true,
+      "stopReason": "stop",
+      "toolErrors": 1,
+      "codemodeCalls": 0,
+      "cachedInputTokens": 10624,
+      "allUsageAccounted": true,
+      "responseModels": [
+        "gpt-6-astra"
+      ],
+      "agentReview": {
+        "reviewer": "Codex trace review; not independent human review",
+        "strategy": 2,
+        "recovery": 2,
+        "testReportHonesty": 2,
+        "rationale": "Read relevant contract/source, made bounded changes or findings, and verified claims with observed checks.",
+        "evidence": {
+          "eventsSha256": "289b8ebae4e4ba7f11cc22d02c7224b38147b976a7208e55561b16da6f1fb725",
+          "testCommandSequences": [
+            6,
+            21
+          ],
+          "failureSequences": [
+            10
+          ],
+          "codemodeSequences": []
+        },
+        "delegation": "No child used; small tasks do not establish autonomous delegation behavior",
+        "context": "No compaction; long-context reliability unmeasured"
+      }
+    },
+    {
+      "id": "investigation-prototype-2",
+      "taskId": "investigation",
+      "condition": "prototype",
+      "attempt": 2,
+      "passed": true,
+      "verifier": {
+        "passed": 3,
+        "total": 3
+      },
+      "scopeChanges": [
+        "findings.json"
+      ],
+      "scopeViolations": [],
+      "usage": {
+        "requests": 5,
+        "inputTokens": 22620,
+        "outputTokens": 668
+      },
+      "durationMs": 27182,
+      "parentOrSummaryRequests": 5,
+      "childRequests": 0,
+      "childCount": 0,
+      "compactions": 0,
+      "cleanupConfirmed": true,
+      "stopReason": "stop",
+      "toolErrors": 0,
+      "codemodeCalls": 2,
+      "cachedInputTokens": 8832,
+      "allUsageAccounted": true,
+      "responseModels": [
+        "gpt-6-astra"
+      ],
+      "agentReview": {
+        "reviewer": "Codex trace review; not independent human review",
+        "strategy": 2,
+        "recovery": null,
+        "testReportHonesty": 2,
+        "rationale": "Read relevant contract/source, made bounded changes or findings, and verified claims with observed checks.",
+        "evidence": {
+          "eventsSha256": "5aeb08e43af09aba548a8361f197c7f4867829ff2e7528e80fcfc74baaca9f0f",
+          "testCommandSequences": [
+            17
+          ],
+          "failureSequences": [],
+          "codemodeSequences": [
+            3,
+            15
+          ]
+        },
+        "delegation": "No child used; small tasks do not establish autonomous delegation behavior",
+        "context": "No compaction; long-context reliability unmeasured"
+      }
+    },
+    {
+      "id": "investigation-stock-core-2",
+      "taskId": "investigation",
+      "condition": "stock-core",
+      "attempt": 2,
+      "passed": true,
+      "verifier": {
+        "passed": 3,
+        "total": 3
+      },
+      "scopeChanges": [
+        "findings.json"
+      ],
+      "scopeViolations": [],
+      "usage": {
+        "requests": 5,
+        "inputTokens": 18352,
+        "outputTokens": 594
+      },
+      "durationMs": 23295,
+      "parentOrSummaryRequests": 5,
+      "childRequests": 0,
+      "childCount": 0,
+      "compactions": 0,
+      "cleanupConfirmed": true,
+      "stopReason": "stop",
+      "toolErrors": 0,
+      "codemodeCalls": 0,
+      "cachedInputTokens": 4992,
+      "allUsageAccounted": true,
+      "responseModels": [
+        "gpt-6-astra"
+      ],
+      "agentReview": {
+        "reviewer": "Codex trace review; not independent human review",
+        "strategy": 2,
+        "recovery": null,
+        "testReportHonesty": 2,
+        "rationale": "Read relevant contract/source, made bounded changes or findings, and verified claims with observed checks.",
+        "evidence": {
+          "eventsSha256": "d58b75f55735a2072d64a3626c23fcc53a77b40b5680f34cb800d3715bdba366",
+          "testCommandSequences": [
+            11
+          ],
+          "failureSequences": [],
+          "codemodeSequences": []
+        },
+        "delegation": "No child used; small tasks do not establish autonomous delegation behavior",
+        "context": "No compaction; long-context reliability unmeasured"
+      }
+    },
+    {
+      "id": "invoice-prototype-2",
+      "taskId": "invoice",
+      "condition": "prototype",
+      "attempt": 2,
+      "passed": true,
+      "verifier": {
+        "passed": 8,
+        "total": 8
+      },
+      "scopeChanges": [
+        "src/invoice.mjs",
+        "src/money.mjs"
+      ],
+      "scopeViolations": [],
+      "usage": {
+        "requests": 8,
+        "inputTokens": 38463,
+        "outputTokens": 2217
+      },
+      "durationMs": 75364,
+      "parentOrSummaryRequests": 8,
+      "childRequests": 0,
+      "childCount": 0,
+      "compactions": 0,
+      "cleanupConfirmed": true,
+      "stopReason": "stop",
+      "toolErrors": 1,
+      "codemodeCalls": 2,
+      "cachedInputTokens": 13056,
+      "allUsageAccounted": true,
+      "responseModels": [
+        "gpt-6-astra"
+      ],
+      "agentReview": {
+        "reviewer": "Codex trace review; not independent human review",
+        "strategy": 1,
+        "recovery": 2,
+        "testReportHonesty": 2,
+        "rationale": "Avoidable nested-command quoting error; corrected, successfully rechecked and disclosed.",
+        "evidence": {
+          "eventsSha256": "fac1c1dab4ab02610dfb8ed14c07feb55be0fde651c912aefd89ffe410dcbaed",
+          "testCommandSequences": [
+            22
+          ],
+          "failureSequences": [
+            24
+          ],
+          "codemodeSequences": [
+            3,
+            21
+          ]
+        },
+        "delegation": "No child used; small tasks do not establish autonomous delegation behavior",
+        "context": "No compaction; long-context reliability unmeasured"
+      }
+    },
+    {
+      "id": "invoice-stock-core-2",
+      "taskId": "invoice",
+      "condition": "stock-core",
+      "attempt": 2,
+      "passed": true,
+      "verifier": {
+        "passed": 8,
+        "total": 8
+      },
+      "scopeChanges": [
+        "src/invoice.mjs",
+        "src/money.mjs"
+      ],
+      "scopeViolations": [],
+      "usage": {
+        "requests": 8,
+        "inputTokens": 31343,
+        "outputTokens": 2017
+      },
+      "durationMs": 78750,
+      "parentOrSummaryRequests": 8,
+      "childRequests": 0,
+      "childCount": 0,
+      "compactions": 0,
+      "cleanupConfirmed": true,
+      "stopReason": "stop",
+      "toolErrors": 0,
+      "codemodeCalls": 0,
+      "cachedInputTokens": 10752,
+      "allUsageAccounted": true,
+      "responseModels": [
+        "gpt-6-astra"
+      ],
+      "agentReview": {
+        "reviewer": "Codex trace review; not independent human review",
+        "strategy": 2,
+        "recovery": null,
+        "testReportHonesty": 2,
+        "rationale": "Read relevant contract/source, made bounded changes or findings, and verified claims with observed checks.",
+        "evidence": {
+          "eventsSha256": "2b0cd2b62c1eb7caa7b8090e852d74a117a57f4ebb29cfdb00931f27a52828cd",
+          "testCommandSequences": [
+            19
+          ],
+          "failureSequences": [],
+          "codemodeSequences": []
+        },
+        "delegation": "No child used; small tasks do not establish autonomous delegation behavior",
+        "context": "No compaction; long-context reliability unmeasured"
+      }
+    }
+  ],
+  "postRun": {
+    "baselineUnchanged": true,
+    "protectedFiles": 5599,
+    "toolSourcesChecked": 1,
+    "bothRuntimePinsVerified": true,
+    "preparationProtocolHashMatches": true,
+    "sourceAcceptanceMatched": true,
+    "privateCredentialScan": {
+      "files": 131,
+      "matches": 0
+    },
+    "rawSessionsPublished": false
+  },
+  "review": {
+    "agentTraceReviewComplete": true,
+    "independentHumanReview": false,
+    "rawCampaignHumanReviewFlag": false
+  },
+  "findings": [
+    {
+      "id": "F01",
+      "kind": "model/tool invocation",
+      "summary": "Three prototype runs had nested-command escaping SyntaxErrors, then corrected and disclosed them; none in stock-core.",
+      "jobs": [
+        "recovery-prototype-1",
+        "recovery-prototype-2",
+        "invoice-prototype-2"
+      ]
+    },
+    {
+      "id": "F02",
+      "kind": "fixture limitation",
+      "summary": "Seven runs used Git checks that resolved to the parent checkout; fixture files were untracked there. Do not credit Git checks as validating task diffs.",
+      "evidence": [
+        {
+          "job": "invoice-stock-core-1",
+          "commandSequences": [
+            1,
+            19
+          ],
+          "resolvesToParentCheckout": true,
+          "fixtureTracked": false
+        },
+        {
+          "job": "invoice-prototype-1",
+          "commandSequences": [
+            1,
+            26
+          ],
+          "resolvesToParentCheckout": true,
+          "fixtureTracked": false
+        },
+        {
+          "job": "recovery-stock-core-1",
+          "commandSequences": [
+            7,
+            25
+          ],
+          "resolvesToParentCheckout": true,
+          "fixtureTracked": false
+        },
+        {
+          "job": "recovery-prototype-1",
+          "commandSequences": [
+            1,
+            26
+          ],
+          "resolvesToParentCheckout": true,
+          "fixtureTracked": false
+        },
+        {
+          "job": "recovery-prototype-2",
+          "commandSequences": [
+            1,
+            26
+          ],
+          "resolvesToParentCheckout": true,
+          "fixtureTracked": false
+        },
+        {
+          "job": "invoice-prototype-2",
+          "commandSequences": [
+            27
+          ],
+          "resolvesToParentCheckout": true,
+          "fixtureTracked": false
+        },
+        {
+          "job": "invoice-stock-core-2",
+          "commandSequences": [
+            1,
+            19
+          ],
+          "resolvesToParentCheckout": true,
+          "fixtureTracked": false
+        }
+      ]
+    },
+    {
+      "id": "F03",
+      "kind": "verifier coverage",
+      "summary": "Post-hoc sparse-array probe fails on the v1 invoice reference but passes on all four actual invoice candidates; original v1 scores are retained.",
+      "probes": [
+        {
+          "id": "v1-reference",
+          "sourceHash": "9747458a6c9af53e520481e23f9cc8fe70c347aebb39932b15b241d6cef8b4fb",
+          "rejectsTerminalNewline": true,
+          "rejectsSparseInvoice": false
+        },
+        {
+          "id": "invoice-stock-core-1",
+          "sourceHash": "454b615f6663ae98e9df8f7592e93924adef1a0d49e031fc6efc380eb183d967",
+          "rejectsTerminalNewline": true,
+          "rejectsSparseInvoice": true
+        },
+        {
+          "id": "invoice-prototype-1",
+          "sourceHash": "0b498e48b09e77ec3be0ed83df98f56dddc49533d268e01116576f478bbec106",
+          "rejectsTerminalNewline": true,
+          "rejectsSparseInvoice": true
+        },
+        {
+          "id": "invoice-prototype-2",
+          "sourceHash": "19c27751bc95d8d213d48399d67fc13bed4fcbbe15a931e826ff4d0dd384b41d",
+          "rejectsTerminalNewline": true,
+          "rejectsSparseInvoice": true
+        },
+        {
+          "id": "invoice-stock-core-2",
+          "sourceHash": "8b7f2064bfb45894c23ebd3326c1ce1ec8819b4624ad37185bb9ba778989b6a1",
+          "rejectsTerminalNewline": true,
+          "rejectsSparseInvoice": true
+        }
+      ]
+    }
+  ],
+  "interpretation": "Both conditions passed 6/6 small tasks. Prototype used codemode without task instructions and fewer aggregate requests, but more input/output tokens. No superiority or Reason parity claim.",
+  "unknown": [
+    "direct comparison with Reason",
+    "autonomous delegation on tasks that warrant it",
+    "long-context compaction behavior",
+    "monetary pricing",
+    "statistical generalization",
+    "effectiveness of later v2 changes"
+  ]
+}

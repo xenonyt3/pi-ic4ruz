@@ -7,6 +7,12 @@ ledgers; an existing campaign is never replayed or replenished. Workspaces under
 `artifacts/evaluations/behavior/` are disposable fixtures. Selecting stock-core for
 an evaluation does not change `config/runtime-selection.json` or another Pi install.
 
+I24 v2 creates Git metadata only inside new disposable fixtures and adds generic
+command-escaping guidance. The paid v1 state and corpus history remain preserved.
+Use the recorded v1 source checkpoint `ac12d83` in a separate checkout for inspection;
+do not replay its consumed campaign or reset ledgers. Disabling future evaluation
+requires no changes to production profiles, runtime selection or the Brain vault.
+
 For the interactive-live entrypoint, interrupt active work, then exit Pi and
 confirm child cleanup and writer lease release. Return to `node launch.mjs` for
 offline mode; do not flip `config/harness.json.liveInference`. Keep the ignored

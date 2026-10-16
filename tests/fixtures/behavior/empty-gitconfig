@@ -1,0 +1,1 @@
+# Synthetic fixture Git operations must not read a user's global configuration.

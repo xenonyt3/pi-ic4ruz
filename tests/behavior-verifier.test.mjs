@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import {spawnSync} from 'node:child_process';
 import {root} from '../src/paths.mjs';
 import {loadBehaviorCorpus,createBehaviorWorkspace,scopeChanges} from '../src/behavior-corpus.mjs';
 import {verifyBehaviorWorkspace} from '../src/behavior-verifier.mjs';
@@ -54,5 +55,29 @@ test('workspace rejects reuse and symlink escapes before candidate evaluation',(
     assert.throws(()=>scopeChanges(task,f.workspace),/WORKSPACE_LINK/);
     assert.equal(verifyBehaviorWorkspace(task,f.workspace).passed,false);
     fs.rmdirSync(link);
+  }finally{f.dispose();}
+});
+test('fixture git is isolated, clean initially, and detects edits and whitespace errors',()=>{
+  const task=tasks[0],f=fixture(task);
+  const git=args=>spawnSync(process.platform==='win32'?'git.exe':'git',args,{cwd:f.workspace,encoding:'utf8',windowsHide:true});
+  try{
+    assert.equal(path.resolve(git(['rev-parse','--show-toplevel']).stdout.trim()),f.workspace);
+    assert.equal(git(['status','--porcelain']).stdout,'');
+    assert.equal(git(['log','-1','--format=%ae']).stdout.trim(),'behavior-fixture@example.invalid');
+    fs.appendFileSync(path.join(f.workspace,'src/money.mjs'),'// trailing whitespace  \n');
+    assert.match(git(['diff','--name-only']).stdout,/src\/money.mjs/);
+    assert.notEqual(git(['diff','--check']).status,0);
+    assert.deepEqual(scopeChanges(task,f.workspace).changes,['src/money.mjs']);
+  }finally{f.dispose();}
+});
+test('v2 rejects the sparse-array bug in the preserved v1 reference without rewriting v1 scores',()=>{
+  const task=tasks.find(t=>t.id==='invoice'),f=fixture(task);
+  try{
+    const old=JSON.parse(fs.readFileSync(path.join(root,'tests/fixtures/behavior/history/v1/invoice.json'),'utf8'));
+    applyReference(old,f.workspace);
+    const result=verifyBehaviorWorkspace(task,f.workspace);
+    assert.equal(result.passed,false);assert.deepEqual(result.receipt.failures,['reject sparse invoices']);
+    assert.equal(result.receipt.passed,8);assert.equal(result.receipt.total,9);
+    applyReference(task,f.workspace);assert.equal(verifyBehaviorWorkspace(task,f.workspace).passed,true);
   }finally{f.dispose();}
 });

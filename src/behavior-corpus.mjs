@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
+import {spawnSync} from 'node:child_process';
 import {root,canonicalPath,isWithin} from './paths.mjs';
 
 export const corpusRoot=path.join(root,'tests/fixtures/behavior');
@@ -17,7 +18,8 @@ export function loadBehaviorCorpus() {
     }
     return task;
   });
-  return {manifest,tasks,hash:digest({manifest,tasks})};
+  const gitConfigHash=digest(fs.readFileSync(path.join(corpusRoot,'empty-gitconfig')));
+  return {manifest,tasks,hash:digest({manifest,tasks,gitConfigHash})};
 }
 export function snapshotWorkspace(workspace) {
   const base=canonicalPath(workspace),files={};
@@ -25,6 +27,7 @@ export function snapshotWorkspace(workspace) {
     for(const entry of fs.readdirSync(dir,{withFileTypes:true}).sort((a,b)=>a.name.localeCompare(b.name))){
       const file=path.join(dir,entry.name),relative=path.relative(workspace,file).replaceAll('\\','/');
       if(entry.isSymbolicLink()||!isWithin(base,canonicalPath(file)))throw new Error('BEHAVIOR_WORKSPACE_LINK');
+      if(dir===workspace&&entry.name==='.git'&&entry.isDirectory())continue;
       if(entry.isDirectory())walk(file);
       else if(entry.isFile())files[relative]=digest(fs.readFileSync(file));
       else throw new Error('BEHAVIOR_WORKSPACE_SPECIAL_FILE');
@@ -38,6 +41,19 @@ export function createBehaviorWorkspace(task,workspace) {
   fs.mkdirSync(workspace,{recursive:true});
   for(const [name,content]of Object.entries(task.files)){
     const file=path.join(workspace,name);fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,content);
+  }
+  // Keep ordinary git status/diff inside the fixture instead of its parent checkout.
+  const env={};
+  for(const name of ['SystemRoot','WINDIR','TEMP','TMP','PATH','PATHEXT','ComSpec'])if(process.env[name])env[name]=process.env[name];
+  Object.assign(env,{GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:path.join(corpusRoot,'empty-gitconfig'),
+    GIT_AUTHOR_NAME:'Behavior Fixture',GIT_AUTHOR_EMAIL:'behavior-fixture@example.invalid',
+    GIT_COMMITTER_NAME:'Behavior Fixture',GIT_COMMITTER_EMAIL:'behavior-fixture@example.invalid',
+    GIT_AUTHOR_DATE:'2000-01-01T00:00:00Z',GIT_COMMITTER_DATE:'2000-01-01T00:00:00Z'});
+  const common=['-c','core.autocrlf=false','-c','commit.gpgsign=false','-c','gc.auto=0','-c','maintenance.auto=false',
+    '-c','init.defaultBranch=fixture','-c',`core.hooksPath=${path.join(workspace,'.git/no-hooks')}`];
+  for(const args of [['init','--quiet','--template='],['add','--','.'],['commit','--quiet','-m','Behavior fixture baseline']]){
+    const result=spawnSync(process.platform==='win32'?'git.exe':'git',[...common,...args],{cwd:workspace,env,encoding:'utf8',windowsHide:true,timeout:15000});
+    if(result.status!==0)throw new Error('BEHAVIOR_GIT_INITIALIZATION_FAILED');
   }
   const actual=snapshotWorkspace(workspace);
   if(Object.keys(actual).length!==Object.keys(task.fileHashes).length||Object.entries(task.fileHashes).some(([file,hash])=>actual[file]!==hash))throw new Error('BEHAVIOR_STARTING_TREE_MISMATCH');

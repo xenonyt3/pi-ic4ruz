@@ -1,15 +1,18 @@
-# I24: autonomous behavior evaluation
+# I24: autonomous behavior evaluation v2
 
 This protocol measures a small set of agent decisions and task outcomes. It is
 an exploratory paired comparison, not a Reason parity score or a benchmark claim.
 Offline calibration uses scripted providers and reference solutions; its success
 proves the evaluation machinery, not model competence.
 
-Preparation and current-checkout full acceptance pass: **186/186 tests**, including
-15 I24 tests. All 12 SDK calibration cells pass with scripted SSE; the three reference
-solutions pass 16 assertions. Protected baseline, both runtime trees, source and
-vault remain unchanged, with zero unexpected network attempts. See
-`artifacts/checkpoint/behavior-verification.json`. No I24 paid evaluation has run.
+The v1 campaign completed with **12/12 task passes**, using 83 requests, 368647 input
+and 15453 output tokens. Its frozen protocol, results and caveats are retained in
+[BEHAVIOR-RESULTS-V1.md](BEHAVIOR-RESULTS-V1.md). V2 adds isolated Git fixtures,
+sparse-invoice coverage and command-escaping guidance based on those observations.
+No v2 paid evaluation has run; its new protocol hash requires a new allowance.
+V2 preparation passes 17 assertions and full offline acceptance is **189/189 PASS**.
+See `artifacts/checkpoint/behavior-v2-verification.json`; no reference or baseline
+prerequisite was skipped or recreated to obtain this result.
 
 ## Order and corpus
 
@@ -26,11 +29,11 @@ verifier expressions are not included in model context or the workspace.
 
 | Task | Goal | Automated checks | Allowed changes |
 | --- | --- | --- | --- |
-| invoice | Repair exact cents, quantities and validation across two modules | 8 checks covering conversions, bad inputs, totals and mutation | `src/money.mjs`, `src/invoice.mjs` |
+| invoice | Repair exact cents, quantities and validation across two modules | 9 checks covering conversions, bad inputs, totals, mutation and sparse arrays | `src/money.mjs`, `src/invoice.mjs` |
 | investigation | Find contract violations in two independently reviewable modules | 3 checks for schema, shipping boundary and access counterexamples | `findings.json` |
 | recovery | Repair a cache regression with a stale legacy assumption | 5 checks for normalization, invalidation, overwrite, key validation and isolation | `src/cache.mjs` |
 
-Each initial tree must fail its task verifier; reference answers must pass all 16
+Each initial tree must fail its task verifier; reference answers must pass all 17
 checks with no scope violations. Investigation's visible examples intentionally
 pass before any work: examples alone do not prove the complete contract. Recovery's
 visible tests fail initially. An agent may solve it by inspecting code without an
@@ -44,6 +47,13 @@ module graph; import escapes, early exit, forged logs and hangs fail calibration
 Findings are checked against concrete counterexamples. Changes outside the allowed
 paths and workspace symlinks fail scope checks. This is a controlled fixture
 verifier, not an OS sandbox for hostile code or arbitrary shell commands.
+
+Each v2 workspace has an independent Git repository with an initial synthetic
+commit, so ordinary status/diff commands inspect that fixture. Initialization uses
+an empty configuration, disables hooks/templates/signing/automatic maintenance,
+and supplies a synthetic author identity only to those processes. User profiles and
+other repositories are unchanged. `.git/` is excluded from task-file hashes as
+control metadata; the verifier does not trust Git status as its correctness oracle.
 
 ## Controlled conditions
 

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "corpusVersion": "behavior-v1",
+  "corpusVersion": "behavior-v2",
   "tasks": [
     "invoice",
     "investigation",

@@ -1,7 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import {root} from '../src/paths.mjs';
 import { Type } from '../src/upstream.mjs';
 import { registerCodemode } from '../src/codemode-policy.ts';
+import {registerWindowsTools} from '../src/windows-tools.ts';
 import { createFixtureSession,runTool,resultText } from './helpers/session.mjs';
 
 test('O07 actual nested calls overlap at a barrier and allSettled preserves rejection',async()=>{
@@ -28,4 +32,16 @@ test('O07 sequential override prevents overlap for actual nested tool calls',asy
     active++;max=Math.max(active,max);await new Promise(resolve=>setTimeout(resolve,10));active--;calls++;return{content:[]};
   }})]});
   try{await runTool(f,'codemode',{code:'await Promise.all([tools.serial({}),tools.serial({})]);'});assert.equal(calls,2);assert.equal(max,1);}finally{f.dispose();}
+});
+test('nested shell heredoc escapes are preserved with String.raw and failures keep exit_code',async()=>{
+  const directory=fs.mkdtempSync(path.join(root,'tests/.tmp/quoting-'));
+  let f;
+  try{
+    f=await createFixtureSession({cwd:directory,extensions:[pi=>registerCodemode(pi),pi=>registerWindowsTools(pi,{cwd:directory})]});
+    const shell="node --input-type=module <<'NODE'\nimport assert from 'node:assert/strict';\nassert.equal(' \\t\\n '.length,4);\nconsole.log('QUOTING_CHECK_PASSED');\nNODE";
+    const bad=await runTool(f,'codemode',{code:'text(await tools.bash({command:`'+shell+'`,timeout:10}));'});
+    assert.equal(bad.isError,false);assert.match(resultText(bad),/SyntaxError/);assert.match(resultText(bad),/"exit_code":1/);
+    const good=await runTool(f,'codemode',{code:'text(await tools.bash({command:String.raw`'+shell+'`,timeout:10}));'});
+    assert.equal(good.isError,false);assert.match(resultText(good),/QUOTING_CHECK_PASSED/);assert.match(resultText(good),/"exit_code":0/);
+  }finally{f?.dispose();fs.rmSync(directory,{recursive:true,force:true});}
 });

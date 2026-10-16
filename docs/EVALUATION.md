@@ -4,7 +4,10 @@ I24 now has a separate [behavior corpus/protocol](BEHAVIOR-EVALUATION.md). Its
 goal-only prompts and 12 fresh stock-core/prototype cells reuse the existing live
 runtime and accounting. The historical pilot's mandatory-delegation prompt is not
 used to assess autonomous decisions. Preparation is offline and the proposed
-campaign requires a new explicit budget. No I24 paid results exist yet.
+campaign requires a new explicit budget. I24 v1 subsequently completed with 12/12
+task passes and fully accounted usage (83 requests, 368647 input, 15453 output).
+The [v1 results](BEHAVIOR-RESULTS-V1.md) distinguish automated outcomes, Codex trace
+review and evaluation limitations. V2 offline fixes do not reuse that authorization.
 
 Interactive daily use now has a separate explicit entrypoint; see [LIVE.md](LIVE.md).
 It shares the existing live transport and child broker with the evaluator, with

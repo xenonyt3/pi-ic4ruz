@@ -10,7 +10,7 @@ export function buildBehaviorPlan() {
   const jobs=[];
   for(let attempt=1;attempt<=2;attempt++)for(const task of attempt===1?corpus.tasks:[...corpus.tasks].reverse())for(const condition of attempt===1?conditions:[...conditions].reverse())jobs.push({id:`${task.id}-${condition}-${attempt}`,taskId:task.id,condition,attempt});
   const limits=Object.fromEntries(['maxRequests','maxInputTokens','maxOutputTokens','maxDurationMs'].map(key=>[key,perRun[key]*jobs.length]));
-  const plan={schemaVersion:1,protocol:'behavior-v1',corpusHash:corpus.hash,
+  const plan={schemaVersion:1,protocol:corpus.manifest.corpusVersion,corpusHash:corpus.hash,
     model:{provider:'9router',model:'cx/gpt-6-astra',thinkingLevel:'low',contextWindow:32768,api:'openai-completions'},
     conditions,attemptsPerTaskAndCondition:2,perRun,limits,jobs,
     tasks:corpus.tasks.map(task=>({id:task.id,title:task.title,prompt:task.prompt,promptHash:digest(task.prompt),startingTree:task.fileHashes,allowedChanges:task.allowedChanges})),
