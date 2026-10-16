@@ -1,10 +1,20 @@
 # Continue on another device
 
+I27 cost audit (no new inference) matched all 73 v2 requests to local router
+history. Pi's client count contains +2000 input padding per request: upstream
+input is **112300**, with **69248 cached**; all 11 missing cache fields are zero.
+At the verified Standard reference rates, Pi is **$0.865268** versus Codex
+**$1.411920**, or **38.7% lower API-equivalent cost**. This is not an OAuth invoice.
+Read [docs/CODEX-PI-COST-AUDIT.md](docs/CODEX-PI-COST-AUDIT.md). Original ledgers
+and closed allowances are unchanged. The historical client totals below remain
+valid as client-reported counters, not unpadded upstream billing counts.
+
 I26 v2 completed its separately approved live campaign through 9router / Astra low:
 **12/12 task passes**, 73 requests, 625104 input and 14306 output tokens. Codex and
 Pi each passed 6/6. Codex used 33 requests / 432804 input / 6996 output; Pi used
 40 / 192300 / 7310. Read [docs/CODEX-PI-RESULTS-V2.md](docs/CODEX-PI-RESULTS-V2.md).
-Cache details are missing on 11 Pi requests; money prices remain unknown. All six
+Cache details were missing on 11 Pi requests and are resolved in the audit above;
+actual subscription billing remains unknown. All six
 Codex runs recovered from Windows `spawn EPERM` using tests without process
 isolation. This is a small configured-product comparison, not a causal harness
 or Reason parity claim. Source/baseline/runtimes/vault remain unchanged; cleanup

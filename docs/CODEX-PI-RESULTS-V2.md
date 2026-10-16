@@ -1,10 +1,17 @@
 # Codex versus Pi through 9router: v2 results
 
+**Later cost reconciliation:** [CODEX-PI-COST-AUDIT.md](CODEX-PI-COST-AUDIT.md)
+matches all 73 requests to router history. Pi's client input includes 2000 tokens
+of reporting padding per request: upstream input is 112300, not 192300. The 11
+missing cache fields are confirmed zero. At Standard API-equivalent rates, Pi is
+$0.865268 versus Codex $1.411920 (38.7% less). Actual OAuth billing remains unknown.
+The original client-counter observations below are retained and labeled as such.
+
 Both conditions passed all six runs, with **12/12 task passes and 68/68 trusted
 assertions**. Pi used less total input, while Codex used fewer requests and slightly
 less output. Aggregate cell time was similar. These results do not establish a
-monetary winner: cache reporting is incomplete on the Pi path and billing rates
-are unverified.
+actual monetary-billing winner. At initial capture, cache reporting and prices
+were unresolved; the later audit establishes the API-equivalent comparison only.
 
 The separately authorized campaign `codex-pi-v2-20261016` ran once at commit
 `ec343ad49b33689132d11d8e3cc8185e71684028`, using protocol hash
@@ -28,7 +35,7 @@ on both sides; Pi retained its harness/codemode and Codex retained native tools.
 | Task passes | 6/6 | 6/6 |
 | Trusted assertions | 34/34 | 34/34 |
 | Physical model requests | 33 | 40 |
-| Input tokens, including cached input | 432804 | 192300 |
+| Client-reported input, including cached input and any router padding | 432804 | 192300 |
 | Output tokens | 6996 | 7310 |
 | Reported cached input | 362880, complete | At least 69248, incomplete |
 | Requests without cache counters | 0/33 | 11/40 |
@@ -41,11 +48,15 @@ that is not evidence of statistical superiority. Cell time includes adapter
 startup, tool execution, cleanup and trusted verification. Request duration is a
 shared-gate observation, not isolated model compute time.
 
-The whole campaign took **639.255 seconds** including orchestration. Usage was
+The whole campaign took **639.255 seconds** including orchestration. Client-reported usage was
 **73 requests / 625104 input / 14306 output**, within every approved aggregate,
 per-cell, per-request and time ceiling. No extra paid run followed the campaign.
 
-## Why raw input does not establish price
+## Initial Cost Uncertainty (Resolved By The Later Audit)
+
+This section preserves the initial interpretation based only on client ledgers.
+It is superseded for API-equivalent cost by the linked reconciliation, which
+also discovered input padding; the original ledger is not rewritten.
 
 Codex reported 362880 cached tokens and 69924 uncached tokens. Pi reported 69248
 cached tokens, but cache counters were absent on 11 requests totaling 49659 input
@@ -127,7 +138,8 @@ to either side's paired totals. Across v1 plus v2, total actual usage is **74
 requests / 636898 input / 14414 output**. Both allowances are closed; unused
 capacity is not transferable to daily use or another campaign.
 
-Next evidence work is offline: isolate the Windows nested-process restriction,
-determine the gateway's missing-cache semantics, and obtain verified pricing or
-attributable billing. Larger/delegation tasks remain I25; any later paid
+The cache/counter reconciliation and Standard rate reference are now documented
+in the cost audit. Remaining evidence work is offline: isolate the Windows
+nested-process restriction and obtain attributable billing. Larger/delegation
+tasks remain I25; any later paid
 comparison requires a newly frozen protocol and explicit allowance.

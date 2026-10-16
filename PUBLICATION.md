@@ -39,6 +39,9 @@ I26 also excludes native Codex homes, raw request/tool envelopes, stderr/events,
 process receipts and provider configuration. The repository publishes the native
 binary hash and synthetic tests, not the installed Codex executable or its bundled
 instructions. Synthetic fixture directories remain under ignored `tests/.tmp/`.
+Cost reconciliation publishes aggregate counts, bundle hashes and reproducible
+arithmetic only. Raw router database rows, row IDs and account linkage remain in
+`agent/live-private/`; the router database and authentication stores are excluded.
 
 Original implementation provenance is recorded in
 `artifacts/checkpoint/public-source-snapshot.json`. New-machine bootstrap results

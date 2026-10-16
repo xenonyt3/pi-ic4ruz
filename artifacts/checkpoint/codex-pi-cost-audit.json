@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "campaignId": "codex-pi-v2-20261016",
+  "matchedRequests": 73,
+  "uniqueRouterRows": 73,
+  "maxTimestampDifferenceMs": 30,
+  "ratesUsdPerMillion": {
+    "input": "10",
+    "cached": "1",
+    "output": "50",
+    "cache_write": "12.5"
+  },
+  "rateReference": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+  "rateVerifiedDate": "2026-10-16",
+  "authType": "oauth",
+  "totals": [
+    {
+      "ledgerInput": 432804,
+      "upstreamInput": 432804,
+      "output": 6996,
+      "cached": 362880,
+      "reasoning": 395,
+      "recoveredZeroCache": 0,
+      "condition": "codex",
+      "requests": 33,
+      "uncached": 69924,
+      "routerCostUsd": "1.431670",
+      "standardApiEquivalentUsd": "1.411920"
+    },
+    {
+      "ledgerInput": 192300,
+      "upstreamInput": 112300,
+      "output": 7310,
+      "cached": 69248,
+      "reasoning": 0,
+      "recoveredZeroCache": 11,
+      "condition": "prototype",
+      "requests": 40,
+      "uncached": 43052,
+      "routerCostUsd": "0.865268",
+      "standardApiEquivalentUsd": "0.865268"
+    }
+  ],
+  "basis": "Standard short-context API-equivalent; no logged cache writes; reasoning already included in output",
+  "actualInvoiceVerified": false,
+  "modelRequestsPerformedByAudit": 0,
+  "matchDigest": "5ecd9ebe16635249807d140fdc26998f61c595fd99ffc4e9deb9443c0d8e61ae",
+  "auditedAt": "2026-10-16T16:45:15.124302+00:00",
+  "ledgerSource": "artifacts/checkpoint/codex-pi-live-v2.json",
+  "routerInstalledPackageVersion": "0.5.104",
+  "routerSourceHashes": {
+    "5330.js": "fe7030506fce3fc316d9083f16935f7b9f48c807e6562544ff338821733002a4",
+    "8920.js": "19a61472721b6c6d7a8c01e9598c17527a214ce80481442f375423f79051cbca",
+    "6763.js": "c8e75b18079bda0795a5945f555a5868677578a23fbb89ed185bd8cc7fcb64cd"
+  },
+  "sourceFindings": {
+    "inputPadding": "module 73483 export O9 adds 2000 to input_tokens/prompt_tokens and total_tokens; all 40 Chat Completions matches show this delta",
+    "reasoningDoubleCount": "calculateCostFromTokens adds reasoning_tokens at output rate after already charging completion_tokens",
+    "cacheOmissions": "all 11 missing client cache fields map uniquely to explicit router cached_tokens=0"
+  },
+  "officialSources": [
+    "https://developers.openai.com/api/docs/models/gpt-6-astra",
+    "https://developers.openai.com/api/docs/guides/token-counting",
+    "https://learn.chatgpt.com/docs/pricing"
+  ],
+  "offlineControls": {
+    "passed": 3,
+    "total": 3,
+    "cleanupConfirmed": true,
+    "initialCleanupFailure": "SQLite context manager did not close its handle; corrected with contextlib.closing before passing controls"
+  },
+  "rawLedgerModified": false,
+  "routerModified": false,
+  "privateRowMatchesPublished": false,
+  "prototypeSavingsUsd": "0.546652",
+  "prototypeSavingsPercent": 38.716924471641455,
+  "limits": "API-equivalent reference only; OAuth account invoice, subscription allocation, credits, service-tier adjustments and unreported fees are not established.",
+  "auditScriptSha256": "de0674e292ce0fc203dc1f9cd80c4d59ede1d52895ad0ce8e0c923772bd4e4dd",
+  "monetaryComponentsUsd": {
+    "codex": {
+      "uncachedInput": "0.69924",
+      "cachedInput": "0.36288",
+      "output": "0.3498"
+    },
+    "prototype": {
+      "uncachedInput": "0.43052",
+      "cachedInput": "0.069248",
+      "output": "0.3655"
+    }
+  }
+}

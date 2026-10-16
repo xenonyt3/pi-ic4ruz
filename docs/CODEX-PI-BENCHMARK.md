@@ -160,8 +160,12 @@ labeled review. Two attempts on three small tasks cannot prove general superiori
   native Codex/Pi tools and cleanup. The interrupted v1 attempt remains separate.
 - Observed behavior and resource comparison: see the v2 results; both passed 6/6,
   with different input/request totals, incomplete Pi cache detail and Codex EPERM.
-- Unknown: monetary ranking, exact EPERM cause, missing-cache semantics and
+- Unknown: actual OAuth billing, exact EPERM cause and
   broader/delegation/long-context quality. No general superiority is established.
+
+Later [cost reconciliation](CODEX-PI-COST-AUDIT.md) resolves the missing cache
+fields and client input padding for this campaign, establishing a Standard
+API-equivalent ranking. Actual OAuth billing and the other limitations remain open.
 
 Receipts: `artifacts/checkpoint/codex-pi-verification.json`,
 `artifacts/checkpoint/codex-native-fixture.json`, and
