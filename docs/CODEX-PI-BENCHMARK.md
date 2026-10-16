@@ -2,7 +2,9 @@
 
 I26 prepares an exploratory, paired comparison requested by the user. The current
 protocol is `codex-pi-v2`; [v1 stopped at its first request](CODEX-PI-RESULTS-V1.md)
-and has no valid paired result. Both
+and has no valid paired result. The separately approved
+[v2 campaign completed 12/12 passes](CODEX-PI-RESULTS-V2.md); both allowances are
+now closed. Both
 conditions select **9router / `cx/gpt-6-astra` / low effort**, with a configured
 32768-token context and 2000 output tokens per physical request. No paid run is
 authorized by implementation, preparation, or the historical I24 allowance.
@@ -41,8 +43,9 @@ latency or attribute adapter startup overhead to token efficiency.
 Codex 0.162.1 sends namespaced tool definitions inside `additional_tools` input
 items and invokes `functions.exec` as a custom tool. This format is preserved.
 The gate hashes these definitions and does not translate them into another agent
-protocol. V1 verified an initial 9router response and native command. Multi-turn
-compatibility of the corrected v2 path still needs a newly authorized live attempt.
+protocol. V2 verified multi-turn 9router streaming, native tools and complete
+accounting across all six Codex cells. This does not establish compatibility
+outside the pinned model, tested configuration and small corpus.
 
 ## Accounting and containment
 
@@ -97,7 +100,7 @@ the current source hashes. The native receipt must match the prepared protocol
 hash before live execution. Missing original baseline/reference prerequisites
 remain blocking; never replace them and call the suite fully accepted.
 
-## Proposed fresh allowance
+## V2 Allowance (Used And Closed)
 
 | Limit | Per cell | Whole campaign |
 | --- | ---: | ---: |
@@ -111,7 +114,9 @@ input reservation accommodates Codex's native prompt/schema envelope; both sides
 receive the same cap. Output is limited to 2000 per request on both sides.
 All cells share the aggregate authorization through fixed disjoint suballowances.
 
-Only after the user approves this new allowance, create a new private JSON file:
+V2 was explicitly approved and consumed 73 requests, 625104 input and 14306 output
+tokens in 639.255 seconds. Any future run needs new authorization, a fresh unused
+campaign ID and then a new private JSON file; this template is not permission:
 
 ```json
 {
@@ -151,10 +156,12 @@ labeled review. Two attempts on three small tasks cannot prove general superiori
 - Runtime-verified with synthetic responses: six native scenarios and **12/12
   scripted Codex/Pi cells**, including shell writes, credential environment
   exclusion, cancellation and confirmed cleanup. Campaign replay is rejected.
-- Runtime-verified with 9router at v1: one streamed response, one native read
-  command, actual usage accounting and cleanup. The campaign then stopped.
-- Unknown: v2 multi-turn paid compatibility, comparative model decisions, price
-  and broader workload quality. **No valid paired comparison exists.**
+- Runtime-verified with 9router at v2: 12/12 task passes, all 73 requests accounted,
+  native Codex/Pi tools and cleanup. The interrupted v1 attempt remains separate.
+- Observed behavior and resource comparison: see the v2 results; both passed 6/6,
+  with different input/request totals, incomplete Pi cache detail and Codex EPERM.
+- Unknown: monetary ranking, exact EPERM cause, missing-cache semantics and
+  broader/delegation/long-context quality. No general superiority is established.
 
 Receipts: `artifacts/checkpoint/codex-pi-verification.json`,
 `artifacts/checkpoint/codex-native-fixture.json`, and
@@ -162,6 +169,8 @@ Receipts: `artifacts/checkpoint/codex-pi-verification.json`,
 failures (loopback binding under the guard, incomplete fake Responses usage, and
 a cleanup receipt race) were fixed before these final runs. Their private fixture
 artifacts remain retained; they were not paid provider failures.
+The offline verification receipt predates v2 live authorization. The completed
+campaign's usage and current closed status are in `artifacts/checkpoint/codex-pi-live-v2.json`.
 
 Stop an active benchmark with Ctrl+C and wait for cleanup. Preserve its campaign,
 ledger and locks; reopening an existing campaign is rejected. Raw events, configs,

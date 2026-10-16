@@ -1,17 +1,29 @@
 # Continue on another device
 
+I26 v2 completed its separately approved live campaign through 9router / Astra low:
+**12/12 task passes**, 73 requests, 625104 input and 14306 output tokens. Codex and
+Pi each passed 6/6. Codex used 33 requests / 432804 input / 6996 output; Pi used
+40 / 192300 / 7310. Read [docs/CODEX-PI-RESULTS-V2.md](docs/CODEX-PI-RESULTS-V2.md).
+Cache details are missing on 11 Pi requests; money prices remain unknown. All six
+Codex runs recovered from Windows `spawn EPERM` using tests without process
+isolation. This is a small configured-product comparison, not a causal harness
+or Reason parity claim. Source/baseline/runtimes/vault remain unchanged; cleanup
+and all 73 usage records are confirmed. V1 is preserved separately. V2 is now
+closed too; no further inference is authorized by its remaining allowance.
+
 I26 adds the requested Codex-versus-Pi benchmark through the same 9router model.
 Read [docs/CODEX-PI-BENCHMARK.md](docs/CODEX-PI-BENCHMARK.md) before using
 `evaluate-behavior.mjs --comparison codex`. This is a new single-agent protocol,
 with native Codex Responses and Pi Chat Completions sharing LiveBudgetTransport.
 Codex CLI 0.162.1 is hash-pinned; native state is isolated per cell. Preparation
-and synthetic fixtures do not authorize paid inference. The proposed new ceiling
-is 144 requests / 2880000 input / 288000 output / 60 minutes, 2000 output/request.
+and synthetic fixtures do not authorize paid inference. The v2 authorization
+ceiling was 144 requests / 2880000 input / 288000 output / 60 minutes, 2000 output/request.
 The user approved v1, which stopped after its first Codex request due to an adapter
 stream-completion defect: **1 request / 11794 input / 108 output**, cleanup confirmed.
 Pi and the other 11 cells never started, so there is no valid paired comparison.
 Read [docs/CODEX-PI-RESULTS-V1.md](docs/CODEX-PI-RESULTS-V1.md). The used v1 allowance
-is closed; the corrected `codex-pi-v2` protocol needs new authorization.
+is closed; the corrected `codex-pi-v2` protocol was separately approved and
+completed as recorded above. Future campaigns need new authorization.
 Current I26 verification: **198/198 full offline acceptance PASS**, with source,
 both runtimes, original baseline and vault unchanged, zero unexpected tracked
 network attempts, and complete receipts. Native synthetic verification passes

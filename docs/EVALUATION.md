@@ -7,7 +7,10 @@ matched. The explicitly approved v1 campaign stopped at its first Codex request
 because of the broker's terminal-stream handling; see
 [the retained v1 result](CODEX-PI-RESULTS-V1.md). It consumed one accounted request
 (11794 input, 108 output), with confirmed cleanup and no Pi cell dispatched.
-The v2 fix is verified offline and requires a fresh authorization for paid testing.
+V2 was then separately approved and completed **12/12 task passes**, consuming
+73 requests / 625104 input / 14306 output, with confirmed cleanup and complete
+total usage. [V2 results](CODEX-PI-RESULTS-V2.md) retain cache-reporting and Windows
+EPERM limitations; no verified monetary winner follows. The allowance is closed.
 
 I24 now has a separate [behavior corpus/protocol](BEHAVIOR-EVALUATION.md). Its
 goal-only prompts and 12 fresh stock-core/prototype cells reuse the existing live

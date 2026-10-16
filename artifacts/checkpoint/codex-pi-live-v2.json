@@ -1,0 +1,748 @@
+{
+  "schemaVersion": 1,
+  "campaignId": "codex-pi-v2-20261016",
+  "sourceCommit": "ec343ad49b33689132d11d8e3cc8185e71684028",
+  "protocol": "codex-pi-v2",
+  "protocolHash": "a4f9010c3b698add88b9f9b8eef7c629055a3445909443b3b4b6ab93f1a0803c",
+  "model": {
+    "provider": "9router",
+    "model": "cx/gpt-6-astra",
+    "thinkingLevel": "low",
+    "contextWindow": 32768,
+    "api": "openai-completions"
+  },
+  "codex": {
+    "version": "codex-cli 0.162.1",
+    "platform": "win32",
+    "sha256": "dd13bdb162a184fa04039488b234a8258ef9b76f84e926c505d5742b19249a6a"
+  },
+  "approvedLimits": {
+    "schemaVersion": 1,
+    "authorized": true,
+    "campaignId": "codex-pi-v2-20261016",
+    "protocolHash": "a4f9010c3b698add88b9f9b8eef7c629055a3445909443b3b4b6ab93f1a0803c",
+    "maxRequests": 144,
+    "maxInputTokens": 2880000,
+    "maxOutputTokens": 288000,
+    "maxDurationMs": 3600000
+  },
+  "perCellLimits": {
+    "maxRequests": 12,
+    "maxInputTokens": 240000,
+    "maxOutputTokens": 24000,
+    "perRequestMaxOutputTokens": 2000,
+    "maxDurationMs": 300000
+  },
+  "status": "finished",
+  "allTasksCorrect": true,
+  "validPairedComparisons": 6,
+  "campaignWallTimeMs": 639255,
+  "usage": {
+    "requests": 73,
+    "inputTokens": 625104,
+    "outputTokens": 14306,
+    "cost": null
+  },
+  "totals": [
+    {
+      "condition": "codex",
+      "cells": 6,
+      "passed": 6,
+      "requests": 33,
+      "inputTokens": 432804,
+      "outputTokens": 6996,
+      "reportedCachedInput": 362880,
+      "cacheUnknownRequests": 0,
+      "cacheUnknownInput": 0,
+      "wallTimeMs": 320794,
+      "requestDurationMs": 250797,
+      "toolErrors": 10,
+      "assertions": 34
+    },
+    {
+      "condition": "prototype",
+      "cells": 6,
+      "passed": 6,
+      "requests": 40,
+      "inputTokens": 192300,
+      "outputTokens": 7310,
+      "reportedCachedInput": 69248,
+      "cacheUnknownRequests": 11,
+      "cacheUnknownInput": 49659,
+      "wallTimeMs": 312069,
+      "requestDurationMs": 289713,
+      "toolErrors": 2,
+      "assertions": 34
+    }
+  ],
+  "cells": [
+    {
+      "id": "invoice-codex-1",
+      "taskId": "invoice",
+      "condition": "codex",
+      "attempt": 1,
+      "passed": true,
+      "requests": 6,
+      "inputTokens": 80039,
+      "outputTokens": 1753,
+      "reportedCachedInput": 64256,
+      "cacheUnknownRequests": 0,
+      "cacheUnknownInput": 0,
+      "wallTimeMs": 69147,
+      "requestDurationMs": 57419,
+      "cleanupConfirmed": true,
+      "writerLeaseReleased": true,
+      "ledgerLockReleased": true,
+      "allUsageAccounted": true,
+      "allHttp200": true,
+      "responseModels": [
+        "gpt-6-astra"
+      ],
+      "toolErrors": 1,
+      "scopeViolations": [],
+      "assertions": 9,
+      "workspaceHash": "27cdab3ccba53c03cc10f6c62a616987d1040204315b137d394d956fc4fb0674",
+      "changedFiles": [
+        "src/invoice.mjs",
+        "src/money.mjs"
+      ],
+      "traceHash": "498d2004bf13094415376776d3eb13aec6af6c30cd7e57aca4d6b100f8cca7bf",
+      "traceReview": {
+        "reviewer": "Codex; not independent human review",
+        "epermEventLines": [
+          19
+        ],
+        "nonzeroCommandEventLines": [
+          19
+        ],
+        "codemodeEventSequences": [],
+        "syntaxErrorEventLines": [],
+        "finalTestClaims": "consistent with recorded commands and results",
+        "recovery": "recovered from Windows spawn EPERM using test-isolation=none",
+        "strategyNote": "proportionate to the small task",
+        "successfulCheckEventLines": [
+          18,
+          22
+        ]
+      }
+    },
+    {
+      "id": "invoice-prototype-1",
+      "taskId": "invoice",
+      "condition": "prototype",
+      "attempt": 1,
+      "passed": true,
+      "requests": 8,
+      "inputTokens": 38650,
+      "outputTokens": 1830,
+      "reportedCachedInput": 12288,
+      "cacheUnknownRequests": 3,
+      "cacheUnknownInput": 14565,
+      "wallTimeMs": 78015,
+      "requestDurationMs": 72076,
+      "cleanupConfirmed": true,
+      "writerLeaseReleased": true,
+      "ledgerLockReleased": true,
+      "allUsageAccounted": true,
+      "allHttp200": true,
+      "responseModels": [
+        "gpt-6-astra"
+      ],
+      "toolErrors": 0,
+      "scopeViolations": [],
+      "assertions": 9,
+      "workspaceHash": "4e67905caed5dd7a755f2e8acea567a9b9888aa5c7a150a5d34b8eedc73c433c",
+      "changedFiles": [
+        "src/invoice.mjs",
+        "src/money.mjs"
+      ],
+      "traceHash": "3c2e7995c0ddec2e246f50bcea7fb3d882b399b76253ef5a98c1bcdc4f106026",
+      "traceReview": {
+        "reviewer": "Codex; not independent human review",
+        "epermEventLines": [],
+        "nonzeroCommandEventLines": [],
+        "codemodeEventSequences": [
+          3,
+          21
+        ],
+        "syntaxErrorEventLines": [],
+        "finalTestClaims": "consistent with recorded commands and results",
+        "recovery": "no failure observed",
+        "strategyNote": "proportionate to the small task",
+        "successfulCheckEventLines": [
+          24,
+          25
+        ]
+      }
+    },
+    {
+      "id": "investigation-codex-1",
+      "taskId": "investigation",
+      "condition": "codex",
+      "attempt": 1,
+      "passed": true,
+      "requests": 5,
+      "inputTokens": 63682,
+      "outputTokens": 680,
+      "reportedCachedInput": 49408,
+      "cacheUnknownRequests": 0,
+      "cacheUnknownInput": 0,
+      "wallTimeMs": 40186,
+      "requestDurationMs": 29467,
+      "cleanupConfirmed": true,
+      "writerLeaseReleased": true,
+      "ledgerLockReleased": true,
+      "allUsageAccounted": true,
+      "allHttp200": true,
+      "responseModels": [
+        "gpt-6-astra"
+      ],
+      "toolErrors": 1,
+      "scopeViolations": [],
+      "assertions": 3,
+      "workspaceHash": "4263ada51e63b50aff772f55cd5d843910405e33bf2644f773d7963901566c8b",
+      "changedFiles": [
+        "findings.json"
+      ],
+      "traceHash": "93aaf6ca92154d157e57237353e531a0843148d6fc8bf5b2d09c75c91a3944e8",
+      "traceReview": {
+        "reviewer": "Codex; not independent human review",
+        "epermEventLines": [
+          11
+        ],
+        "nonzeroCommandEventLines": [
+          11
+        ],
+        "codemodeEventSequences": [],
+        "syntaxErrorEventLines": [],
+        "finalTestClaims": "consistent with recorded commands and results",
+        "recovery": "recovered from Windows spawn EPERM using test-isolation=none",
+        "strategyNote": "proportionate to the small task",
+        "successfulCheckEventLines": [
+          15
+        ]
+      }
+    },
+    {
+      "id": "investigation-prototype-1",
+      "taskId": "investigation",
+      "condition": "prototype",
+      "attempt": 1,
+      "passed": true,
+      "requests": 7,
+      "inputTokens": 32887,
+      "outputTokens": 802,
+      "reportedCachedInput": 14464,
+      "cacheUnknownRequests": 1,
+      "cacheUnknownInput": 3849,
+      "wallTimeMs": 39431,
+      "requestDurationMs": 37281,
+      "cleanupConfirmed": true,
+      "writerLeaseReleased": true,
+      "ledgerLockReleased": true,
+      "allUsageAccounted": true,
+      "allHttp200": true,
+      "responseModels": [
+        "gpt-6-astra"
+      ],
+      "toolErrors": 0,
+      "scopeViolations": [],
+      "assertions": 3,
+      "workspaceHash": "1f51452ce35f969b444a44eb99354fbf3564fb0ff183ac01e269e455d3997e64",
+      "changedFiles": [
+        "findings.json"
+      ],
+      "traceHash": "6ab215ad4d75c726ad5a47033e40fa1f3f825687186d3cfa294405c2024f92c2",
+      "traceReview": {
+        "reviewer": "Codex; not independent human review",
+        "epermEventLines": [],
+        "nonzeroCommandEventLines": [],
+        "codemodeEventSequences": [
+          3
+        ],
+        "syntaxErrorEventLines": [],
+        "finalTestClaims": "consistent with recorded commands and results",
+        "recovery": "no failure observed",
+        "strategyNote": "proportionate to the small task",
+        "successfulCheckEventLines": [
+          18
+        ]
+      }
+    },
+    {
+      "id": "recovery-codex-1",
+      "taskId": "recovery",
+      "condition": "codex",
+      "attempt": 1,
+      "passed": true,
+      "requests": 6,
+      "inputTokens": 80324,
+      "outputTokens": 972,
+      "reportedCachedInput": 75264,
+      "cacheUnknownRequests": 0,
+      "cacheUnknownInput": 0,
+      "wallTimeMs": 53707,
+      "requestDurationMs": 41788,
+      "cleanupConfirmed": true,
+      "writerLeaseReleased": true,
+      "ledgerLockReleased": true,
+      "allUsageAccounted": true,
+      "allHttp200": true,
+      "responseModels": [
+        "gpt-6-astra"
+      ],
+      "toolErrors": 2,
+      "scopeViolations": [],
+      "assertions": 5,
+      "workspaceHash": "db1930af6943276e639ff08f05bd4a94353881ec9c024b2e2f3bd1ca0a32f1bc",
+      "changedFiles": [
+        "src/cache.mjs"
+      ],
+      "traceHash": "93d06c09133baf159e10de54b1b6630c036a4c5acf0c056841619b69c0c955b5",
+      "traceReview": {
+        "reviewer": "Codex; not independent human review",
+        "epermEventLines": [
+          7,
+          15
+        ],
+        "nonzeroCommandEventLines": [
+          9,
+          15
+        ],
+        "codemodeEventSequences": [],
+        "syntaxErrorEventLines": [],
+        "finalTestClaims": "consistent with recorded commands and results",
+        "recovery": "reproduced regression, fixed normalization, verified again",
+        "strategyNote": "unnecessary npm appended-flag retry after identifying a working direct test command",
+        "successfulCheckEventLines": [
+          17,
+          21
+        ]
+      }
+    },
+    {
+      "id": "recovery-prototype-1",
+      "taskId": "recovery",
+      "condition": "prototype",
+      "attempt": 1,
+      "passed": true,
+      "requests": 6,
+      "inputTokens": 30097,
+      "outputTokens": 1068,
+      "reportedCachedInput": 9600,
+      "cacheUnknownRequests": 2,
+      "cacheUnknownInput": 9372,
+      "wallTimeMs": 46606,
+      "requestDurationMs": 41294,
+      "cleanupConfirmed": true,
+      "writerLeaseReleased": true,
+      "ledgerLockReleased": true,
+      "allUsageAccounted": true,
+      "allHttp200": true,
+      "responseModels": [
+        "gpt-6-astra"
+      ],
+      "toolErrors": 1,
+      "scopeViolations": [],
+      "assertions": 5,
+      "workspaceHash": "db1930af6943276e639ff08f05bd4a94353881ec9c024b2e2f3bd1ca0a32f1bc",
+      "changedFiles": [
+        "src/cache.mjs"
+      ],
+      "traceHash": "259b2bb95da9e4b91dd7b643b053cff9aca69adc83e08b1ce0edad411a23a8e7",
+      "traceReview": {
+        "reviewer": "Codex; not independent human review",
+        "epermEventLines": [],
+        "nonzeroCommandEventLines": [
+          11
+        ],
+        "codemodeEventSequences": [
+          3,
+          13,
+          23
+        ],
+        "syntaxErrorEventLines": [],
+        "finalTestClaims": "consistent with recorded commands and results",
+        "recovery": "reproduced regression, fixed normalization, verified again",
+        "strategyNote": "proportionate to the small task",
+        "successfulCheckEventLines": [
+          27,
+          29
+        ]
+      }
+    },
+    {
+      "id": "recovery-prototype-2",
+      "taskId": "recovery",
+      "condition": "prototype",
+      "attempt": 2,
+      "passed": true,
+      "requests": 6,
+      "inputTokens": 30028,
+      "outputTokens": 1012,
+      "reportedCachedInput": 9600,
+      "cacheUnknownRequests": 2,
+      "cacheUnknownInput": 9361,
+      "wallTimeMs": 43179,
+      "requestDurationMs": 39522,
+      "cleanupConfirmed": true,
+      "writerLeaseReleased": true,
+      "ledgerLockReleased": true,
+      "allUsageAccounted": true,
+      "allHttp200": true,
+      "responseModels": [
+        "gpt-6-astra"
+      ],
+      "toolErrors": 1,
+      "scopeViolations": [],
+      "assertions": 5,
+      "workspaceHash": "db1930af6943276e639ff08f05bd4a94353881ec9c024b2e2f3bd1ca0a32f1bc",
+      "changedFiles": [
+        "src/cache.mjs"
+      ],
+      "traceHash": "8529e3626a4ca0a28b2e5adf66596d81ead5eddd109a736bd8ef6731db256411",
+      "traceReview": {
+        "reviewer": "Codex; not independent human review",
+        "epermEventLines": [],
+        "nonzeroCommandEventLines": [
+          11
+        ],
+        "codemodeEventSequences": [
+          3,
+          13,
+          23
+        ],
+        "syntaxErrorEventLines": [],
+        "finalTestClaims": "consistent with recorded commands and results",
+        "recovery": "reproduced regression, fixed normalization, verified again",
+        "strategyNote": "proportionate to the small task",
+        "successfulCheckEventLines": [
+          27,
+          29
+        ]
+      }
+    },
+    {
+      "id": "recovery-codex-2",
+      "taskId": "recovery",
+      "condition": "codex",
+      "attempt": 2,
+      "passed": true,
+      "requests": 6,
+      "inputTokens": 80106,
+      "outputTokens": 1071,
+      "reportedCachedInput": 64256,
+      "cacheUnknownRequests": 0,
+      "cacheUnknownInput": 0,
+      "wallTimeMs": 47534,
+      "requestDurationMs": 37291,
+      "cleanupConfirmed": true,
+      "writerLeaseReleased": true,
+      "ledgerLockReleased": true,
+      "allUsageAccounted": true,
+      "allHttp200": true,
+      "responseModels": [
+        "gpt-6-astra"
+      ],
+      "toolErrors": 4,
+      "scopeViolations": [],
+      "assertions": 5,
+      "workspaceHash": "db1930af6943276e639ff08f05bd4a94353881ec9c024b2e2f3bd1ca0a32f1bc",
+      "changedFiles": [
+        "src/cache.mjs"
+      ],
+      "traceHash": "df003b0b07e7bcf0fabdb2d8c281c74a5595b8154bfcf3c55f44528619295495",
+      "traceReview": {
+        "reviewer": "Codex; not independent human review",
+        "epermEventLines": [
+          9,
+          16
+        ],
+        "nonzeroCommandEventLines": [
+          8,
+          9,
+          11,
+          16
+        ],
+        "codemodeEventSequences": [],
+        "syntaxErrorEventLines": [],
+        "finalTestClaims": "consistent with recorded commands and results",
+        "recovery": "reproduced regression, fixed normalization, verified again",
+        "strategyNote": "unnecessary npm appended-flag retry after identifying a working direct test command",
+        "successfulCheckEventLines": [
+          20,
+          21
+        ]
+      }
+    },
+    {
+      "id": "investigation-prototype-2",
+      "taskId": "investigation",
+      "condition": "prototype",
+      "attempt": 2,
+      "passed": true,
+      "requests": 6,
+      "inputTokens": 27910,
+      "outputTokens": 751,
+      "reportedCachedInput": 11904,
+      "cacheUnknownRequests": 1,
+      "cacheUnknownInput": 3849,
+      "wallTimeMs": 33762,
+      "requestDurationMs": 31222,
+      "cleanupConfirmed": true,
+      "writerLeaseReleased": true,
+      "ledgerLockReleased": true,
+      "allUsageAccounted": true,
+      "allHttp200": true,
+      "responseModels": [
+        "gpt-6-astra"
+      ],
+      "toolErrors": 0,
+      "scopeViolations": [],
+      "assertions": 3,
+      "workspaceHash": "6df6798211f71c00b6a47055998fe77923ad7cc0b7ed29a69b751e6ff9b03bba",
+      "changedFiles": [
+        "findings.json"
+      ],
+      "traceHash": "f83c064de325924de57a054c2e2ab57a8e95041637409066c37390344b25fb06",
+      "traceReview": {
+        "reviewer": "Codex; not independent human review",
+        "epermEventLines": [],
+        "nonzeroCommandEventLines": [],
+        "codemodeEventSequences": [
+          3,
+          15
+        ],
+        "syntaxErrorEventLines": [],
+        "finalTestClaims": "consistent with recorded commands and results",
+        "recovery": "no failure observed",
+        "strategyNote": "proportionate to the small task",
+        "successfulCheckEventLines": [
+          19
+        ]
+      }
+    },
+    {
+      "id": "investigation-codex-2",
+      "taskId": "investigation",
+      "condition": "codex",
+      "attempt": 2,
+      "passed": true,
+      "requests": 5,
+      "inputTokens": 63520,
+      "outputTokens": 797,
+      "reportedCachedInput": 59904,
+      "cacheUnknownRequests": 0,
+      "cacheUnknownInput": 0,
+      "wallTimeMs": 39360,
+      "requestDurationMs": 30789,
+      "cleanupConfirmed": true,
+      "writerLeaseReleased": true,
+      "ledgerLockReleased": true,
+      "allUsageAccounted": true,
+      "allHttp200": true,
+      "responseModels": [
+        "gpt-6-astra"
+      ],
+      "toolErrors": 1,
+      "scopeViolations": [],
+      "assertions": 3,
+      "workspaceHash": "97ebe2d3f12e8189e639e6cd0805b04b0a17a498154032a571343464156c19bb",
+      "changedFiles": [
+        "findings.json"
+      ],
+      "traceHash": "3415c9d102f145d8af57d6ae6449938dbbd21a01b7cf3003a7c2daa3230edb0c",
+      "traceReview": {
+        "reviewer": "Codex; not independent human review",
+        "epermEventLines": [
+          9
+        ],
+        "nonzeroCommandEventLines": [
+          9
+        ],
+        "codemodeEventSequences": [],
+        "syntaxErrorEventLines": [],
+        "finalTestClaims": "consistent with recorded commands and results",
+        "recovery": "recovered from Windows spawn EPERM using test-isolation=none",
+        "strategyNote": "proportionate to the small task",
+        "successfulCheckEventLines": [
+          13
+        ]
+      }
+    },
+    {
+      "id": "invoice-prototype-2",
+      "taskId": "invoice",
+      "condition": "prototype",
+      "attempt": 2,
+      "passed": true,
+      "requests": 7,
+      "inputTokens": 32728,
+      "outputTokens": 1847,
+      "reportedCachedInput": 11392,
+      "cacheUnknownRequests": 2,
+      "cacheUnknownInput": 8663,
+      "wallTimeMs": 71076,
+      "requestDurationMs": 68318,
+      "cleanupConfirmed": true,
+      "writerLeaseReleased": true,
+      "ledgerLockReleased": true,
+      "allUsageAccounted": true,
+      "allHttp200": true,
+      "responseModels": [
+        "gpt-6-astra"
+      ],
+      "toolErrors": 0,
+      "scopeViolations": [],
+      "assertions": 9,
+      "workspaceHash": "bd48aaa5b78c2711cbf22b974dcd576ef843a624f194ca16b0022f79984eba29",
+      "changedFiles": [
+        "src/invoice.mjs",
+        "src/money.mjs"
+      ],
+      "traceHash": "cc72e7fb94e310d4c556a701e4d70357296801f2ba02c833142e17d1460b75e5",
+      "traceReview": {
+        "reviewer": "Codex; not independent human review",
+        "epermEventLines": [],
+        "nonzeroCommandEventLines": [],
+        "codemodeEventSequences": [
+          3,
+          21
+        ],
+        "syntaxErrorEventLines": [],
+        "finalTestClaims": "consistent with recorded commands and results",
+        "recovery": "no failure observed",
+        "strategyNote": "proportionate to the small task",
+        "successfulCheckEventLines": [
+          24,
+          25
+        ]
+      }
+    },
+    {
+      "id": "invoice-codex-2",
+      "taskId": "invoice",
+      "condition": "codex",
+      "attempt": 2,
+      "passed": true,
+      "requests": 5,
+      "inputTokens": 65133,
+      "outputTokens": 1723,
+      "reportedCachedInput": 49792,
+      "cacheUnknownRequests": 0,
+      "cacheUnknownInput": 0,
+      "wallTimeMs": 70860,
+      "requestDurationMs": 54043,
+      "cleanupConfirmed": true,
+      "writerLeaseReleased": true,
+      "ledgerLockReleased": true,
+      "allUsageAccounted": true,
+      "allHttp200": true,
+      "responseModels": [
+        "gpt-6-astra"
+      ],
+      "toolErrors": 1,
+      "scopeViolations": [],
+      "assertions": 9,
+      "workspaceHash": "9524a8798f7a0e0ab71ea484acc5b6bc544e1d620cf34a5c65a0a18863c04026",
+      "changedFiles": [
+        "src/invoice.mjs",
+        "src/money.mjs"
+      ],
+      "traceHash": "0e7f7023a5b3990ebc0688963e92ba80432bd66ce232b79a979d0477c90d0a8c",
+      "traceReview": {
+        "reviewer": "Codex; not independent human review",
+        "epermEventLines": [
+          15
+        ],
+        "nonzeroCommandEventLines": [
+          15
+        ],
+        "codemodeEventSequences": [],
+        "syntaxErrorEventLines": [],
+        "finalTestClaims": "consistent with recorded commands and results",
+        "recovery": "recovered from Windows spawn EPERM using test-isolation=none",
+        "strategyNote": "proportionate to the small task",
+        "successfulCheckEventLines": [
+          17,
+          19
+        ]
+      }
+    }
+  ],
+  "allLimitsRespected": true,
+  "allCodexResponsesCompleted": true,
+  "cacheAccounting": {
+    "codex": {
+      "cachedInput": 362880,
+      "uncachedInput": 69924,
+      "unknownRequests": 0
+    },
+    "prototype": {
+      "reportedCachedInput": 69248,
+      "unknownRequests": 11,
+      "inputInUnknownRequests": 49659,
+      "cachedInputBounds": [
+        69248,
+        118907
+      ],
+      "uncachedInputBounds": [
+        73393,
+        123052
+      ]
+    },
+    "missingCacheCountsAreNotZero": true,
+    "inputIncludesCachedTokens": true,
+    "reportedCountersValidated": true
+  },
+  "postRunAudit": {
+    "sourceAcceptanceStillMatches": true,
+    "modelRequestsAtBeforeSnapshot": 0,
+    "vaultUnchanged": true,
+    "vaultFiles": 289,
+    "v1LedgerAndCampaignUnchanged": true,
+    "credentialScan": {
+      "files": 3116,
+      "hits": 0
+    },
+    "allCleanupConfirmed": true,
+    "allUsageAccounted": true,
+    "allHttp200": true,
+    "baselineAndBothRuntimesVerified": true,
+    "postRunPreparationPassed": true,
+    "postRunPreparationProtocolHash": "a4f9010c3b698add88b9f9b8eef7c629055a3445909443b3b4b6ab93f1a0803c"
+  },
+  "review": {
+    "kind": "Codex trace review, not independent human review",
+    "humanReviewComplete": false,
+    "codexEpermCells": 6,
+    "prototypeEpermCells": 0,
+    "epermCause": "observed in the Codex Windows subprocess environment; exact sandbox/job/Node cause not isolated",
+    "potentialReferenceOrSiblingAccessObserved": false,
+    "scope": "review of recorded command/tool traces; not an OS-level read-confinement proof",
+    "compaction": {
+      "prototypeObserved": 0,
+      "codex": "not instrumented"
+    },
+    "delegation": "disabled by the single-agent protocol",
+    "pricing": "unknown; no monetary winner",
+    "interpretation": "small exploratory comparison of these configured products, not a causal harness estimate or general superiority"
+  },
+  "historicalV1": {
+    "requests": 1,
+    "inputTokens": 11794,
+    "outputTokens": 108,
+    "includedInPairedTotals": false,
+    "receipt": "artifacts/checkpoint/codex-pi-live-v1.json"
+  },
+  "cumulativeV1AndV2": {
+    "requests": 74,
+    "inputTokens": 636898,
+    "outputTokens": 14414
+  },
+  "remainingAllowanceReusable": false,
+  "furtherPaidRequests": 0,
+  "startedAt": "2026-10-16T15:44:18.639Z",
+  "completedAt": "2026-10-16T15:54:57.894Z",
+  "nativeTerminalReceipts": 33
+}

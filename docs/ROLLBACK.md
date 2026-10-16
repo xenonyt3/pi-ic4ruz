@@ -9,6 +9,8 @@ Return to the standard offline Pi launcher; no global rollback is required.
 The v1 Codex/Pi campaign is stopped and retained. Its unused quota must not be
 transferred to v2. To inspect the original stream-ending behavior, use commit
 `e521a9d` in a separate checkout without running its consumed live campaign.
+V2 subsequently completed all 12 cells; preserve its separate ledgers too. Do not
+reuse the remaining quota for daily live use, another comparison or a rerun.
 
 I24 evaluation is opt-in through `scripts/evaluate-behavior.mjs`; existing launchers
 keep their behavior. Interrupt the campaign to cancel active parent/child work and
