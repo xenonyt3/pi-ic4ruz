@@ -1,10 +1,15 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import {pathToFileURL} from 'node:url';
 import { LiveBudgetTransport } from './live-budget-transport.mjs';
-import { root, canonicalPath, isWithin } from './paths.mjs';
+import { root, canonicalPath, isWithin, resolvePrototypePaths } from './paths.mjs';
 
 export async function createLiveRuntime({config,budget,key,workspace,endpoint,options={},fetchImpl=globalThis.fetch,directory}) {
-  const {sdk,ai}=await import('./upstream.mjs');
+  const condition=options.evaluationCondition??'prototype';
+  if(!['prototype','stock-core'].includes(condition))throw new Error('LIVE_EVALUATION_CONDITION_INVALID');
+  const {sdk,ai}=condition==='stock-core'
+    ? await import(pathToFileURL(resolvePrototypePaths(root,'stock').runtimeExports).href)
+    : await import('./upstream.mjs');
   const {registerHarness}=await import('./harness.ts');
   const {createProcessChildTransport}=await import('./child-supervisor.ts');
   const {createOwnedShellOperations}=await import('./windows-tools.ts');
@@ -84,7 +89,9 @@ export async function createLiveRuntime({config,budget,key,workspace,endpoint,op
       if(!binding)sessionManager.appendCustomEntry('live_allowance',{allowanceId:budget.allowanceId,fingerprint:gate.state.fingerprint});
       const harnessConfig=JSON.parse(fs.readFileSync(path.join(root,'config/harness.json'),'utf8'));
       harnessConfig.features.brain=false;harnessConfig.provider=model.provider;harnessConfig.model=model.id;
-      const settingsManager=sdk.SettingsManager.inMemory({packages:[],defaultTools:['read','bash','edit','write','codemode'],hideThinkingBlock:true,cacheWarming:'off',retry:{enabled:false,maxRetries:0,provider:{maxRetries:0}},
+      if(condition==='stock-core')for(const name of ['codemode','delegation','context'])harnessConfig.features[name]=false;
+      if(options.headlessEvaluation||condition==='stock-core')harnessConfig.ui.reasonTerminal=false;
+      const settingsManager=sdk.SettingsManager.inMemory({packages:[],defaultTools:condition==='stock-core'?['read','bash','edit','write']:['read','bash','edit','write','codemode'],hideThinkingBlock:true,cacheWarming:'off',retry:{enabled:false,maxRetries:0,provider:{maxRetries:0}},
         compaction:{enabled:true,reserveTokens:Math.min(16384,Math.floor(config.contextWindow/4)),keepRecentTokens:Math.min(20000,Math.floor(config.contextWindow/4))},enableAnalytics:false,enableInstallTelemetry:false});
       const services=await sdk.createAgentSessionServices({cwd:workspace,agentDir,settingsManager,modelRuntime:runtime,resourceLoaderOptions:{
         noExtensions:true,noSkills:true,noPromptTemplates:true,noThemes:true,noContextFiles:true,systemPromptOverride:()=>'',appendSystemPromptOverride:()=>[],extensionFactories:[pi=>{

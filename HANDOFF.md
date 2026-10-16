@@ -1,5 +1,17 @@
 # Continue on another device
 
+I24 offline preparation adds three synthetic behavior tasks and a goal-only paired
+stock-core/prototype protocol. Read [docs/BEHAVIOR-EVALUATION.md](docs/BEHAVIOR-EVALUATION.md).
+Use `node scripts/evaluate-behavior.mjs --dry-run` or `--prepare` without inference.
+The proposed 12-cell live campaign needs a new explicit allowance; the I23 smoke
+authorization does not cover it. Human strategy/recovery/honesty review stays
+unscored until real traces exist; synthetic calibration is not model performance.
+Current I24 acceptance is **186/186 PASS**, including 15 behavior tests and 51 UI
+tests, with source/both runtimes/baseline/vault unchanged and zero unexpected network
+attempts. Preparation passes all three negative/reference controls (16 assertions).
+Receipt: `artifacts/checkpoint/behavior-verification.json`. The 171/171 I23 result
+below is retained as the previous milestone, not the current source acceptance.
+
 I23 adds an explicitly opted-in interactive live launcher. Start with
 [docs/LIVE.md](docs/LIVE.md): `launch-live.mjs --live --config PATH`, local
 credential environment variable, pinned provider/model and a new persistent

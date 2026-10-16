@@ -1,5 +1,12 @@
 # Rollback prototype
 
+I24 evaluation is opt-in through `scripts/evaluate-behavior.mjs`; existing launchers
+keep their behavior. Interrupt the campaign to cancel active parent/child work and
+wait for cleanup. Preserve `agent/live-private/behavior-campaigns/` and per-cell
+ledgers; an existing campaign is never replayed or replenished. Workspaces under
+`artifacts/evaluations/behavior/` are disposable fixtures. Selecting stock-core for
+an evaluation does not change `config/runtime-selection.json` or another Pi install.
+
 For the interactive-live entrypoint, interrupt active work, then exit Pi and
 confirm child cleanup and writer lease release. Return to `node launch.mjs` for
 offline mode; do not flip `config/harness.json.liveInference`. Keep the ignored

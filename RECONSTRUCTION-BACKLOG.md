@@ -6,14 +6,51 @@ Dokumen kerja aktif berada di `D:/pi-ic4ruz`; evidence audit tetap di `D:/reason
 
 ## Urutan berikutnya: I24 evaluasi behaviour mandiri - 16 Oktober 2026 WIB
 
-Status: **PLANNED / BELUM DIJALANKAN**. Pengguna meminta urutan ini dicatat ke
-backlog. Pencatatan ini tidak mengaktifkan inference atau allowance baru.
+Status: **LANGKAH 1-3 SELESAI OFFLINE; LANGKAH 4 MENUNGGU ALLOWANCE BARU**.
+Pengguna meminta eksekusi berurutan. Langkah 1-3 kini diimplementasikan dan
+diverifikasi offline; langkah 4 memiliki protokol serta proposal allowance baru.
+Campaign berbayar dan analisis keputusan model pada langkah 5 menunggu otorisasi
+allowance tersebut. Allowance smoke I23 tidak digunakan kembali.
+
+- Langkah 1: tiga fixture sintetis dengan starting-tree hashes, scope perubahan,
+  kontrak dan verifier terpercaya. Negative controls gagal sebagaimana diharapkan;
+  reference solutions lulus 16 assertion. Verifier menolak test tampering, log palsu,
+  import escape, hang dan symlink. `tests/fixtures/behavior/` sudah dibuat.
+- Langkah 2: prompt tujuan tanpa instruksi codemode/delegation dan rubrik berbukti
+  tersedia di `docs/BEHAVIOR-EVALUATION.md`. Correctness/scope otomatis dipisahkan
+  dari strategy/recovery/honesty yang tetap unreviewed sampai trace model ditinjau.
+- Langkah 3: SDK stock-core terpasang di checkout dan prototype memakai model/effort,
+  workspace, prompt, safety policy serta batas yang sama. Selector/runtime global
+  tidak diubah. Kalibrasi menjalankan semua 12 cell dengan provider sintetis;
+  stock benar-benar memakai kelas SDK stock, bukan sekadar label kondisi.
+- Langkah 4 (persiapan): dua attempt untuk setiap pasangan task/kondisi, urutan
+  dibalik pada attempt kedua. Proposal maksimum 144 request / 1440000 input /
+  144000 output / 60 menit total; tiap cell 12 request / 120000 input / 12000 output /
+  5 menit, output per request 1000. Belum diotorisasi; harga uang unknown.
+- Reuse: runner corpus `scripts/evaluate-behavior.mjs` memakai `createLiveRuntime`,
+  `LiveBudgetTransport`, broker child dan cleanup yang sama. Suballowance tetap
+  terpisah per cell dengan total cap tetap, tanpa transfer/replay; campaign yang
+  sudah ada ditolak. Tidak membuat transport atau mesin pricing baru.
+- Temuan kalibrasi: inherited `NODE_TEST_CONTEXT` menyebabkan nested `node --test`
+  exit 0 sambil melewati tes. Fixture shell kini menghapus marker tersebut dan
+  memverifikasi tepat satu kegagalan awal pada recovery serta sukses sesudahnya.
+- Tested: **186/186 full acceptance PASS**, termasuk 15 tes I24 dan 51 tes UI,
+  tanpa failed/cancelled/skipped. Source, kedua runtime, baseline 5599 file + sumber
+  fd dan vault unchanged; unexpected network attempts 0, receipts lengkap.
+  Report: `artifacts/verification/runs/2026-10-16T12-06-26.883Z/report.json`.
+  `node scripts/evaluate-behavior.mjs --prepare` juga PASS, tanpa request model;
+  receipt/protokol: `artifacts/checkpoint/behavior-preparation.json`.
+- Runtime-verified (sintetis): kedua SDK menjalankan 12 cell berurutan dengan tools
+  dan shell nyata, hasil verifier benar, kegagalan awal recovery teramati, quota
+  tidak dipinjam antar-cell, cleanup confirmed dan selector runtime unchanged.
+- Inference berbayar tambahan: 0. Reason parity, pricing, kualitas keputusan mandiri
+  dan hasil campaign nyata masih unknown. Proposal lokal tetap authorized=false.
 
 1. **Siapkan corpus dan verifier offline.** Buat tiga task disposable: bugfix
    lintas file, investigasi dua modul yang dapat dikerjakan paralel, serta recovery
    saat tes gagal atau asumsi awal salah. Bekukan starting tree, acceptance criteria,
    batas perubahan dan verifier sebelum run. Calon artefak:
-   `tests/fixtures/behavior/` dan `docs/BEHAVIOR-EVALUATION.md`; belum dibuat.
+   `tests/fixtures/behavior/` dan `docs/BEHAVIOR-EVALUATION.md`; kini tersedia.
 2. **Susun prompt berbasis tujuan dan rubrik.** Jangan mengarahkan pemakaian
    codemode/tools atau mewajibkan spawn child. Nilai apakah strategi yang dipilih
    sesuai kebutuhan task; tidak mendelegasikan task sederhana bukan kegagalan.
@@ -322,7 +359,7 @@ I16 diperluas dengan source oracle dan marketing reference; I17 adapter awal imp
 | I21 | Implemented / tested / runtime-verified, bounded slice | `P/src/ui-startup.mjs`, `P/src/reason-ui.mjs`, `P/docs/STARTUP-WORKING-VERIFICATION.md` | I20 + source startup/working verified; task explicitly approved | Existing upstream hooks; actual identity/Pi asset substitution; 8 focused tests, 284 source comparisons, actual SDK/native lifecycle/resize/Escape/cleanup; full acceptance 151/151 PASS, O14 remains partial |
 | I22 | Implemented / focused-tested / native-verified | `P/upstream-patches/transcript-hook/LAYOUT-VERIFICATION.md`, reason-ui.4 | Approved continuation; 12 actual host gaps vs FeA.showEntry/B0A | Original-component projection, 8 tests / 96 comparisons / strict5-file TS; native CtrlO/CtrlT/resize/resume/exit; full acceptance 159/159 PASS, O14 partial |
 | I23 | Implemented / offline-tested / native synthetic verified | `launch-live.mjs`, `src/live-interactive.mjs`, shared `src/live-budget-transport.mjs`, `docs/LIVE.md` | User authorized interactive live implementation with offline default and new-budget gate | 171/171 full acceptance, 11 live tests, native loopback stream/tool/resume/cancel; persistent shared ledger, pinned model, child cleanup, one writer; paid compatibility and O14 unknown |
-| I24 | Planned / urutan dicatat | Corpus/verifier `tests/fixtures/behavior/`, protokol `docs/BEHAVIOR-EVALUATION.md` (keduanya belum dibuat); reuse runner yang sesuai | I23 + corpus/rubrik offline; live memerlukan allowance baru | Ikuti lima langkah di bagian teratas; goal-only prompts, pembanding terkontrol, evaluasi keputusan dan hasil; Reason parity tetap unknown tanpa bukti sebanding |
+| I24 | Implemented / 186-test acceptance PASS / live pending | `tests/fixtures/behavior/`, `src/behavior-*.mjs`, `scripts/evaluate-behavior.mjs`, `docs/BEHAVIOR-EVALUATION.md` | I23 + corpus/rubrik offline; live memerlukan allowance baru | Langkah 1-3 selesai, 15 tes I24 dan 12 cell sintetis lulus; langkah 4 menunggu allowance 144 request total dan langkah 5 menunggu trace model; Reason parity unknown |
 
 ## Evidence follow-up yang tidak boleh disamarkan sebagai implementation task
 

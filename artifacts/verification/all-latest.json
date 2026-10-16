@@ -1,13 +1,13 @@
 {
   "suite": "all",
   "stage": "T1-T5-offline",
-  "createdAt": "2026-10-15T08:33:55.334Z",
+  "createdAt": "2026-10-16T12:18:32.427Z",
   "code": 0,
   "signal": null,
   "passed": true,
   "counts": {
-    "tests": 171,
-    "pass": 171,
+    "tests": 186,
+    "pass": 186,
     "fail": 0,
     "cancelled": 0,
     "skipped": 0
@@ -23,6 +23,10 @@
   "runtimeUnchanged": true,
   "runtimeError": null,
   "sourceHashes": {
+    "src\\behavior-corpus.mjs": "2ce2c65820d98e451af7d0d4474e82b7eb2dcdda24f7df6a3f1ae59424c71929",
+    "src\\behavior-evaluation.mjs": "df7e68607428443257ff371ce237753dc55576cefca4390c9bd62ea1c0e551d7",
+    "src\\behavior-plan.mjs": "a4e144a76c52d1c2ebdd8515e37127d67c91abe520c3e9771f28c6ef8951345c",
+    "src\\behavior-verifier.mjs": "a546dfb0499cfc70e8bc36e6eb11a9d1e059423c7bf0f36bb593439c6d3c6bd4",
     "src\\brain-config.ts": "d71480b0055fdb3431bfb2d6012c9cf19f38089a1aaa258d0864bba2de9cef81",
     "src\\child-profiles.ts": "096c24f4a6b82bc4af102053cce0529a68645807bf967fd4b12f7668b87af022",
     "src\\child-runner.mjs": "25f360f4f15109fc5d60a1562bc0ec9da14ba7297545ebed7c02e8138536442e",
@@ -36,7 +40,7 @@
     "src\\live-budget-transport.mjs": "fbde0e6fd0224faab4cae3f567e52220ccbcbd71a671313672363662557f8643",
     "src\\live-config.mjs": "1ef4b9e251d8da4276d9a0e8e92e52263914b8abe79c82912136bc243098637c",
     "src\\live-evaluation.mjs": "baa35135a9b50ed354d1fbe0118bb6250e7440ad11ba6cd2c246d61468b62fea",
-    "src\\live-interactive.mjs": "20125244f2b1681ee418d511ae30300021fb37c2f9bf51d9c988277327d17529",
+    "src\\live-interactive.mjs": "07fc9cc3dd618c3cd695a0caff31f7e6f82b3b28418954fe70f48b602de6acbe",
     "src\\live-network-guard.mjs": "e0965bb98030538b6b7e4945945806fcb927183bf1f164aa57d1667990822eba",
     "src\\offline-guard.mjs": "1414e16ea81129fb99a4c375e49daec6110e5a31668685247220290edbf9c65d",
     "src\\paths.mjs": "5bfddd983fd8deffab105f8de8c427b65bd2557bde332da3a5d75d56c97b4954",
@@ -52,6 +56,7 @@
     "src\\workspace-ownership.ts": "9ef880083925478530f505d9aae8cc5e68a58c082138f8c2a06de561e9c870e1",
     "extensions\\harness.ts": "45f42d019a78c138cc6f05afe4d87e400cc1c7abf02d0a27bc15de95da19ac6f",
     "prompts\\harness.md": "885b8e3df93160c7afdaf0c151a86f559867bbaaabb031c7ef017c882818d8bb",
+    "config\\behavior-budget.example.json": "57a075495a64aeea6cf8b4baa6463a00bec6b3816bd2785f80948164ef303edd",
     "config\\child-profiles.json": "e1e1cf7d165b2be837e939fd68db548634d5b28f6b94e7b8693acd27a171147f",
     "config\\harness.json": "ec88c815bd2094cc4f85f5a815086307b2096ae54a7328ac40e7ccdb99fda13d",
     "config\\live.example.json": "7b56b94bef1caa320a6ce4a0cc1ec11509da9ab539ec93a0688b6fac40721c5d",
@@ -69,6 +74,7 @@
     "scripts\\create-assistant-native-fixture.mjs": "032304ab83869f7118cdbb428ca287c9d1a12f06cda262d504bdc47daa6e813f",
     "scripts\\create-layout-native-fixture.mjs": "1d53ba72edbafe25002798c17454bf278ad61176ca77b5c72ca025d3df78ca54",
     "scripts\\create-thinking-native-fixture.mjs": "37c32f6459efc2141a46bcb89481c14d3772f3e198bd8e8a1d18006fb10600de",
+    "scripts\\evaluate-behavior.mjs": "e1a465f7b0581e8196b366b86dd339fd284b4a886699f2dff4b89173e8e9811c",
     "scripts\\evaluate-tasks.mjs": "cc07efbc35d37cac2b91479611a5da549217cf99a23ea3c80b52e8e8803a470d",
     "scripts\\pin-runtime.mjs": "ae6f921d02ca1111202a0b488fc3ee514f01407344c6a7caf7e8237c8fc70ad6",
     "scripts\\render-ui-fixtures.mjs": "aa04744cf86e5cf5f492adb8bd218b3339eb29ff15d91e22208451e3394dfdb3",
@@ -77,7 +83,7 @@
     "scripts\\verify-native-layout.cjs": "16a81f29ec86e43f4e6b164b9fac0c81284f790f34fa7c311e5d59dd6c3da6c3",
     "scripts\\verify-native-live.cjs": "aeeb78467f61c59ce55891c72a8e53bc3e68699360d7af6dbfcb987f96165b93",
     "scripts\\verify-native-startup.cjs": "4e9d2c2edf9bda8d342f5ad349aa5cacf67f221fc021d93972afc5a511a75bfc",
-    "scripts\\verify-offline.mjs": "b411fecb25c94a1ce6b5c52288b58ad4262395369c60fbb3569dfc43318b7913",
+    "scripts\\verify-offline.mjs": "4b82a41f4a476a6b5451e3531bf18499c8924d1eb2d33091070e7f08281b474f",
     "scripts\\verify-thinking-parity.mjs": "941c09222b16577bd1473a290121fc57dcfbed76b9f553ad54016bdad158983e",
     "scripts\\verify-transcript-parity.mjs": "e9a673b2d300ceff0643e62b83de9d459b0ebe6d14f35e0b643feb6f238e26e6",
     "tests\\helpers\\assistant-ui.mjs": "e1b7a14a460c713bc1712cc4d959223dc3f9e7dc3ce8783976f1e3e96d013409",
@@ -89,6 +95,10 @@
     "tests\\helpers\\transcript-host.mjs": "64430eb5661f0f4c72db04d771517e7bf0daa45e1a3a4133dd145565819769db",
     "tests\\helpers\\transcript-layout-host.mjs": "515ad6bbd5dbdc0eb866f402be8a6b7f92a708f24f20bcf51e447f6f6ee1b3fa",
     "tests\\helpers\\ui.mjs": "d23062a39ab614048b2ef93ad09944f710af24847bffd515d45863dc4b30dd21",
+    "tests\\fixtures\\behavior\\investigation.json": "3266fd5fb08e44d79605e9a328d311a721b28ae5a12a25195422cb77a43354a4",
+    "tests\\fixtures\\behavior\\invoice.json": "276790f6888bf9497c23713532a11e99636c0dcbcc062a6a60c9fc6aff637927",
+    "tests\\fixtures\\behavior\\manifest.json": "e3359571126694d2e58b7b818ab920a16fbfec23d35a0ba9bd14fd9e70f719e7",
+    "tests\\fixtures\\behavior\\recovery.json": "02db22329b16d2b07ce8d985933ce4daaca3f3e07d51e1b938936baf64d7fff2",
     "tools\\typecheck\\package.json": "c273d998134048a64d300c35899f220724e84405dab64235797afe9690f84906",
     "tools\\typecheck\\package-lock.json": "383ebcbdd9f7410c2a2c7eb93cc17c653c37c10560d0e07ccfac5ba59db2813f",
     "tools\\typecheck\\node_modules\\typescript\\lib\\typescript.js": "3ae902c92cc44dace175c0e69e13a4b0899f6983c6121d76b9ab8dd5795e7675",
@@ -125,6 +135,8 @@
     "tests\\thinking-hook.test.mjs": "b6f2035724f0080354ae4cc39c13a3b39599722710f69c39a29f0c80497b350a",
     "tests\\startup-working.test.mjs": "5486a19cf2fba4fd1555e4401172b7889d69ae34fcf61f5f8c89d288f0f7ace6",
     "tests\\transcript-layout.test.mjs": "34cb90bd7a8536affb98c66f142fc6d10ca58ffc8aa6a19173df62c9242cb835",
+    "tests\\behavior-verifier.test.mjs": "461d9975d6e39e201ae3ce92e85cd3ca1eb95db3cec4690d71dece9a4e78812f",
+    "tests\\behavior-evaluation.test.mjs": "35a29c5971f3ed40572f6476b7d890c16da0fed4738f3e9fddbeee9da30fc0cc",
     "launch.mjs": "55ef6ce2f65f55701675c0beeedf2aa42140a91379917c2b5b01ede0976f7872",
     "launch-live.mjs": "40ef31c0cabf960011c989ef053a20b692628836d8dcb868b65179a2d17141fe",
     "agent\\settings.json": "c5d4da181ecce3a174053ea4980e8ebc510f56191bd05d2460bc4427f681d069",
@@ -136,7 +148,7 @@
     "tests\\fixtures\\live-provider.json": "74c61b653eafdd40b6c485267985e8c542a95b780102056d7a8e1f1187c97ee6"
   },
   "unexpectedNetworkAttempts": 0,
-  "networkReceiptCount": 90,
+  "networkReceiptCount": 115,
   "receiptErrors": [],
   "missingTestReceipts": [],
   "interruptedReceiptUpdates": 2,
@@ -172,7 +184,9 @@
     "assistant-hook",
     "thinking-hook",
     "startup-working",
-    "transcript-layout"
+    "transcript-layout",
+    "behavior-verifier",
+    "behavior-evaluation"
   ],
   "externalInference": "disabled",
   "liveCompatibility": "unknown",
@@ -219,7 +233,9 @@
     "assistant-hook.test.mjs": "be2e6f5f599e78c6e6c81042c9fc5554b0646b65d9fd99d8002724e58fa27cc2",
     "thinking-hook.test.mjs": "b6f2035724f0080354ae4cc39c13a3b39599722710f69c39a29f0c80497b350a",
     "startup-working.test.mjs": "5486a19cf2fba4fd1555e4401172b7889d69ae34fcf61f5f8c89d288f0f7ace6",
-    "transcript-layout.test.mjs": "34cb90bd7a8536affb98c66f142fc6d10ca58ffc8aa6a19173df62c9242cb835"
+    "transcript-layout.test.mjs": "34cb90bd7a8536affb98c66f142fc6d10ca58ffc8aa6a19173df62c9242cb835",
+    "behavior-verifier.test.mjs": "461d9975d6e39e201ae3ce92e85cd3ca1eb95db3cec4690d71dece9a4e78812f",
+    "behavior-evaluation.test.mjs": "35a29c5971f3ed40572f6476b7d890c16da0fed4738f3e9fddbeee9da30fc0cc"
   },
-  "reportPath": "D:\\pi-reason-prototype\\publish\\pi-ic4ruz\\artifacts\\verification\\runs\\2026-10-15T08-27-06.809Z\\report.json"
+  "reportPath": "D:\\pi-reason-prototype\\publish\\pi-ic4ruz\\artifacts\\verification\\runs\\2026-10-16T12-06-26.883Z\\report.json"
 }

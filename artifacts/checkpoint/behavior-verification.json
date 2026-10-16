@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "baseCheckpoint": "515d0d7",
+  "protocolHash": "cc9103e000f23f6c8c750c9c8843d98c88f27234c24c2a1e72ad2252d5411d35",
+  "implemented": [
+    "three frozen tasks and trusted verifiers",
+    "goal-only prompts and evidence-based rubric",
+    "pinned stock-core/prototype conditions",
+    "fixed disjoint suballowances using existing transport/runtime/broker",
+    "12-cell campaign with cancellation, deadline, drift and replay gates"
+  ],
+  "completedBacklogSteps": [
+    1,
+    2,
+    3
+  ],
+  "pendingBacklogSteps": {
+    "4": "new explicit paid allowance required",
+    "5": "real model traces and review required"
+  },
+  "preparation": {
+    "command": "node scripts/evaluate-behavior.mjs --prepare",
+    "passed": true,
+    "checks": [
+      {
+        "taskId": "invoice",
+        "startingTreeFails": true,
+        "referencePasses": true,
+        "assertions": 8,
+        "scopeProtected": true
+      },
+      {
+        "taskId": "investigation",
+        "startingTreeFails": true,
+        "referencePasses": true,
+        "assertions": 3,
+        "scopeProtected": true
+      },
+      {
+        "taskId": "recovery",
+        "startingTreeFails": true,
+        "referencePasses": true,
+        "assertions": 5,
+        "scopeProtected": true
+      }
+    ],
+    "receipt": "artifacts/checkpoint/behavior-preparation.json"
+  },
+  "acceptance": {
+    "command": "node scripts/verify-offline.mjs --suite all",
+    "report": "artifacts/verification/runs/2026-10-16T12-06-26.883Z/report.json",
+    "counts": {
+      "tests": 186,
+      "pass": 186,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    "behaviorTests": 15,
+    "uiTests": 51,
+    "baseline": {
+      "passed": true,
+      "checkedFiles": 5599,
+      "toolSourcesChecked": 1,
+      "changed": []
+    },
+    "sourceUnchanged": true,
+    "runtimeUnchanged": true,
+    "vaultUnchanged": true,
+    "unexpectedNetworkAttempts": 0,
+    "receiptsComplete": true
+  },
+  "runtimeVerified": {
+    "scope": "actual SDKs, file tools and owned shells with scripted SSE; no real provider",
+    "calibrationCells": 12,
+    "stockSdkConfirmed": true,
+    "selectorUnchanged": true,
+    "recoveryFailureThenSuccessObserved": true,
+    "humanBehaviorScores": "unreviewed"
+  },
+  "authorization": {
+    "authorized": false,
+    "proposedTotal": {
+      "maxRequests": 144,
+      "maxInputTokens": 1440000,
+      "maxOutputTokens": 144000,
+      "maxDurationMs": 3600000
+    },
+    "perRun": {
+      "maxRequests": 12,
+      "maxInputTokens": 120000,
+      "maxOutputTokens": 12000,
+      "perRequestMaxOutputTokens": 1000,
+      "maxDurationMs": 300000
+    },
+    "runs": 12
+  },
+  "paidInferenceRequests": 0,
+  "unknown": [
+    "autonomous model decisions and outcomes",
+    "Reason parity",
+    "provider pricing",
+    "statistical superiority",
+    "long-context reliability"
+  ]
+}

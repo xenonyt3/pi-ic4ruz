@@ -1,5 +1,11 @@
 # T5 - evaluasi tetap terpisah dari acceptance offline
 
+I24 now has a separate [behavior corpus/protocol](BEHAVIOR-EVALUATION.md). Its
+goal-only prompts and 12 fresh stock-core/prototype cells reuse the existing live
+runtime and accounting. The historical pilot's mandatory-delegation prompt is not
+used to assess autonomous decisions. Preparation is offline and the proposed
+campaign requires a new explicit budget. No I24 paid results exist yet.
+
 Interactive daily use now has a separate explicit entrypoint; see [LIVE.md](LIVE.md).
 It shares the existing live transport and child broker with the evaluator, with
 persistent resumable allowances. The campaign path retains its one-shot Astra

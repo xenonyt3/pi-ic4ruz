@@ -32,6 +32,9 @@ usage totals in project documents are evidence, not production credentials.
 The bundled `agent/models.json` uses `127.0.0.1:9` and an explicit fixture credential.
 `config/live.example.json` is disabled with zero allowance. Test provider files
 contain synthetic credentials only and never grant paid inference authorization.
+The I24 behavior corpus/reference solutions and preparation receipt are synthetic
+and publishable. Raw behavior campaign events, final answers, sessions and ledgers
+remain private under the existing exclusions; only reviewed aggregates are public.
 
 Original implementation provenance is recorded in
 `artifacts/checkpoint/public-source-snapshot.json`. New-machine bootstrap results

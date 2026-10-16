@@ -1,5 +1,10 @@
 # Pi Reason prototype
 
+**Autonomous behavior evaluation:** [I24 protocol](docs/BEHAVIOR-EVALUATION.md)
+provides three frozen tasks, trusted verifiers, goal-only prompts and a controlled
+stock-core/prototype comparison. Preparation is offline; live evaluation requires
+a new allowance. It does not claim Reason parity.
+
 **Continuing on another device:** start with [HANDOFF.md](HANDOFF.md) for Windows bootstrap and current limits. Public exclusions are described in [PUBLICATION.md](PUBLICATION.md). The historical 159/159 result is original-workstation evidence; current I23 verification is recorded separately. Private baselines and proprietary Reason source are not distributed.
 
 **Interactive live mode:** [docs/LIVE.md](docs/LIVE.md) describes the separate

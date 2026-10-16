@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "authorized": false,
+  "campaignId": "REPLACE_WITH_NEW_CAMPAIGN_ID",
+  "protocolHash": "REPLACE_WITH_PREPARED_PROTOCOL_HASH",
+  "maxRequests": 144,
+  "maxInputTokens": 1440000,
+  "maxOutputTokens": 144000,
+  "maxDurationMs": 3600000
+}
