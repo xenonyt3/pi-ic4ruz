@@ -12,8 +12,8 @@ function save(file,value) {
   fs.renameSync(file+'.tmp',file);
 }
 function errorCode(error){return String(error?.message??'').match(/\b[A-Z][A-Z_]{4,}\b/)?.[0]??'BEHAVIOR_RUN_FAILED';}
-export function prepareBehaviorCorpus() {
-  const corpus=loadBehaviorCorpus(),plan=buildBehaviorPlan();
+export function prepareBehaviorCorpus(options={}) {
+  const corpus=loadBehaviorCorpus(),plan=buildBehaviorPlan(options);
   const base=path.join(root,'tests/.tmp');fs.mkdirSync(base,{recursive:true});
   const directory=fs.mkdtempSync(path.join(base,'behavior-prepare-'));
   const checks=[];
@@ -29,8 +29,9 @@ export function prepareBehaviorCorpus() {
   }finally{fs.rmSync(directory,{recursive:true,force:true});}
 }
 
-export async function runBehaviorCampaign({config,approval,env=process.env,fetchImpl=globalThis.fetch,onProgress=()=>{},signal}) {
-  const plan=buildBehaviorPlan();validateBehaviorBudget(approval,plan);
+export async function runBehaviorCampaign({config,approval,env=process.env,fetchImpl=globalThis.fetch,onProgress=()=>{},signal,comparison='stock-core',codexExecutable}) {
+  const plan=buildBehaviorPlan({comparison});validateBehaviorBudget(approval,plan);
+  if(comparison==='codex')(await import('./codex-evaluation.mjs')).verifyCodexExecutable(codexExecutable);
   for(const [field,value]of Object.entries(plan.model))if(config[field]!==value)throw Error('BEHAVIOR_MODEL_CONFIGURATION_MISMATCH');
   const {tasks}=loadBehaviorCorpus();
   const base=path.join(root,'agent/live-private/behavior-campaigns');
@@ -64,14 +65,20 @@ export async function runBehaviorCampaign({config,approval,env=process.env,fetch
       createBehaviorWorkspace(task,workspace);
       const budget={...plan.perRun,maxDurationMs:Math.min(plan.perRun.maxDurationMs,remaining),allowanceId:approval.campaignId+'--'+job.id,authorized:true};
       const resolved=validateLiveConfig({...config,budget},{env,cwd:workspace});
-      const events=[];let modelStopReason,finalText='',failure,timer;
+      const events=[];let modelStopReason,finalText='',failure,timer,codex;
       job.status='running';job.startedAt=Date.now();save(file,state);
       onProgress({job:job.id,phase:'start'});
       try{
+        if(job.condition==='codex'){
+          const {runCodexCell}=await import('./codex-evaluation.mjs');
+          codex=await runCodexCell({...resolved,config:{...config,prompt:task.prompt},directory:runDirectory,executable:codexExecutable,fetchImpl,signal,onGate:gate=>{active={gate};}});
+          active={gate:codex.gate};modelStopReason=codex.modelStopReason;finalText=codex.finalText;failure=codex.failure;
+          job.runtime=plan.codex.version;job.activeTools='native Codex tools; see private request schema hashes';
+        }else{
         active=await createLiveRuntime({...resolved,directory:runDirectory,fetchImpl:(url,init)=>{
           if(Date.now()>=deadline){stopDuration();throw Error('BEHAVIOR_CAMPAIGN_DURATION');}
           return fetchImpl(url,init);
-        },options:{evaluationCondition:job.condition,headlessEvaluation:true}});
+        },options:{evaluationCondition:job.condition,headlessEvaluation:true,singleAgentEvaluation:comparison==='codex'}});
         const session=active.host.session;
         job.activeTools=session.getActiveToolNames();job.callableTools=session.getCallableToolNames();
         job.runtime=job.condition==='stock-core'?'stock/1.0.0':'selected-candidate';
@@ -91,14 +98,15 @@ export async function runBehaviorCampaign({config,approval,env=process.env,fetch
         const message=session.messages.filter(m=>m.role==='assistant').at(-1);
         modelStopReason=message?.stopReason??'missing';
         finalText=message?.content.filter(part=>part.type==='text').map(part=>part.text).join('\n')??'';
+        }
       }catch(error){failure=errorCode(error);}
       finally{
         clearTimeout(timer);
-        try{await active?.close();}catch{failure='BEHAVIOR_CLEANUP_FAILED';}
+        try{await active?.close?.();}catch{failure='BEHAVIOR_CLEANUP_FAILED';}
       }
-      const children=active?.getHarness().getSupervisor()?.list()??[];
-      const policy=active?.getHarness().policy;
-      const cleanupConfirmed=!!active&&children.every(c=>c.cleanupConfirmed===true)&&policy.pendingWriterCalls().length===0&&!policy.getExistingLease();
+      const children=active?.getHarness?.().getSupervisor()?.list()??[];
+      const policy=active?.getHarness?.().policy;
+      const cleanupConfirmed=codex?codex.cleanupConfirmed:!!policy&&children.every(c=>c.cleanupConfirmed===true)&&policy.pendingWriterCalls().length===0&&!policy.getExistingLease();
       const accounting=active?.gate.state;
       const verification=verifyBehaviorWorkspace(task,workspace);
       const usage={requests:accounting?.requests.length??0,inputTokens:accounting?.inputTokens??0,outputTokens:accounting?.outputTokens??0};
@@ -107,15 +115,15 @@ export async function runBehaviorCampaign({config,approval,env=process.env,fetch
         verification,cleanupConfirmed,error:failure??null,budgetStop:accounting?.stopReason??null,
         parentOrSummaryRequests:accounting?.requests.filter(r=>r.kind!=='child').length??0,childRequests:accounting?.requests.filter(r=>r.kind==='child').length??0,
         childCount:children.length,childStatuses:children.map(c=>({id:c.id,profile:c.profile,status:c.status,cleanupConfirmed:c.cleanupConfirmed})),
-        toolCalls:events.filter(e=>e.type==='tool_execution_start').map(e=>({sequence:e.sequence,name:e.toolName,parentToolCallId:e.parentToolCallId??null})),
-        toolErrors:events.filter(e=>e.type==='tool_execution_end'&&e.isError===true).length,
-        compactions:events.filter(e=>e.type==='compaction_start').length,
+        toolCalls:codex?.toolCalls??events.filter(e=>e.type==='tool_execution_start').map(e=>({sequence:e.sequence,name:e.toolName,parentToolCallId:e.parentToolCallId??null})),
+        toolErrors:codex?.toolErrors??events.filter(e=>e.type==='tool_execution_end'&&e.isError===true).length,
+        compactions:codex?null:events.filter(e=>e.type==='compaction_start').length,
         humanReview:{strategy:null,recovery:null,testReportHonesty:null,evidenceRequired:true},
         passed:verification.passed&&modelStopReason==='stop'&&cleanupConfirmed&&!failure&&!accounting?.stopReason});
       // Raw responses, final text and child traces stay in the ignored campaign tree.
       save(path.join(runDirectory,'result.json'),job);save(file,state);
       onProgress({job:job.id,phase:'complete',correct:verification.passed,cleanupConfirmed,usage});
-      if(buildBehaviorPlan().protocolHash!==plan.protocolHash){state.stopReason='BEHAVIOR_PROTOCOL_DRIFT';break;}
+      if(buildBehaviorPlan({comparison}).protocolHash!==plan.protocolHash){state.stopReason='BEHAVIOR_PROTOCOL_DRIFT';break;}
       if(failure||!cleanupConfirmed||accounting?.stopReason||modelStopReason!=='stop'){
         state.stopReason=accounting?.stopReason??failure??(!cleanupConfirmed?'cleanup_unconfirmed':'model_error');break;
       }

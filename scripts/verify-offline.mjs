@@ -15,7 +15,7 @@ const suites = {
   provider:['provider-transport'],
   live:['live-budget-transport','live-evaluation','brokered-child','pilot-verifier','live-interactive'],
   ui:['reason-ui','transcript-hook','assistant-hook','thinking-hook','startup-working','transcript-layout'],
-  behavior:['behavior-verifier','behavior-evaluation'],
+  behavior:['behavior-verifier','behavior-evaluation','codex-evaluation'],
 };
 suites.all=[...new Set(Object.values(suites).flat())];
 function verifyRuntimes(){

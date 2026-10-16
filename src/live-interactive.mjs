@@ -90,6 +90,7 @@ export async function createLiveRuntime({config,budget,key,workspace,endpoint,op
       const harnessConfig=JSON.parse(fs.readFileSync(path.join(root,'config/harness.json'),'utf8'));
       harnessConfig.features.brain=false;harnessConfig.provider=model.provider;harnessConfig.model=model.id;
       if(condition==='stock-core')for(const name of ['codemode','delegation','context'])harnessConfig.features[name]=false;
+      if(options.singleAgentEvaluation)harnessConfig.features.delegation=false;
       if(options.headlessEvaluation||condition==='stock-core')harnessConfig.ui.reasonTerminal=false;
       const settingsManager=sdk.SettingsManager.inMemory({packages:[],defaultTools:condition==='stock-core'?['read','bash','edit','write']:['read','bash','edit','write','codemode'],hideThinkingBlock:true,cacheWarming:'off',retry:{enabled:false,maxRetries:0,provider:{maxRetries:0}},
         compaction:{enabled:true,reserveTokens:Math.min(16384,Math.floor(config.contextWindow/4)),keepRecentTokens:Math.min(20000,Math.floor(config.contextWindow/4))},enableAnalytics:false,enableInstallTelemetry:false});

@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "passed": true,
+  "createdAt": "2026-10-16T14:46:54.163Z",
+  "protocolHash": "9d804700a46ccbbb33f4ddc13f61183c11bc3a60794c7e1d0b1dbaaf97662fde",
+  "codex": {
+    "version": "codex-cli 0.162.1",
+    "platform": "win32",
+    "sha256": "dd13bdb162a184fa04039488b234a8258ef9b76f84e926c505d5742b19249a6a"
+  },
+  "checks": [
+    {
+      "scenario": "stream-tool",
+      "requests": 2,
+      "cleanupConfirmed": true,
+      "stopReason": null,
+      "modelStopReason": "stop",
+      "toolOutput": true,
+      "error": null
+    },
+    {
+      "scenario": "wrong-model",
+      "requests": 1,
+      "cleanupConfirmed": true,
+      "stopReason": "response_model_mismatch",
+      "modelStopReason": "error",
+      "toolOutput": false,
+      "error": "CODEX_PROCESS_FAILED"
+    },
+    {
+      "scenario": "missing-usage",
+      "requests": 1,
+      "cleanupConfirmed": true,
+      "stopReason": "missing_or_invalid_usage",
+      "modelStopReason": "stop",
+      "toolOutput": false,
+      "error": null
+    },
+    {
+      "scenario": "cancel",
+      "requests": 1,
+      "cleanupConfirmed": true,
+      "stopReason": "campaign_cancelled",
+      "modelStopReason": "error",
+      "toolOutput": false,
+      "error": "CODEX_PROCESS_FAILED"
+    },
+    {
+      "scenario": "cancel-tool",
+      "requests": 1,
+      "cleanupConfirmed": true,
+      "stopReason": "campaign_cancelled",
+      "modelStopReason": "error",
+      "toolOutput": false,
+      "error": "CODEX_PROCESS_FAILED"
+    }
+  ],
+  "syntheticCampaign": {
+    "cells": 12,
+    "correct": 12,
+    "requests": 26,
+    "replayRejected": true,
+    "delegationDisabled": true,
+    "humanReviewComplete": false
+  },
+  "externalInference": 0,
+  "scope": "Native Codex and Pi with scripted reference edits and synthetic streams; verifies plumbing, not model decisions or paid 9router compatibility"
+}

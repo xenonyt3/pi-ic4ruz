@@ -35,6 +35,10 @@ contain synthetic credentials only and never grant paid inference authorization.
 The I24 behavior corpus/reference solutions and preparation receipt are synthetic
 and publishable. Raw behavior campaign events, final answers, sessions and ledgers
 remain private under the existing exclusions; only reviewed aggregates are public.
+I26 also excludes native Codex homes, raw request/tool envelopes, stderr/events,
+process receipts and provider configuration. The repository publishes the native
+binary hash and synthetic tests, not the installed Codex executable or its bundled
+instructions. Synthetic fixture directories remain under ignored `tests/.tmp/`.
 
 Original implementation provenance is recorded in
 `artifacts/checkpoint/public-source-snapshot.json`. New-machine bootstrap results

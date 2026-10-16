@@ -12,13 +12,14 @@ function argumentsOf(args) {
   const result={};
   for(let i=0;i<args.length;i++){
     const flag=args[i];
-    if(!['--prepare','--dry-run','--live','--config','--budget'].includes(flag)||result[flag]!==undefined)throw Error('BEHAVIOR_ARGUMENT_REJECTED');
-    if(['--config','--budget'].includes(flag)){
-      if(!args[i+1]||args[i+1].startsWith('--'))throw Error('BEHAVIOR_ARGUMENT_VALUE_REQUIRED');result[flag]=path.resolve(args[++i]);
+    if(!['--prepare','--dry-run','--live','--config','--budget','--comparison','--codex'].includes(flag)||result[flag]!==undefined)throw Error('BEHAVIOR_ARGUMENT_REJECTED');
+    if(['--config','--budget','--comparison','--codex'].includes(flag)){
+      if(!args[i+1]||args[i+1].startsWith('--'))throw Error('BEHAVIOR_ARGUMENT_VALUE_REQUIRED');const value=args[++i];result[flag]=flag==='--comparison'?value:path.resolve(value);
     }else result[flag]=true;
   }
   if(['--prepare','--dry-run','--live'].filter(key=>result[key]).length>1)throw Error('BEHAVIOR_MODE_CONFLICT');
   if(!result['--live']&&(result['--config']||result['--budget']))throw Error('BEHAVIOR_LIVE_OPT_IN_REQUIRED');
+  if(result['--codex']&&result['--comparison']!=='codex')throw Error('BEHAVIOR_COMPARISON_REQUIRED');
   return result;
 }
 function readPrivate(file) {
@@ -31,13 +32,14 @@ function verifyRuntimePrerequisites() {
   assertIsolation(resolvePrototypePaths(),path.join(root,'workspace'));
 }
 export async function main(args=process.argv.slice(2)) {
-  const options=argumentsOf(args),plan=buildBehaviorPlan();
+  const options=argumentsOf(args),comparison=options['--comparison']??'stock-core',plan=buildBehaviorPlan({comparison});
   if(!options['--live']){
     await import('../src/offline-guard.mjs');
     if(options['--prepare']){
       verifyRuntimePrerequisites();
-      const result=prepareBehaviorCorpus();
-      const file=path.join(root,'artifacts/checkpoint/behavior-preparation.json');
+      if(comparison==='codex')(await import('../src/codex-evaluation.mjs')).verifyCodexExecutable(options['--codex']);
+      const result=prepareBehaviorCorpus({comparison});
+      const file=path.join(root,`artifacts/checkpoint/${comparison==='codex'?'codex-pi':'behavior'}-preparation.json`);
       fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,JSON.stringify(result,null,2)+'\n');
       if(!result.passed)throw Error('BEHAVIOR_PREPARATION_FAILED');
       console.log(JSON.stringify({prepared:true,modelRequests:0,checks:result.checks,protocolHash:plan.protocolHash,proposedBudget:plan.limits}));
@@ -49,6 +51,12 @@ export async function main(args=process.argv.slice(2)) {
   const report=JSON.parse(fs.readFileSync(path.join(root,'artifacts/verification/all-latest.json'),'utf8'));
   assertOfflineAcceptance(report);
   for(const name of ['behavior-verifier','behavior-evaluation'])if(!report.coverage.includes(name))throw Error('BEHAVIOR_ACCEPTANCE_REQUIRED');
+  if(comparison==='codex'){
+    if(!report.coverage.includes('codex-evaluation'))throw Error('CODEX_ACCEPTANCE_REQUIRED');
+    const native=JSON.parse(fs.readFileSync(path.join(root,'artifacts/checkpoint/codex-native-fixture.json'),'utf8'));
+    if(!native.passed||native.protocolHash!==plan.protocolHash)throw Error('CODEX_NATIVE_FIXTURE_REQUIRED');
+    (await import('../src/codex-evaluation.mjs')).verifyCodexExecutable(options['--codex']);
+  }
   verifyRuntimePrerequisites();
   const config=readPrivate(options['--config']),key=process.env[config.credentialEnv];
   if(typeof key!=='string'||!key)throw Error('LIVE_CREDENTIAL_UNAVAILABLE');
@@ -61,11 +69,11 @@ export async function main(args=process.argv.slice(2)) {
   const fetchImpl=installLiveNetworkGuard(),controller=new AbortController();
   const abort=()=>controller.abort();process.once('SIGINT',abort);process.once('SIGTERM',abort);
   try{
-    const result=await runBehaviorCampaign({config,approval,env:{[config.credentialEnv]:key},fetchImpl,signal:controller.signal,onProgress:event=>console.log(JSON.stringify(event))});
+    const result=await runBehaviorCampaign({config,approval,comparison,codexExecutable:options['--codex'],env:{[config.credentialEnv]:key},fetchImpl,signal:controller.signal,onProgress:event=>console.log(JSON.stringify(event))});
     console.log(JSON.stringify({status:result.state.status,stopReason:result.state.stopReason??null,usage:result.state.usage,allTasksCorrect:result.state.allTasksCorrect,humanReviewComplete:false,reasonParity:'unknown'}));
     if(result.state.status!=='finished'||!result.state.allTasksCorrect)process.exitCode=1;
   }finally{process.removeListener('SIGINT',abort);process.removeListener('SIGTERM',abort);}
 }
 if(process.argv[1]&&pathToFileURL(path.resolve(process.argv[1])).href===import.meta.url){
-  main().catch(error=>{console.error(String(error?.message??'').match(/\b(?:BEHAVIOR|LIVE|OFFLINE|RUNTIME|CANDIDATE|ISOLATION)_[A-Z_]+\b/)?.[0]??'BEHAVIOR_FAILED');process.exitCode=1;});
+  main().catch(error=>{console.error(String(error?.message??'').match(/\b(?:BEHAVIOR|CODEX|LIVE|OFFLINE|RUNTIME|CANDIDATE|ISOLATION)_[A-Z_]+\b/)?.[0]??'BEHAVIOR_FAILED');process.exitCode=1;});
 }

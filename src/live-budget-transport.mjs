@@ -6,7 +6,9 @@ import { validateBudget } from './evaluation-budget.mjs';
 const hash=value=>createHash('sha256').update(typeof value==='string'?value:JSON.stringify(value)).digest('hex');
 const validCount=value=>Number.isSafeInteger(value)&&value>=0;
 export class LiveBudgetTransport {
-  constructor({budget,endpoint,ledgerPath,fetchImpl=globalThis.fetch,clock=Date.now,interactive=false,onChange=()=>{}}) {
+  constructor({budget,endpoint,ledgerPath,fetchImpl=globalThis.fetch,clock=Date.now,interactive=false,onChange=()=>{},api='openai-completions'}) {
+    if(!['openai-completions','openai-responses'].includes(api))throw new Error('LIVE_API_UNSUPPORTED');
+    this.api=api;
     this.budget=validateBudget(budget);this.endpoint=new URL(endpoint).href;this.file=ledgerPath;this.fetchImpl=fetchImpl;this.clock=clock;
     this.interactive=interactive;this.onChange=onChange;
     if(!interactive){
@@ -15,7 +17,7 @@ export class LiveBudgetTransport {
     }
     if(!Number.isSafeInteger(budget.perRequestMaxOutputTokens)||budget.perRequestMaxOutputTokens<1)throw new Error('INVALID_OUTPUT_CAP');
     if(budget.maxCost!==undefined)throw new Error('LIVE_COST_CAP_UNSUPPORTED: use explicit token caps');
-    const fingerprint=hash({budget,endpoint:this.endpoint});
+    const fingerprint=hash({budget,endpoint:this.endpoint,...(api==='openai-responses'?{api}:{})});
     this.abortController=new AbortController();this.timer=undefined;
     fs.mkdirSync(path.dirname(ledgerPath),{recursive:true});
     this.lock=ledgerPath+'.lock';
@@ -50,7 +52,7 @@ export class LiveBudgetTransport {
     const output=this.budget.perRequestMaxOutputTokens;
     if(this.state.requests.length>=this.budget.maxRequests||this.state.inputTokens+pending.reduce((n,r)=>n+r.reservedInput,0)+input>this.budget.maxInputTokens||this.state.outputTokens+pending.reduce((n,r)=>n+r.reservedOutput,0)+output>this.budget.maxOutputTokens){this.stop('capacity');throw new Error('LIVE_BUDGET_EXHAUSTED');}
     if(this.state.startedAt===null){this.state.startedAt=this.clock();this.armTimer();}
-    const record={id:this.state.requests.length+1,kind,condition,status:'pending',startedAt:this.clock(),reservedInput:input,reservedOutput:output,payloadHash:hash(payload),promptHash:hash(payload.messages??[]),schemaHash:hash(payload.tools??[]),reasoning:payload.reasoning_effort??null};
+    const record={id:this.state.requests.length+1,kind,condition,status:'pending',startedAt:this.clock(),reservedInput:input,reservedOutput:output,payloadHash:hash(payload),promptHash:hash(payload.messages??{instructions:payload.instructions,input:payload.input}),schemaHash:hash(payload.tools??payload.input?.filter(item=>item.type==='additional_tools')??[]),reasoning:payload.reasoning_effort??payload.reasoning?.effort??null};
     this.state.status='running';this.state.requests.push(record);this.persist();return record;
   }
   finish(record){
@@ -74,9 +76,11 @@ export class LiveBudgetTransport {
       const url=typeof input==='string'||input instanceof URL?String(input):input.url;
       if(new URL(url).href!==this.endpoint||init.method?.toUpperCase()!=='POST')throw new Error('LIVE_ENDPOINT_DENIED');
       if(typeof init.body!=='string')throw new Error('LIVE_PAYLOAD_UNSUPPORTED');
-      const payload=JSON.parse(init.body);const caps=[payload.max_tokens,payload.max_completion_tokens].filter(value=>value!==undefined);
+      const payload=JSON.parse(init.body),responses=this.api==='openai-responses';
+      const caps=(responses?[payload.max_output_tokens]:[payload.max_tokens,payload.max_completion_tokens]).filter(value=>value!==undefined);
       const reasoning=this.budget.thinkingLevel==='off'?undefined:this.budget.thinkingLevel;
-      if(payload.model!==this.budget.model||payload.stream!==true||payload.stream_options?.include_usage!==true||!caps.length||caps.some(value=>!Number.isSafeInteger(value)||value<1||value>this.budget.perRequestMaxOutputTokens)||payload.reasoning_effort!==reasoning)throw new Error('LIVE_PAYLOAD_LIMIT_DENIED');
+      if(payload.model!==this.budget.model||payload.stream!==true||(!responses&&payload.stream_options?.include_usage!==true)||!caps.length||caps.some(value=>!Number.isSafeInteger(value)||value<1||value>this.budget.perRequestMaxOutputTokens)||(responses?payload.reasoning?.effort:payload.reasoning_effort)!==reasoning||
+        (responses&&(payload.previous_response_id||payload.conversation||payload.background===true||payload.store!==false)))throw new Error('LIVE_PAYLOAD_LIMIT_DENIED');
       if(signal?.aborted||init.signal?.aborted)throw new Error('LIVE_REQUEST_CANCELLED');
       const record=this.reserve(payload,kind,condition);records.push(record);
       const combined=AbortSignal.any([this.abortController.signal,AbortSignal.timeout(Math.min(120000,this.remainingMs())),...(signal?[signal]:[]),...(init.signal?[init.signal]:[])]);
@@ -84,10 +88,10 @@ export class LiveBudgetTransport {
         const response=await this.fetchImpl(url,{...init,redirect:'error',signal:combined});record.httpStatus=response.status;this.persist();
         if(!response.ok||!response.body)return response;
         let buffer='';const decoder=new TextDecoder();
-        const parse=line=>{if(!line.startsWith('data:'))return;const raw=line.slice(5).trim();if(!raw||raw==='[DONE]')return;try{const chunk=JSON.parse(raw);if(typeof chunk.model==='string'){
+        const parse=line=>{if(!line.startsWith('data:'))return;const raw=line.slice(5).trim();if(!raw||raw==='[DONE]')return;try{const event=JSON.parse(raw),chunk=responses?(event.response??{}):event;if(typeof chunk.model==='string'){
           if(this.interactive&&!this.budget.responseModels.includes(chunk.model)){this.stop('response_model_mismatch');throw new Error('LIVE_RESPONSE_MODEL_MISMATCH');}
           record.responseModel=chunk.model.slice(0,160);
-        }const usage=chunk.usage??chunk.choices?.find(choice=>choice.usage)?.usage;if(usage)record.rawUsage={prompt_tokens:usage.prompt_tokens,completion_tokens:usage.completion_tokens,prompt_tokens_details:{cached_tokens:usage.prompt_tokens_details?.cached_tokens}};}catch(error){if(this.state.stopReason==='response_model_mismatch')throw error;record.malformedSse=true;}};
+        }const usage=chunk.usage??chunk.choices?.find(choice=>choice.usage)?.usage;if(usage&&(!responses||['response.completed','response.incomplete','response.failed'].includes(event.type)))record.rawUsage={prompt_tokens:responses?usage.input_tokens:usage.prompt_tokens,completion_tokens:responses?usage.output_tokens:usage.completion_tokens,prompt_tokens_details:{cached_tokens:responses?usage.input_tokens_details?.cached_tokens:usage.prompt_tokens_details?.cached_tokens}};}catch(error){if(this.state.stopReason==='response_model_mismatch')throw error;record.malformedSse=true;}};
         const body=response.body.pipeThrough(new TransformStream({transform(chunk,controller){buffer+=decoder.decode(chunk,{stream:true});let newline;while((newline=buffer.indexOf('\n'))>=0){parse(buffer.slice(0,newline).replace(/\r$/,''));buffer=buffer.slice(newline+1);}if(buffer.length>1048576)throw new Error('SSE_FRAME_LIMIT');controller.enqueue(chunk);},flush(){buffer+=decoder.decode();if(buffer)parse(buffer);}}));
         return new Response(body,{status:response.status,statusText:response.statusText,headers:response.headers});
       }catch(error){record.transportError=combined.aborted?'aborted_or_timeout':'transport_failed';throw error;}

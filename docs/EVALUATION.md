@@ -1,5 +1,10 @@
 # T5 - evaluasi tetap terpisah dari acceptance offline
 
+I26 introduces [Codex versus Pi through 9router](CODEX-PI-BENCHMARK.md), reusing
+the v2 corpus and accounting. Native Codex Responses and Pi Chat Completions are
+explicitly different transports; single-agent settings, prompts and quotas are
+matched. This comparison has no paid result or approved new allowance yet.
+
 I24 now has a separate [behavior corpus/protocol](BEHAVIOR-EVALUATION.md). Its
 goal-only prompts and 12 fresh stock-core/prototype cells reuse the existing live
 runtime and accounting. The historical pilot's mandatory-delegation prompt is not

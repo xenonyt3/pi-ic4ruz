@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "createdAt": "2026-10-16T15:00:36.527Z",
+  "protocolHash": "9d804700a46ccbbb33f4ddc13f61183c11bc3a60794c7e1d0b1dbaaf97662fde",
+  "implemented": true,
+  "offlineAcceptance": {
+    "passed": true,
+    "counts": {
+      "tests": 198,
+      "pass": 198,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    "report": "artifacts/verification/runs/2026-10-16T14-49-32.846Z/report.json",
+    "sourceUnchanged": true,
+    "runtimeUnchanged": true,
+    "vaultUnchanged": true,
+    "baseline": {
+      "passed": true,
+      "checkedFiles": 5599,
+      "toolSourcesChecked": 1,
+      "changed": []
+    },
+    "unexpectedNetworkAttempts": 0,
+    "networkReceiptCount": 119,
+    "missingTestReceipts": [],
+    "receiptErrors": []
+  },
+  "preparation": {
+    "passed": true,
+    "assertions": 17,
+    "file": "artifacts/checkpoint/codex-pi-preparation.json"
+  },
+  "nativeSynthetic": {
+    "file": "artifacts/checkpoint/codex-native-fixture.json",
+    "passed": true,
+    "scenarios": 5,
+    "cells": 12
+  },
+  "externalInference": 0,
+  "paidComparison": "not run; new explicit allowance required",
+  "monetaryCost": "unknown",
+  "reasonParity": "unknown",
+  "proposedBudget": {
+    "maxRequests": 144,
+    "maxInputTokens": 2880000,
+    "maxOutputTokens": 288000,
+    "maxDurationMs": 3600000
+  }
+}

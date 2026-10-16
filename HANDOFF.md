@@ -1,5 +1,22 @@
 # Continue on another device
 
+I26 adds the requested Codex-versus-Pi benchmark through the same 9router model.
+Read [docs/CODEX-PI-BENCHMARK.md](docs/CODEX-PI-BENCHMARK.md) before using
+`evaluate-behavior.mjs --comparison codex`. This is a new single-agent protocol,
+with native Codex Responses and Pi Chat Completions sharing LiveBudgetTransport.
+Codex CLI 0.162.1 is hash-pinned; native state is isolated per cell. Preparation
+and synthetic fixtures do not authorize paid inference. The proposed new ceiling
+is 144 requests / 2880000 input / 288000 output / 60 minutes, 2000 output/request.
+No live Codex comparison has run and no historical allowance can authorize it.
+Current I26 verification: **198/198 full offline acceptance PASS**, with source,
+both runtimes, original baseline and vault unchanged, zero unexpected tracked
+network attempts, and complete receipts. Native synthetic verification passes
+five scenarios plus all 12 scripted Codex/Pi cells; preparation passes 17 assertions.
+See `artifacts/checkpoint/codex-pi-verification.json`. This is zero-paid-inference
+verification, not a model-quality/cost result. The protocol hash is
+`9d804700a46ccbbb33f4ddc13f61183c11bc3a60794c7e1d0b1dbaaf97662fde`.
+The acceptance counts below describe earlier checkpoints.
+
 I24 adds three synthetic behavior tasks and a goal-only paired
 stock-core/prototype protocol. Read [docs/BEHAVIOR-EVALUATION.md](docs/BEHAVIOR-EVALUATION.md).
 Use `node scripts/evaluate-behavior.mjs --dry-run` or `--prepare` without inference.
@@ -10,7 +27,7 @@ method limitations and source checkpoint. It is not independent human review or
 Reason parity. No child was selected and no compaction was triggered.
 V2 applies offline fixes for command escaping, Git fixture isolation and sparse
 invoice coverage. No v2 live run is authorized by the used v1 budget.
-Current v2 acceptance is **189/189 PASS**, with 17 behavior tests, 51 UI tests and
+I24 v2 acceptance was **189/189 PASS**, with 17 behavior tests, 51 UI tests and
 the nested-command quoting regression. Preparation passes 17 assertions. Source,
 both runtimes, protected baseline and vault remain unchanged during the run;
 unexpected network attempts are zero. Receipt:

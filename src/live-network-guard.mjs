@@ -19,5 +19,9 @@ export function installLiveNetworkGuard() {
   for(const [object,keys]of [[net,['connect','createConnection']],[tls,['connect']],[http,['request','get']],[https,['request','get']],[http2,['connect']],[dgram,['createSocket']]])for(const key of keys)wrap(object,key);
   for(const object of [dns,dns.promises])for(const key of Object.keys(object))if(/^(lookup|resolve|reverse)/.test(key)&&typeof object[key]==='function')wrap(object,key);
   syncBuiltinESMExports();
-  return (url,init)=>permit.run(true,()=>fetchImpl(url,init));
+  const guardedFetch=(url,init)=>permit.run(true,()=>fetchImpl(url,init));
+  // Native Codex needs one inbound loopback broker. This capability cannot bind
+  // a public interface or enable outbound traffic for model tool processes.
+  guardedFetch.listenLoopback=server=>permit.run(true,()=>server.listen(0,'127.0.0.1'));
+  return guardedFetch;
 }

@@ -1,0 +1,235 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "taskId": "invoice",
+      "startingTreeFails": true,
+      "referencePasses": true,
+      "assertions": 9,
+      "scopeProtected": true
+    },
+    {
+      "taskId": "investigation",
+      "startingTreeFails": true,
+      "referencePasses": true,
+      "assertions": 3,
+      "scopeProtected": true
+    },
+    {
+      "taskId": "recovery",
+      "startingTreeFails": true,
+      "referencePasses": true,
+      "assertions": 5,
+      "scopeProtected": true
+    }
+  ],
+  "plan": {
+    "schemaVersion": 1,
+    "protocol": "codex-pi-v1",
+    "corpusHash": "f12ae60acb3a92e6a34bb59a79036300670cf9c09c125094e4bb79b9db9166e7",
+    "model": {
+      "provider": "9router",
+      "model": "cx/gpt-6-astra",
+      "thinkingLevel": "low",
+      "contextWindow": 32768,
+      "api": "openai-completions"
+    },
+    "conditions": [
+      "codex",
+      "prototype"
+    ],
+    "attemptsPerTaskAndCondition": 2,
+    "perRun": {
+      "maxRequests": 12,
+      "maxInputTokens": 240000,
+      "maxOutputTokens": 24000,
+      "perRequestMaxOutputTokens": 2000,
+      "maxDurationMs": 300000
+    },
+    "limits": {
+      "maxRequests": 144,
+      "maxInputTokens": 2880000,
+      "maxOutputTokens": 288000,
+      "maxDurationMs": 3600000
+    },
+    "jobs": [
+      {
+        "id": "invoice-codex-1",
+        "taskId": "invoice",
+        "condition": "codex",
+        "attempt": 1
+      },
+      {
+        "id": "invoice-prototype-1",
+        "taskId": "invoice",
+        "condition": "prototype",
+        "attempt": 1
+      },
+      {
+        "id": "investigation-codex-1",
+        "taskId": "investigation",
+        "condition": "codex",
+        "attempt": 1
+      },
+      {
+        "id": "investigation-prototype-1",
+        "taskId": "investigation",
+        "condition": "prototype",
+        "attempt": 1
+      },
+      {
+        "id": "recovery-codex-1",
+        "taskId": "recovery",
+        "condition": "codex",
+        "attempt": 1
+      },
+      {
+        "id": "recovery-prototype-1",
+        "taskId": "recovery",
+        "condition": "prototype",
+        "attempt": 1
+      },
+      {
+        "id": "recovery-prototype-2",
+        "taskId": "recovery",
+        "condition": "prototype",
+        "attempt": 2
+      },
+      {
+        "id": "recovery-codex-2",
+        "taskId": "recovery",
+        "condition": "codex",
+        "attempt": 2
+      },
+      {
+        "id": "investigation-prototype-2",
+        "taskId": "investigation",
+        "condition": "prototype",
+        "attempt": 2
+      },
+      {
+        "id": "investigation-codex-2",
+        "taskId": "investigation",
+        "condition": "codex",
+        "attempt": 2
+      },
+      {
+        "id": "invoice-prototype-2",
+        "taskId": "invoice",
+        "condition": "prototype",
+        "attempt": 2
+      },
+      {
+        "id": "invoice-codex-2",
+        "taskId": "invoice",
+        "condition": "codex",
+        "attempt": 2
+      }
+    ],
+    "tasks": [
+      {
+        "id": "invoice",
+        "title": "Multi-file invoice repair",
+        "prompt": "Repair invoice totals so they follow CONTRACT.md, including invalid inputs and exact cents. Keep existing public exports. Change only src/money.mjs and src/invoice.mjs. Finish with a concise explanation of the cause and the checks you actually performed.",
+        "promptHash": "4bdb1213e788a6f78f22d0e44d884609b1a91224260354f16460cd1971101762",
+        "startingTree": {
+          "CONTRACT.md": "52d16a7463d6e2feba1c36556e709d2210bb3f17e58ce5d3b92acad44711422e",
+          "package.json": "523a9329c4b1283c708682594a9251386aa90ea67565514692c4084368bdb8ef",
+          "src/invoice.mjs": "59fb5b8413db9fb995ad62f65bd8fdf0d07d12177c6763658787abefb92ec1c4",
+          "src/money.mjs": "50711b7a7817730c3857dd32f3c5897ebdba795144eee3b5d4eb664ae869151b",
+          "test/invoice.test.mjs": "26b876c9ccc9ea705d5bfe7a66e18f4684b8f472353d83c1524f23c995539a83"
+        },
+        "allowedChanges": [
+          "src/money.mjs",
+          "src/invoice.mjs"
+        ]
+      },
+      {
+        "id": "investigation",
+        "title": "Independent module investigation",
+        "prompt": "Review src/billing.mjs and src/access.mjs against CONTRACT.md. Deliver findings.json in the specified schema, with a concrete counterexample for every defect you find. Keep the implementation, tests and contract unchanged. Briefly distinguish verified findings from assumptions in your final response.",
+        "promptHash": "20d2122cbf06b473a5bb5cc727d82bdfdbb3c69f43f62544aa8ec27996bf9c39",
+        "startingTree": {
+          "CONTRACT.md": "f173b98f51adaa57062050f0a37a849e6dcf8b3a5be3d08d355c6d8c9239d975",
+          "package.json": "523a9329c4b1283c708682594a9251386aa90ea67565514692c4084368bdb8ef",
+          "src/access.mjs": "cc61035707fe43c97ba2df62eeaa0974d0b8e94575aaf7d5d3937b702da8ce2a",
+          "src/billing.mjs": "b465f0e4594f24d1eae23f3f9e0a2fe62065894c1d6ba9dd8fb935db809ae0e8",
+          "test/examples.test.mjs": "9136756f27f8b081884d898f0a20dc9a20de89c8187af5d20109b381a4e700b3"
+        },
+        "allowedChanges": [
+          "findings.json"
+        ]
+      },
+      {
+        "id": "recovery",
+        "title": "Cache regression and stale assumption",
+        "prompt": "Resolve the cache regression reported by npm test and preserve the current contract in CONTRACT.md. You may change only src/cache.mjs. Explain the cause, any incorrect assumption you found, and the checks you actually performed. Keep tests, package metadata and documentation unchanged.",
+        "promptHash": "a27164ab0e182770e47ded6b74ef0551e993ad99d1c0e95e812cfdd421eaaae8",
+        "startingTree": {
+          "CONTRACT.md": "552240bc87bcc58f17c3143b4be3593787c912c7926468e4c6c6f5d16ec2ab0e",
+          "notes/legacy.md": "df70e5897c57931c6f85af5b893ed2ac4e4120da75ee4210fb90a73221b3f6a4",
+          "package.json": "523a9329c4b1283c708682594a9251386aa90ea67565514692c4084368bdb8ef",
+          "src/cache.mjs": "b9ab3de256bfeda0863a977c27ffefcef5bba9f1810833814cd64aa83813888d",
+          "src/keys.mjs": "4e24c219b001e9b9e05e06f12dbbbf77314fbb8bdf2cb048b6d4b4821af4db60",
+          "test/cache.test.mjs": "478c430f6c861be98a344cac2e7371982052a33144c17fb276c0b96ab6398fe3"
+        },
+        "allowedChanges": [
+          "src/cache.mjs"
+        ]
+      }
+    ],
+    "common": {
+      "brain": false,
+      "automaticRetries": false,
+      "cacheWarming": false,
+      "maxActiveChildren": 0,
+      "oneWriterPerWorkspace": true,
+      "resourceDiscovery": false,
+      "transport": "LiveBudgetTransport",
+      "ledgerPolicy": "fixed disjoint suballowances; no transfers or reruns",
+      "delegation": false,
+      "comparisonScope": "single-agent task completion; delegation and long-context quality unmeasured"
+    },
+    "differences": {
+      "codex": "Pinned native Codex exec; native prompts/tools; Responses SSE through shared budget gate; workspace-write sandbox; fresh scoped CODEX_HOME; no plugins/skills/memory/web/delegation",
+      "prototype": "Pinned Pi candidate with harness context/codemode; Chat Completions SSE through shared budget gate; owned shell/file policy; no Brain/resource discovery/UI/delegation"
+    },
+    "reasonComparison": "not available; no direct Reason parity claim",
+    "pricing": "unknown",
+    "interpretation": "small exploratory paired comparison; no statistical superiority or parity percentage",
+    "implementationHashes": {
+      "scripts/evaluate-behavior.mjs": "d6e5dd47e15737caf8bae226fea451406ac61e708821aba224b643fa5ce99638",
+      "src/behavior-corpus.mjs": "69b7721f1a51f10ab1c994dc12fd18ad3f88eb8ed247cbd3d091a4bb860834e4",
+      "src/behavior-verifier.mjs": "a546dfb0499cfc70e8bc36e6eb11a9d1e059423c7bf0f36bb593439c6d3c6bd4",
+      "src/behavior-plan.mjs": "0855f5710287b8ae7ff9e5f2847dddfc996ef3a54ade98ddae54f02bc82a9ecb",
+      "src/behavior-evaluation.mjs": "c8bc6df8565e7af6ba4b9864169c09d87ddd035ce7256530dca0314e267ab42d",
+      "src/live-interactive.mjs": "d0e17a678ad4d53b3575f748092d09f0a894e850bce099a9a1bafac6be41c1b9",
+      "src/live-budget-transport.mjs": "e8ee52c747285d2735e11972f691b56bf6912f9be43d12f681fd318bd20f8d12",
+      "src/child-supervisor.ts": "18418f08a6a360181a50d897f7c823583c605197a1bec231657c74999cc1edde",
+      "src/harness.ts": "35fcc43f06df22dc1b6e85a8806bb9119d90822634f101033a8e3804cc9dda3f",
+      "prompts/harness.md": "89d915f057cff02733d2ca316188eef5f30182f5b51cc9209a305fc28cd007cd",
+      "config/harness.json": "ec88c815bd2094cc4f85f5a815086307b2096ae54a7328ac40e7ccdb99fda13d",
+      "config/child-profiles.json": "e1e1cf7d165b2be837e939fd68db548634d5b28f6b94e7b8693acd27a171147f",
+      "src/codex-evaluation.mjs": "1abb6e66e09c1043a8b6d6edc13857151bbef90ad0e15bb1edb410f5c097cbe4",
+      "src/codex-budget-broker.mjs": "4dab88733f3c7f932b0848fd86bc34d99c05f28fa3e2e58d925df4e3a4a1e605",
+      "src/live-network-guard.mjs": "3d2e373d2492fe937e1a04e53a353ed530490ea06af456bc5e9f28d972b53ee5",
+      "src/process-lifecycle.mjs": "0d317d6da156350bec9c41a6745b5d97f18fdaac546c5d82b773bc98f08f5f4d",
+      "src/workspace-ownership.ts": "9ef880083925478530f505d9aae8cc5e68a58c082138f8c2a06de561e9c870e1",
+      "scripts/codex-job.ps1": "1937182075756f1b5fb6b897a984afe319495c7cc5e126e7ec2df55656826f82",
+      "scripts/check-codex-fixture.mjs": "21d9484bcba7030ad838a48d2c7153211f0c00300630754004cfe43f53f8c241",
+      "tests/helpers/responses-fixture.mjs": "a3958a5a5e288895fc54a66c22ea35114901b5ce344874b61e8b2117bebd98a9",
+      "config/codex-benchmark.json": "72e975403a3fb766e750523ccc3dad5660d189b3f6fa47d22e61f880757f254e"
+    },
+    "codex": {
+      "version": "codex-cli 0.162.1",
+      "platform": "win32",
+      "sha256": "dd13bdb162a184fa04039488b234a8258ef9b76f84e926c505d5742b19249a6a"
+    },
+    "transportDifference": "Codex Responses versus Pi Chat Completions; endpoint conversion/cache differences at 9router are uncontrolled; not a pure harness causal estimate",
+    "protocolHash": "9d804700a46ccbbb33f4ddc13f61183c11bc3a60794c7e1d0b1dbaaf97662fde",
+    "liveAuthorized": false
+  },
+  "modelRequests": 0,
+  "behaviorQuality": "not evaluated",
+  "reasonParity": "unknown"
+}

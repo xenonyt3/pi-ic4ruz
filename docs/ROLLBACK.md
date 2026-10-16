@@ -1,5 +1,12 @@
 # Rollback prototype
 
+I26 Codex comparison is selected only by `--comparison codex`. Stop with Ctrl+C
+and wait for the Windows job/tree cleanup receipt. Preserve the private campaign,
+ledger and any unconfirmed writer lease; never reset an allowance to repeat cells.
+Codex state lives under the ignored campaign's `codex-home` and does not replace
+the user's Codex configuration. The installed pinned executable is read-only.
+Return to the standard offline Pi launcher; no global rollback is required.
+
 I24 evaluation is opt-in through `scripts/evaluate-behavior.mjs`; existing launchers
 keep their behavior. Interrupt the campaign to cancel active parent/child work and
 wait for cleanup. Preserve `agent/live-private/behavior-campaigns/` and per-cell
