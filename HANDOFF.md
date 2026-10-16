@@ -7,14 +7,18 @@ with native Codex Responses and Pi Chat Completions sharing LiveBudgetTransport.
 Codex CLI 0.162.1 is hash-pinned; native state is isolated per cell. Preparation
 and synthetic fixtures do not authorize paid inference. The proposed new ceiling
 is 144 requests / 2880000 input / 288000 output / 60 minutes, 2000 output/request.
-No live Codex comparison has run and no historical allowance can authorize it.
+The user approved v1, which stopped after its first Codex request due to an adapter
+stream-completion defect: **1 request / 11794 input / 108 output**, cleanup confirmed.
+Pi and the other 11 cells never started, so there is no valid paired comparison.
+Read [docs/CODEX-PI-RESULTS-V1.md](docs/CODEX-PI-RESULTS-V1.md). The used v1 allowance
+is closed; the corrected `codex-pi-v2` protocol needs new authorization.
 Current I26 verification: **198/198 full offline acceptance PASS**, with source,
 both runtimes, original baseline and vault unchanged, zero unexpected tracked
 network attempts, and complete receipts. Native synthetic verification passes
-five scenarios plus all 12 scripted Codex/Pi cells; preparation passes 17 assertions.
+six scenarios plus all 12 scripted Codex/Pi cells; preparation passes 17 assertions.
 See `artifacts/checkpoint/codex-pi-verification.json`. This is zero-paid-inference
 verification, not a model-quality/cost result. The protocol hash is
-`9d804700a46ccbbb33f4ddc13f61183c11bc3a60794c7e1d0b1dbaaf97662fde`.
+`a4f9010c3b698add88b9f9b8eef7c629055a3445909443b3b4b6ab93f1a0803c`.
 The acceptance counts below describe earlier checkpoints.
 
 I24 adds three synthetic behavior tasks and a goal-only paired

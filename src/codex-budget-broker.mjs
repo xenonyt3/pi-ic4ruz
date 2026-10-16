@@ -27,12 +27,22 @@ export async function createCodexBudgetBroker({budget,baseUrl,key,ledgerPath,fet
       const response=await call.fetch(endpoint,{method:'POST',body:JSON.stringify(payload)});
       if(!response.ok||!response.body)throw Error('CODEX_PROVIDER_ERROR');
       res.writeHead(200,{'Content-Type':'text/event-stream','Cache-Control':'no-cache'});
-      for await(const chunk of response.body){if(res.destroyed)throw Error('CODEX_CLIENT_CLOSED');res.write(chunk);}
+      for await(const chunk of response.body){
+        if(res.destroyed)throw Error('CODEX_CLIENT_CLOSED');res.write(chunk);
+        // Responses clients finish at the terminal event, independently of HTTP
+        // EOF. Release the upstream reader before Codex closes its completed turn.
+        if(call.records.some(record=>record.terminalEvent))break;
+      }
       call.finish();
       if(gate.state.status==='stopped')throw Error('CODEX_ACCOUNTING_STOP');
       res.end();
     }catch(error){
       call?.finish();
+      // A peer can close between receiving response.completed and res.end().
+      // Only fully accounted completion is benign; partial/unknown usage stops.
+      if(call?.records.length&&call.records.every(record=>record.terminalEvent==='response.completed'&&record.status==='accounted')&&!gate.state.stopReason){
+        if(!res.destroyed)res.end();return;
+      }
       const reason=String(error?.message??'').match(/\b(?:CODEX|LIVE)_[A-Z_]+\b/)?.[0]??'CODEX_BROKER_REJECTED';
       if(!gate.abortController.signal.aborted)gate.stop(reason);
       if(!res.headersSent)res.writeHead(502,{'Content-Type':'application/json'});

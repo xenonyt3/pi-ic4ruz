@@ -1,7 +1,7 @@
 {
   "suite": "all",
   "stage": "T1-T5-offline",
-  "createdAt": "2026-10-16T14:59:15.799Z",
+  "createdAt": "2026-10-16T15:37:20.923Z",
   "code": 0,
   "signal": null,
   "passed": true,
@@ -25,21 +25,21 @@
   "sourceHashes": {
     "src\\behavior-corpus.mjs": "69b7721f1a51f10ab1c994dc12fd18ad3f88eb8ed247cbd3d091a4bb860834e4",
     "src\\behavior-evaluation.mjs": "c8bc6df8565e7af6ba4b9864169c09d87ddd035ce7256530dca0314e267ab42d",
-    "src\\behavior-plan.mjs": "0855f5710287b8ae7ff9e5f2847dddfc996ef3a54ade98ddae54f02bc82a9ecb",
+    "src\\behavior-plan.mjs": "98daa22c07c8866976cede48ffb85a8b23d19812733f29a4334ad67db8e03802",
     "src\\behavior-verifier.mjs": "a546dfb0499cfc70e8bc36e6eb11a9d1e059423c7bf0f36bb593439c6d3c6bd4",
     "src\\brain-config.ts": "d71480b0055fdb3431bfb2d6012c9cf19f38089a1aaa258d0864bba2de9cef81",
     "src\\child-profiles.ts": "096c24f4a6b82bc4af102053cce0529a68645807bf967fd4b12f7668b87af022",
     "src\\child-runner.mjs": "25f360f4f15109fc5d60a1562bc0ec9da14ba7297545ebed7c02e8138536442e",
     "src\\child-supervisor.ts": "18418f08a6a360181a50d897f7c823583c605197a1bec231657c74999cc1edde",
     "src\\codemode-policy.ts": "9dc40d3a474c4a44c52cc40ff5609b4b828c63a0097d13727fff28b3c0b21ea4",
-    "src\\codex-budget-broker.mjs": "4dab88733f3c7f932b0848fd86bc34d99c05f28fa3e2e58d925df4e3a4a1e605",
+    "src\\codex-budget-broker.mjs": "d648f5a8522ccd99b83953653bf8c78a51702fc5e4aa3b57bf874278c63f93bf",
     "src\\codex-evaluation.mjs": "1abb6e66e09c1043a8b6d6edc13857151bbef90ad0e15bb1edb410f5c097cbe4",
     "src\\context-policy.ts": "f1da55adcbdcadc1dee6e0fd7b93cac84aef3776e6c561aa9d801b43f58e0d42",
     "src\\delegation.ts": "c7433d30016328fbf06f899a9c5ce4445d636076754585a852789107f9ee564b",
     "src\\evaluation-acceptance.mjs": "0c7238619798d3fc64f7c1c9b96156c7ef657f0eb9d40dcc635ca63c0039cbb7",
     "src\\evaluation-budget.mjs": "df081cbb5e9e716f2329271aa4c871283588492ffbf8f33cf9f3a4d18b44ff75",
     "src\\harness.ts": "35fcc43f06df22dc1b6e85a8806bb9119d90822634f101033a8e3804cc9dda3f",
-    "src\\live-budget-transport.mjs": "e8ee52c747285d2735e11972f691b56bf6912f9be43d12f681fd318bd20f8d12",
+    "src\\live-budget-transport.mjs": "20521d7668a83ccaae87dc7338b4e915db0ea62d71c6dcba76b28f7e47fde894",
     "src\\live-config.mjs": "1ef4b9e251d8da4276d9a0e8e92e52263914b8abe79c82912136bc243098637c",
     "src\\live-evaluation.mjs": "baa35135a9b50ed354d1fbe0118bb6250e7440ad11ba6cd2c246d61468b62fea",
     "src\\live-interactive.mjs": "d0e17a678ad4d53b3575f748092d09f0a894e850bce099a9a1bafac6be41c1b9",
@@ -73,7 +73,7 @@
     "scripts\\audit-transcript-gap.mjs": "13f41b10ff472f2e5a73626d7a1cd2e21141a9e786b756564daa805fedb3228f",
     "scripts\\bootstrap-device.mjs": "dcb88d5d674deaa725be3c1c617b4b731eb4d9e0f0eced36980251a7bb46a9ad",
     "scripts\\capture-reason-reference.mjs": "46ecf17ba67a31bdd9178cea740b25ad83fcb065fc9d46dc952f20e380fdff3a",
-    "scripts\\check-codex-fixture.mjs": "21d9484bcba7030ad838a48d2c7153211f0c00300630754004cfe43f53f8c241",
+    "scripts\\check-codex-fixture.mjs": "48a3ef99752423fa9c25670dbbc1c40ffe7358e65819f6b20d107687f745a27c",
     "scripts\\check-provider-fixture.mjs": "3116f0740e7d6a770e7a271bc0647bea0f7a159f4b3c17f1bc885db3a91393f3",
     "scripts\\codex-job.ps1": "1937182075756f1b5fb6b897a984afe319495c7cc5e126e7ec2df55656826f82",
     "scripts\\create-assistant-native-fixture.mjs": "032304ab83869f7118cdbb428ca287c9d1a12f06cda262d504bdc47daa6e813f",
@@ -92,7 +92,7 @@
     "scripts\\verify-thinking-parity.mjs": "941c09222b16577bd1473a290121fc57dcfbed76b9f553ad54016bdad158983e",
     "scripts\\verify-transcript-parity.mjs": "e9a673b2d300ceff0643e62b83de9d459b0ebe6d14f35e0b643feb6f238e26e6",
     "tests\\helpers\\assistant-ui.mjs": "e1b7a14a460c713bc1712cc4d959223dc3f9e7dc3ce8783976f1e3e96d013409",
-    "tests\\helpers\\codex-broker-fixture.mjs": "8077f9a20fb1a4c63dedf18afe7fb3fea78b8cbd882c1063039f3fb64076055e",
+    "tests\\helpers\\codex-broker-fixture.mjs": "9b4d6676fae3c40a3489c2504391aae0b383a6f0331c841ec1da714738576e92",
     "tests\\helpers\\live-fixture.mjs": "3c552cd1d3a524139cd190b474f4584dc698baf7d48e630b335677af93be0757",
     "tests\\helpers\\process.mjs": "6646eeb6509d0c617c200d51499accad3a34182fe382cf3adafcf51a131b7162",
     "tests\\helpers\\reasoning-ui.mjs": "d1244ceef4baee4169491a9c846f56a537cd8795c5cb8047a79202a7ef98831d",
@@ -149,7 +149,7 @@
     "tests\\transcript-layout.test.mjs": "34cb90bd7a8536affb98c66f142fc6d10ca58ffc8aa6a19173df62c9242cb835",
     "tests\\behavior-verifier.test.mjs": "f2aa99925321d2863f883672043b33baa57f6814178cf90906a6fce279ace573",
     "tests\\behavior-evaluation.test.mjs": "35a29c5971f3ed40572f6476b7d890c16da0fed4738f3e9fddbeee9da30fc0cc",
-    "tests\\codex-evaluation.test.mjs": "f950b69a369e24db6a9857d1574b24c34de80e0c79ae4e3343a76e50ddcf6984",
+    "tests\\codex-evaluation.test.mjs": "c8a55338b54c92ec34e4aabe9614ca53aadcb3003dbc417f01cadab3a34c1082",
     "launch.mjs": "55ef6ce2f65f55701675c0beeedf2aa42140a91379917c2b5b01ede0976f7872",
     "launch-live.mjs": "40ef31c0cabf960011c989ef053a20b692628836d8dcb868b65179a2d17141fe",
     "agent\\settings.json": "c5d4da181ecce3a174053ea4980e8ebc510f56191bd05d2460bc4427f681d069",
@@ -161,10 +161,10 @@
     "tests\\fixtures\\live-provider.json": "74c61b653eafdd40b6c485267985e8c542a95b780102056d7a8e1f1187c97ee6"
   },
   "unexpectedNetworkAttempts": 0,
-  "networkReceiptCount": 119,
+  "networkReceiptCount": 120,
   "receiptErrors": [],
   "missingTestReceipts": [],
-  "interruptedReceiptUpdates": 3,
+  "interruptedReceiptUpdates": 2,
   "coverage": [
     "isolation",
     "offline-guard",
@@ -250,7 +250,7 @@
     "transcript-layout.test.mjs": "34cb90bd7a8536affb98c66f142fc6d10ca58ffc8aa6a19173df62c9242cb835",
     "behavior-verifier.test.mjs": "f2aa99925321d2863f883672043b33baa57f6814178cf90906a6fce279ace573",
     "behavior-evaluation.test.mjs": "35a29c5971f3ed40572f6476b7d890c16da0fed4738f3e9fddbeee9da30fc0cc",
-    "codex-evaluation.test.mjs": "f950b69a369e24db6a9857d1574b24c34de80e0c79ae4e3343a76e50ddcf6984"
+    "codex-evaluation.test.mjs": "c8a55338b54c92ec34e4aabe9614ca53aadcb3003dbc417f01cadab3a34c1082"
   },
-  "reportPath": "D:\\pi-reason-prototype\\publish\\pi-ic4ruz\\artifacts\\verification\\runs\\2026-10-16T14-49-32.846Z\\report.json"
+  "reportPath": "D:\\pi-reason-prototype\\publish\\pi-ic4ruz\\artifacts\\verification\\runs\\2026-10-16T15-25-53.019Z\\report.json"
 }

@@ -20,7 +20,7 @@ export function buildBehaviorPlan({comparison='stock-core'}={}) {
     reasonComparison:'not available; no direct Reason parity claim',pricing:'unknown',interpretation:'small exploratory paired comparison; no statistical superiority or parity percentage',
     implementationHashes:Object.fromEntries(['scripts/evaluate-behavior.mjs','src/behavior-corpus.mjs','src/behavior-verifier.mjs','src/behavior-plan.mjs','src/behavior-evaluation.mjs','src/live-interactive.mjs','src/live-budget-transport.mjs','src/child-supervisor.ts','src/harness.ts','prompts/harness.md','config/harness.json','config/child-profiles.json'].map(file=>[file,digest(fs.readFileSync(path.join(root,file)))]))};
   if(comparison==='codex'){
-    plan.protocol='codex-pi-v1';
+    plan.protocol='codex-pi-v2';
     plan.codex=JSON.parse(fs.readFileSync(path.join(root,'config/codex-benchmark.json'),'utf8'));
     plan.common.delegation=false;
     plan.common.maxActiveChildren=0;

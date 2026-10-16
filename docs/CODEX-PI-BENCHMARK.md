@@ -1,6 +1,8 @@
 # Codex versus Pi through 9router
 
-I26 prepares an exploratory, paired comparison requested by the user. Both
+I26 prepares an exploratory, paired comparison requested by the user. The current
+protocol is `codex-pi-v2`; [v1 stopped at its first request](CODEX-PI-RESULTS-V1.md)
+and has no valid paired result. Both
 conditions select **9router / `cx/gpt-6-astra` / low effort**, with a configured
 32768-token context and 2000 output tokens per physical request. No paid run is
 authorized by implementation, preparation, or the historical I24 allowance.
@@ -39,7 +41,8 @@ latency or attribute adapter startup overhead to token efficiency.
 Codex 0.162.1 sends namespaced tool definitions inside `additional_tools` input
 items and invokes `functions.exec` as a custom tool. This format is preserved.
 The gate hashes these definitions and does not translate them into another agent
-protocol. Paid 9router compatibility is unknown until an authorized live attempt.
+protocol. V1 verified an initial 9router response and native command. Multi-turn
+compatibility of the corrected v2 path still needs a newly authorized live attempt.
 
 ## Accounting and containment
 
@@ -49,6 +52,9 @@ locks, model allowlists, retry accounting and persistence are the same mechanism
 An inbound loopback broker gives native Codex access to this gate; it is not a
 second quota implementation. Provider credentials remain in the broker process.
 Codex receives only an ephemeral loopback token, excluded from shell tool env.
+V2 releases the upstream stream at its terminal Responses event. A client close
+after fully accounted `response.completed` does not invalidate a completed request;
+missing/invalid usage and earlier cancellation retain conservative stop behavior.
 
 Only streamed `/responses` POST requests are accepted. Hidden server history,
 background mode, storage, WebSockets, unknown routes and a changed model/effort
@@ -80,7 +86,8 @@ node scripts/evaluate-behavior.mjs --comparison codex --prepare --codex 'C:/path
 node scripts/verify-offline.mjs --suite all
 ```
 
-The native fixture uses synthetic SSE exclusively: tool read/write, credential
+The native fixture uses synthetic SSE exclusively: tool read/write, completion
+without transport EOF, credential
 environment exclusion, wrong model, missing usage, stream/tool cancellation and
 the full 12-cell scripted campaign. Scripted reference edits verify the runner,
 not model quality. Its public receipt is `artifacts/checkpoint/codex-native-fixture.json`.
@@ -141,11 +148,13 @@ labeled review. Two attempts on three small tasks cannot prove general superiori
 - Tested: **198/198 full offline acceptance**, including nine new Codex tests and
   51 existing UI tests; 17 trusted preparation assertions. Source, both runtimes,
   original baseline and vault unchanged; zero unexpected tracked network attempts.
-- Runtime-verified with synthetic responses: five native scenarios and **12/12
+- Runtime-verified with synthetic responses: six native scenarios and **12/12
   scripted Codex/Pi cells**, including shell writes, credential environment
   exclusion, cancellation and confirmed cleanup. Campaign replay is rejected.
-- Unknown: paid 9router compatibility, comparative model decisions, actual token
-  use, price and broader workload quality. **No paid comparison has run.**
+- Runtime-verified with 9router at v1: one streamed response, one native read
+  command, actual usage accounting and cleanup. The campaign then stopped.
+- Unknown: v2 multi-turn paid compatibility, comparative model decisions, price
+  and broader workload quality. **No valid paired comparison exists.**
 
 Receipts: `artifacts/checkpoint/codex-pi-verification.json`,
 `artifacts/checkpoint/codex-native-fixture.json`, and

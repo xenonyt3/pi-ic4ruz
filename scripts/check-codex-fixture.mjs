@@ -21,11 +21,15 @@ const config={schemaVersion:1,mode:'interactive-live',provider:'9router',api:'op
 const checks=[];
 const {listenLoopback}=installLiveNetworkGuard();
 // Provider traffic is exclusively the injected synthetic stream; no credential is loaded.
-for(const scenario of ['stream-tool','wrong-model','missing-usage','cancel','cancel-tool']){
+for(const scenario of ['stream-tool','terminal-before-eof','wrong-model','missing-usage','cancel','cancel-tool']){
   const workspace=path.join(directory,scenario,'workspace'),control=path.join(directory,scenario,'control');
   createBehaviorWorkspace(loadBehaviorCorpus().tasks[0],workspace);
   const resolved=validateLiveConfig({...config,budget:{...plan.perRun,maxDurationMs:60000,allowanceId:'fixture-'+scenario,authorized:true}},{cwd:workspace,env:{FIXTURE_KEY:'synthetic-upstream-secret'}});
-  let requests=0,toolOutput=false;const controller=new AbortController();
+  let requests=0,toolOutput=false,trailingCancelled=0;const controller=new AbortController();
+  const streamed=(response,signal)=>scenario!=='terminal-before-eof'?response:new Response(new ReadableStream({
+    async start(c){for await(const chunk of response.body)c.enqueue(chunk);signal.addEventListener('abort',()=>c.error(Error('synthetic trailing disconnect')),{once:true});},
+    cancel(){trailingCancelled++;}
+  }),{headers:{'Content-Type':'text/event-stream'}});
   const result=await runCodexCell({...resolved,config:{...config,prompt:'Read the local package.json and report the project name.'},directory:control,executable,signal:controller.signal,onEvent:event=>{
     if(scenario==='cancel-tool'&&event.type==='item.started'&&event.item?.type==='command_execution')setTimeout(()=>controller.abort(),300);
   },fetchImpl:Object.assign(async(url,init)=>{
@@ -43,15 +47,15 @@ for(const scenario of ['stream-tool','wrong-model','missing-usage','cancel','can
       assert.ok(!namespaces.some(tool=>tool.name==='collaboration'),'single-agent policy');
       assert.ok(namespaces.find(tool=>tool.name==='functions')?.tools.some(tool=>tool.name==='exec'),'native tool dispatcher exposed');
       const cmd=scenario==='cancel-tool'?'Start-Sleep -Seconds 60':"if ($env:CODEX_BENCHMARK_TOKEN -or $env:FIXTURE_KEY) { throw 'credential inherited' }; Set-Content -Path fixture.txt -Value 'fixture-written'; Get-Content package.json";
-      return responsesFixture({tool:{custom:true,namespace:'functions',name:'exec',input:`text(await tools.exec_command(${JSON.stringify({cmd,max_output_tokens:500,yield_time_ms:1000})}));`}});
+      return streamed(responsesFixture({tool:{custom:true,namespace:'functions',name:'exec',input:`text(await tools.exec_command(${JSON.stringify({cmd,max_output_tokens:500,yield_time_ms:1000})}));`}}),init.signal);
     }
     toolOutput=body.input.some(item=>['function_call_output','custom_tool_call_output'].includes(item.type)&&JSON.stringify(item.output).includes('name'));
-    return responsesFixture();
+    return streamed(responsesFixture(),init.signal);
   },{listenLoopback})});
-  const check={scenario,requests,cleanupConfirmed:result.cleanupConfirmed,stopReason:result.gate.state.stopReason??null,modelStopReason:result.modelStopReason,toolOutput,error:result.failure??null};
+  const check={scenario,requests,cleanupConfirmed:result.cleanupConfirmed,stopReason:result.gate.state.stopReason??null,modelStopReason:result.modelStopReason,toolOutput,trailingCancelled,error:result.failure??null};
   checks.push(check);console.log(JSON.stringify(check));
   assert.ok(result.cleanupConfirmed,`cleanup ${scenario}; inspect ${control}`);
-  if(scenario==='stream-tool'){assert.equal(result.modelStopReason,'stop');assert.equal(requests,2);assert.ok(toolOutput);assert.equal(result.failure,undefined);assert.equal(fs.readFileSync(path.join(workspace,'fixture.txt'),'utf8').trim(),'fixture-written');}
+  if(['stream-tool','terminal-before-eof'].includes(scenario)){assert.equal(result.modelStopReason,'stop');assert.equal(requests,2);assert.ok(toolOutput);assert.equal(result.failure,undefined);assert.equal(fs.readFileSync(path.join(workspace,'fixture.txt'),'utf8').trim(),'fixture-written');if(scenario==='terminal-before-eof')assert.equal(trailingCancelled,2);}
   else {assert.ok(result.gate.state.stopReason);assert.equal(requests,1);}
 }
 assert.ok(auditBaseline().passed);assertIsolation(undefined,path.join(root,'workspace'));

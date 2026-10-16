@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "passed": true,
-  "createdAt": "2026-10-16T14:46:54.163Z",
-  "protocolHash": "9d804700a46ccbbb33f4ddc13f61183c11bc3a60794c7e1d0b1dbaaf97662fde",
+  "createdAt": "2026-10-16T15:22:21.172Z",
+  "protocolHash": "a4f9010c3b698add88b9f9b8eef7c629055a3445909443b3b4b6ab93f1a0803c",
   "codex": {
     "version": "codex-cli 0.162.1",
     "platform": "win32",
@@ -16,6 +16,17 @@
       "stopReason": null,
       "modelStopReason": "stop",
       "toolOutput": true,
+      "trailingCancelled": 0,
+      "error": null
+    },
+    {
+      "scenario": "terminal-before-eof",
+      "requests": 2,
+      "cleanupConfirmed": true,
+      "stopReason": null,
+      "modelStopReason": "stop",
+      "toolOutput": true,
+      "trailingCancelled": 2,
       "error": null
     },
     {
@@ -25,6 +36,7 @@
       "stopReason": "response_model_mismatch",
       "modelStopReason": "error",
       "toolOutput": false,
+      "trailingCancelled": 0,
       "error": "CODEX_PROCESS_FAILED"
     },
     {
@@ -34,6 +46,7 @@
       "stopReason": "missing_or_invalid_usage",
       "modelStopReason": "stop",
       "toolOutput": false,
+      "trailingCancelled": 0,
       "error": null
     },
     {
@@ -43,6 +56,7 @@
       "stopReason": "campaign_cancelled",
       "modelStopReason": "error",
       "toolOutput": false,
+      "trailingCancelled": 0,
       "error": "CODEX_PROCESS_FAILED"
     },
     {
@@ -52,6 +66,7 @@
       "stopReason": "campaign_cancelled",
       "modelStopReason": "error",
       "toolOutput": false,
+      "trailingCancelled": 0,
       "error": "CODEX_PROCESS_FAILED"
     }
   ],

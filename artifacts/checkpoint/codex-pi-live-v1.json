@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "campaignId": "codex-pi-v1-20261016",
+  "sourceCommit": "e521a9ded615342936017531f7bc90501bf75e0e",
+  "protocol": "codex-pi-v1",
+  "protocolHash": "9d804700a46ccbbb33f4ddc13f61183c11bc3a60794c7e1d0b1dbaaf97662fde",
+  "provider": "9router",
+  "model": "cx/gpt-6-astra",
+  "thinkingLevel": "low",
+  "approvedLimits": {
+    "schemaVersion": 1,
+    "authorized": true,
+    "campaignId": "codex-pi-v1-20261016",
+    "protocolHash": "9d804700a46ccbbb33f4ddc13f61183c11bc3a60794c7e1d0b1dbaaf97662fde",
+    "maxRequests": 144,
+    "maxInputTokens": 2880000,
+    "maxOutputTokens": 288000,
+    "maxDurationMs": 3600000
+  },
+  "status": "stopped",
+  "stopReason": "CODEX_BROKER_REJECTED",
+  "startedCells": 1,
+  "unstartedCells": 11,
+  "validPairedComparisons": 0,
+  "usage": {
+    "requests": 1,
+    "inputTokens": 11794,
+    "outputTokens": 108,
+    "cost": null,
+    "cachedInputTokens": 2304
+  },
+  "wallTimeMs": 9254,
+  "cell": {
+    "id": "invoice-codex-1",
+    "durationMs": 8841,
+    "modelStopReason": "error",
+    "error": "CODEX_PROCESS_FAILED",
+    "toolCalls": [
+      {
+        "sequence": 1,
+        "name": "command_execution",
+        "parentToolCallId": null
+      }
+    ],
+    "taskCompleted": false,
+    "workspaceChanges": [],
+    "cleanupConfirmed": true,
+    "writerLeaseReleased": true,
+    "ledgerLockReleased": true
+  },
+  "requests": [
+    {
+      "id": 1,
+      "status": "accounted",
+      "httpStatus": 200,
+      "responseModel": "gpt-6-astra",
+      "inputTokens": 11794,
+      "outputTokens": 108,
+      "cacheReadTokens": 2304,
+      "durationMs": 6450
+    }
+  ],
+  "postRunAudit": {
+    "sourceAcceptanceStillMatches": true,
+    "requestsAtVaultSnapshot": 0,
+    "vaultUnchanged": true,
+    "vaultFiles": 289,
+    "credentialScan": {
+      "files": 47,
+      "hits": 0
+    },
+    "status": "stopped",
+    "pendingCells": 11,
+    "allStartedCellsCleanupConfirmed": true,
+    "baselineAndBothRuntimesVerified": true,
+    "postRunPreparationPassed": true,
+    "postRunPreparationProtocolHash": "9d804700a46ccbbb33f4ddc13f61183c11bc3a60794c7e1d0b1dbaaf97662fde"
+  },
+  "analysis": {
+    "classification": "benchmark adapter stream termination defect",
+    "evidence": "Native synthetic stream with response.completed and no transport EOF reproduces CODEX_BROKER_REJECTED after one accounted request; terminal-event handling fixes that reproduction.",
+    "limitation": "Original live socket exception text was not retained; no valid model-quality or cost comparison exists."
+  },
+  "humanReviewComplete": false,
+  "reviewer": "Codex trace review; not independent human review",
+  "furtherPaidRequests": 0,
+  "pricing": "unknown"
+}

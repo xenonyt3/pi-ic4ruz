@@ -74,7 +74,7 @@ test('guarded native loopback broker enforces credential, route and output-cap b
   const child=spawn(process.execPath,['--test',path.join(root,'tests/helpers/codex-broker-fixture.mjs')],{windowsHide:true,env,stdio:['ignore','pipe','pipe']});
   let output='';child.stdout.on('data',data=>output+=data);child.stderr.on('data',data=>output+=data);
   const code=await new Promise((resolve,reject)=>{child.once('error',reject);child.once('close',resolve);});
-  assert.equal(code,0,output);assert.match(output,/tests 2/);assert.match(output,/pass 2/);
+  assert.equal(code,0,output);assert.match(output,/tests 3/);assert.match(output,/pass 3/);
 });
 test('Codex config disables extra services and real credential inheritance; binary pin fails closed',()=>{
   const config=codexConfiguration({model:budget.model,thinkingLevel:'low',contextWindow:32768},'http://127.0.0.1:12345/v1');

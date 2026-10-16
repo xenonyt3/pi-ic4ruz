@@ -3,7 +3,11 @@
 I26 introduces [Codex versus Pi through 9router](CODEX-PI-BENCHMARK.md), reusing
 the v2 corpus and accounting. Native Codex Responses and Pi Chat Completions are
 explicitly different transports; single-agent settings, prompts and quotas are
-matched. This comparison has no paid result or approved new allowance yet.
+matched. The explicitly approved v1 campaign stopped at its first Codex request
+because of the broker's terminal-stream handling; see
+[the retained v1 result](CODEX-PI-RESULTS-V1.md). It consumed one accounted request
+(11794 input, 108 output), with confirmed cleanup and no Pi cell dispatched.
+The v2 fix is verified offline and requires a fresh authorization for paid testing.
 
 I24 now has a separate [behavior corpus/protocol](BEHAVIOR-EVALUATION.md). Its
 goal-only prompts and 12 fresh stock-core/prototype cells reuse the existing live
