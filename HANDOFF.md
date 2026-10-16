@@ -139,6 +139,11 @@ Private baseline/reference prerequisites remain intentionally unpublished.
 
 ## Windows setup
 
+The checkout also provides a local `icarus` shortcut. From the repository root,
+`.\icarus.ps1` starts offline mode; `.\icarus.ps1 live` starts the explicit
+9router/Astra live mode; `.\icarus.ps1 resume` resumes the latest live session.
+This is repository-local and does not modify PATH or any global Pi profile.
+
 Install Node.js 24+ and Git for Windows. Keep this checkout separate from `.pi`
 and any clean/fork installation. Bootstrap writes only inside the checkout.
 

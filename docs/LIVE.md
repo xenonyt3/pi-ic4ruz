@@ -46,6 +46,15 @@ node agent/live-private/start-daily.mjs
 node agent/live-private/start-daily.mjs --continue
 ```
 
+The repository-local `icarus.ps1`/`icarus.cmd` shortcut maps the same flows without
+changing PATH or any global launcher:
+
+```powershell
+.\icarus.ps1 live
+.\icarus.ps1 check
+.\icarus.ps1 resume
+```
+
 The user-approved daily configuration is 9router / `cx/gpt-6-astra`, low effort,
 with web tools enabled and Brain disabled. Configuration and the wrapper stay
 untracked. This authorization does not authorize new evaluation campaigns.

@@ -19,6 +19,16 @@ and child tools, exact file result, accounting, cleanup and resume; see
 [the sanitized receipt](artifacts/checkpoint/interactive-live-smoke.json). Prices,
 broad daily-workload reliability and full Reason parity remain unverified.
 
+Untuk shortcut lokal Windows, gunakan `icarus.cmd` atau `icarus.ps1` dari root
+checkout. Shortcut ini tidak mengubah PATH atau launcher global:
+
+```powershell
+.\icarus.ps1                 # offline (default)
+.\icarus.ps1 live            # live 9router/Astra
+.\icarus.ps1 check           # preflight live tanpa request model
+.\icarus.ps1 resume          # lanjutkan session live terakhir
+```
+
 
 
 Prototype terisolasi berdasarkan `D:/pi-ic4ruz/PI-IMPLEMENTATION-PLAN.md`.

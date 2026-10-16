@@ -1,5 +1,14 @@
 # Bahan backlog rekonstruksi perilaku Reason di Pi Windows
 
+## I30 - Shortcut lokal `icarus` (17 Oktober 2026 WIB)
+
+- Implemented: repository-local `icarus.mjs`, `icarus.cmd`, and `icarus.ps1`.
+  `offline` is the default; `live`, `check`, and `resume` map to the explicit
+  daily 9router/Astra launcher without changing PATH or global profiles.
+- Tested: help dispatch and unknown-command rejection on Node 24 and both Windows
+  wrappers. No model request was made.
+- Usage: see `README.md` and `docs/LIVE.md`.
+
 ## I29 - Daily live tanpa menetapkan budget lokal (17 Oktober 2026 WIB)
 
 - User explicitly superseded daily budget gate: no manual request/token/duration
