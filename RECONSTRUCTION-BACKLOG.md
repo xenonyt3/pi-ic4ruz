@@ -4,7 +4,45 @@ Tanggal audit: 14 Oktober 2026. **Plan disetujui; implementasi bertahap dimulai 
 
 Dokumen kerja aktif berada di `D:/pi-ic4ruz`; evidence audit tetap di `D:/reason-investigation-20261014`. UI: **ikuti CLI/terminal Reason** (D13). Persetujuan desain sudah eksplisit; tidak memerlukan persetujuan ulang untuk detail rutin. Pengguna telah mengotorisasi pilot live Astra/9router dengan budget terbatas; hasilnya dilacak pada bagian terbaru berikut.
 
-## Status terbaru: I23 bounded interactive live smoke PASS - 15 Oktober 2026 WIB
+## Urutan berikutnya: I24 evaluasi behaviour mandiri - 16 Oktober 2026 WIB
+
+Status: **PLANNED / BELUM DIJALANKAN**. Pengguna meminta urutan ini dicatat ke
+backlog. Pencatatan ini tidak mengaktifkan inference atau allowance baru.
+
+1. **Siapkan corpus dan verifier offline.** Buat tiga task disposable: bugfix
+   lintas file, investigasi dua modul yang dapat dikerjakan paralel, serta recovery
+   saat tes gagal atau asumsi awal salah. Bekukan starting tree, acceptance criteria,
+   batas perubahan dan verifier sebelum run. Calon artefak:
+   `tests/fixtures/behavior/` dan `docs/BEHAVIOR-EVALUATION.md`; belum dibuat.
+2. **Susun prompt berbasis tujuan dan rubrik.** Jangan mengarahkan pemakaian
+   codemode/tools atau mewajibkan spawn child. Nilai apakah strategi yang dipilih
+   sesuai kebutuhan task; tidak mendelegasikan task sederhana bukan kegagalan.
+   Rubrik mencakup correctness, scope perubahan, pilihan tools/delegasi, recovery,
+   kejujuran laporan tes, penggunaan konteks, token dan waktu.
+3. **Siapkan pembanding yang terkontrol.** Bandingkan prototype dengan salinan
+   Pi stock terisolasi pada model/provider/effort, starting repo, izin dan verifier
+   yang sama. Jangan mengubah `pi-clean`, profil `.pi` atau launcher global.
+   Perbandingan langsung dengan Reason membutuhkan run/trace yang sebanding;
+   jika belum tersedia, tandai Reason parity sebagai unknown. Pi-versus-prototype
+   saja tidak membuktikan kesamaan behaviour dengan Reason.
+4. **Tetapkan protokol dan budget baru, lalu jalankan evaluasi.** Tentukan jumlah
+   attempt dan kriteria berhenti sebelum run; gunakan pengulangan untuk menilai
+   konsistensi, bukan menarik klaim performa dari satu attempt. Setelah persiapan
+   offline/verifier lulus, minta otorisasi allowance baru yang konkret. Reuse runner,
+   broker dan ledger yang cocok; semua parent/child/retry/summary dihitung bersama.
+   Batas tiga child aktif, satu writer dan Brain production off tetap berlaku.
+5. **Analisis trace dan perbaiki berdasarkan bukti.** Bandingkan hasil serta urutan
+   keputusan/tool/delegation/recovery. Pisahkan kegagalan model, prompt, policy,
+   transport dan verifier sebelum mengubah implementasi. Lakukan perbaikan terarah,
+   tambahkan regresi yang relevan, lalu evaluasi ulang dengan protokol sebanding
+   dan allowance tersendiri bila berbayar. Laporkan implemented, tested,
+   runtime-verified dan unknown; jangan memberi persentase parity tanpa ukuran.
+
+Deliverable pertama: corpus, verifier, prompt tujuan dan rubrik offline siap direview.
+O14 penuh, compaction Reason, hidden child context dan semantics lifecycle Reason
+tetap gap terpisah; kelulusan I24 tidak otomatis menutupnya.
+
+## Status terbaru yang selesai: I23 bounded interactive live smoke PASS - 15 Oktober 2026 WIB
 
 - Authorization baru eksplisit: 6 request / 120000 input / 6000 output / 1000
   output per request / 300 detik, 9router `cx/gpt-6-astra`. Satu smoke baru melalui
@@ -284,6 +322,7 @@ I16 diperluas dengan source oracle dan marketing reference; I17 adapter awal imp
 | I21 | Implemented / tested / runtime-verified, bounded slice | `P/src/ui-startup.mjs`, `P/src/reason-ui.mjs`, `P/docs/STARTUP-WORKING-VERIFICATION.md` | I20 + source startup/working verified; task explicitly approved | Existing upstream hooks; actual identity/Pi asset substitution; 8 focused tests, 284 source comparisons, actual SDK/native lifecycle/resize/Escape/cleanup; full acceptance 151/151 PASS, O14 remains partial |
 | I22 | Implemented / focused-tested / native-verified | `P/upstream-patches/transcript-hook/LAYOUT-VERIFICATION.md`, reason-ui.4 | Approved continuation; 12 actual host gaps vs FeA.showEntry/B0A | Original-component projection, 8 tests / 96 comparisons / strict5-file TS; native CtrlO/CtrlT/resize/resume/exit; full acceptance 159/159 PASS, O14 partial |
 | I23 | Implemented / offline-tested / native synthetic verified | `launch-live.mjs`, `src/live-interactive.mjs`, shared `src/live-budget-transport.mjs`, `docs/LIVE.md` | User authorized interactive live implementation with offline default and new-budget gate | 171/171 full acceptance, 11 live tests, native loopback stream/tool/resume/cancel; persistent shared ledger, pinned model, child cleanup, one writer; paid compatibility and O14 unknown |
+| I24 | Planned / urutan dicatat | Corpus/verifier `tests/fixtures/behavior/`, protokol `docs/BEHAVIOR-EVALUATION.md` (keduanya belum dibuat); reuse runner yang sesuai | I23 + corpus/rubrik offline; live memerlukan allowance baru | Ikuti lima langkah di bagian teratas; goal-only prompts, pembanding terkontrol, evaluasi keputusan dan hasil; Reason parity tetap unknown tanpa bukti sebanding |
 
 ## Evidence follow-up yang tidak boleh disamarkan sebagai implementation task
 
